@@ -13,10 +13,15 @@ body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
 }
+  
+div.grid-container {
+  
+  display: inline-block;
+  }
 
 h1 {
   font-weight: bold;
-  color: pink;
+  color: black;
 }
 
 .bold {
@@ -56,6 +61,10 @@ input {
   
 input#place-notation {
   width: 75%;
+  }
+  
+select#class {
+  width: 100px;
   }
   
 span.methodName {
@@ -110,6 +119,19 @@ ul {
   list-style-type: none;
   padding-left: 20px;
 }
+  
+div.grid {
+  float: left;
+  /*height: 850px;*/
+  margin-bottom: 40px;
+  }
+  
+svg.grid {
+  
+  /*float: left;*/
+  margin-right: 0;
+  margin-top: 0;
+  }
 
 footer {
   margin-top: 50px;
@@ -132,15 +154,38 @@ footer > a {
     display: none;
   }
   
+  body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 25px;
+}
+  
   div#form {
     display: none;
   }
   
   svg.contain {
-    width: 16.6%;
+    width: 25%;
     height: auto;
     break-inside: avoid-page;
+    margin-bottom: 40px;
   }
+  
+  div.grid-container {
+    display: inline-block;
+  }
+  
+  div.grid {
+  float: left;
+  height: 850px;
+  }
+  
+  div.pageN {
+    margin-top: 100px;
+  }
+  
+  /*div.paged {
+    margin-bottom: 250px;
+  }*/
   
   svg svg {
     width: 16.6%;

@@ -2,26 +2,30 @@
 const fs = require('fs');
 const path = require('path');
 const buildForm = require('./buildForm');
+const buildFormBL = require('./buildFormBL');
 const buildTitle = require('./title');
 
 var formBegin = `</div>
-      <form action="/" method="post">`;
+      <form action="/blueline" method="post">`;
 
 var formEnd = `<button type="submit">Submit</button>
       </form>
       </div>`;
 
+var svgsBegin = `<div class="grid-container">`;
+var svgsEnd = `</div>`;
+
 
 module.exports = function buildPage(errors, svgs, input) {
-  var header = fs.readFileSync(path.join(__dirname, '..', 'views/header.html'));
+  var header = fs.readFileSync(path.join(__dirname, '..', 'views/headerBL.html'));
   var footer = fs.readFileSync(path.join(__dirname, '..', 'views/footer.html'));
   var form = buildForm(input);
+  var formBL = buildFormBL(input);
   var anchor;
   var title = '';
   ///*
-  
   if (input == 0) {
-    //form = fs.readFileSync(path.join(__dirname, '..', 'views/form.html'));
+    //form = fs.readFileSync(path.join(__dirname, '..', 'views/formBL.html'));
     anchor = '';
   } else {
     //form = buildForm(input);
@@ -38,16 +42,8 @@ module.exports = function buildPage(errors, svgs, input) {
     return errorsJoined;
   }
   
-  function loopSVG() {
-    let body = '';
-    for (var j = 0; j < svgs.length; ++j) {
-     //console.log('svg ' + (j + 1) + ' added');
-      body += svgs[j];  
-    }
-    return body;
-  }
   
-  var page = header + joinErrors() + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
+  var page = header + joinErrors() + formBegin + form + formBL + formEnd + anchor + title + svgsBegin + svgs + svgsEnd + footer;
 
   
   return page;

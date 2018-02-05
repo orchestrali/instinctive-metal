@@ -16,10 +16,16 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+
+
 const buildPage = require('./src/buildPage.js');
 const formatRows = require('./src/formatRows.js');
 const parsePN = require('./src/parsePlaceNotation.js');
 const handleInput = require('./src/handleInput.js');
+
+const buildPageBL = require('./src/buildPageBL.js');
+//const methodSVG = require('./src/build/methodSVG.js');
+const leadSVG = require('./src/build/methodSVG.js');
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -28,11 +34,14 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // http://expressjs.com/en/starter/basic-routing.html
-/*
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/src/mockup.svg');
+///*
+app.get("/methods/:stage", function (request, response) {
+  console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
+  response.sendFile(__dirname + '/methods' + request.params.stage + '.json');
+  //response.send("hello");
+  
 });
-*/
+//*/
 /*
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/input.html');
@@ -49,11 +58,25 @@ app.get("/", function (request, response) {
 
 app.post("/", function (request, response) {
   //dreams.push(request.query.dream);
-  //console.log(request.body);
+  console.log(request.body);
   //response.sendStatus(200);
-  response.send(handleInput(request.body));
+  response.send(handleInput(request.body, 'graphs'));
 });
 //*/
+
+app.get("/blueline", function (request, response) {
+  response.send(buildPageBL([],[],0));
+  //response.sendFile(__dirname + '/src/mockupgrid.svg');
+  //response.send(leadSVG());
+});
+
+app.post("/blueline", function (request, response) {
+  console.log(request.body);
+  //response.sendStatus(200);
+  response.send(handleInput(request.body, 'grid'));
+});
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

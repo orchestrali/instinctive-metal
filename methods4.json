@@ -1,0 +1,40 @@
+[
+  {
+    "class": "Plain",
+    "methods": [
+      {
+        "name": "Plain Bob Minimus",
+        "plainPN": ["x",[1,4],"x",[1,4],"x",[1,4],"x",[1,2]]
+      },
+      {
+        "name": "Double Bob Minimus",
+        "plainPN": [ "x", [ 1, 4 ], "x", [ 3, 4 ], "x", [ 1, 4 ], "x", [ 1, 2 ] ]
+      },
+      {
+        "name": "Reverse Bob Minimus",
+        "plainPN": [ "x", [ 1, 4 ], "x", [ 3, 4 ], "x", [ 1, 4 ], "x", [ 1, 4 ] ]
+      },
+      {
+        "name": "St Nicholas Bob Minimus",
+        "plainPN": [ [ 3, 4 ], [ 1, 4 ], "x", [ 3, 4 ], "x", [ 1, 4 ], [ 3, 4 ], [ 1, 2 ] ]
+      },
+      {
+        "name": "Reverse Canterbury Place Minimus",
+        "plainPN": [ [ 3, 4 ],[ 1, 4 ],"x",[ 1, 4 ],"x",[ 1, 4 ],[ 3, 4 ],[ 1, 2 ] ]
+      },
+      {
+        "name": "Double Canterbury Place Minimus",
+        "plainPN": [ [ 3, 4 ],[ 1, 4 ],[ 1, 2 ],[ 3, 4 ],[ 1, 2 ],[ 1, 4 ],[ 3, 4 ],[ 1, 2 ] ]
+      },
+      {
+        "name": "Single Canterbury Place Minimus",
+        "plainPN": [ "x",[ 1, 4 ],[ 1, 2 ],[ 3, 4 ],[ 1, 2 ],[ 1, 4 ],"x",[ 1, 4 ] ]
+      },
+      {
+        "name": "Reverse St Nicholas Bob Minimus",
+        "plainPN": [ "x",[ 1, 4 ],[ 1, 2 ],[ 3, 4 ],[ 1, 2 ],[ 1, 4 ],"x",[ 1, 2 ] ]
+      }
+
+    ]
+  }
+]

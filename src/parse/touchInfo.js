@@ -1,21 +1,14 @@
-var validTouchTokens = ['p', 'b', 's'];
 const lexer = require('./lexer');
 
+//given the form input (composition, bob info, single info)
+//return any errors
+//return callInfo, an array containing bob info and/or single info as applicable
+
 module.exports = function parseTouch(input) {
-  var comp = input.touch.split('');
+  var comp = input.touch;
   var callInfo = ['none', 'none'];
-  
-  
   var numBells = Number(input.stage);
-  
   var errors = [];
-  
-  for (var i = 0; i < input.touch.length; ++i) {
-    if (validTouchTokens.indexOf(comp[i]) == -1) {
-      errors.push("Error: unrecognized token in touch");
-      return [errors, callInfo];
-    }
-  }
   
   if (comp.indexOf('b') > -1 && 
       (input.bobPlaceNot == '' || input.bobFreq == '' || input.bobStart == '')) {
@@ -42,11 +35,7 @@ module.exports = function parseTouch(input) {
     callInfo.splice(1, 1, singleInfo);
     errors = errors.concat(lexer(input.singlePlaceNot, numBells)[0]);
   }
+
   
-  
-  
-  
-  
-  
-  return [errors, callInfo, comp];
+  return [errors, callInfo];
 }

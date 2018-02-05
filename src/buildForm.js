@@ -37,44 +37,112 @@ var stages = [
   },
   ];
 
+const findMethod = require('./findMethod.js');
+
+
 module.exports = function buildForm(input) {
-  let rounds;
-  let other;
-  let otherLeadhead;
-  let oneLead;
-  let plainCourse;
-  let placeNot = 'value="' + input.placeNotation + '"';
-  let options = '<option value disabled>required</option>';
+  let rounds = 'checked';
+  let other = '';
+  let otherLeadhead = '';
+  let oneLead = 'checked';
+  let plainCourse = '';
+  let touch = '';
+  let composition = '';
+  let bobPN = 'disabled';
+  let bobFreq = 'disabled';
+  let bobStart = 'disabled';
+  let singlePN = 'disabled';
+  let singleFreq = 'disabled';
+  let singleStart = 'disabled';
+  let placeNot = 'placeholder="required"';
+  let placeNotReq = 'required';
+  var classOptions = '';
+  var methodOptions = '';
+  //stage options
+  let options = '';
   
-  for (var i = 0; i < stages.length; ++i) {
-    var option = '<option value="' + stages[i].num + '"' + function() {
-      if (Number(input.stage) == stages[i].num) {
-        return 'selected';
+  if (input != 0) {
+    options += '<option value disabled>required</option>';
+    //build dropdown menu for stage
+    for (var i = 0; i < stages.length; ++i) {
+      var option = '<option value="' + stages[i].num + '"' + function() {
+        if (Number(input.stage) == stages[i].num) {
+          return 'selected';
+        }
+      }() + '>' + stages[i].num + ' - ' + stages[i].name + '</option>';
+      options += option;
+    }
+    placeNot = 'value="' + input.placeNotation + '"';
+    //select radio button for starting row
+    if (input.leadhead == 'rounds') {
+      rounds = 'checked ';
+      other = '';
+      otherLeadhead = '';
+    } else if (input.leadhead == 'other') {
+      rounds = '';
+      other = 'checked ';
+      otherLeadhead = 'value="' + input.otherLeadhead + '"';
+    }
+    //select radio button for quantity
+    if (input.quantity == 'one-lead') {
+      oneLead = 'checked ';
+      plainCourse = '';
+      touch = '';
+    } else if (input.quantity == 'plain-course') {
+      oneLead = '';
+      plainCourse = 'checked ';
+      touch = '';
+    } else if (input.quantity == 'touch') {
+      oneLead = '';
+      plainCourse = '';
+      touch = 'checked ';
+      composition = 'value="' + input.touch + '"';
+
+      if (input.methodName == undefined || input.methodName == '') {
+        bobPN = 'value="' + input.bobPlaceNot + '"';
+        bobFreq = 'value="' + input.bobFreq + '"';
+        bobStart = 'value="' + input.bobStart + '"';
+        singlePN = 'value="' + input.singlePlaceNot + '"';
+        singleFreq = 'value="' + input.singleFreq + '"';
+        singleStart = 'value="' + input.singleStart + '"';
       }
-    }() + '>' + stages[i].num + ' - ' + stages[i].name + '</option>';
-    options += option;
+
+    }
+    var classes = findMethod(input).classes;
+    var methods = findMethod(input).methods;
+
+    for (var i = 0; i < classes.length; ++i) {
+        classOptions += '<option value="' + classes[i] + '"' + function() {
+          if (classes[i] == input.methodClass) {
+            return 'selected';
+          }
+        }() + '>' + classes[i] + '</option>';
+      }
+
+    for (var i = 0; i < methods.length; ++i) {
+      methodOptions += '<option value="' + methods[i].name + '"' + function() {
+        if (methods[i].name == input.methodName) {
+          return 'selected';
+        }
+      }() + '>' + methods[i].name + '</option>';
+    }
+    if (input.methodName != undefined && input.methodName != '') {
+      placeNotReq = '';
+    }
+  } else if (input == 0) {
+    options += '<option value disabled selected>required</option>'
+    //build dropdown menu for stage
+    for (var i = 0; i < stages.length; ++i) {
+      var option = '<option value="' + stages[i].num + '">' + stages[i].num + ' - ' + stages[i].name + '</option>';
+      options += option;
+    }
   }
   
-  if (input.leadhead == 'rounds') {
-    rounds = 'checked ';
-    other = '';
-    otherLeadhead = '';
-  } else if (input.leadhead == 'other') {
-    rounds = '';
-    other = 'checked ';
-    otherLeadhead = 'value="' + input.otherLeadhead + '"';
-  }
   
-  if (input.quantity == 'one-lead') {
-    oneLead = 'checked ';
-    plainCourse = '';
-  } else if (input.quantity == 'plain-course') {
-    oneLead = '';
-    plainCourse = 'checked ';
-  }
   
-  let form = `</div>
-      <form action="/" method="post">
+  
+  
+  let form = `
         <div id="method-info">
           <p class="bold">
             Method info
@@ -90,7 +158,23 @@ module.exports = function buildForm(input) {
             <label for="placeNotation">
               <span>Place notation:</span>
             </label>
-            <input type="text" ` + placeNot + ` id="place-notation" name="placeNotation" required minlength="1"/>
+            <input type="text" ` + placeNot + ` id="place-notation" name="placeNotation" ` + placeNotReq + ` minlength="1"/>
+          </p>
+          <p>
+            <label for="methodClass">
+              <span>Method class:</span>
+            </label>
+            <select id="class" name="methodClass" >
+              <option value disabled selected></option>
+              ` + classOptions + `
+            </select>
+            <label for="methodName">
+              <span class="methodName">Method:</span>
+            </label>
+            <select id="methodName" name="methodName" >
+              <option value selected> </option>
+                ` + methodOptions + `
+            </select>
           </p>
           <fieldset>
             <legend>
@@ -136,17 +220,67 @@ module.exports = function buildForm(input) {
               </label>
             </li>
             <li>
-            (Touches coming soon!)
+            
+              <label for="touch">
+                <input type="radio" id="touch" name="quantity" value="touch" ` + touch + ` />
+                Touch (lead end notation): 
+                <input type="text" id="touchNot" name="touch" ` + composition + `/>
+              </label>
+            </li>
+            <li id="bob">
+              Bob info
+              <ul>
+                <li>
+                  <label for="bobPlaceNot">
+                    Place notation:
+                  </label>
+                  <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" ` + bobPN + ` />
+                </li>
+                <li>
+                  <label for="bobHowOften">
+                    Every 
+                    <input type="number" class="bob" id="bobHowOften" name="bobFreq" ` + bobFreq + ` />
+                     rows
+                  </label>
+                </li>
+                <li>
+                  <label for="bobStart">
+                    Starting at row
+                  </label>
+                  <input type="number" class="bob" id="bobStart" name="bobStart" ` + bobStart + ` />
+                </li>
+              </ul>
+            </li>
+            <li id="single">
+              Single info
+              <ul>
+                <li>
+                  <label for="singlePlaceNot">
+                    Place notation:
+                  </label>
+                  <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + singlePN + ` />
+                </li>
+                <li>
+                  <label for="singleHowOften">
+                    Every 
+                    <input type="number" class="single" id="singleHowOften" name="singleFreq" ` + singleFreq + ` />
+                     rows
+                  </label>
+                </li>
+                <li>
+                  <label for="singleStart">
+                    Starting at row
+                  </label>
+                  <input type="number" class="single" id="singleStart" name="singleStart" ` + singleStart + ` />
+                </li>
+              </ul>
             </li>
           </ul>
           </fieldset>
           
         </div>
         
-        <!--<input type="text" cols="80" rows="30" maxlength="5000" /> -->
-        <button type="submit">Submit</button>
-      </form>
-      </div>`;
+        `;
   
   return form;
 }

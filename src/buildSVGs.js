@@ -16,9 +16,11 @@ module.exports = function buildSVGs(rowArray, width) {
   measure.yIncrem = (measure.containHeight -40) / (numBells - 1);
   measure.rowNumX = (measure.containWidth - 20) / 2 + 10;
   
-  console.log(measure);
-  
-  if (numBells < 7) {
+  //console.log(measure);
+  if (numBells == 4) {
+    measure.rowNumY = (numBells - 2)*measure.yIncrem + (measure.yIncrem/-5.985 + 19.2);
+    measure.rowNumSize = measure.yIncrem;
+  } else if (numBells < 7) {
       measure.rowNumY = (numBells - 2)*measure.yIncrem + (measure.yIncrem/-5.985 + 19.2);
       measure.rowNumSize = measure.yIncrem * 4;
     } else if (numBells > 6 && numBells < 11) {

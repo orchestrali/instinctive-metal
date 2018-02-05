@@ -1,6 +1,6 @@
+//given a starting row, place notation, the number of the first row to create, and the stage, create an array of rows
 
-
-module.exports = function buildRows(rowZero, placeNotArray, rowNum, numBells) {
+module.exports = function buildRows(rowZero, placeNotArray, rowNum, numBells, leadType) {
   let arrayRows = [];
   let prevRow = rowZero;
   
@@ -28,6 +28,10 @@ module.exports = function buildRows(rowZero, placeNotArray, rowNum, numBells) {
     }
     arrayRows.push(row);
     prevRow = row.bells;
+    
+    if ((leadType.name == 'b' || leadType.name == 's') && row.rowNum % leadType.callLoc == 0) {
+      row.type = leadType.name;
+    }
   }
   return arrayRows;
 }

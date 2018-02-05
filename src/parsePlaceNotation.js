@@ -17,10 +17,10 @@ const stringify = require('./parse/stringsFromObjects');
 
 
 module.exports = function parseNotation(placeNot, numBells) {
-  
+  var stringArray = stringify(grouping(parseNumAbbr(numJoin(placeNot), numBells)));
   console.log('hi');
-  
-  return stringify(grouping(parseNumAbbr(numJoin(placeNot), numBells)));
+  console.log(stringArray);
+  return stringArray;
   
 
 }
