@@ -55,5 +55,18 @@
       }
       ]
   
+  },
+  {
+    "class": "Principle",
+    "methods": [
+      {
+        "name": "Original Minor",
+        "plainPN": ["x",[1,6]],
+        "bobPN": ["x", [1,4]],
+        "singlePN": ["x", [1,4,5,6]],
+        "callLoc": 2,
+        "leadLength": 2
+      }
+    ]
   }
 ]

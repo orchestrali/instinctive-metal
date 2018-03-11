@@ -1,4 +1,4 @@
-const parsePN = require('../parsePlaceNotation.js');
+const parsePN = require('../placeNot/parse.js');
 
 module.exports = function touchPN(completePN, callInfo, numBells) {
   var plainPN = completePN[0];

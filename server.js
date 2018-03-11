@@ -22,6 +22,7 @@ const buildPage = require('./src/buildPage.js');
 const formatRows = require('./src/formatRows.js');
 const parsePN = require('./src/parsePlaceNotation.js');
 const handleInput = require('./src/handleInput.js');
+const handleInput2 = require('./src/handleInput2.js');
 
 const buildPageBL = require('./src/buildPageBL.js');
 //const methodSVG = require('./src/build/methodSVG.js');
@@ -73,7 +74,7 @@ app.get("/blueline", function (request, response) {
 app.post("/blueline", function (request, response) {
   console.log(request.body);
   //response.sendStatus(200);
-  response.send(handleInput(request.body, 'grid'));
+  response.send(handleInput2(request.body, 'grid'));
 });
 
 

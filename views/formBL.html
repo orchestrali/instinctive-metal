@@ -1,166 +1,112 @@
 
     
-          
-       </div>
-      <form action="/blueline" method="post">
-        <div id="method-info">
-          <p class="bold">
-            Method info
-          </p>
-          <p>
-            <label for="stage">
-              <span>Stage:</span>
-            </label>
-            <select id="stage" name="stage" required>
-              <option value disabled selected>required</option>
-              <option value="4">4 - Minimus</option>
-              <option value="5">5 - Doubles</option>
-              <option value="6">6 - Minor</option>
-              <option value="7">7 - Triples</option>
-              <option value="8">8 - Major</option>
-              <option value="9">9 - Caters</option>
-              <option value="10">10 - Royal</option>
-              <option value="11">11 - Cinques</option>
-              <option value="12">12 - Maximus</option>
-            </select>
-          </p>
-          <p>
-            <label for="placeNotation">
-              <span>Place notation:</span>
-            </label>
-            <input type="text" placeholder="required" id="place-notation" name="placeNotation" required minlength="1"/>
-          </p>
-          <p>
-            <label for="methodClass">
-              <span>Method class:</span>
-            </label>
-            <select id="class" name="methodClass" >
-              <option value disabled selected></option>
-              
-            </select>
-            <label for="methodName">
-              <span class="methodName">Method:</span>
-            </label>
-            <select id="methodName" name="methodName" >
-              <option value selected> </option>
-            </select>
-          </p>
-          <fieldset>
-            <legend>
-              Leadhead to begin from
-            </legend>
-            <ul>
-              <li>
-                <label for="rounds">
-                  <input type="radio" id="rounds" name="leadhead" value="rounds" checked />
-                  Rounds
-                </label>
-              </li>
-              <li>
-                <label for="leadhead">
-                  <input type="radio" id="other" name="leadhead" value="other" />
-                  Other: 
-                  <input type="text" id="leadhead" name="otherLeadhead" />
-                </label>
-              </li>
-            </ul>
-          </fieldset>
-          
-        </div>
-        <div id="quantity">
-          <fieldset>
-            <legend>
-              Quantity
-            </legend>
-          
-          <ul>
-            <li>
-              <label for="one-lead">
-                <input type="radio" id="one-lead" name="quantity" value="one-lead" checked />
-                One lead
-              </label>
-            </li>
-            <li>
-              <label for="plain-course">
-                <input type="radio" id="plain-course" name="quantity" value="plain-course" />
-                Plain course
-              </label>
-            </li>
-            <li>
-            
-              <label for="touch">
-                <input type="radio" id="touch" name="quantity" value="touch" />
-                Touch (lead end notation): 
-                <input type="text" id="touchNot" name="touch" />
-              </label>
-            </li>
-            <li id="bob">
-              Bob info
-              <ul>
-                <li>
-                  <label for="bobPlaceNot">
-                    Place notation:
-                  </label>
-                  <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" disabled />
-                </li>
-                <li>
-                  <label for="bobHowOften">
-                    Every 
-                    <input type="number" class="bob" id="bobHowOften" name="bobFreq" disabled />
-                     rows
-                  </label>
-                </li>
-                <li>
-                  <label for="bobStart">
-                    Starting at row
-                  </label>
-                  <input type="number" class="bob" id="bobStart" name="bobStart" disabled />
-                </li>
-              </ul>
-            </li>
-            <li id="single">
-              Single info
-              <ul>
-                <li>
-                  <label for="singlePlaceNot">
-                    Place notation:
-                  </label>
-                  <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" disabled />
-                </li>
-                <li>
-                  <label for="singleHowOften">
-                    Every 
-                    <input type="number" class="single" id="singleHowOften" name="singleFreq" disabled />
-                     rows
-                  </label>
-                </li>
-                <li>
-                  <label for="singleStart">
-                    Starting at row
-                  </label>
-                  <input type="number" class="single" id="singleStart" name="singleStart" disabled />
-                </li>
-              </ul>
-            </li>
-          </ul>
-          </fieldset>
-          
-        </div>
-        <div id="appearance">
+<div id="appearance">
           <p class="bold">
             Display options
           </p>
+          <div id="basic-lines">
+          <p id="hunt-bells">
+            <label for="huntBellw">
+              Draw hunt bell line(s): 
+            </label>
+            <select id="huntBellw" name="huntBellw">
+              <option value="1" selected>thin</option>
+              <option value="2">thick</option>
+            </select>
+            <label for="huntColor">
+              color:
+            </label>
+            <input type="text" id="huntColor" name="huntColor" value="red"/>
+          </p>
           <p>
             <label for="blueBell">
-              <span>Show blue line for bell:</span>
+              <span>Draw path for bell:</span>
             </label>
             <select id="blueBell" name="blueBell" >
-              <option value disabled selected></option>
+              ` + blueOptions + `
             </select>
+            <label for="blueBellw">
+               
+            </label>
+            <select id="blueBellw" name="blueBellw">
+              <option value="1">thin</option>
+              <option value="2" selected>thick</option>
+            </select>
+            <label for="blueBellc">
+              color:
+            </label>
+            <input type="text" id="blueBellc" name="blueBellc" value="blue"/>
+          </p>
+          <p>
+          Advanced options: 
+          <button id="line-groups" type="button">
+            Set lines for bell groups
+          </button>
+          <button id="every-line" type="button">
+            Set line for each bell
+          </button>
+          </p>
+          </div>
+          <div id="bellgroups">
+          <button class="return-basic" type="button">
+          Return to basic options
+          </button>
+          <p>
+            Draw lines for: 
+          </p>
+           <ul>
+             <li id="group1">
+               <label for="blueGroup1"></label>
+               <select id="blueGroup1" name="blueGroup1">
+                <option value disabled selected></option>
+                 <option value="all">All bells</option>
+                 <option value="hunt">Hunt bells</option>
+                 <option value="work" >Working bells</option>
+                 <option value="none" >No bells</option>
+               </select>
+               <label for="blueGroup1w"></label>
+               <select id="blueGroup1w" name="blueGroup1w">
+              <option value disabled selected></option>
+              <option value="1">thin</option>
+              <option value="2">thick</option>
+            </select>
+            <label for="blueGroup1c">
+              color:
+            </label>
+            <input type="text" id="blueGroup1c" name="blueGroup1c" />
+             </li>
+             <li id="group2">
+               <label for="blueGroup2"></label>
+               <select id="blueGroup2" name="blueGroup2">
+                <option value disabled selected></option>
+                 <option value="all">All bells</option>
+                 <option value="hunt" >Hunt bells</option>
+                 <option value="work">Working bells</option>
+                 <option value="none" >No bells</option>
+               </select>
+               <label for="blueGroup2w"></label>
+               <select id="blueGroup2w" name="blueGroup2w">
+                 <option value disabled selected></option>
+              <option value="1">thin</option>
+              <option value="2">thick</option>
+            </select>
+            <label for="blueGroup2c">
+              color:
+            </label>
+            <input type="text" id="blueGroup2c" name="blueGroup2c" />
+             </li>
+           </ul>
+          </div>
+          <div id="everyline">
+          <button class="return-basic" type="button">
+          Return to basic options
+          </button>
+            <ul>
+              ` + advLines + `
+            </ul>
+          </div>
+          <p>
+            <input type="checkbox" id="pagination" name="pagination" value="paginate">
+    <label for="pagination">Include page breaks</label>
           </p>
         </div>
-        
-        <!--<input type="text" cols="80" rows="30" maxlength="5000" /> -->
-        <button type="submit">Submit</button>
-      </form>
-      </div>

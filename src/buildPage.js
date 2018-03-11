@@ -18,15 +18,26 @@ module.exports = function buildPage(errors, svgs, input) {
   var form = buildForm(input);
   var anchor;
   var title = '';
+  var page;
   ///*
   
   if (input == 0) {
     //form = fs.readFileSync(path.join(__dirname, '..', 'views/form.html'));
     anchor = '';
+    page = header + formBegin + form + formEnd + footer;
+    return page;
   } else {
+    if (errors.length > 0 ) {
+      page = header + joinErrors() + formBegin + form + formEnd + footer;
+      return page;
+    } else {
+      title = buildTitle(input);
+      anchor = '<a name="svgs"></a>';
+      page = header + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
+      return page;
+    }
     //form = buildForm(input);
-    title = buildTitle(input);
-    anchor = '<a name="svgs"></a>';
+    
   }
   //*/
   function joinErrors() {
@@ -47,10 +58,10 @@ module.exports = function buildPage(errors, svgs, input) {
     return body;
   }
   
-  var page = header + joinErrors() + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
+  //var page = header + joinErrors() + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
 
   
-  return page;
+  //return page;
 }
 
 

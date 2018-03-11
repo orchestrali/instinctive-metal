@@ -1,5 +1,3 @@
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
 
 const lexer = require('./parse/lexer.js');
 const buildPage = require('./buildPage.js');
@@ -14,6 +12,7 @@ const completePN = require('./parse/touchPN.js');
 const findMethod = require('./findMethod.js');
 const methodSVG = require('./build/methodSVG.js');
 const pagedSVGs = require('./build/leadsSVG.js');
+const bluelineSVGs = require('./bluelines/handleInput.js');
 const buildPageBL = require('./buildPageBL.js');
 
 module.exports = function handleInput(input, type) {
@@ -25,6 +24,8 @@ module.exports = function handleInput(input, type) {
   var placeNotArray = [];
   var callLoc;
   var leadLength;
+  var info = {};
+  info.numBells = numBells;
   
   if (knownMethod == undefined || knownMethod == '') {
     errors = lexer(input.placeNotation, numBells)[0];
@@ -41,7 +42,7 @@ module.exports = function handleInput(input, type) {
   var singleInfo = 'none';
   var composition = [];
   var width = 270;
-  console.log(placeNotArray);
+  //console.log(placeNotArray);
   
   //parse beginning leadhead
   if (input.leadhead == 'rounds') {
@@ -51,6 +52,7 @@ module.exports = function handleInput(input, type) {
     rowZero = parseLH(input.otherLeadhead, numBells)[1];
   }
   
+  info.rowZero = rowZero;
   console.log(rowZero);
   console.log('quantity', input.quantity);
   //console.log('bob info first', bobInfo);
@@ -84,35 +86,21 @@ module.exports = function handleInput(input, type) {
     
   }
   
+  info.leadLength = leadLength;
+  info.plainPN = placeNotArray[0];
   //console.log('bob info after', bobInfo);
-  
   
   if (errors.length > 0) {
     return buildPage(errors, [], input);
   } else {
     let rowArray = buildRows(placeNotArray, rowZero, composition, callLoc);
+    console.log(rowArray);
     if (type == 'graphs') {
-      
       let svgs = buildSVGs(rowArray, width);
       return buildPage([], svgs, input);
     } else if (type == 'grid') {
-      let rowZeroObj = {};
-      rowZeroObj.rowNum = 0;
-      rowZeroObj.bells = rowZero;
-      if (numBells % 2 == 1) {
-        rowZeroObj.bells.push(numBells + 1);
-      }
-      rowArray.unshift(rowZeroObj);
-      if (input.pagination) {
-        let svgs = pagedSVGs(rowArray, Number(input.blueBell), leadLength);
-        return buildPageBL([], svgs, input);
-      } else {
-        let methodSVGs = methodSVG(rowArray, Number(input.blueBell));
-        return buildPageBL([], methodSVGs, input);
-      }
-      
-      
-    }
-    
+      let svgs = bluelineSVGs(input, info, rowArray);
+      return buildPageBL([], svgs, input);
+    } 
   }
 }

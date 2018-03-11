@@ -165,7 +165,7 @@ module.exports = function buildForm(input) {
               <span>Method class:</span>
             </label>
             <select id="class" name="methodClass" >
-              <option value disabled selected></option>
+              <option value= disabled selected></option>
               ` + classOptions + `
             </select>
             <label for="methodName">
@@ -227,6 +227,14 @@ module.exports = function buildForm(input) {
                 <input type="text" id="touchNot" name="touch" ` + composition + `/>
               </label>
             </li>
+          </ul>
+        </fieldset>
+        </div>
+        <div id="call-info">
+          <p class="bold hidden">
+            Call details
+          </p>
+          <ul>
             <li id="bob">
               Bob info
               <ul>
@@ -253,7 +261,7 @@ module.exports = function buildForm(input) {
             </li>
             <li id="single">
               Single info
-              <ul>
+              <ul class="hidden">
                 <li>
                   <label for="singlePlaceNot">
                     Place notation:
@@ -276,9 +284,8 @@ module.exports = function buildForm(input) {
               </ul>
             </li>
           </ul>
-          </fieldset>
           
-        </div>
+        </div> 
         
         `;
   
