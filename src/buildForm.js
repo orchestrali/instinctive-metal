@@ -49,10 +49,8 @@ module.exports = function buildForm(input) {
   let touch = '';
   let composition = '';
   let bobPN = 'disabled';
-  let bobFreq = 'disabled';
   let bobStart = 'disabled';
   let singlePN = 'disabled';
-  let singleFreq = 'disabled';
   let singleStart = 'disabled';
   let placeNot = 'placeholder="required"';
   let placeNotReq = 'required';
@@ -100,10 +98,8 @@ module.exports = function buildForm(input) {
 
       if (input.methodName == undefined || input.methodName == '') {
         bobPN = 'value="' + input.bobPlaceNot + '"';
-        bobFreq = 'value="' + input.bobFreq + '"';
         bobStart = 'value="' + input.bobStart + '"';
         singlePN = 'value="' + input.singlePlaceNot + '"';
-        singleFreq = 'value="' + input.singleFreq + '"';
         singleStart = 'value="' + input.singleStart + '"';
       }
 
@@ -244,13 +240,7 @@ module.exports = function buildForm(input) {
                   </label>
                   <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" ` + bobPN + ` />
                 </li>
-                <li>
-                  <label for="bobHowOften">
-                    Every 
-                    <input type="number" class="bob" id="bobHowOften" name="bobFreq" ` + bobFreq + ` />
-                     rows
-                  </label>
-                </li>
+                
                 <li>
                   <label for="bobStart">
                     Starting at row
@@ -268,13 +258,7 @@ module.exports = function buildForm(input) {
                   </label>
                   <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + singlePN + ` />
                 </li>
-                <li>
-                  <label for="singleHowOften">
-                    Every 
-                    <input type="number" class="single" id="singleHowOften" name="singleFreq" ` + singleFreq + ` />
-                     rows
-                  </label>
-                </li>
+                
                 <li>
                   <label for="singleStart">
                     Starting at row

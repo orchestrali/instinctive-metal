@@ -1,4 +1,4 @@
-const lexer = require('./lexer');
+const lexer = require('../placeNot/lexer');
 
 //given the form input (composition, bob info, single info)
 //return any errors

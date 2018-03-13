@@ -5,14 +5,17 @@ var leadEnds = [
   {
     name: 'p',
     num: 0,
+    fullname: 'plain'
   },
   {
     name: 'b',
     num: 1,
+    fullname: 'bob'
   },
   {
     name: 's',
     num: 2,
+    fullname: 'single'
   }
 ];
 
@@ -26,12 +29,15 @@ module.exports = function composition(placeNot, rowZero, composition, callLoc) {
   let leadType = {
     name: 'p',
   };
+  let plainPN = placeNot.plain;
+  let bobPN = placeNot.bob;
+  let singlePN = placeNot.single;
  
   console.log('rounds', roundsStr);
   
   if (composition[0] == 'one-lead') {
     //console.log(buildLead(rowZero, placeNot[0], 1, numBells));
-    return buildLead(rowZero, placeNot[0], 1, numBells, leadType);
+    return buildLead(rowZero, placeNot.plain, 1, numBells, leadType);
   } else if (composition[0] == 'plain-course') {
     let leadhead = rowZero;
     let leadheadStr;
@@ -40,7 +46,7 @@ module.exports = function composition(placeNot, rowZero, composition, callLoc) {
     let i = 1;
     do {
       //build one lead of rows
-      let oneLead = buildLead(leadhead, placeNot[0], rowNum, numBells, leadType);
+      let oneLead = buildLead(leadhead, placeNot.plain, rowNum, numBells, leadType);
       //new leadhead = last row of built lead, removing tenor if added
       leadhead = oneLead[oneLead.length - 1].bells.slice(0, numBells);
       leadheadStr = leadhead.join();
@@ -63,8 +69,15 @@ module.exports = function composition(placeNot, rowZero, composition, callLoc) {
       let type = composition[1][i];
       leadType.name = type;
       leadType.callLoc = callLoc;
-      let typeNum = leadEnds.find(o => o.name == composition[1][i]).num;
-      let oneLead = buildLead(leadhead, placeNot[typeNum], rowNum, numBells, leadType);
+      let leadPN;
+      if (type == 'p') {
+        leadPN = plainPN;
+      } else if (type == 'b') {
+        leadPN = bobPN;
+      } else if (type == 's') {
+        leadPN = singlePN;
+      }
+      let oneLead = buildLead(leadhead, leadPN, rowNum, numBells, leadType);
 
       leadhead = oneLead[oneLead.length - 1].bells.slice(0, numBells);
       rowNum = oneLead.length*(i + 1) + 1;

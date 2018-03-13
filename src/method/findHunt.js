@@ -1,5 +1,4 @@
 const rounds = require('../rounds.js');
-const oneLead = require('../build/oneLeadArray.js');
 const buildLead = require('../rowArray/buildLead.js');
 
 var leadInfo = {leadType: {}, rowNum: 1};
@@ -18,6 +17,6 @@ module.exports = function findHuntBells(plainPN, numBells) {
       huntBells.push(rowZero[i]);
     }
   }
-  console.log('huntBells: ', huntBells);
+  //console.log('huntBells: ', huntBells);
   return huntBells;
 }

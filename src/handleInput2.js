@@ -1,5 +1,5 @@
 
-const lexer = require('./parse/lexer.js');
+const lexer = require('./placeNot/lexer.js');
 const buildPage = require('./buildPage.js');
 const parsePN = require('./placeNot/parse.js');
 const buildRows = require('./build/rowArray.js');
@@ -10,9 +10,10 @@ const touchComp = require('./parse/touchComp.js');
 const touchInfo = require('./parse/touchInfo.js');
 const completePN = require('./parse/touchPN.js');
 const findMethod = require('./findMethod.js');
-const methodSVG = require('./build/methodSVG.js');
-const pagedSVGs = require('./build/leadsSVG.js');
-const bluelineSVGs = require('./bluelines/handleInput.js');
+
+
+
+const bluelineSVGs= require('./bluelines/handleInput.js');
 const buildPageBL = require('./buildPageBL.js');
 
 module.exports = function handleInput(input, type) {
@@ -21,7 +22,7 @@ module.exports = function handleInput(input, type) {
   console.log('known method: ', knownMethod);
   var errors = [];
   var tokens = [];
-  var placeNotArray = [];
+  var placeNotArray = {};
   var callLoc;
   var leadLength;
   var info = {};
@@ -30,8 +31,8 @@ module.exports = function handleInput(input, type) {
   if (knownMethod == undefined || knownMethod == '') {
     errors = lexer(input.placeNotation, numBells)[0];
     tokens = lexer(input.placeNotation, numBells)[1];
-    placeNotArray = [parsePN(tokens, numBells)];
-    leadLength = placeNotArray.length;
+    placeNotArray.plain = parsePN(tokens, numBells);
+    leadLength = placeNotArray.plain.length;
   } else {
     placeNotArray = findMethod(input).placeNot;
     callLoc = findMethod(input).callLoc;
@@ -72,35 +73,31 @@ module.exports = function handleInput(input, type) {
       bobInfo = touchInfo(input)[1][0];
       singleInfo = touchInfo(input)[1][1];
       callLoc = Number(input.bobStart);
-      leadLength = Number(input.bobFreq);
       console.log('bob info', bobInfo);
       console.log('single info', singleInfo);
-      let addBob = completePN(placeNotArray, bobInfo, numBells);
+      let addBob = completePN(placeNotArray.plain, bobInfo, numBells);
       console.log('addBob', addBob);
       errors = errors.concat(addBob[0]);
-      placeNotArray = addBob[1];
-      let addSingle = completePN(placeNotArray, singleInfo, numBells);
+      placeNotArray.bob = addBob[1];
+      let addSingle = completePN(placeNotArray.plain, singleInfo, numBells);
       errors = errors.concat(addSingle[0]);
-      placeNotArray = addSingle[1];
+      placeNotArray.single = addSingle[1];
     }
     
   }
   
   info.leadLength = leadLength;
-  info.plainPN = placeNotArray[0];
+  info.plainPN = placeNotArray.plain;
   //console.log('bob info after', bobInfo);
   
   if (errors.length > 0) {
-    return buildPage(errors, [], input);
+    return buildPageBL(errors, [], input);
   } else {
     let rowArray = buildRows(placeNotArray, rowZero, composition, callLoc);
-    console.log(rowArray);
-    if (type == 'graphs') {
-      let svgs = buildSVGs(rowArray, width);
-      return buildPage([], svgs, input);
-    } else if (type == 'grid') {
-      let svgs = bluelineSVGs(input, info, rowArray);
-      return buildPageBL([], svgs, input);
-    } 
+    //console.log(rowArray);
+    console.log(info);
+    let svgs = bluelineSVGs(input, info, rowArray);
+    return buildPageBL([], svgs, input);
+     
   }
 }

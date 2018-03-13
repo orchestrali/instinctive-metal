@@ -1,7 +1,7 @@
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-const lexer = require('./parse/lexer.js');
+const lexer = require('./placeNot/lexer.js');
 const buildPage = require('./buildPage.js');
 const parsePN = require('./placeNot/parse.js');
 const buildRows = require('./build/rowArray.js');
@@ -12,8 +12,8 @@ const touchComp = require('./parse/touchComp.js');
 const touchInfo = require('./parse/touchInfo.js');
 const completePN = require('./parse/touchPN.js');
 const findMethod = require('./findMethod.js');
-const methodSVG = require('./build/methodSVG.js');
-const pagedSVGs = require('./build/leadsSVG.js');
+
+
 const buildPageBL = require('./buildPageBL.js');
 
 module.exports = function handleInput(input, type) {
@@ -91,28 +91,11 @@ module.exports = function handleInput(input, type) {
     return buildPage(errors, [], input);
   } else {
     let rowArray = buildRows(placeNotArray, rowZero, composition, callLoc);
-    if (type == 'graphs') {
+    
       
-      let svgs = buildSVGs(rowArray, width);
-      return buildPage([], svgs, input);
-    } else if (type == 'grid') {
-      let rowZeroObj = {};
-      rowZeroObj.rowNum = 0;
-      rowZeroObj.bells = rowZero;
-      if (numBells % 2 == 1) {
-        rowZeroObj.bells.push(numBells + 1);
-      }
-      rowArray.unshift(rowZeroObj);
-      if (input.pagination) {
-        let svgs = pagedSVGs(rowArray, Number(input.blueBell), leadLength);
-        return buildPageBL([], svgs, input);
-      } else {
-        let methodSVGs = methodSVG(rowArray, Number(input.blueBell));
-        return buildPageBL([], methodSVGs, input);
-      }
-      
-      
-    }
+    let svgs = buildSVGs(rowArray, width);
+    return buildPage([], svgs, input);
+     
     
   }
 }

@@ -7,7 +7,7 @@ module.exports = function findMethod(input) {
   var classes = [];
   var methods = [];
   var file = require('../methods' + stage + '.json');
-  var placeNot = '';
+  var placeNot = {};
   var callLoc;
   var leadLength;
   let output = {};
@@ -26,11 +26,15 @@ module.exports = function findMethod(input) {
     leadLength = method.leadLength;
   
     if (Number(stage) == 4) {
-      placeNot = [method.plainPN];
+      placeNot.plain = method.plainPN;
     } else {
-      placeNot = [method.plainPN, method.bobPN, method.singlePN];
+      placeNot.plain = method.plainPN; 
+      placeNot.bob = method.bobPN;
+      placeNot.single = method.singlePN;
     }
   }
+  output.name = methodName;
+  output.stage = stage;
   output.placeNot = placeNot;
   output.methods = methods;
   output.classes = classes;

@@ -1,4 +1,4 @@
-const findHunt = require('./findHunt.js');
+const findHunt = require('../method/findHunt.js');
 const rounds = require('../rounds.js');
 
 module.exports = function handleGroups(input, groupNum, plainPN, numBells) {

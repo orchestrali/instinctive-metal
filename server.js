@@ -16,17 +16,17 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-
+var testComp = 'bpppb bpppb';
+const composition = require('./src/comp/composition.js');
 
 const buildPage = require('./src/buildPage.js');
-const formatRows = require('./src/formatRows.js');
-const parsePN = require('./src/parsePlaceNotation.js');
+
 const handleInput = require('./src/handleInput.js');
 const handleInput2 = require('./src/handleInput2.js');
-
+const handleInput3 = require('./src/directTraffic.js');
 const buildPageBL = require('./src/buildPageBL.js');
-//const methodSVG = require('./src/build/methodSVG.js');
-const leadSVG = require('./src/build/methodSVG.js');
+
+
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // http://expressjs.com/en/starter/basic-routing.html
 ///*
 app.get("/methods/:stage", function (request, response) {
-  console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
+  //console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
   response.sendFile(__dirname + '/methods' + request.params.stage + '.json');
   //response.send("hello");
   
@@ -52,29 +52,31 @@ app.get("/", function (request, response) {
 */
 ///*
 app.get("/", function (request, response) {
-  //response.send(buildRows());
-  response.send(buildPage([],[],0));
+  //response.send(composition(testComp, 'leadend'));
+  response.send(buildPageBL([],[],0));
   //response.send(parsePN());
+  //response.send(handleInput3(request.body));
 });
 
 app.post("/", function (request, response) {
   //dreams.push(request.query.dream);
-  console.log(request.body);
+  //console.log(request.body);
   //response.sendStatus(200);
-  response.send(handleInput(request.body, 'graphs'));
+  //response.send(request.body);
+  response.send(handleInput3(request.body, 'grid'));
 });
 //*/
 
-app.get("/blueline", function (request, response) {
-  response.send(buildPageBL([],[],0));
+app.get("/graphs", function (request, response) {
+  response.send(buildPage([],[],0));
   //response.sendFile(__dirname + '/src/mockupgrid.svg');
   //response.send(leadSVG());
 });
 
-app.post("/blueline", function (request, response) {
+app.post("/graphs", function (request, response) {
   console.log(request.body);
   //response.sendStatus(200);
-  response.send(handleInput2(request.body, 'grid'));
+  response.send(handleInput3(request.body, 'graphs'));
 });
 
 

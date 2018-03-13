@@ -7,7 +7,7 @@ module.exports = function buildPath(rowArray, bell) {
   let bellIndex = rowArray[0].bells.indexOf(bellNum);
   let path = `<g style="stroke: `+ color +`; stroke-width: `+weight+`; fill:none;">
       <path d="M` + (bellIndex*16+45) + `,10`;;
-  console.log('building path for bell ' + bellNum)
+  //console.log('building path for bell ' + bellNum)
   //console.log('path ' + path);
   for (var i = 1; i < rowArray.length; ++i) {
     let index = rowArray[i].bells.indexOf(bellNum);

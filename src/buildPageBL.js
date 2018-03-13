@@ -6,7 +6,7 @@ const buildFormBL = require('./buildFormBL');
 const buildTitle = require('./title');
 
 var formBegin = `</div>
-      <form action="/blueline" method="post">`;
+      <form action="/" method="post">`;
 
 var formEnd = `<button type="submit">Submit</button>
       </form>
@@ -24,7 +24,7 @@ module.exports = function buildPage(errors, svgs, input) {
   var anchor;
   var title = '';
   ///*
-  if (input == 0) {
+  if (input == 0 || errors.length > 0) {
     //form = fs.readFileSync(path.join(__dirname, '..', 'views/formBL.html'));
     anchor = '';
   } else {

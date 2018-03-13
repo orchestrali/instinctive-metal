@@ -6,12 +6,11 @@ const stringify = require('./objToStr');
 
 
 
-
+//takes input place notation string, returns fully parsed array of place notation
 module.exports = function parseNotation(placeNot, numBells) {
-  var stringArray = stringify(grouping(parseNumAbbr(numJoin(placeNot), numBells)));
+  var stringArray = stringify(grouping(parseNumAbbr(numJoin(lexer(placeNot, numBells)), numBells)));
   console.log('hi');
   console.log(stringArray);
   return stringArray;
   
-
 }

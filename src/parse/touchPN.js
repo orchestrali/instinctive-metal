@@ -1,10 +1,9 @@
 const parsePN = require('../placeNot/parse.js');
 
-module.exports = function touchPN(completePN, callInfo, numBells) {
-  var plainPN = completePN[0];
+module.exports = function touchPN(plainPN, callInfo, numBells) {
+  
   if (callInfo == 'none') {
-    completePN.push([]);
-    return [[], completePN];
+    return [[], []];
   } else {
   
     console.log('call placeNot tokens', callInfo.placeNot);
@@ -28,7 +27,6 @@ module.exports = function touchPN(completePN, callInfo, numBells) {
 
     }
     console.log(callLead);
-    completePN.push(callLead);
-    return [[], completePN];
+    return [[], callLead];
   }
 }

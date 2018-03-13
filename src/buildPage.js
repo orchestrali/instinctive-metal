@@ -5,7 +5,7 @@ const buildForm = require('./buildForm');
 const buildTitle = require('./title');
 
 var formBegin = `</div>
-      <form action="/" method="post">`;
+      <form action="/graphs" method="post">`;
 
 var formEnd = `<button type="submit">Submit</button>
       </form>
@@ -21,24 +21,14 @@ module.exports = function buildPage(errors, svgs, input) {
   var page;
   ///*
   
-  if (input == 0) {
+  if (input == 0 || errors.length > 0) {
     //form = fs.readFileSync(path.join(__dirname, '..', 'views/form.html'));
     anchor = '';
-    page = header + formBegin + form + formEnd + footer;
-    return page;
   } else {
-    if (errors.length > 0 ) {
-      page = header + joinErrors() + formBegin + form + formEnd + footer;
-      return page;
-    } else {
-      title = buildTitle(input);
-      anchor = '<a name="svgs"></a>';
-      page = header + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
-      return page;
-    }
-    //form = buildForm(input);
-    
+    title = buildTitle(input);
+    anchor = '<a name="svgs"></a>';
   }
+  page = header + joinErrors() + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
   //*/
   function joinErrors() {
     let errorsJoined = '';
@@ -61,7 +51,7 @@ module.exports = function buildPage(errors, svgs, input) {
   //var page = header + joinErrors() + formBegin + form + formEnd + anchor + title + loopSVG() + footer;
 
   
-  //return page;
+  return page;
 }
 
 

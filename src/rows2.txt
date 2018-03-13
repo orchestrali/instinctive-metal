@@ -1,8 +1,0 @@
-[ { rowNum: 1, bells: [ 2, 1, 4, 3, 6, 5 ] },
-  { rowNum: 2, bells: [ 2, 4, 1, 6, 3, 5 ] },
-  { rowNum: 3, bells: [ 4, 2, 6, 1, 5, 3 ] },
-  { rowNum: 4, bells: [ 4, 6, 2, 1, 3, 5 ] },
-  { rowNum: 5, bells: [ 6, 4, 1, 2, 5, 3 ] },
-  { rowNum: 6, bells: [ 6, 1, 4, 5, 2, 3 ] },
-  { rowNum: 7, bells: [ 1, 6, 5, 4, 3, 2 ] },
-  { rowNum: 8, bells: [ 1, 6, 4, 5, 2, 3 ] } ]

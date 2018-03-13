@@ -1,7 +1,8 @@
-const findHunt = require('./findHunt.js');
+const findHunt = require('../method/findHunt.js');
 const blueGroups = require('./handleGroups.js');
 const allLines = require('./allLines.js');
 
+//input here is displayInput
 module.exports = function handlePaths(input, plainPN, numBells) {
   let bellPaths = [];
   
