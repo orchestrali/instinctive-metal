@@ -1,0 +1,304 @@
+/* styles */
+/* called by your view template */
+
+/* You might want to try something fancier: */
+/* less: http://lesscss.org/ */
+@media screen {
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 25px;
+}
+  
+div.grid-container {
+  margin-left: 8%;
+  display: inline-block;
+  }
+
+h1 {
+  font-weight: bold;
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p {
+  max-width: 600px;
+}
+  
+.errors p {
+  color: red;
+  min-height: 20px;
+  }
+
+form {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  padding: 0 15px 15px 15px;
+  background-color: cyan;
+  display: inline-block;
+  width: 100%;
+  
+  max-width: 578px;
+  border-radius: 3px;
+  position: relative;
+}
+
+input {
+  
+  margin-bottom: 10px;
+  padding: 5px;
+  
+  
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+}
+  
+input#place-notation {
+  width: 75%;
+  }
+  
+select#class {
+  width: 100px;
+  }
+  
+p#methodSearch {
+  position: relative
+  }
+  
+ul#methodList {
+  margin-left: 26.8%;
+  
+  padding-left: 0;
+  /*border: 1px solid black;*/
+  position: absolute;
+  top: 103px;
+  width: 63.2%;
+  background-color: aliceblue;
+  border-radius: 0 0 5px 5px;
+  /*z-index: 3;*/
+  }
+  
+ul#methodList li {
+  display: none;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  width: 100%;
+  z-index: 4;
+  background-color: aliceblue;
+  }
+  
+ul#methodList li:last-child {
+  border-radius: 0 0 5px 5px;
+  }
+  
+ul#methodList li:hover {
+  background-color: lightsteelblue;
+  }
+  
+ul#methodList li.selected {
+  background-color: lightsteelblue;
+  }
+  
+input#methodName {
+  width: 67%;
+  border-radius: 5px 5px 0 0;
+  }
+  
+input.bob, input.single {
+  
+  width: 75px;
+  }
+  
+input:disabled {
+  background-color: #e9e9e9;
+  }
+  
+  fieldset#calls legend {
+    margin-left: -16px;
+  }
+  
+  fieldset#calls {
+    border: 0;
+  }
+  
+  fieldset#calls li {
+    float: left;
+    margin-left: 24px;
+  }
+  
+  fieldset#calls li:first-child {
+    margin-left: -10px;
+  }
+  
+li {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 5px;
+  
+}
+  
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+  
+div#quantity fieldset ul {
+  position: relative;
+  
+  }
+  
+div#quantity fieldset ul li:last-child {
+  float: left;
+  }
+  
+div#call-info {
+  
+  
+  width: 100%;
+  height: 300px;
+  }
+  
+.hidden {
+  display: none;
+  }
+
+.visible {
+  height: 300px;
+  visibility: visible;
+  }
+  
+li#bob {
+  
+  width: 50%;
+  margin-right: 0px;
+  }
+ 
+li#bob, li#single {
+  float: left;
+  }
+/*
+li#single {
+  
+  left: 50%;
+  }
+*/
+button {
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+  
+}
+
+button:hover {
+  background-color: #eee;
+}
+
+button:active {
+  box-shadow: none;
+}
+  
+button a {
+  text-decoration: none;
+  color: black;
+  }
+
+#appearance input {
+  margin-bottom: 0;
+  }
+  
+div#bellgroups, div#everyline {
+  display: none;
+  }
+
+  
+div.grid {
+  float: left;
+  /*height: 850px;*/
+  margin-bottom: 40px;
+  }
+  
+svg.grid {
+  
+  /*float: left;*/
+  margin-right: 0;
+  margin-top: 0;
+  }
+
+  div#arrows {
+    margin-left: 8%;
+  }
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid lightgrey;
+}
+
+footer > a {
+  color: #BBBBBB;
+}
+
+.nicejob {
+  text-decoration: line-through;
+}
+}
+
+@media print {
+  
+  header {
+    display: none;
+  }
+  
+  body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 25px;
+}
+  
+  div#form {
+    display: none;
+  }
+  
+  svg.contain {
+    width: 25%;
+    height: auto;
+    break-inside: avoid-page;
+    margin-bottom: 40px;
+  }
+  
+  div.grid-container {
+    display: inline-block;
+  }
+  
+  div.grid {
+  float: left;
+  height: 850px;
+  }
+  
+  div.pageN {
+    margin-top: 100px;
+  }
+  
+  /*div.paged {
+    margin-bottom: 250px;
+  }*/
+  
+  svg svg {
+    width: 16.6%;
+  }
+  
+  footer {
+    display: none;
+  }
+}

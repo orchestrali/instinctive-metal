@@ -1,0 +1,38 @@
+div.grid-container {
+  
+  display: block;
+  }
+
+div.buttons {
+  margin-left: 8%;
+}
+
+svg {
+  
+  position: relative;
+}
+
+svg#container {
+  position: absolute;
+}
+
+
+.visible {
+  color: black;
+}
+
+.finished {
+  display: none;
+}
+
+path {
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;
+  animation: dash 500ms linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

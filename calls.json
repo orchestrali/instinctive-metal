@@ -1,0 +1,82 @@
+[
+  {
+    "callName": "bob",
+    "calls": [
+      {
+        "name": "4th place",
+        "placeNot": ["14"],
+        "callLoc": "leadLength"
+      },
+      {
+        "name": "n-2 place",
+        "placeNot": ["stage-2"],
+        "callLoc": "leadLength",
+        "notes": "only even stages"
+      },
+      {
+        "name": "Grandsire/early 3rds",
+        "placeNot": ["3"],
+        "callLoc": "leadLength-1"
+      },
+      {
+        "name": "early n-2",
+        "placeNot": ["stage-2"],
+        "callLoc": "leadLength-1"
+      },
+      {
+        "name": "Stedman",
+        "placeNot": ["stage-2"],
+        "callLoc": 3 || 9
+      }
+    ]
+  },
+  {
+    "callName": "single",
+    "calls": [
+      {
+        "name": "1234",
+        "placeNot": "1234",
+        "callLoc": "leadLength"
+      },
+      {
+        "name": "Doubles 123",
+        "placeNot": ["123"],
+        "callLoc": "leadLength"
+      },
+      {
+        "name": "n-2,n-1,n",
+        "placeNot": ["stage-2" & "stage"],
+        "callLoc": "leadLength"
+      },
+      {
+        "name": "Grandsire",
+        "placeNot": ["3","123"],
+        "callLoc": "leadLength-1"
+      },
+      {
+        "name": "early n-2",
+        "placeNot": ["stage-2" & "stage"],
+        "callLoc": "leadLength-1",
+        "example": "Original Triples"
+      },
+      {
+        "name": "Stedman5",
+        "options": [
+          {
+            "placeNot": "345",
+            "callLoc": 6
+          },
+          {
+            "placeNot": "145",
+            "callLoc": 12
+          }
+          ]
+      },
+      {
+        "name": "Stedman",
+        "placeNot": ["stage-2" & "stage"],
+        "callLoc": 3 || 9
+      }
+      ]
+  }
+]
