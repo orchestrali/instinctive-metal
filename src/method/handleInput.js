@@ -16,6 +16,7 @@ module.exports = function methodInfo(methodInput) {
     methodInfo.placeNot = {};
     methodInfo.placeNot.plain = parsePN(methodInput.placeNotation, stage);
     methodInfo.leadLength = methodInfo.placeNot.plain.length;
+    methodInfo.name = '';
     
     if (methodInput.bobStart || methodInput.singleStart) {
       let calls = callInfo(methodInput);

@@ -10,8 +10,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.2",
-    "express-validator": "^4.3.0"
+    "express": "^4.16.3",
+    "express-validator": "^5.2.0",
+    "node-xml": "^1.0.2",
+    "xml-js": "^1.6.7"
   },
   "engines": {
     "node": "8.x"

@@ -5,7 +5,7 @@ const buildForm = require('./buildForm');
 const buildTitle = require('./title');
 
 var formBegin = `</div>
-      <form action="/graphs" method="post">`;
+      <form action="/graphs" method="post" autocomplete="off">`;
 
 var formEnd = `<button type="submit">Submit</button>
       </form>

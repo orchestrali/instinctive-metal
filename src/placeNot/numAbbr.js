@@ -1,7 +1,7 @@
 const places = require('../places');
 
 module.exports = function parseNumAbbr(tokens, numBells) {
-  console.log('parsing number abbreviations: ', tokens);
+  //console.log('parsing number abbreviations: ', tokens);
   //do stuff with the objects of type 'number'
   for (var i = 0; i < tokens.length; ++i) {
     if (tokens[i].type == 'number') {
@@ -51,6 +51,6 @@ module.exports = function parseNumAbbr(tokens, numBells) {
       tokens[i].value = numArray;
     }
   }
-  console.log(tokens);
+  //console.log(tokens);
   return tokens;
 }

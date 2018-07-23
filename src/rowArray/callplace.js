@@ -1,4 +1,5 @@
 const buildLead = require('./buildLead.js');
+const callPlaces = require("../method/callplaces.js");
 
 var leadEnds = [{name: 'b',fullname: 'bob'},{name: 's',fullname: 'single'}];
 

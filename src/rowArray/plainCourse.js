@@ -1,7 +1,7 @@
 const buildLead = require('./buildLead.js');
 const rounds = require('../rounds.js');
 
-module.exports = function plainCourse(methodInfo) {
+module.exports = function plainCourse(methodInfo, tenor) {
   let stage = methodInfo.stage;
   let roundsStr = rounds(stage).join();
   //starting states
@@ -13,6 +13,7 @@ module.exports = function plainCourse(methodInfo) {
     leadInfo.placeNot = methodInfo.placeNot.plain;
     leadInfo.rowNum = 1;
     leadInfo.leadType = {name: 'p'};
+  leadInfo.tenor = tenor;
   do {
     //build one lead of rows
     let oneLead = buildLead(leadInfo);

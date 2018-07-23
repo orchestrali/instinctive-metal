@@ -28,7 +28,8 @@ module.exports = function leadend(methodInfo, compInfo) {
   let rowArray = [];
   
   for (var i = 0; i < touch.length; ++i) {
-    let type = touch[i];
+    let type = touch[i].value;
+    console.log(type);
     let typeName = leadEnds.find(o => o.name == type).fullname;
     leadInfo.leadType.name = type;
     leadInfo.leadType.callLoc = methodInfo.callLoc;

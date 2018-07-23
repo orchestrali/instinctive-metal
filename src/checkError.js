@@ -36,7 +36,7 @@ module.exports = function findError(methodInput, compInput) {
   }
 //if leadhead is not rounds
   if (compInput.otherLeadhead) {
-    console.log('leadhead is not rounds');
+    //console.log('leadhead is not rounds');
     //unrecognized token in leadhead
     for (var i = 0; i < compInput.otherLeadhead.length; ++i) {
       if (places.indexOf(compInput.otherLeadhead[i]) == -1) {
@@ -52,7 +52,7 @@ module.exports = function findError(methodInput, compInput) {
       errors.push("Error: a plain course must start with rounds");
     }
   } else {
-    console.log('leadhead is rounds');
+    //console.log('leadhead is rounds');
   }
   
 
@@ -62,11 +62,11 @@ module.exports = function findError(methodInput, compInput) {
     for (var i = 0; i < compInput.touch.length; ++i) {
       let token = compInput.touch[i];
       if (compInput.touchType == 'leadend') {
-        if (leadendTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && token*1 > stage) {
+        if (leadendTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
           errors.push("Error: unrecognized token in touch");
         }
       } else if (compInput.touchType == 'callplace') {
-        if (leadendTokens.indexOf(token) == -1 && callPlaceTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && token*1 > stage) {
+        if (leadendTokens.indexOf(token) == -1 && callPlaceTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
           errors.push("Error: unrecognized token in touch");
         }
       }
@@ -81,6 +81,22 @@ module.exports = function findError(methodInput, compInput) {
         errors.push("Error: mismatching '" + touchGroup[i] + "' in touch");
       }
     }
+    //check for matching parentheses/brackets
+    let openParens = [];
+    for (var i = 0; i < compArr.length; i++) {
+      if (touchGroup.indexOf(compArr[i]) > -1) {
+        if (touchGroup.indexOf(compArr[i]) % 2 == 0) {
+          openParens.push(compArr[i]);
+        } else if (touchGroup.indexOf(compArr[i]) % 2 == 1) {
+          let closeIndex = touchGroup.indexOf(compArr[i]);
+          let lastOpen = touchGroup.indexOf(openParens[openParens.length-1]);
+          if (closeIndex != lastOpen + 1) {
+            errors.push("Error: bad touch syntax");
+          }
+        }
+      }
+    }
+    
     
     
     if (!methodInput.methodName) {

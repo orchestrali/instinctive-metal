@@ -1,7 +1,7 @@
 const categories = {
-  methodInfo: ['stage', 'placeNotation', 'methodClass', 'methodName', 'bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart'],
+  methodInfo: ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart'],
   composition: ['leadhead', 'otherLeadhead', 'quantity', 'touch', 'touchType'],
-  display: ['huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup2']
+  display: ['huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells']
 }
 
 const catIndexed = (function(cats) {

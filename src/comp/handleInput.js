@@ -5,14 +5,22 @@ const parseTouch = require('./composition.js');
 module.exports = function compInfo(compInput, stage) {
   let compObject = {};
   compObject.quantity = compInput.quantity;
+  let rowZero = parseLH(compInput, stage);
+  compObject.rowZero = rowZero;
   
-  compObject.rowZero = parseLH(compInput, stage).rowArray;
-  compObject.rowZeroObj = parseLH(compInput, stage).rowObj;
+  let rowZeroObj = {};
+      rowZeroObj.rowNum = 0;
+      rowZeroObj.bells = rowZero;
+  
+  compObject.rowZeroObj = rowZeroObj;
   
   if (compInput.quantity == 'touch') {
     compObject.touch = parseTouch(compInput.touch, compInput.touchType);
-    compObject.touchType = compInput.touchType;
+    //compObject.touchType = compInput.touchType;
+    //right now all touches are leadend touches
+    compObject.touchType = 'leadend';
   }
   
+  //console.log(compObject);
   return compObject;
 }

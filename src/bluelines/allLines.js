@@ -9,8 +9,9 @@ module.exports = function allLines(input, numBells) {
         path.bells = [i];
         path.weight = input['bell' + i + 'w']
         path.color = color;
+        bellPaths.push(path);
       }
-    bellPaths.push(path);
+    
   }
   return bellPaths;
 }

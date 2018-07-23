@@ -1,15 +1,17 @@
 const rounds = require('../rounds.js');
 
-//take compInput and generate a row array and a row object of the leadhead
+//take compInput and generate a row array of the leadhead
 module.exports = function leadhead(compInput, stage) {
-  let leadhead = {};
+  
+  let rowZero;
   //if leadhead is rounds, generate the correct length row array
   if (compInput.leadhead == 'rounds') {
-    leadhead.rowArray = rounds(stage);
+    rowZero = rounds(stage);
+    //console.log('leadhead is rounds', rowZero);
   } else if (compInput.otherLeadhead) {
     //if leadhead is not rounds, convert it to array of numbers
     let row = compInput.otherLeadhead.split('');
-    let rowZero = [];
+    rowZero = [];
     for (var i = 0; i < stage; ++i) {
       if (row[i] == '0') {
         rowZero.push(10);
@@ -21,17 +23,22 @@ module.exports = function leadhead(compInput, stage) {
         rowZero.push(Number(row[i]));
       }
     }
-    leadhead.rowArray = rowZero;
+    
   }
+  /*
   //create rowZeroObj
   let rowZeroObj = {};
       rowZeroObj.rowNum = 0;
-      rowZeroObj.bells = leadhead.rowArray;
+      rowZeroObj.bells = rowZero;
+  leadhead.rowArray = rowZero;
+  leadhead.rowObj = rowZeroObj;
       //add tenor to odd-bell methods
       if (stage % 2 == 1) {
-        rowZeroObj.bells.push(stage + 1);
+        leadhead.rowObj.bells.push(stage + 1);
       }
-  leadhead.rowObj = rowZeroObj;
+  */
   
-  return leadhead;
+  //console.log(rowZero);
+  //return leadhead;
+  return rowZero;
 }

@@ -16,16 +16,21 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var testComp = 'bpppb bpppb';
-const composition = require('./src/comp/composition.js');
+var input = {
+  stage: 11,
+  class: "Slow Course"
+};
 
-const buildPage = require('./src/buildPage.js');
 
-const handleInput = require('./src/handleInput.js');
-const handleInput2 = require('./src/handleInput2.js');
+
+
 const handleInput3 = require('./src/directTraffic.js');
 const buildPageBL = require('./src/buildPageBL.js');
+const buildPage = require('./src/buildPage.js');
+const buildPageP = require('./src/buildPageP.js');
 
+const methodLib = require('./src/library/methodArray.js');
+const methodSearch = require('./src/library/search.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -39,9 +44,17 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.get("/methods/:stage", function (request, response) {
   //console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
   response.sendFile(__dirname + '/methods' + request.params.stage + '.json');
+  //response.sendFile(__dirname + '/methods' + request.params.stage + '.xml');
   //response.send("hello");
-  
 });
+
+app.get("/methodnames", function (request, response) {
+  response.sendFile(__dirname + '/methodNames.json');
+})
+
+app.get("/bellpaths", function (request, response) {
+  response.sendFile(__dirname + '/bellplaces.json');
+})
 //*/
 /*
 app.get("/", function (request, response) {
@@ -52,14 +65,12 @@ app.get("/", function (request, response) {
 */
 ///*
 app.get("/", function (request, response) {
-  //response.send(composition(testComp, 'leadend'));
   response.send(buildPageBL([],[],0));
   //response.send(parsePN());
   //response.send(handleInput3(request.body));
 });
 
 app.post("/", function (request, response) {
-  //dreams.push(request.query.dream);
   //console.log(request.body);
   //response.sendStatus(200);
   //response.send(request.body);
@@ -79,7 +90,18 @@ app.post("/graphs", function (request, response) {
   response.send(handleInput3(request.body, 'graphs'));
 });
 
+app.get("/library", function (request, response) {
+  response.send(methodSearch(input));
+});
 
+app.get("/practice", function (request, response) {
+  response.send(buildPageP([],{svg:""},0));
+});
+
+app.post("/practice", function (request, response) {
+  console.log(request.body);
+  response.send(handleInput3(request.body, 'practice'));
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

@@ -1,43 +1,7 @@
-var stages = [
-  {
-    num: 4,
-    name: 'Minimus',
-  },
-  {
-    num: 5,
-    name: 'Doubles',
-  },
-  {
-    num: 6,
-    name: 'Minor',
-  },
-  {
-    num: 7,
-    name: 'Triples',
-  },
-  {
-    num: 8,
-    name: 'Major',
-  },
-  {
-    num: 9,
-    name: 'Caters',
-  },
-  {
-    num: 10,
-    name: 'Royal',
-  },
-  {
-    num: 11,
-    name: 'Cinques',
-  },
-  {
-    num: 12,
-    name: 'Maximus',
-  },
-  ];
 
 const findMethod = require('./findMethod.js');
+const stages = require('./stages.js');
+const methodNames = require('../methodNames.json');
 
 
 module.exports = function buildForm(input) {
@@ -52,10 +16,12 @@ module.exports = function buildForm(input) {
   let bobStart = 'disabled';
   let singlePN = 'disabled';
   let singleStart = 'disabled';
-  let placeNot = 'placeholder="required"';
-  let placeNotReq = 'required';
+  let placeNot = '';
+  let placeNotReq = '';
   var classOptions = '';
   var methodOptions = '';
+  var methodPlaceholder = '';
+  let calloptions = "hidden";
   //stage options
   let options = '';
   
@@ -95,17 +61,34 @@ module.exports = function buildForm(input) {
       plainCourse = '';
       touch = 'checked ';
       composition = 'value="' + input.touch + '"';
+      calloptions = "";
+      bobPN = "";
+      bobStart = "";
+      singlePN = "";
+      singleStart = "";
 
-      if (input.methodName == undefined || input.methodName == '') {
+      if (input.bobPlaceNot) {
         bobPN = 'value="' + input.bobPlaceNot + '"';
         bobStart = 'value="' + input.bobStart + '"';
+      }
+      if (input.singlePlaceNot) {
         singlePN = 'value="' + input.singlePlaceNot + '"';
         singleStart = 'value="' + input.singleStart + '"';
       }
 
     }
-    var classes = findMethod(input).classes;
-    var methods = findMethod(input).methods;
+    var classArray = methodNames.find(o => o.stage == Number(input.stage)).classes;
+    var classes = [];
+    for (var i = 0; i < classArray.length; i++) {
+        if (classArray[i].methods.length > 0) {
+          classes.push(classArray[i].class);
+        }
+      }
+    
+    if (input.methodClass == "") {
+      methodPlaceholder = "Select a stage and class to search methods";
+    }
+    //var methods = findMethod(input).methods;
 
     for (var i = 0; i < classes.length; ++i) {
         classOptions += '<option value="' + classes[i] + '"' + function() {
@@ -114,7 +97,7 @@ module.exports = function buildForm(input) {
           }
         }() + '>' + classes[i] + '</option>';
       }
-
+/*
     for (var i = 0; i < methods.length; ++i) {
       methodOptions += '<option value="' + methods[i].name + '"' + function() {
         if (methods[i].name == input.methodName) {
@@ -122,11 +105,13 @@ module.exports = function buildForm(input) {
         }
       }() + '>' + methods[i].name + '</option>';
     }
+    */
     if (input.methodName != undefined && input.methodName != '') {
       placeNotReq = '';
     }
   } else if (input == 0) {
     options += '<option value disabled selected>required</option>'
+    methodPlaceholder = "Select a stage and class to search methods";
     //build dropdown menu for stage
     for (var i = 0; i < stages.length; ++i) {
       var option = '<option value="' + stages[i].num + '">' + stages[i].num + ' - ' + stages[i].name + '</option>';
@@ -148,15 +133,7 @@ module.exports = function buildForm(input) {
               <span>Stage:</span>
             </label>
             <select id="stage" name="stage" required>` + options + `
-        </select>
-          </p>
-          <p>
-            <label for="placeNotation">
-              <span>Place notation:</span>
-            </label>
-            <input type="text" ` + placeNot + ` id="place-notation" name="placeNotation" ` + placeNotReq + ` minlength="1"/>
-          </p>
-          <p>
+            </select>
             <label for="methodClass">
               <span>Method class:</span>
             </label>
@@ -164,14 +141,24 @@ module.exports = function buildForm(input) {
               <option value= disabled selected></option>
               ` + classOptions + `
             </select>
-            <label for="methodName">
-              <span class="methodName">Method:</span>
-            </label>
-            <select id="methodName" name="methodName" >
-              <option value selected> </option>
-                ` + methodOptions + `
-            </select>
           </p>
+          <p id="methodSearch">
+            
+            <label for="methodName">
+              <span class="methodName">Search for a method:</span>
+            </label>
+            <input type="text" id="methodName" name="methodName" placeholder="`+ methodPlaceholder +`" autocomplete="off"/>
+              <ul id="methodList">
+                
+              </ul>
+          </p>
+          <p>
+            <label for="placeNotation">
+              <span>Place notation:</span>
+            </label>
+            <input type="text" ` + placeNot + ` id="place-notation" name="placeNotation" ` + placeNotReq + ` minlength="1" autocomplete="off"/>
+          </p>
+          
           <fieldset>
             <legend>
               Leadhead to begin from
@@ -226,10 +213,31 @@ module.exports = function buildForm(input) {
           </ul>
         </fieldset>
         </div>
-        <div id="call-info">
-          <p class="bold hidden">
+        <div id="call-info" `+calloptions+`>
+          <p class="bold">
             Call details
           </p>
+          <fieldset id="calls">
+            <legend>Common Calls</legend>
+            <ul>
+            <li><label for="typea">
+                <input type="radio" id="typea" name="callType" value="a" />
+                4th place bob<br/>234 single (23 on doubles)
+              </label>
+            </li>
+            <li><label for="typeb">
+                <input type="radio" id="typeb" name="callType" value="b" />
+                n-2 bob<br/>n-2, n-1 single
+              </label>
+            </li>
+            <li><label for="typed">
+                <input type="radio" id="typed" name="callType" value="d" />
+                early 3rds bob<br/>long 3rds & 2nds single
+              </label>
+            </li>
+          </ul>
+          </fieldset>
+          <p>Custom Calls</p>
           <ul>
             <li id="bob">
               Bob info
@@ -251,7 +259,7 @@ module.exports = function buildForm(input) {
             </li>
             <li id="single">
               Single info
-              <ul class="hidden">
+              <ul>
                 <li>
                   <label for="singlePlaceNot">
                     Place notation:

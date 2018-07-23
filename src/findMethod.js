@@ -1,7 +1,7 @@
 
 
 module.exports = function findMethod(input) {
-  var stage = input.stage;
+  var stage = Number(input.stage);
   var methodClass = input.methodClass;
   var methodName = input.methodName;
   var classes = [];

@@ -8,6 +8,8 @@ module.exports = function buildRows(leadInfo) {
   let placeNotArray = leadInfo.placeNot;
   let numBells = prevRow.length;
   let leadType = leadInfo.leadType;
+  //console.log('rowZero', leadInfo.rowZero);
+  //console.log('numBells', numBells);
   
   //loop through place notation
   for (var i = 0; i < placeNotArray.length; ++i) {
@@ -25,13 +27,14 @@ module.exports = function buildRows(leadInfo) {
         direction *= -1;
       }
     }
-    
+    prevRow = row.bells;
+    //console.log(row.bells);
     //add tenor to odd bell methods
-    if (numBells % 2 == 1) {
+    if (numBells % 2 == 1 && leadInfo.tenor == "yes") {
       row.bells.push(numBells + 1);
     }
     arrayRows.push(row);
-    prevRow = row.bells;
+    
     //add call indication to call rows
     if ((leadType.name == 'b' || leadType.name == 's') && row.rowNum % leadType.callLoc == 0) {
       row.type = leadType.name;

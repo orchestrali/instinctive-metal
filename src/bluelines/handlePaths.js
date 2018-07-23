@@ -4,6 +4,7 @@ const allLines = require('./allLines.js');
 
 //input here is displayInput
 module.exports = function handlePaths(input, plainPN, numBells) {
+  //console.log(input);
   let bellPaths = [];
   
   if (input.blueGroup1) {
@@ -22,10 +23,12 @@ module.exports = function handlePaths(input, plainPN, numBells) {
     bellPaths.push(huntBells);
     //add bluebell to paths with weight and color
     let bluebell = {};
-    bluebell.bells = [Number(input.blueBell)];
-    bluebell.weight = input.blueBellw;
-    bluebell.color = input.blueBellc;
-    bellPaths.push(bluebell);
+    if(input.blueBell) {
+      bluebell.bells = [Number(input.blueBell)];
+      bluebell.weight = input.blueBellw;
+      bluebell.color = input.blueBellc;
+      bellPaths.push(bluebell);
+    }
   } else if (input.bell1w) {
     //add each bell to bell paths
     bellPaths = bellPaths.concat(allLines(input, numBells));
