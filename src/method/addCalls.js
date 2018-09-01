@@ -22,7 +22,7 @@ const callTypes = [
     ]
 
 module.exports = function addCalls(type, plainPN, stage) {
-  console.log("type", type);
+  //console.log("type", type);
   let methodInfo = {};
   let leadLength = plainPN.length;
   if (type == "a" || type == "c") {
@@ -37,14 +37,14 @@ module.exports = function addCalls(type, plainPN, stage) {
     methodInfo.bobPN = plainPN.slice(0, -1);
     methodInfo.bobPN.push(bobArray);
     methodInfo.singlePN = plainPN.slice(0, -1)
-    console.log("bobPN", methodInfo.bobPN);
+    //console.log("bobPN", methodInfo.bobPN);
     if (stage == 5) {
       methodInfo.singlePN.push([1,2,3]);
     } else {
       methodInfo.singlePN.push(singleArr);
     }
     methodInfo.callLoc = leadLength;
-    console.log(methodInfo);
+    //console.log(methodInfo);
   } else if (type == "b") {
     let bobArr = [1, stage-2];
     let singleArr = [1, stage-2, stage-1, stage];

@@ -15,6 +15,8 @@ module.exports = function lexer(compStr, type) {
     
     if (compInput[i]*1 > 0) {
       token.type = 'number';
+    } else if (compInput[i] == "!") {
+      token.type = 'obsbell'
     } else if (groupStart.indexOf(compInput[i]) > -1) {
       token.type = 'groupStart';
     } else if (groupEnd.indexOf(compInput[i]) > -1) {
@@ -31,6 +33,6 @@ module.exports = function lexer(compStr, type) {
     }
     
   }
-  console.log(tokens);
+  //console.log(tokens);
   return tokens;
 }

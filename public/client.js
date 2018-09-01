@@ -514,6 +514,7 @@ window.location.hash = 'svgs';
        $('.bob').prop("disabled", false);
        $('.single').prop("disabled", false);
        $('div#call-info').slideDown(1000, "swing");
+       $('li#compinfo').slideDown(1000, "swing");
        //$('#single').css("display", "inline-block");
      
      
@@ -523,6 +524,7 @@ window.location.hash = 'svgs';
      $('.single').prop("disabled", true);
      $('#touchNot').prop("required", false);
      $('div#call-info').slideUp(1000, "swing");
+     $('li#compinfo').slideUp(1000, "swing");
    }
    
  })
@@ -640,7 +642,7 @@ function toggleBlueInput(hide) {
   
 let gridWidth = (stage + (stage % 2))*16;
   //console.log('stage: ', stage);
-  //console.log('gridWidth: ', gridWidth);
+  console.log('gridWidth: ', gridWidth);
   //console.log('window width: ', $(window).width());
   //number of columns per viewport
   let numSVGs = Math.floor(($( window ).width() - 76)/(gridWidth + 38));
@@ -650,7 +652,8 @@ let gridWidth = (stage + (stage % 2))*16;
   $('div.grid').css("height", gridHeight);
   
   //number of columns per letter size page
-  let printNumSVGs = Math.floor(536/(gridWidth + 38));
+  let printNumSVGs = Math.floor(670/(gridWidth + 38));
+  console.log("printNumSVGs", printNumSVGs);
   let lastPage = $('div.grid').length % printNumSVGs;
   if (lastPage == 0) {
     lastPage = printNumSVGs;
@@ -658,19 +661,20 @@ let gridWidth = (stage + (stage % 2))*16;
   
   let b = $('div.grid').length - lastPage;
   
-  //add class with a margin-top to svgs past the first page
+  //add class with a margin-top to svgs past the first page (I turned this off because it wasn't finding
  $("div.grid:nth-child(n+"+(printNumSVGs+1)+")").addClass("pageN");
   
   //console.log('margin-bottom: ', 850-gridHeight);
   if ($('div.grid').length > 1) {
     //$('div.paged').css("margin-bottom", 753-gridHeight);
+    /*
     $('#printPaging').text(
       " @media print {" +
         "div.paged {" +
           "margin-bottom: "+ (817-gridHeight) + "px;" +
         "} " +
       "}"
-    );
+    );*/
     $('div.grid:nth-child(-n+'+b+')').addClass("paged");
   }
 

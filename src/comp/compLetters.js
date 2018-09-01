@@ -10,6 +10,13 @@ module.exports = function letters(compArr) {
       if (compArr[i+1].type != 'groupStart') {
         //if token is a number and next token is not a groupStart, change tokenType to callPlace and add to tokens
         compArr[i].type = 'callPlace';
+        if (prevToken == 's' || prevToken == 'p') {
+          compArr[i].call = prevToken;
+        } else {
+          compArr[i].call = 'b';
+        }
+        tokens.push(compArr[i]);
+        prevToken = '';
       } else {
         //if token is a number and next token IS groupStart, add it as is
         tokens.push(compArr[i]);
@@ -27,14 +34,12 @@ module.exports = function letters(compArr) {
       if (prevToken == 's' || prevToken == 'p') {
         //if token is a letter and prevToken is s or p, set type to callPlace and call to s or p
         compArr[i].call = prevToken;
-        tokens.push(compArr[i]);
-        prevToken = '';
       } else {
         //if token is a letter and prevToken is not s or p, set call to b
         compArr[i].call = 'b';
-        tokens.push(compArr[i]);
-        prevToken = '';
       }
+      tokens.push(compArr[i]);
+      prevToken = '';
     }  
     
   }

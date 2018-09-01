@@ -11,7 +11,7 @@ module.exports = function methodInfo(methodInput) {
   let stage = Number(methodInput.stage);
   methodInfo.stage = stage;
   methodInfo.placeNot = {};
-  console.log(methodInput);
+  //console.log(methodInput);
   
   if (methodInput.methodName) {
     //if the method is known, name, stage, unparsed plain PN, and lead length come from the files
@@ -25,11 +25,11 @@ module.exports = function methodInfo(methodInput) {
     methodInfo.name = '';
   }
   if (methodInfo.name.indexOf("Stedman") > -1 || methodInfo.name.indexOf("Erin") > -1) {
-    stedman(methodInput, methodInfo.name);
+    //stedman(methodInput, methodInfo.name);
   }
 
   if (methodInput.callType) {
-    console.log("adding calls");
+    //console.log("adding calls");
     let callInfo = addCalls(methodInput.callType, methodInfo.placeNot.plain, stage);
     methodInfo.placeNot.bob = callInfo.bobPN;
     methodInfo.placeNot.single = callInfo.singlePN;

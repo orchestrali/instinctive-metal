@@ -57,10 +57,11 @@ module.exports = function findError(methodInput, compInput) {
   
 
   if (compInput.touch) {
-    let compArr = compInput.touch.split('');
+    let compArr = compInput.touch.toLowerCase().split('');
+    console.log(compArr);
     //unrecognized token in composition
     for (var i = 0; i < compInput.touch.length; ++i) {
-      let token = compInput.touch[i];
+      let token = compArr[i];
       if (compInput.touchType == 'leadend') {
         if (leadendTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
           errors.push("Error: unrecognized token in touch");

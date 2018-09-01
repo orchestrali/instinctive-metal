@@ -7,7 +7,7 @@ module.exports = function parseComp(compStr, type) {
   //if type is 'callplace', parseLetters
   if (type == 'callplace') {
     tokens = parseLetters(tokens);
-    console.log(tokens);
+    //console.log(tokens);
   }
   //expand abbreviations using numbers
   let composition = expandAbbr(tokens);
