@@ -60,7 +60,7 @@ $(function() {
     if (button == correct) {
       $('div#errors').text('');
       addStuff();
-    } else {
+    } else if (button) {
       $('div#errors').text('wrong!');
     }
   }
@@ -100,8 +100,8 @@ $(function() {
       distMoved += newPos;
       
       
-      if (distMoved < i*20 && rowObjArr.length >= i) {
-        tl.to("#container", 0.5, {attr:{viewBox:"0 "+distMoved+" 400 400"}, repeat:0, ease: Linear.easeNone, onComplete:animate2});
+      if (distMoved < (i-1)*20 && rowObjArr.length >= i) {
+        tl.to("#container", 0.5, {attr:{viewBox:"0 "+distMoved+" 320 400"}, repeat:0, ease: Linear.easeNone, onComplete:animate2});
         stopped = false;
       } else {
         console.log("stopped");

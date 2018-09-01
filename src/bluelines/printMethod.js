@@ -9,7 +9,12 @@ module.exports = function printSVG(rowArray, pathArray, info) {
   let height = rowArray.length*20;
    //width of svg including rows + margin
   let gridWidth = rowArray[0].bells.length*16 + 38;
-  let rows = printRows(rowArray);
+  let rows;
+  if (info.displayNums) {
+    rows = printRows(rowArray);
+  } else {
+    rows = "";
+  }
   let paths = printPaths(pathArray, rowArray);
   let calls = printCalls(rowArray);
   let lines = leadheads(gridWidth, rowArray.length, info);

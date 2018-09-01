@@ -3,8 +3,8 @@ div.grid-container {
   display: block;
   }
 
-div.buttons {
-  margin-left: 8%;
+div.buttons, div#arrows {
+  margin-left: 80px;
 }
 
 svg {

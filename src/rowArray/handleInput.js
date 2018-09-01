@@ -1,6 +1,7 @@
 const buildLead = require('./buildLead.js');
 const plainCourse = require('./plainCourse.js');
 const leadend = require('./leadend.js');
+const callplace = require('./callplace2.js');
 
 module.exports = function handleInput(methodInfo, compInfo, tenor) {
   //if quantity is one lead, generate that
@@ -15,11 +16,12 @@ module.exports = function handleInput(methodInfo, compInfo, tenor) {
     return buildLead(leadInfo);
   } else if (compInfo.quantity == 'plain-course') {
   //if quantity is plain course, generate that
-    return plainCourse(methodInfo);
+    return plainCourse(methodInfo, tenor);
   } else if (compInfo.touchType == 'leadend') {
   //if touchType is 'leadend', use the leadend generator function
-    return leadend(methodInfo, compInfo);
+    return leadend(methodInfo, compInfo, tenor);
+  } else if (compInfo.touchType == 'callplace') {
+  //if touchType is 'callplace', use the callplace generator function (does it work??)
+    return callplace(methodInfo, compInfo);
   }
-  //if touchType is 'callplace', use the callplace generator function (not quite functional yet)
-  
 }

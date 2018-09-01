@@ -1,5 +1,4 @@
 
-
 //given a starting row, place notation, the number of the first row to create, and the lead type, create an array of rows
 
 module.exports = function buildRows(leadInfo) {
@@ -9,7 +8,7 @@ module.exports = function buildRows(leadInfo) {
   let numBells = prevRow.length;
   let leadType = leadInfo.leadType;
   //console.log('rowZero', leadInfo.rowZero);
-  //console.log('numBells', numBells);
+  //console.log('leadType', leadType);
   
   //loop through place notation
   for (var i = 0; i < placeNotArray.length; ++i) {
@@ -36,7 +35,8 @@ module.exports = function buildRows(leadInfo) {
     arrayRows.push(row);
     
     //add call indication to call rows
-    if ((leadType.name == 'b' || leadType.name == 's') && row.rowNum % leadType.callLoc == 0) {
+    if ((leadType.name == 'b' || leadType.name == 's') && i+1 == leadType.callLoc) {
+      //console.log("adding row of type " + leadType.name)
       row.type = leadType.name;
     }
   }

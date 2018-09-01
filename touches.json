@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Wrong and home twice",
+    "touch": [{"value": "w", "call": "b"}, {"value": "h", "call": "b"}, {"value": "w", "call": "b"}, {"value": "h", "call": "b"}]
+  },
+  {
+    "name": "In and out twice",
+    "touch": [{"value": "i", "call": "b"}, {"value": "b", "call": "b"}, {"value": "i", "call": "b"}, {"value": "b", "call": "b"}]
+  },
+  {
+    "name": "Three homes",
+    "touch": [{"value": "h", "call": "b"}, {"value": "h", "call": "b"}, {"value": "h", "call": "b"}]
+  },
+  {
+    "name": "Three wrongs",
+    "touch": [{"value": "w", "call": "b"}, {"value": "w", "call": "b"}, {"value": "w", "call": "b"}]
+  },
+  {
+    "name": "Single wrong twice",
+    "touch": [{"value": "w", "call": "s"}, {"value": "w", "call": "s"}]
+  }
+]

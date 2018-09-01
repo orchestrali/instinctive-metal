@@ -16,11 +16,12 @@ module.exports = function compInfo(compInput, stage) {
   
   if (compInput.quantity == 'touch') {
     compObject.touch = parseTouch(compInput.touch, compInput.touchType);
-    //compObject.touchType = compInput.touchType;
-    //right now all touches are leadend touches
-    compObject.touchType = 'leadend';
+    compObject.touchType = compInput.touchType;
+    //right now obsbell is always the tenor
+    compObject.obsBell = stage;
+    //compObject.touchType = 'leadend';
   }
   
-  //console.log(compObject);
+  console.log(compObject);
   return compObject;
 }

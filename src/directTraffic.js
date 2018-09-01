@@ -19,6 +19,7 @@ module.exports = function directTraffic(input, type) {
   let width = 270;
   let SVGs;
   console.log(type);
+  //console.log(compInput);
   //check for errors, first round; return page if there are any.
   let errors = checkError(methodInput, compInput);
   if (errors.length > 0) {
@@ -26,12 +27,14 @@ module.exports = function directTraffic(input, type) {
       return buildPageBL(errors, [], input);
     } else if (type == 'graphs') {
       return buildPage(errors, [], input);
+    } else if (type == 'practice') {
+      return buildPageP(errors, {svg:""}, input);
     }
   }
   
   //parse methodInput, get methodInfo object
   let methodInfo = methodParse(methodInput);
-  console.log(methodInfo);
+  //console.log(methodInfo);
   //parse compInput
   let compInfo = compParse(compInput, stage);
   //second error check: not needed????

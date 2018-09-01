@@ -16,8 +16,8 @@ module.exports = function callPlaces(methodInfo) {
   let leadInfo2 = {};
   leadInfo2.rowZero = rounds(stage);
   leadInfo2.placeNot = methodInfo.placeNot.single;
-  leadInfo.rowNum = 1;
-  leadInfo.leadType = {name: "s"};
+  leadInfo2.rowNum = 1;
+  leadInfo2.leadType = {name: "s"};
   let singleEnd = buildLead(leadInfo2)[methodInfo.leadLength-1].bells;
   
   let callplaces = [];

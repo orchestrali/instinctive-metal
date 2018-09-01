@@ -99,7 +99,7 @@ app.get("/practice", function (request, response) {
 });
 
 app.post("/practice", function (request, response) {
-  console.log(request.body);
+  //console.log(request.body);
   response.send(handleInput3(request.body, 'practice'));
 });
 

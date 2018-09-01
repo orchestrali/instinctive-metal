@@ -10,13 +10,11 @@ module.exports = function buildSVG(bluebell, color, rowZero) {
   let cx = 120 - 8*(rowZero.length-6) + (bluebell-1)*16;
   let textx = 115 - 8*(rowZero.length-6);
   
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400">
-  <defs>
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="400">
+  
+  <rect x="0" y="0" width="320" height="400" style="stroke: #000; fill: none;" />
     
-  </defs>
-  <rect x="0" y="0" width="350" height="400" style="stroke: #000; fill: none;" />
-    
-  <svg id="container" viewBox="0 0 400 400">
+  <svg id="container" viewBox="0 0 320 400">
     
     
     <g id="numbers" style="font-family: Verdana; fill: #000;">
@@ -46,7 +44,7 @@ module.exports = function buildSVG(bluebell, color, rowZero) {
 </div>
 <div id="arrows">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="30">
-<g style="stroke:black; stroke-width:2; fill:none; animation:none;">
+<g style="stroke:black; stroke-width:2; fill:none;">
   <path d="M40,15 l-20,0 m7,7 l-7,-7 l7,-7" ></path>
   <path d="M88,7 l0,17 m7,-7 l-7,7 l-7,-7">
   </path>

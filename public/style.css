@@ -4,255 +4,294 @@
 /* You might want to try something fancier: */
 /* less: http://lesscss.org/ */
 @media screen {
-  
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 25px;
-}
-  
-div.grid-container {
-  margin-left: 8%;
-  display: inline-block;
+  /*general element and element-state styles*/
+  * {
+    box-sizing: border-box;
   }
 
-h1 {
-  font-weight: bold;
-  color: black;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-p {
-  max-width: 600px;
-}
-  
-.errors p {
-  color: red;
-  min-height: 20px;
+  body {
+    font-family: helvetica, arial, sans-serif;
+    margin: 25px;
   }
 
-form {
-  margin-top: 20px;
-  margin-bottom: 25px;
-  padding: 0 15px 15px 15px;
-  background-color: cyan;
-  display: inline-block;
-  width: 100%;
-  
-  max-width: 578px;
-  border-radius: 3px;
-  position: relative;
-}
+  h1 {
+    font-weight: bold;
+    color: black;
+  }
 
-input {
-  
-  margin-bottom: 10px;
-  padding: 5px;
-  
-  
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
-}
-  
-input#place-notation {
-  width: 75%;
+  p {
+    max-width: 600px;
+    margin: 8px 0;
   }
   
-select#class {
-  width: 100px;
+  button {
+    font-size: 16px;
+    border-radius: 3px;
+    background-color: lightgrey;
+    border: 1px solid grey;
+    box-shadow: 2px 2px teal;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  button:hover {
+    background-color: #eee;
+  }
+
+  button:active {
+    box-shadow: none;
+  }
+
+  button a {
+    text-decoration: none;
+    color: black;
+    }
+  
+  form {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding: 0 15px 15px 15px;
+    background-color: cyan;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 578px;
+    border-radius: 3px;
+    position: relative;
   }
   
-p#methodSearch {
-  position: relative
+  label {
+    margin-right: 7px;
+  }
+
+  input {
+
+    /*margin-bottom: 10px;*/
+    padding: 5px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    font-size: 16px;
   }
   
-ul#methodList {
-  margin-left: 26.8%;
-  
-  padding-left: 0;
-  /*border: 1px solid black;*/
-  position: absolute;
-  top: 103px;
-  width: 63.2%;
-  background-color: aliceblue;
-  border-radius: 0 0 5px 5px;
-  /*z-index: 3;*/
+  input:disabled {
+    background-color: #e9e9e9;
   }
   
-ul#methodList li {
-  display: none;
-  padding-left: 10px;
-  padding-bottom: 5px;
-  margin-bottom: 0;
-  width: 100%;
-  z-index: 4;
-  background-color: aliceblue;
+  li {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 20px;
   }
   
-ul#methodList li:last-child {
-  border-radius: 0 0 5px 5px;
+  span {
+    margin-right: 10px;
   }
   
-ul#methodList li:hover {
-  background-color: lightsteelblue;
+  footer {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid lightgrey;
+  }
+
+  footer > a {
+    color: #BBBBBB;
   }
   
-ul#methodList li.selected {
-  background-color: lightsteelblue;
+  
+  
+  /*some general classes */
+  
+  .bold {
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 10px;
   }
   
-input#methodName {
-  width: 67%;
-  border-radius: 5px 5px 0 0;
+  .hidden.category, .hidden {
+    display: none;
+  }
+
+  .visible {
+    height: 300px;
+    visibility: visible;
   }
   
-input.bob, input.single {
-  
-  width: 75px;
+  fieldset.borderless {
+    border: 0;
   }
   
-input:disabled {
-  background-color: #e9e9e9;
+  /*error div at top of page*/
+  .errors p {
+    color: red;
+    min-height: 20px;
+  }
+  
+  /* FORM STYLING */
+  
+  div.category {
+    display: flex;
+    flex-flow: column;
+  }
+
+  div.input, ul.row {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 7px;
+    align-items: center;
+  }
+  
+  /* method info */
+  
+  select#class {
+    width: 100px;
+  }
+  
+  input#place-notation {
+    flex: 1 335px;
+  }
+  
+  div#methodSearch div {
+    position: relative;
+    flex: 1 335px;
+  }
+  
+  input#methodName {
+    width: 99%;
+    border-radius: 3px 3px 0 0;
+  }
+  
+  ul#methodList {
+    margin-left: 1px;
+    padding-left: 0;
+    width: 98.5%;
+    /*border: 1px solid black;*/
+    position: absolute;
+    top: 15px;
+    background-color: aliceblue;
+    border-radius: 0 0 5px 5px;
+    /*z-index: 3;*/
+    }
+  
+  ul#methodList li {
+    display: none;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+    width: 100%;
+    z-index: 4;
+    background-color: aliceblue;
+    }
+  
+  ul#methodList li:last-child {
+    border-radius: 0 0 5px 5px;
+    }
+  
+  ul#methodList li:hover {
+    background-color: lightsteelblue;
+    }
+  
+  ul#methodList li.selected {
+    background-color: lightsteelblue;
+    }
+  
+  /* quantity/composition info */
+  
+  div#quantity fieldset ul {
+    position: relative;
+  }
+  
+  li#compinfo {
+    margin-top: 20px;
+  }
+  
+  li#compinfo div {
+    align-items: flex-start;
+  }
+  
+  ul#touchInfo > li {
+    float: left;
+    margin-right: 35px;
+  }
+  
+  ul#touchInfo > li:first-child {
+    margin-left: -20px;
+  }
+  
+  /*div#quantity fieldset ul li:last-child {
+  float: left;
+  }*/ 
+  
+  /* call info */
+  
+  div#call-info {
+    width: 100%;
   }
   
   fieldset#calls legend {
     margin-left: -16px;
   }
   
-  fieldset#calls {
-    border: 0;
+  fieldset#calls ul {
+    padding-left: 0;
   }
   
   fieldset#calls li {
-    float: left;
-    margin-left: 24px;
+    margin-right: 24px;
+    margin-left: -10px;
   }
-  
+  /*
   fieldset#calls li:first-child {
     margin-left: -10px;
   }
-  
-li {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 5px;
-  
-}
-  
-ul {
-  list-style-type: none;
-  padding-left: 20px;
-}
-  
-div#quantity fieldset ul {
-  position: relative;
-  
-  }
-  
-div#quantity fieldset ul li:last-child {
-  float: left;
-  }
-  
-div#call-info {
-  
-  
-  width: 100%;
-  height: 300px;
-  }
-  
-.hidden {
-  display: none;
+    */
+  li#bob {
+    
+    margin-right: 15px;
   }
 
-.visible {
-  height: 300px;
-  visibility: visible;
+  input.bob, input.single {
+    width: 75px;
   }
   
-li#bob {
+  /* appearance info */
   
-  width: 50%;
-  margin-right: 0px;
-  }
- 
-li#bob, li#single {
-  float: left;
-  }
-/*
-li#single {
-  
-  left: 50%;
-  }
-*/
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
-  
-}
-
-button:hover {
-  background-color: #eee;
-}
-
-button:active {
-  box-shadow: none;
-}
-  
-button a {
-  text-decoration: none;
-  color: black;
+  #appearance input {
+    margin-bottom: 0;
   }
 
-#appearance input {
-  margin-bottom: 0;
+  div#bellgroups, div#everyline {
+    display: none;
   }
   
-div#bellgroups, div#everyline {
-  display: none;
+  /* END FORM STYLING */
+
+  /* svg styling */
+  
+  div.grid-container {
+    /*margin-left: 40px;*/
+    display: inline-block;
+  }
+  
+  div.grid {
+    float: left;
+    /*height: 850px;*/
+    margin-bottom: 40px;
+  }
+  
+  svg.grid {
+
+    /*float: left;*/
+    margin-right: 0;
+    margin-top: 0;
   }
 
   
-div.grid {
-  float: left;
-  /*height: 850px;*/
-  margin-bottom: 40px;
-  }
-  
-svg.grid {
-  
-  /*float: left;*/
-  margin-right: 0;
-  margin-top: 0;
-  }
 
-  div#arrows {
-    margin-left: 8%;
-  }
-
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
-
-footer > a {
-  color: #BBBBBB;
-}
-
-.nicejob {
-  text-decoration: line-through;
-}
 }
 
 @media print {
@@ -264,7 +303,7 @@ footer > a {
   body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
-}
+  }
   
   div#form {
     display: none;
@@ -283,8 +322,11 @@ footer > a {
   
   div.grid {
   float: left;
-  height: 850px;
+  /*height: 850px;*/
   }
+  
+  div.grid
+  
   
   div.pageN {
     margin-top: 100px;

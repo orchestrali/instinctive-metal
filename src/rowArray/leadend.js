@@ -15,7 +15,7 @@ var leadEnds = [
   }
 ];
 
-module.exports = function leadend(methodInfo, compInfo) {
+module.exports = function leadend(methodInfo, compInfo, tenor) {
   let stage = methodInfo.stage;
   let touch = compInfo.touch;
   
@@ -24,15 +24,16 @@ module.exports = function leadend(methodInfo, compInfo) {
     leadInfo.placeNot;
     leadInfo.rowNum = 1;
     leadInfo.leadType = {};
+  leadInfo.leadType.callLoc = methodInfo.callLoc;
+  leadInfo.tenor = tenor;
   
   let rowArray = [];
   
   for (var i = 0; i < touch.length; ++i) {
-    let type = touch[i].value;
+    let type = touch[i];
     console.log(type);
     let typeName = leadEnds.find(o => o.name == type).fullname;
     leadInfo.leadType.name = type;
-    leadInfo.leadType.callLoc = methodInfo.callLoc;
     leadInfo.placeNot = methodInfo.placeNot[typeName];
     
     let oneLead = buildLead(leadInfo);

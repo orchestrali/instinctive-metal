@@ -14,6 +14,11 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     if (methodInfo.name.indexOf('Stedman') > -1 || methodInfo.name.indexOf('Erin') > -1) {
       info.method = methodInfo.name.slice(0,4);
     }
+    if (displayInput.numbers) {
+      info.displayNums = true;
+    } else {
+      info.displayNums = false;
+    }
     SVGs = printMethod(displayInput, info, rowArray);
   } else if (type == 'graphs') {
     SVGs = buildGraphs(rowArray, width);
