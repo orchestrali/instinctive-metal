@@ -17,10 +17,18 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var input = {
-  stage: 11,
+  stage: 6,
   class: "Slow Course"
 };
 
+let input1 = {};
+  input1.stage = 6;
+  input1.methodClass = "Surprise";
+  input1.methodName = "Cambridge Surprise";
+let input2 = {};
+  input2.stage = 6;
+  input2.methodClass = "Surprise";
+  input2.methodName = "London Surprise";
 
 
 
@@ -31,6 +39,12 @@ const buildPageP = require('./src/buildPageP.js');
 
 const methodLib = require('./src/library/methodArray.js');
 const methodSearch = require('./src/library/search.js');
+const compareLeads = require('./src/prove/compareLeads.js');
+const displayTest = require('./src/prove/display.js');
+const findLeads = require('./src/prove/findLHs.js');
+const compare = require('./src/prove/compare.js');
+const courseOrders = require('./src/prove/listCOs.js');
+const courseOrder = require('./src/prove/courseOrder.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -40,30 +54,40 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // http://expressjs.com/en/starter/basic-routing.html
-///*
+/*
 app.get("/methods/:stage", function (request, response) {
   //console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
   response.sendFile(__dirname + '/methods' + request.params.stage + '.json');
   //response.sendFile(__dirname + '/methods' + request.params.stage + '.xml');
   //response.send("hello");
 });
+*/
 
 app.get("/methodnames", function (request, response) {
   response.sendFile(__dirname + '/methodNames.json');
 })
 
-app.get("/bellpaths", function (request, response) {
-  response.sendFile(__dirname + '/bellplaces.json');
+app.get("/sm", function (request, response) {
+  response.sendFile(__dirname + '/minorsurprise.json');
+})
+
+app.get("/compare", function (request, response) {
+  let inputs = findLeads(input1, input2);
+  let uniques = compare(inputs);
+  response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
 })
 //*/
-/*
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/input.html');
+///*
+app.get("/courseorder", function (request, response) {
+  response.send(courseOrder("123456"));
 });
 
-
-*/
+//*/
 ///*
+
+
+
+
 app.get("/", function (request, response) {
   response.send(buildPageBL([],[],0));
   //response.send(parsePN());
@@ -101,6 +125,10 @@ app.get("/practice", function (request, response) {
 app.post("/practice", function (request, response) {
   //console.log(request.body);
   response.send(handleInput3(request.body, 'practice'));
+});
+
+app.get("/surpriseminor", function (request, response) {
+  response.sendFile(__dirname + "/views/surprise-minor.html");
 });
 
 // listen for requests :)

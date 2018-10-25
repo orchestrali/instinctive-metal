@@ -2,7 +2,7 @@ const fs = require('fs');
 var convert = require('xml-js');
 const buildMethod = require('./buildMethod');
 
-//given a methodSet array and a filter, produce an array of matching method objects
+//given a methodSet array, extract the methods into objects in an array
 module.exports = function methodArray(sets) {
   let methods = [];
 

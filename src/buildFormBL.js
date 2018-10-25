@@ -9,7 +9,11 @@ module.exports = function buildForm(input) {
     
     for (var i = 1; i <= input.stage; ++i) {
       //build dropdown menu for blue bell options
-      var option = '<option value="' + i + '">' + i + '</option>';
+      var option = '<option value="' + i + '"' + function() {
+        if (Number(input.blueBell) == i) {
+          return 'selected';
+        }
+      }() + '>' + i + '</option>';
       blueOptions += option;
       //build options for blue lines for every bell
       var li = '<li><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select id="bell' + i + 'w" name="bell' + i + `w">

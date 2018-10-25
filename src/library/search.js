@@ -3,7 +3,6 @@ const buildArray = require('./methodArray.js');
 const methodClass = require('./methodClass.js');
 
 module.exports = function search(input) {
-  let methodSetArray = buildSets(input.stage);
   
   let filter = {};
   
@@ -13,7 +12,9 @@ module.exports = function search(input) {
   } else {
     filter.class = input.class;
   }
-  let methodArray = buildArray(methodSetArray, filter);
+  
+  let methodSetArray = buildSets(input.stage, filter);
+  let methodArray = buildArray(methodSetArray);
   let names = [];
   
   console.log('number in class ' + input.class, methodArray.length);

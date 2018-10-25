@@ -1,0 +1,150 @@
+
+
+body {
+    font-family: helvetica, arial, sans-serif;
+    margin: 25px;
+  }
+
+  h1 {
+    font-weight: bold;
+    color: black;
+  }
+
+a {
+  text-decoration: none;
+  color: black;
+  
+}
+
+p {
+  margin: 8px 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+footer {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid lightgrey;
+  }
+
+  footer > a {
+    color: #BBBBBB;
+  }
+
+#nav-options {
+  background-color: aliceblue;
+  color: steelblue;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+#nav-options p {
+  width: 80%;
+  margin: 8px 8px;
+  display: inline-block;
+}
+#nav-options li a {
+  color: darkslateblue;
+}
+
+#nav-options ul {
+  margin-top: 0;
+  padding-bottom: 8px;
+  display: none;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 8px solid steelblue;
+  margin-right: 8px;
+  margin-top: 8px;
+  display: inline-block;
+  transition: transform 600ms ease;
+}
+
+.rotate {
+  transform: rotate(-90deg);
+}
+
+#gamecontainer {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-width: 600px;
+}
+
+#methodname {
+  border: 1px solid darkblue;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: inset -5px -5px 5px darkblue, inset 5px 5px 5px darkblue;
+}
+
+#methodname:hover {
+  cursor: pointer;
+}
+
+#choicecontainer {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+
+.choices {
+  flex: 1;
+  max-width: 200px;
+  /*width: 198px;*/
+  display: flex;
+  flex-flow: column;
+  padding-right: 3px;
+}
+
+.choices:last-child {
+  padding-right: 0;
+}
+
+
+.option {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgray;
+  padding: 1px;
+  border-radius: 5px;
+  box-shadow: inset -3px -3px 5px lightgray, inset 1px 1px 5px lightgray;
+}
+
+.option:hover {
+  cursor: pointer;
+  box-shadow: inset -3px -3px 5px lightsteelblue, inset 1px 1px 5px lightsteelblue;
+}
+
+.option p {
+  text-align: center;
+}
+
+.correct {
+  background-color: lightgreen;
+  box-shadow: inset -3px -3px 5px green, inset 1px 1px 5px green;
+}
+
+.correct:hover {
+  box-shadow: inset -3px -3px 5px darkgreen, inset 1px 1px 5px darkgreen;
+}
+
+.wrong {
+  background-color: lightcoral;
+  box-shadow: inset -3px -3px 5px firebrick, inset 1px 1px 5px firebrick;
+}
+
+.wrong:hover {
+  box-shadow: inset -3px -3px 5px darkred, inset 1px 1px 5px darkred;
+}

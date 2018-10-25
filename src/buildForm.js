@@ -24,6 +24,9 @@ module.exports = function buildForm(input) {
   let calloptions = 'hidden';
   //stage options
   let options = '';
+  let methodName = '';
+  
+  //console.log("input: ", input);
   
   if (input != 0) {
     options += '<option value disabled>required</option>';
@@ -108,6 +111,7 @@ module.exports = function buildForm(input) {
     */
     if (input.methodName != undefined && input.methodName != '') {
       placeNotReq = '';
+      methodName = 'value="' + input.methodName + '"';
     }
   } else if (input == 0) {
     options += '<option value disabled selected>required</option>'
@@ -152,7 +156,7 @@ module.exports = function buildForm(input) {
       Search for a method:
     </label>
     <div>
-      <input type="text" id="methodName" name="methodName" placeholder="`+ methodPlaceholder +`" autocomplete="off"/>
+      <input type="text" id="methodName" name="methodName" placeholder="`+ methodPlaceholder +`" ${methodName} autocomplete="off"/>
       <ul id="methodList">
       </ul>
     </div>
