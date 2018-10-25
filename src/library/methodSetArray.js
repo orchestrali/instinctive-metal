@@ -2,7 +2,7 @@ const fs = require('fs');
 var convert = require('xml-js');
 const buildSet = require('./buildMethodSet');
 
-//given a stage, build an array of methodSet objects from the corresponding xml file
+//given a stage and a filter, build an array of methodSet objects from the corresponding xml file
 module.exports = function methodArray(stage, filter) {
   let methodSets = [];
   

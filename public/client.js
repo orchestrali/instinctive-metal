@@ -53,7 +53,12 @@ $(function() {
     });
   }
   
-  
+  //nav toggle
+  $("#nav-options").click(function() {
+    $("#nav-options ul").slideToggle(600, "swing");
+    $(".arrow").toggleClass("rotate");
+    
+  });
   
   //search new json methodNames file, returns array of arrays with methods
   function methodNames(stage, checkedClass, cb) {
