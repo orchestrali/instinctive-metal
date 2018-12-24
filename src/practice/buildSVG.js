@@ -58,5 +58,5 @@ module.exports = function buildSVG(bluebell, color, rowZero) {
 </div>
 <div id="errors"></div>`;
 
-  return svg;
+  return [svg];
 }

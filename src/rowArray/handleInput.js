@@ -5,7 +5,7 @@ const callplace = require('./callplace2.js');
 
 module.exports = function handleInput(methodInfo, compInfo, tenor) {
   //if quantity is one lead, generate that
-  if (compInfo.quantity == 'one-lead') {
+  if (compInfo.quantity == 'onelead') {
     console.log('building one lead', compInfo.rowZero);
     let leadInfo = {};
     leadInfo.rowZero = compInfo.rowZero;
@@ -14,7 +14,7 @@ module.exports = function handleInput(methodInfo, compInfo, tenor) {
     leadInfo.leadType = {name: 'p'};
     leadInfo.tenor = tenor;
     return buildLead(leadInfo);
-  } else if (compInfo.quantity == 'plain-course') {
+  } else if (compInfo.quantity == 'plaincourse') {
   //if quantity is plain course, generate that
     return plainCourse(methodInfo, tenor);
   } else if (compInfo.touchType == 'leadend') {

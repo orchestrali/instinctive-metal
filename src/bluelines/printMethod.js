@@ -22,5 +22,5 @@ module.exports = function printSVG(rowArray, pathArray, info) {
   let svg = `<div class="grid"><svg class="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="` + gridWidth + `" height="` + height + `">
 ` + rows + lines + calls + paths + `</svg></div>`
   //console.log(svg);
-  return svg;
+  return [svg];
 }

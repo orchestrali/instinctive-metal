@@ -28,13 +28,13 @@ module.exports = function methodInfo(methodInput) {
     //stedman(methodInput, methodInfo.name);
   }
 
-  if (methodInput.callType) {
+  if (methodInput.callType != "cust") {
     //console.log("adding calls");
     let callInfo = addCalls(methodInput.callType, methodInfo.placeNot.plain, stage);
     methodInfo.placeNot.bob = callInfo.bobPN;
     methodInfo.placeNot.single = callInfo.singlePN;
     methodInfo.callLoc = callInfo.callLoc;
-  } else if (methodInput.bobStart != '' || methodInput.singleStart != '' || !methodInput.bobStart) {
+  } else if (methodInput.callType = "cust") {
     let calls = callInfo(methodInput);
     methodInfo.callLoc = calls.callLoc;
     //add bob PN to PN object

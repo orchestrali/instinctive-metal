@@ -110,9 +110,10 @@ $(function() {
  //location.hash = 'svgs';
 window.location.hash = 'svgs';
   var bluelines = '';
-  recalcBlue();
+  recalcBlue(stage);
   
-  function recalcBlue() {
+  
+  function recalcBlue(stage) {
     for (var i = 1; i <= stage; ++i) {
       
       
@@ -137,40 +138,37 @@ window.location.hash = 'svgs';
     
     stage = Number($('select#stage option:checked').val());
     console.log("stage: ", stage);
-    $('select#methodName').children().detach();
-    $('<option></option>').prop({selected: true}).appendTo('select#methodName');
     
+    //remove methods from name dropdown
+    $('ul#methodList').children().detach();
+    
+    //remove blueBell options and add a blank selected option
     $('select#blueBell').children().detach();
     //console.log($('div#basic-lines input').prop("disabled"));
     $('<option></option>').prop({selected: true, disabled: true}).appendTo('select#blueBell');
     
+    //if a non-empty class is selected, make sure the methodName placeholder is blank (is this possible?)
     if ($("select#class option:checked").text() != "") {
       $("#methodName").prop("placeholder", "");
     }
     
+    //if the placeholder and class are blank, set the placeholder
     if ($("#methodName").prop("placeholder") == "" && $("select#class option:checked").text() == "") {
       $("#methodName").prop("placeholder", "Select a stage and class to search methods");
     }
     
-    
+    //if the basic lines aren't disabled, add options to the blueBell dropdown
     if (!$('div#basic-lines input').prop("disabled")) {
       for (var i = 1; i <= stage; ++i) {
       $('<option></option').text(i).val(i).appendTo('select#blueBell');
       }
     }
     
-    recalcBlue();
-    /*
-    //old function to find & build classes
-    methods(stage, (body) => {
-      $('select#class').children().detach();
-    $('<option></option>').prop({disabled: true, selected: true}).appendTo('select#class');
-    for (var i = 0; i < body.length; ++i) {
-        console.log(body[i].class);
-        $('<option></option>').text(body[i].class).val(body[i].class).appendTo('select#class');
-      }
-    });*/
-    //console.log(body);
+    //build options to draw every line
+    recalcBlue(stage);
+    if ($("div#everyline").css("display") == "block") {
+      $('div#everyline > ul').append(bluelines);
+    }
     
     //new function to build classes
     methodClasses(stage, (classes) => {
@@ -190,25 +188,6 @@ window.location.hash = 'svgs';
     })
     
     
-    /*
-    $.getJSON('/methods/' + stage, function(body) {
-      methods = body;
-      $('select#class').children().detach();
-      $('<option></option>').prop({disabled: true, selected: true}).appendTo('select#class');
-      
-      //alert('data loaded: ' + body);
-      for (var i = 0; i < body.length; ++i) {
-        console.log(body[i].class);
-        $('<option></option>').text(body[i].class).val(body[i].class).appendTo('select#class');
-      }
-      
-    }).fail(function( jqxhr, textStatus, error ) {
-    var err = textStatus + ", " + error;
-      //console.log("Text: " + jqxhr.responseText);
-    console.log( "Request Failed: " + err );
-    });
-    */
-    
     
   })
   
@@ -217,39 +196,24 @@ window.location.hash = 'svgs';
   $('#class').change(function() {
     stage = $('select#stage option:checked').val();
     let checkedClass = $('select#class option:checked').val();
-    $('select#methodName').children().detach();
-    $('<option></option>').prop({disabled: true, selected: true}).appendTo('select#methodName');
+    
+    //remove methods from dropdown
+    $('ul#methodList').children().detach();
+    
+    //if there's a stage make the search placeholder blank
     if (stage) {
       $("#methodName").prop("placeholder", "");
     }
-    /*
-      methods(stage, (body) => {
-        let classMethods = body.find(o => o.class == checkedClass).methods;
-         for (var i = 0; i < classMethods.length; ++i) {
-        $('<option></option>').text(classMethods[i].name).val(classMethods[i].name).appendTo('select#methodName');
-      }
-      })
-      //console.log(classMethods);
-      */
     
-    
-    
+    //if class is principle/differential hide the option to draw hunt-bell line(s)
     if (checkedClass == 'Principle' || checkedClass == 'Differential') {
       $('p#hunt-bells').slideUp(400);
     } else {
       $('p#hunt-bells').slideDown(400);
     }
      
-      
-    });
+  });
   
-  //when old methodname dropdown changes
-  $('#methodName').change(function() {
-    if ($('select#methodName').val() != '') {
-      $('#place-notation').prop({required: false, placeholder: ''});
-    }
-    
-  })
   
   //don't submit form if enter is pressed in an input
   $("form input").on("keyup keypress", function(event) {
@@ -260,6 +224,7 @@ window.location.hash = 'svgs';
     }
   });
   
+  
   //when methodName is clicked
   $("#methodName").click(function() {
     //body click causes methodList to be hidden
@@ -269,7 +234,7 @@ window.location.hash = 'svgs';
 
         $body.off('click.menuHide');
     });
-    //check if stage and class are selected
+    //check if stage and class are selected and display warning if either isn't
     let stage = $('select#stage option:checked').val();
     let checkedClass = $('select#class option:checked').val();
     if (stage == "" || checkedClass == "") {
@@ -280,6 +245,7 @@ window.location.hash = 'svgs';
       }
     }
   });
+  
   
   function searchWarning() {
       $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
@@ -305,6 +271,7 @@ window.location.hash = 'svgs';
   
   //when typing in the methodName field
   $("#methodName").on("keyup", function(event) {
+    //body click causes methodList to be hidden
     $(document.body).on('click.menuHide', function(){
         //console.log('body click');
         var $body = $(this);
@@ -511,22 +478,15 @@ window.location.hash = 'svgs';
    if ($('#touch').is(':checked')) {
      //console.log('touch chosen');
      $('#touchNot').prop({required: true, placeholder: 'required'});
-     
-     
      //console.log('select#methodName.val(): ', $('select#methodName').val());
      
        //console.log('yes');
-       $('.bob').prop("disabled", false);
-       $('.single').prop("disabled", false);
+       
        $('div#call-info').slideDown(1000, "swing");
        $('li#compinfo').slideDown(1000, "swing");
        //$('#single').css("display", "inline-block");
      
-     
-     
    } else {
-     $('.bob').prop("disabled", true);
-     $('.single').prop("disabled", true);
      $('#touchNot').prop("required", false);
      $('div#call-info').slideUp(1000, "swing");
      $('li#compinfo').slideUp(1000, "swing");
@@ -534,12 +494,26 @@ window.location.hash = 'svgs';
    
  })
   
+  $('#call-info').change(function() {
+    if ($('#cust').is(':checked')) {
+      $('.bob').prop("disabled", false);
+      $('.single').prop("disabled", false);
+    } else {
+      $('.bob').prop("disabled", true);
+      $('.single').prop("disabled", true);
+    }
+  })
+  
   
   $('.bob, .single').click(function() {
     //console.log("clicked");
-    $('fieldset#calls input:checked').prop("checked", false);
+    $('fieldset#calls li input:checked').prop("checked", false);
+    $('#cust').prop("checked", true);
+    $('.bob').prop("disabled", false);
+    $('.single').prop("disabled", false);
   })
   
+  //set lines for bell groups
 $('button#line-groups').click(function() {
   //console.log($(this).attr("id"));
   $('div#bellgroups input').prop("disabled", false);
@@ -567,7 +541,7 @@ $('button#line-groups').click(function() {
   
 });
   
-  
+  //set lines for every bell
 $('button#every-line').click(function() {
   //console.log($(this).attr("id"));
   $('div#basic-lines select').children($('option')).detach();
@@ -579,15 +553,18 @@ $('button#every-line').click(function() {
   
 });
   
-  
+  //return to basic line options
 $('button.return-basic').click(function() {
   console.log($(this).attr("id"));
+  
+  //detach the advanced options
   if ($(this).attr("id") == "from-groups") {
     console.log('toggling from bellgroups');
     toggleBlueInput("bellgroups");
   } else if ($(this).attr("id") == "from-all") {
     toggleBlueInput("everyline");
   }
+  
   $('select#huntBellw').append(`<option value="1" selected>thin</option>
               <option value="2">thick</option>`);
   $('div#basic-lines input').prop("disabled", false);
@@ -605,17 +582,26 @@ $('button.return-basic').click(function() {
   
   
 let other;
+  //when bluegroup selection changes
 $('#blueGroup1, #blueGroup2').change(function() {
   
+  let id = $(this).attr("id");
+  let otherID;
+  if (id == "blueGroup1") {
+    otherID = "group2";
+  } else if (id == "blueGroup2") {
+    otherID = "group1";
+  }
+  
+  //if the selection is all or none, remove the other group
   if ($(this).val() == 'all' || $(this).val() == 'none') {
     if (!other) {
-      other = $(this).parent().siblings().detach();
+      other = $("#" + otherID).detach();
     }
     
-    let id = $(this).attr("id");
-      //$(this).parent().siblings().attr("id");
-    $(this).parent().siblings().detach();
+    $("#" + otherID).detach();
     console.log(other);
+    //if the selection is none, disable color input
     if ($(this).val() == 'none') {
       
       $('input#' + id + 'c').prop({disabled: true, value: ''});
@@ -624,6 +610,7 @@ $('#blueGroup1, #blueGroup2').change(function() {
     }
   }
   
+  //if the selection is hunt or work AND one option has been detached, reattach it
   if (($(this).val() == 'hunt' || $(this).val() == 'work') && other) {
     console.log('yes');
     console.log(other);

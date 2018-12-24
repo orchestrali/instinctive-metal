@@ -21,7 +21,7 @@ module.exports = function handle(rowArray, info) {
   //generate place array for blue bell
   let blueArray = placeArray(rowArray, info.bluebell);
   //create script with row array and place arrays
-  let script = stringify(rowArray, huntArray, blueArray);
+  let script = '<link rel="stylesheet" href="/practicestyle.css">' + stringify(rowArray, huntArray, blueArray);
   //build SVG
   let svg = buildSVG(info.bluebell, info.bluecolor, info.rowZeroObj.bells);
   let results = {};
