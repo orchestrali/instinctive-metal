@@ -13,6 +13,7 @@ console.log('nextRow', nextRowFromPlaces(currentRow, changePlaces));
 // init project
 var express = require('express');
 var bodyParser = require('body-parser');
+var urlParse = require('url-parse');
 
 var app = express();
 
@@ -33,9 +34,8 @@ let input2 = {};
 
 
 const handleInput3 = require('./src/directTraffic.js');
-const buildPageBL = require('./src/buildPageBL.js');
-const buildPage = require('./src/buildPage.js');
-const buildPageP = require('./src/buildPageP.js');
+const buildPage = require('./src/buildPage2.js');
+
 
 const methodLib = require('./src/library/methodArray.js');
 const methodSearch = require('./src/library/search.js');
@@ -45,6 +45,7 @@ const findLeads = require('./src/prove/findLHs.js');
 const compare = require('./src/prove/compare.js');
 const courseOrders = require('./src/prove/listCOs.js');
 const courseOrder = require('./src/prove/courseOrder.js');
+const findOne = require('./src/library/findOne.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -62,6 +63,8 @@ app.get("/methods/:stage", function (request, response) {
   //response.send("hello");
 });
 */
+
+//findOne({title: 'Original Minimus'}, (result) => {console.log(result)});
 
 app.get("/methodnames", function (request, response) {
   response.sendFile(__dirname + '/methodNames.json');
@@ -89,13 +92,13 @@ app.get("/courseorder", function (request, response) {
 
 
 app.get("/", function (request, response) {
-  response.send(buildPageBL([],[],0));
+  response.send(handleInput3(request.query, 'grid'));
   //response.send(parsePN());
   //response.send(handleInput3(request.body));
 });
 
 app.post("/", function (request, response) {
-  //console.log(request.body);
+  console.log(request.body);
   //response.sendStatus(200);
   //response.send(request.body);
   response.send(handleInput3(request.body, 'grid'));
@@ -103,7 +106,7 @@ app.post("/", function (request, response) {
 //*/
 
 app.get("/graphs", function (request, response) {
-  response.send(buildPage([],[],0));
+  response.send(handleInput3(request.query, 'graphs'));
   //response.sendFile(__dirname + '/src/mockupgrid.svg');
   //response.send(leadSVG());
 });
@@ -114,12 +117,26 @@ app.post("/graphs", function (request, response) {
   response.send(handleInput3(request.body, 'graphs'));
 });
 
+app.get("/staff", function (request, response) {
+  response.send(handleInput3(request.query,'staff'));
+});
+
+app.get("/staff2", function (request, response) {
+  //response.send(urlParse(request.originalUrl, true).query);
+  response.send(request.query);
+  //response.send(handleInput3(urlParse(request.originalUrl, true).query, 'staff'));
+});
+
+app.post("/staff", function (request, response) {
+  //response.send(handleInput3(request.body, 'staff'));
+});
+
 app.get("/library", function (request, response) {
   response.send(methodSearch(input));
 });
 
 app.get("/practice", function (request, response) {
-  response.send(buildPageP([],{svg:""},0));
+  response.send(handleInput3(request.query,'practice'));
 });
 
 app.post("/practice", function (request, response) {

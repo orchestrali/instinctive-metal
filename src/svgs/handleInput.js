@@ -1,9 +1,11 @@
 const buildGraphs = require('./graphs.js');
 const printMethod = require('../bluelines/handleInput.js');
 const methodPractice = require('../practice/handleInput.js');
+const staffNot = require('./staffnotation.js');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
-  let SVGs;
+  let results = {};
+  results.script = '';
   let width = 270;
   if (type == 'grid') {
     let info = {};
@@ -19,9 +21,9 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     } else {
       info.displayNums = false;
     }
-    SVGs = printMethod(displayInput, info, rowArray);
+    results.SVGs = printMethod(displayInput, info, rowArray);
   } else if (type == 'graphs') {
-    SVGs = buildGraphs(rowArray, width);
+    results.SVGs = buildGraphs(rowArray, width);
   } else if (type == 'practice') {
     let info = {};
     info.rowZeroObj = compInfo.rowZeroObj;
@@ -30,7 +32,11 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     info.huntbells = displayInput.huntbells;
     info.bluebell = Number(displayInput.blueBell);
     info.bluecolor = displayInput.blueBellc;
-    SVGs = methodPractice(rowArray, info);
+    let obj = methodPractice(rowArray, info);
+    results.SVGs = obj.svg;
+    results.script = obj.script;
+  } else if (type == 'staff') {
+    results.SVGs = staffNot(rowArray, methodInfo.stage);
   }
-  return SVGs;
+  return results;
 }

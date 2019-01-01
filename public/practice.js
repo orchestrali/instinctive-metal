@@ -4,7 +4,7 @@
 
 $(function() {
   console.log("hi from the other file!");
-  console.log(window.bluepath);
+  //console.log(window.bluepath);
   
   var TweenLite = window.TweenLite;
   var TweenMax = window.TweenMax;
@@ -18,7 +18,10 @@ $(function() {
   //console.log(bluePlaces[0]);
   
   var i = 1;
-  let stage = rowObjArr[0].bells.length;
+  let stage;
+  if (rowObjArr) {
+    stage = rowObjArr[0].bells.length;
+  }
   let textx = 115 - 8*(stage - 6);
   let startx = 120 - 8*(stage - 6);
   

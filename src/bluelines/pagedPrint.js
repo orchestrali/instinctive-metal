@@ -28,5 +28,5 @@ module.exports = function composition(rowArray, pathArray, info) {
     svgs.push(printMethod(shortArray, pathArray, info));
   }
   
-  return svgs.join(' ');
+  return svgs;
 }

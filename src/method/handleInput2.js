@@ -28,21 +28,21 @@ module.exports = function methodInfo(methodInput) {
     //stedman(methodInput, methodInfo.name);
   }
 
-  if (methodInput.callType) {
+  if (methodInput.callType != "cust") {
     //console.log("adding calls");
     let callInfo = addCalls(methodInput.callType, methodInfo.placeNot.plain, stage);
     methodInfo.placeNot.bob = callInfo.bobPN;
     methodInfo.placeNot.single = callInfo.singlePN;
     methodInfo.callLoc = callInfo.callLoc;
-  } else if (methodInput.bobStart != '' || methodInput.singleStart != '' || !methodInput.bobStart) {
-    let calls = callInfo(methodInput);
+  } else if (methodInput.callType = "cust") {
+    let calls = callInfo(methodInput, methodInfo.leadLength);
     methodInfo.callLoc = calls.callLoc;
     //add bob PN to PN object
     if (calls.bob) {
-      methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, stage);
+      methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, calls.callLoc);
     } //add single PN to PN object
     if (calls.single) {
-      methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, stage);
+      methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, calls.callLoc);
     }
   } else {
     methodInfo.callLoc = methodInfo.placeNot.plain.length;

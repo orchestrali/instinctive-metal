@@ -1,13 +1,10 @@
 const rounds = require('../rounds.js');
-const buildLead = require('../rowArray/buildLead.js');
-
-var leadInfo = {leadType: {}, rowNum: 1};
+const buildLead = require('../rowArray/buildLead2.js');
 
 module.exports = function findHuntBells(plainPN, numBells) {
-  leadInfo.rowZero = rounds(numBells);
-  leadInfo.placeNot = plainPN;
+
   let rowZero = rounds(numBells);
-  let rowArray = buildLead(leadInfo);
+  let rowArray = buildLead(rounds(numBells),plainPN, 1);
   let huntBells = [];
   
   let lastRow = rowArray[rowArray.length - 1].bells;

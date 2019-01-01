@@ -15,7 +15,7 @@ module.exports = function compInfo(compInput, stage) {
   compObject.rowZeroObj = rowZeroObj;
   
   if (compInput.quantity == 'touch') {
-    compObject.touch = parseTouch(compInput.touch, compInput.touchType);
+    compObject.touch = parseTouch(compInput.comp, compInput.touchType);
     compObject.touchType = compInput.touchType;
     //right now obsbell is always the tenor
     compObject.obsBell = stage;

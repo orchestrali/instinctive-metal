@@ -1,7 +1,7 @@
 const findMethod = require('../library/findMethod.js');
 const rounds = require('../rounds.js');
 const parsePN = require('../placeNot/parse.js');
-const buildLead = require('../rowArray/buildLead.js');
+const buildLead = require('../rowArray/buildLead2.js');
 
 /*
 var input1 = {

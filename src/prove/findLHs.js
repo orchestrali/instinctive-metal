@@ -1,7 +1,7 @@
 const findMethod = require('../library/findMethod.js');
 const rounds = require('../rounds.js');
 const parsePN = require('../placeNot/parse.js');
-const buildLead = require('../rowArray/firstLead.js');
+const buildLead = require('../rowArray/buildLead2.js');
 
 const rowNumGroups = [{rowNums: [2,21,23,24]},{rowNums: [1,3,20,22]},{rowNums: [4,6,17,19]},{rowNums: [5,7,16,18]},{rowNums: [8,10,13,15]},{rowNums: [9,11,12,14]}];
 
@@ -16,8 +16,8 @@ module.exports = function findLHs(input1, input2) {
   let pn2 = parsePN(method2.plainPN, method2.stage);
   
   //build row arrays
-  let rowArray1 = buildLead(pn1, method1.stage);
-  let rowArray2 = buildLead(pn2, method2.stage);
+  let rowArray1 = buildLead(rounds(method1.stage), pn1, 1);
+  let rowArray2 = buildLead(rounds(method2.stage), pn2, 1);
   
   let LHArray = [];
   

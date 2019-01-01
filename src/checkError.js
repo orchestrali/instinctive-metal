@@ -73,7 +73,7 @@ module.exports = function findError(methodInput, compInput) {
       }
     }
     //no actual calls in touch
-    if ((compInput.touchType == 'leadend' && compArr.filter(e => leadendTokens.indexOf(e) > -1).length == 0) || (compInput.touchType == 'callplace' && compArr.filter(e => callPlaceTokens.indexOf(e) > -1).length == 0)) {
+    if ((compInput.touchType == 'leadend' && compArr.filter(e => leadendTokens.indexOf(e) > -1).length == 0) || (compInput.touchType == 'callplace' && compArr.filter(e => (callPlaceTokens.indexOf(e) > -1 || stage >= Number(e) > 0)).length == 0)) {
       errors.push("Error: no actual calls in touch");
     }
     //mismatched parentheses/brackets (only checks if the number of opening and closing symbols match)
@@ -98,26 +98,73 @@ module.exports = function findError(methodInput, compInput) {
       }
     }
     
-    
-    
-    if (!methodInput.methodName) {
-      //bob info required
-      if ((compInput.touchType == 'leadend' && compInput.touch.indexOf('b') > -1) || (compInput.touchType == 'callplace' && compArr.filter(e => callPlaceTokens.indexOf(e) > -1).length > compArr.filter(e => (e == 'p' || e == 's')).length)) {
-        if (!methodInput.bobPlaceNot || !methodInput.bobFreq || !methodInput.bobStart) {
-          errors.push("Error: bob info required");
+    //if the composition is not just plain leads
+    if (compInput.touchType == 'callplace' || compInput.comp.filter(e => (e != 'p')).length > 0) {
+      //calls required
+      if (methodInput.callType == "") {
+        errors.push("Error: calls required");
+        //if custom calls selected
+      } else if (methodInput.callType == "cust") {
+        
+        if (methodInput.callLoc == '') {
+          errors.push("Error: call location required");
+        }
+        //if there are singles
+        if (compInput.comp.indexOf('s') > -1) {
+          if (methodInput.singlePlaceNot == '' ) {
+            errors.push("Error: single info required");
+          }
+          if (testPN(methodInput.singlePlaceNot) == 1) {
+            errors.push("Error: invalid single place notation");
+          }
+        }
+        //if there are bobs
+        let type = compInput.touchType;
+        let bLoc = compInput.comp.indexOf('b');
+        let numCalls = 0;
+        let numSP = compArr.filter(e => (e == 'p' || e == 's')).length;
+        if (type == 'callplace') {
+          numCalls += compArr.filter(e => callPlaceTokens.indexOf(e) > -1).length;
+          for (var i = 0; i < compArr.length-1; i++) {
+            if (!Number.isNan(compArr[i]) && touchGroup.indexOf(compArr[i+1]) == -1) {
+              numCalls++;
+            }
+          }
+        }
+        if ((type == 'leadend' && bLoc > -1) || (type == 'callplace' && numCalls > numSP)) {
+          if (methodInput.bobPlaceNot == '' ) {
+            errors.push("Error: bob info required");
+          }
+          if (testPN(methodInput.bobPlaceNot) == 1) {
+            errors.push("Error: invalid bob place notation");
+          }
+        }
+        
+        //bob or single start = 0
+        if (methodInput.bobStart == 0 || methodInput.singleStart == 0) {
+          errors.push("Error: call locations must be a non-zero integer");
         }
       }
-      //single info required
-      if (compInput.touch.indexOf('s') > -1) {
-        if (!methodInput.singlePlaceNot || !methodInput.singleFreq || !methodInput.singleStart) {
-          errors.push("Error: single info required");
+
+      function testPN(pn) {
+        let pnArr = pn.split('');
+        let nums = 0;
+        for (var i = 0; i < pnArr.length; i++) {
+          if (places.indexOf(pnArr[i]) > -1) {
+            nums++
+          } else if (pnArr[i] != '.') {
+            return 1;
+          }
+        }
+        if (nums == 0) {
+          return 1;
+        } else {
+          return 0;
         }
       }
-      //bob or single start = 0
-      if (methodInput.bobStart == 0 || methodInput.singleStart == 0) {
-        errors.push("Error: call locations must be a non-zero integer");
-      }
-    } 
+    }
+      
+     
   }
 
 return errors;

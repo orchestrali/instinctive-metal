@@ -1,6 +1,6 @@
 const categories = {
-  methodInfo: ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart'],
-  composition: ['leadhead', 'otherLeadhead', 'quantity', 'touch', 'touchType'],
+  methodInfo: ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc'],
+  composition: ['leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType'],
   display: ['numbers', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells']
 }
 
