@@ -1,16 +1,15 @@
 
 
-module.exports = function leadPN(plainPN, callInfo) {
-  let callPN = callInfo.placeNot;
+module.exports = function leadPN(plainPN, pn, loc) {
   
   //slice the plainPN from start to callStart
-  let callLead = plainPN.slice(0, callInfo.startRow - 1)
-  //add callPN to callLead
-  for (var i = 0; i < callPN.length; ++i) {
-    callLead.push(callPN[i]);
+  let callLead = plainPN.slice(0, loc - 1)
+  //add pn to callLead
+  for (var i = 0; i < pn.length; ++i) {
+    callLead.push(pn[i]);
   }
   //add the slice of plainPN from startRow+callPNlength to end
-  callLead = callLead.concat(plainPN.slice(callInfo.startRow+callPN.length-1))
+  callLead = callLead.concat(plainPN.slice(loc+pn.length-1))
   
   return callLead;
 }

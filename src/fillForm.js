@@ -5,7 +5,7 @@ const defaults = {
   checkblank: {value: '', vars: ['other', 'plaincourse', 'touch', 'leadend', 'callplace', 'a', 'b', 'd', 'cust']},
   inputblank: {value: '', vars: ['placeNotation', 'methodName', 'otherLeadhead', 'comp']},
   checked: {value: 'checked', vars: ['rounds', 'onelead']},
-  disabled: {value: 'disabled', vars: ['bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart']},
+  disabled: {value: 'disabled', vars: ['bobPlaceNot', 'singlePlaceNot', 'callLoc']},
 };
 
 const categories = {
@@ -40,7 +40,12 @@ module.exports = function fillForm(input) {
     formInput.options = buildStages(Number(input.stage));
     //put input into text fields
     for (var i = 0; i < categories.text.length; i++) {
-      formInput[categories.text[i]] = 'value="' + input[categories.text[i]] + '"';
+      let val = input[categories.text[i]];
+      if (val) {
+        formInput[categories.text[i]] = 'value="' + val + '"';
+      } else {
+        formInput[categories.text[i]] = '';
+      }
     }
     formInput.comp = input.comp;
     //check appropriate boxes

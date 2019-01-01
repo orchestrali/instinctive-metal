@@ -1,22 +1,21 @@
 const parsePN = require('../placeNot/parse.js');
 
 
-module.exports = function callInfo(methodInput) {
+module.exports = function callInfo(methodInput, ll) {
   let calls = {};
   let stage = Number(methodInput.stage);
-  
-  if (methodInput.bobStart) {
-    calls.callLoc = methodInput.bobStart;
-    calls.bob = {};
-    calls.bob.placeNot = parsePN(methodInput.bobPlaceNot, stage);
-    calls.bob.startRow = Number(methodInput.bobStart);
+  if (Number(methodInput.callLoc) == 0) {
+    calls.callLoc = ll;
   } else {
-    calls.callLoc = methodInput.singleStart;
+    calls.callLoc = Number(methodInput.callLoc);
   }
-  if (methodInput.singleStart) {
-    calls.single = {};
-    calls.single.placeNot = parsePN(methodInput.singlePlaceNot, stage);
-    calls.single.startRow = Number(methodInput.singleStart);
+  
+  if (methodInput.bobPlaceNot != '') {
+    calls.bob = parsePN(methodInput.bobPlaceNot, stage);
+  } 
+  
+  if (methodInput.singlePlaceNot != '') {
+    calls.single = parsePN(methodInput.singlePlaceNot, stage);
   }
   return calls;
 }

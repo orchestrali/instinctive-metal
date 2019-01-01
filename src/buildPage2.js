@@ -70,7 +70,7 @@ module.exports = function buildPage(errors, svgs, script, input, type) {
   let footer = headers[5] + info.footer + '</body></html>';
   
   let formBegin = `</div>
-      <form action="${info.formAct}" method="${info.method}" autocomplete="off">`
+      <form action="${info.formAct}" method="get" autocomplete="off">`
   let formExtra = require('./buildForm' + info.formPath + '.js');
   
   if (Object.keys(input).length > 0 && errors.length == 0) {

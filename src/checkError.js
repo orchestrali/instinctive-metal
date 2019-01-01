@@ -105,9 +105,13 @@ module.exports = function findError(methodInput, compInput) {
         errors.push("Error: calls required");
         //if custom calls selected
       } else if (methodInput.callType == "cust") {
+        
+        if (methodInput.callLoc == '') {
+          errors.push("Error: call location required");
+        }
         //if there are singles
         if (compInput.comp.indexOf('s') > -1) {
-          if (methodInput.singlePlaceNot == '' || methodInput.singleStart == '') {
+          if (methodInput.singlePlaceNot == '' ) {
             errors.push("Error: single info required");
           }
           if (testPN(methodInput.singlePlaceNot) == 1) {
@@ -128,7 +132,7 @@ module.exports = function findError(methodInput, compInput) {
           }
         }
         if ((type == 'leadend' && bLoc > -1) || (type == 'callplace' && numCalls > numSP)) {
-          if (methodInput.bobPlaceNot == '' || methodInput.bobStart == '') {
+          if (methodInput.bobPlaceNot == '' ) {
             errors.push("Error: bob info required");
           }
           if (testPN(methodInput.bobPlaceNot) == 1) {

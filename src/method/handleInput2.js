@@ -35,14 +35,14 @@ module.exports = function methodInfo(methodInput) {
     methodInfo.placeNot.single = callInfo.singlePN;
     methodInfo.callLoc = callInfo.callLoc;
   } else if (methodInput.callType = "cust") {
-    let calls = callInfo(methodInput);
+    let calls = callInfo(methodInput, methodInfo.leadLength);
     methodInfo.callLoc = calls.callLoc;
     //add bob PN to PN object
     if (calls.bob) {
-      methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, stage);
+      methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, calls.callLoc);
     } //add single PN to PN object
     if (calls.single) {
-      methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, stage);
+      methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, calls.callLoc);
     }
   } else {
     methodInfo.callLoc = methodInfo.placeNot.plain.length;

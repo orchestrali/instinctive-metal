@@ -1,4 +1,4 @@
-const buildLead = require('./buildLead.js');
+const buildLead = require('./buildLead2.js');
 const callPlaces = require("../method/callplaces.js");
 const rounds = require("../rounds.js");
 const buildInfo = require("./leadInfo.js");
@@ -15,6 +15,8 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
   let stage = methodInfo.stage;
   //get call name & place bell correspondences from somewhere
   let callPos = callPlaces(methodInfo);
+  
+  let comp = [];
   //loop through touch
   for (var i = 0; i < compInfo.touch.length; ++i) {
     let type = compInfo.touch[i].call;
@@ -22,38 +24,41 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
     let pos = compInfo.touch[i].value;
     
     
-    //console.log(callPos);
-    //console.log(pos, type);
-    //console.log(callPos.find(o => o[type + 'name'] == pos));
     //while obsBell's place is not the place of the current call type & position
     while (rowZero.indexOf(obsBell)+1 != callPos.find(o => o[typename + 'name'] == pos).placebell) {
-      let lead = buildInfo(methodInfo.placeNot.plain, rowArray.length+1, rowZero, "p", info);
+      let lead = buildLead(rowZero, methodInfo.placeNot.plain, rowArray.length+1);
       //generate a plain lead
       rowArray = rowArray.concat(lead);
-      //new leadhead = last row of built lead, removing tenor if added
-      rowZero = rowArray[rowArray.length - 1].bells.slice(0, stage);
+      //new leadhead = last row of built lead
+      rowZero = rowArray[rowArray.length - 1].bells;
+      comp.push('p');
     }
-    
+    //when obsBell's place IS the place of the current call position
     let placeNot = methodInfo.placeNot[typename];
-    let callLead = buildInfo(placeNot, rowArray.length+1, rowZero, type, info);
+    let callLead = buildLead(rowZero, placeNot, rowArray.length+1);
+    comp.push(type);
     //console.log(leadInfo);
     rowArray = rowArray.concat(callLead);
-    //new leadhead = last row of built lead, removing tenor if added
-    rowZero = rowArray[rowArray.length - 1].bells.slice(0, stage);
+    //new leadhead = last row of built lead
+    rowZero = rowArray[rowArray.length - 1].bells;
   }
-  let lastcallrow = rowArray[rowArray.length - 1].bells.slice(0, stage).join('');
+  let lastcallrow = rowArray[rowArray.length - 1].bells.join('');
   //add plain leads after the last call lead
   if (lastcallrow == rounds(stage).join('')) {
     console.log("last call produced rounds")
-    return rowArray;
+    return {rows: rowArray, comp: comp};
   } else {
     console.log("last call didn't produce rounds");
     do {
-      let lead = buildInfo(methodInfo.placeNot.plain, rowArray.length+1, rowZero, "p", info);
+      let lead = buildLead(rowZero, methodInfo.placeNot.plain, rowArray.length+1);
       rowArray = rowArray.concat(lead);
-      rowZero = rowArray[rowArray.length - 1].bells.slice(0, stage);
+      rowZero = rowArray[rowArray.length - 1].bells;
+      comp.push('p');
 
     } while (rowZero.join('') != rounds(stage).join('') && rowZero.join('') != lastcallrow)
-    return rowArray;
+    return {rows: rowArray, comp: comp};
   }
+
+
+
 }

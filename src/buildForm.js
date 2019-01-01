@@ -173,36 +173,28 @@ form += `<div id="call-info" class="category ${info.touchinfo}">
   
   <ul class="row">
     <li id="bob">
-      Bob info
       <ul>
         <li>
           <label for="bobPlaceNot">
-            Place notation:
+            Bob place notation:
           </label>
           <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" ` + info.bobPlaceNot + ` />
         </li>
         <li>
-          <label for="bobStart">
-            Starting at row
+          <label for="singlePlaceNot">
+            Single place notation:
           </label>
-          <input type="number" class="bob" id="bobStart" name="bobStart" ` + info.bobStart + ` />
+          <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + info.singlePlaceNot + ` />
         </li>
       </ul>
     </li>
     <li id="single">
-      Single info
       <ul>
         <li>
-          <label for="singlePlaceNot">
-            Place notation:
-          </label>
-          <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + info.singlePlaceNot + ` />
-        </li>
-        <li>
-          <label for="singleStart">
+          <label for="callLoc">
             Starting at row
           </label>
-          <input type="number" class="single" id="singleStart" name="singleStart" ` + info.singleStart + ` />
+          <input type="number" class="single" id="callLoc" name="callLoc" ` + info.callLoc + ` />
         </li>
       </ul>
     </li>

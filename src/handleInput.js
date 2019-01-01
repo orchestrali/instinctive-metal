@@ -3,14 +3,11 @@ const checkError = require('./checkError.js');
 
 const methodParse = require('./method/handleInput2.js');
 const compParse = require('./comp/handleInput.js');
-const rowGen = require('./rowArray/handleInput.js');
+const rowGen = require('./rowArray/handleInput2.js');
 const buildSVGs = require('./svgs/handleInput.js');
 
 const build = require('./buildPage2.js');
-const buildPage = require('./buildPage.js');
-const buildPageBL = require('./buildPageBL.js');
-const buildPageP = require('./buildPageP.js');
-const buildPageS = require('./buildPageS.js');
+
 
 module.exports = function directTraffic(input, type) {
   let sortedInput = sortInput(input);
@@ -25,13 +22,7 @@ module.exports = function directTraffic(input, type) {
   //check for errors, first round; return page if there are any.
   let errors = checkError(methodInput, compInput);
   if (errors.length > 0) {
-    if (type == 'grid') {
-      return buildPageBL(errors, [], input);
-    } else if (type == 'graphs') {
-      return buildPage(errors, [], input);
-    } else if (type == 'practice') {
-      return buildPageP(errors, {svg:""}, input);
-    }
+    return build(errors, [], '', input, type);
   }
   
   //parse methodInput, get methodInfo object

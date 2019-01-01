@@ -34,10 +34,8 @@ let input2 = {};
 
 
 const handleInput3 = require('./src/directTraffic.js');
-const buildPageBL = require('./src/buildPageBL.js');
 const buildPage = require('./src/buildPage2.js');
-const buildPageP = require('./src/buildPageP.js');
-const buildPageS = require('./src/buildPageS.js');
+
 
 const methodLib = require('./src/library/methodArray.js');
 const methodSearch = require('./src/library/search.js');
@@ -47,6 +45,7 @@ const findLeads = require('./src/prove/findLHs.js');
 const compare = require('./src/prove/compare.js');
 const courseOrders = require('./src/prove/listCOs.js');
 const courseOrder = require('./src/prove/courseOrder.js');
+const findOne = require('./src/library/findOne.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -64,6 +63,8 @@ app.get("/methods/:stage", function (request, response) {
   //response.send("hello");
 });
 */
+
+//findOne({title: 'Original Minimus'}, (result) => {console.log(result)});
 
 app.get("/methodnames", function (request, response) {
   response.sendFile(__dirname + '/methodNames.json');
