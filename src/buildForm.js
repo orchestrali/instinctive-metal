@@ -1,7 +1,7 @@
 
 const formInfo = require('./fillForm.js');
 const stages = require('./stages.json');
-const methodNames = require('../methodNames.json');
+
 
 
 module.exports = function buildForm(input) {
