@@ -37,16 +37,10 @@ const handleInput3 = require('./src/directTraffic.js');
 const buildPage = require('./src/buildPage2.js');
 //const methodNames2 = require('./methodNames2.json');
 
-const methodLib = require('./src/library/methodArray.js');
-const methodSearch = require('./src/library/search.js');
-const compareLeads = require('./src/prove/compareLeads.js');
-const displayTest = require('./src/prove/display.js');
-const findLeads = require('./src/prove/findLHs.js');
-const compare = require('./src/prove/compare.js');
-const courseOrders = require('./src/prove/listCOs.js');
-const courseOrder = require('./src/prove/courseOrder.js');
+
+
+
 const findOne = require('./src/library/findOneOrMany.js');
-const findMethod = require('./src/library/findMethod.js');
 const findPost = require('./src/library/findPost.js');
 const createNames = require('./src/library/methodNames.js');
 
@@ -91,6 +85,10 @@ app.get("/methodnames", function (request, response) {
 app.get("/sm", function (request, response) {
   response.sendFile(__dirname + '/minorsurprise.json');
 })
+
+app.get("/stages", function (request, response) {
+  response.sendFile(__dirname + '/src/stages.json');
+});
 
 app.get("/compare", function (request, response) {
   let inputs = findLeads(input1, input2);

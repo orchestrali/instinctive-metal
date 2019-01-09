@@ -1,5 +1,5 @@
 const stages = require('./stages.json');
-const methodNames = require('../methodNames.json');
+const methodNames = require('../methodNames2.json');
 
 const defaults = {
   checkblank: {value: '', vars: ['other', 'plaincourse', 'touch', 'leadend', 'callplace', 'a', 'b', 'd', 'cust']},
@@ -76,13 +76,9 @@ module.exports = function fillForm(input) {
       formInput.classOptions = '<option value="Plain">Plain</option>'
       
       //find class options for the stage
-      var classArray = methodNames.find(o => o.stage == Number(input.stage)).classes;
-      var classes = [];
-      for (var i = 0; i < classArray.length; i++) {
-        if (classArray[i].methods.length > 0) {
-          classes.push(classArray[i].class);
-        }
-      }
+     
+      var classes = stages.find(o => o.num == Number(input.stage)).classes;
+      
       //add class options
       for (var i = 0; i < classes.length; ++i) {
         let text;
