@@ -1,7 +1,7 @@
 const sortInput = require('./sortInput.js');
 const checkError = require('./checkError.js');
 
-const methodParse = require('./method/handleInput2.js');
+const methodParse = require('./method/handleInput.js');
 const compParse = require('./comp/handleInput.js');
 const rowGen = require('./rowArray/handleInput2.js');
 const buildSVGs = require('./svgs/handleInput.js');
@@ -9,7 +9,7 @@ const buildSVGs = require('./svgs/handleInput.js');
 const build = require('./buildPage2.js');
 
 
-module.exports = function directTraffic(input, type) {
+module.exports = function directTraffic(input, type, cb) {
   let sortedInput = sortInput(input);
   let methodInput = sortedInput.methodInfo;
   let compInput = sortedInput.composition;
@@ -25,28 +25,43 @@ module.exports = function directTraffic(input, type) {
     return build(errors, [], '', input, type);
   }
   
-  //parse methodInput, get methodInfo object
-  let methodInfo = methodParse(methodInput);
-  //console.log(methodInfo);
   //parse compInput
   let compInfo = compParse(compInput, stage);
+  
+  //parse methodInput, get methodInfo object
+  let methodInfo; // = methodParse(methodInput);
+  //return next();
+  ///*
+  methodParse(methodInput, (obj) => {
+    methodInfo = obj;
+    console.log('methodInfo', methodInfo);
+    cb(next());
+  });
+  //*/
+  //console.log(methodInfo);
+  
   //second error check: not needed????
   
-  //generate row array
-  let rowArray;
-  if (type == 'practice') {
-     rowArray = rowGen(methodInfo, compInfo, "no");
-  } else {
-    rowArray = rowGen(methodInfo, compInfo, "yes");
+  function next() {
+    //generate row array
+    let rowArray;
+    if (type == 'practice') {
+       rowArray = rowGen(methodInfo, compInfo, "no");
+    } else {
+      rowArray = rowGen(methodInfo, compInfo, "yes");
+    }
+
+    //console.log("first row bells: ", rowArray[0].bells);
+    //generate SVGs
+    let results = buildSVGs(methodInfo, compInfo, rowArray, displayInput, type);
+    SVGs = results.SVGs;
+    let script = results.script;
+    //buildpage
+    let page = build([], SVGs, script, input, type);
+    //console.log(page);
+    return page;
   }
   
-  //console.log("first row bells: ", rowArray[0].bells);
-  //generate SVGs
-  let results = buildSVGs(methodInfo, compInfo, rowArray, displayInput, type);
-  SVGs = results.SVGs;
-  let script = results.script;
-  //buildpage
-  return build([], SVGs, script, input, type);
   /*
   if (type == 'grid') {
     return buildPageBL([], SVGs, input);

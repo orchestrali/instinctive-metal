@@ -1,4 +1,4 @@
-const stages = require('./stages.js');
+const stages = require('./stages.json');
 
 module.exports = function buildTitle(input) {
   let html = `<h1>`;

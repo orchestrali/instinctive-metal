@@ -1,36 +1,69 @@
 const parsePN = require('../placeNot/parse.js');
-const findMethod = require('../findMethod.js');
+const findMethod = require('../library/findOneOrMany.js');
+const buildMethod = require('../library/buildMethod2.js');
 const callInfo = require('./callInfo.js');
 const callPN = require('./callPN.js');
+const addCalls = require('./addCalls.js');
+const stages = require('../stages.json');
+var stedman
 
-module.exports = function methodInfo(methodInput) {
+//originally this file was for finding methods in my hand-typed json files
+//now it's for getting methods from mongodb via vivacious-port
+module.exports = function methodInfo(methodInput, cb) {
   //build methodInfo object with name, stage, place notations, lead length, call location(s)
   let methodInfo = {};
   let stage = Number(methodInput.stage);
+  let stageName = stages.find(o => o.num == stage).name;
+  methodInfo.stage = stage;
+  methodInfo.placeNot = {};
+  //console.log(methodInput);
   
   if (methodInput.methodName) {
-    //if the method is known, all those things come from the files
-    return findMethod(methodInput);
+    methodInfo.name = methodInput.methodName + ' ' + stageName;
+    //if the method is known, name, stage, parsed plain PN, and lead length come from the database
+    let knownMethod;
+    findMethod({title: methodInfo.name}, '', (res) => {
+      //console.log(res);
+      knownMethod = buildMethod(res);
+      methodInfo.name = knownMethod.name;
+      methodInfo.placeNot.plain = knownMethod.plainPN;
+      methodInfo.leadLength = knownMethod.leadLength;
+      next();
+    });
+    
   } else {
-    methodInfo.stage = stage;
-    methodInfo.placeNot = {};
     methodInfo.placeNot.plain = parsePN(methodInput.placeNotation, stage);
     methodInfo.leadLength = methodInfo.placeNot.plain.length;
     methodInfo.name = '';
-    
-    if (methodInput.bobStart || methodInput.singleStart) {
-      let calls = callInfo(methodInput);
+    next();
+  }
+  
+  function next() {
+    if (methodInfo.name.indexOf("Stedman") > -1 || methodInfo.name.indexOf("Erin") > -1) {
+      //stedman(methodInput, methodInfo.name);
+    }
+
+    if (methodInput.callType != "cust") {
+      //console.log("adding calls");
+      let callInfo = addCalls(methodInput.callType, methodInfo.placeNot.plain, stage);
+      methodInfo.placeNot.bob = callInfo.bobPN;
+      methodInfo.placeNot.single = callInfo.singlePN;
+      methodInfo.callLoc = callInfo.callLoc;
+    } else if (methodInput.callType = "cust") {
+      let calls = callInfo(methodInput, methodInfo.leadLength);
       methodInfo.callLoc = calls.callLoc;
       //add bob PN to PN object
       if (calls.bob) {
-        methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, stage);
+        methodInfo.placeNot.bob = callPN(methodInfo.placeNot.plain, calls.bob, calls.callLoc);
       } //add single PN to PN object
       if (calls.single) {
-        methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, stage);
+        methodInfo.placeNot.single = callPN(methodInfo.placeNot.plain, calls.single, calls.callLoc);
       }
     } else {
-      methodInfo.callLoc = 0;
+      methodInfo.callLoc = methodInfo.placeNot.plain.length;
     }
+
+    cb(methodInfo);
   }
-  return methodInfo;
+  
 }
