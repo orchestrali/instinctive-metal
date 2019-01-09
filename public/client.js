@@ -98,6 +98,7 @@ $(function() {
   }
   
   //get array of classes from new methodnames file
+  //this is no longer used
   function methodClasses(stage, cb) {
     $.getJSON('/methodnames/', function(body) {
       let classArray = body.find(o => o.stage == stage).classes;
@@ -151,6 +152,7 @@ window.location.hash = 'svgs';
     
     //remove methods from name dropdown
     $('ul#methodList').children().detach();
+    $("#methodName").val("");
     
     //remove blueBell options and add a blank selected option
     $('select#blueBell').children().detach();
@@ -216,6 +218,9 @@ window.location.hash = 'svgs';
     if (stage) {
       $("#methodName").prop("placeholder", "");
     }
+    
+    
+    $("#methodName").val("");
     
     //if class is principle/differential hide the option to draw hunt-bell line(s)
     if (checkedClass == 'Principle' || checkedClass == 'Differential') {
@@ -323,14 +328,17 @@ window.location.hash = 'svgs';
         $("li#noMethods").remove();
         
         let methods = [];
-        
+        let numMatch = 0;
         //if there are fewer than 16 methods, add all to an array
         if (numMethods < 16) {
             for (var j = 0; j < numMethods; j++) {
               //chop off the stage name
               let text = methodList[0][j].substring(0,methodList[0][j].length-1-stageName.length);
             methods.push(text);
+              if (text.toLowerCase().indexOf(value) > -1) {
+                numMatch++;
               }
+            }
         } else {
           //if there are ≥16 methods, make an array of those that match search
           for (var j = 0; j < numArrays; ++j) {
@@ -338,6 +346,7 @@ window.location.hash = 'svgs';
                 let method = methodList[j][k].substring(0,methodList[j][k].length-1-stageName.length);
                 if (method.toLowerCase().indexOf(value) > -1) {
                   methods.push(method);
+                  numMatch++;
                 }
               }
             }
@@ -345,7 +354,7 @@ window.location.hash = 'svgs';
         
         //console.log('methods matching search:', methods.length);
         //if no methods match, say so
-        if (methods.length == 0) {
+        if (numMatch == 0) {
           $("#methodList li").remove();
           $('<li id="noMethods"></li>').text("no methods match search").css("display", "list-item").appendTo($("#methodList"));
         } else {
