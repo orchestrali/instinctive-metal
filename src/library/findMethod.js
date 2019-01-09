@@ -1,6 +1,6 @@
 const methodSetArray = require('./methodSetArray.js');
 const methodArray = require('./methodArray.js');
-const stages = require('../stages.js');
+const stages = require('../stages.json');
 
 //given stage, class, and name (without stage name), find the method with all its info
 module.exports = function findMethod(input) {

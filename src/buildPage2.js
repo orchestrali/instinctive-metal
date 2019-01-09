@@ -57,6 +57,7 @@ const buildTitle = require('./title.js');
 const headers = require('./headers.js');
 
 module.exports = function buildPage(errors, svgs, script, input, type) {
+  console.log('building page');
   let anchor = '';
   let title = '';
   let info = pieces.find(o => o.type == type);

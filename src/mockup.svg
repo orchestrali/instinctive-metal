@@ -1,0 +1,77 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400">
+  <defs>
+    <circle id="marker" cx="5" cy="5" r="3" style="stroke: none; fill:#00d;"/>
+    <g style="text-anchor: middle; font-family: Arial; font-size: 5px; fill: #fff;">
+    
+      <marker id="marker1" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">1</text>
+      </marker>
+      <marker id="marker2" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">2</text>
+      </marker>
+      <marker id="marker3" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">3</text>
+      </marker>
+      <marker id="marker4" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">4</text>
+      </marker>
+      <marker id="marker5" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">5</text>
+      </marker>
+      <marker id="marker6" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">6</text>
+      </marker>
+        <marker id="marker7" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">7</text>
+      </marker>
+        <marker id="marker8" markerWidth="8" markerHeight="8" refX="5" refY="5">
+        <use xlink:href="#marker"/>
+        <text x="5" y="7">8</text>
+      </marker>
+    </g>
+  </defs>
+  <rect x="10" y="10" width="315" height="196" style="stroke: #000; fill: none;" />
+    
+  <svg>
+    <g style="stroke: #aaa; stroke-width:2;">
+      <!--<line x1="20" y1="20" x2="20" y2="196" style="stroke: #000000;"/>-->
+      <line x1="20" y1="195" x2="315" y2="195" style="stroke: #000000;"/>
+      <line x1="20" y1="170" x2="315" y2="170" />
+      <line x1="20" y1="145" x2="315" y2="145" />
+      <line x1="20" y1="120" x2="315" y2="120" />
+      <line x1="20" y1="95" x2="315" y2="95" />
+      <line x1="20" y1="70" x2="315" y2="70" />
+      <line x1="20" y1="45" x2="315" y2="45" />
+      <line x1="20" y1="20" x2="315" y2="20" />
+    </g>
+    <g style="stroke: #00d; stroke-width:2; fill:none;">
+      <path d="M20,20 
+               l42,100
+               l42,-50"
+            style="marker-start: url(#marker1); marker-mid: url(#marker5);"
+              />
+      <path d="M104,70
+               l42,-25
+               l42,50"
+            style="marker-start: url(#marker3); marker-mid: url(#marker2);"
+            />
+      <path d="M188,95
+               l42,75
+               l42,-25"
+            style="marker-start: url(#marker4); marker-mid: url(#marker7);"
+            />
+      <path d="M272,145
+               l42,50"
+            style="marker-start: url(#marker6); marker-end: url(#marker8);"
+            />
+    </g>
+  </svg>
+</svg>

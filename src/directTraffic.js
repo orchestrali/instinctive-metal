@@ -5,12 +5,12 @@ const build = require('./buildPage2.js');
 
 const handleInput = require('./handleInput.js');
 
-module.exports = function directTraffic(input, type) {
+module.exports = function directTraffic(input, type, cb) {
   if (Object.keys(input).length == 0) {
-    return build([],[],'', input, type);
+    cb(build([],[],'', input, type));
   } else {
     //buildpage
-    return handleInput(input, type);
+    return handleInput(input, type, cb);
   }
   
 }

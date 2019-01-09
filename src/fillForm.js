@@ -1,4 +1,4 @@
-const stages = require('./stages.js');
+const stages = require('./stages.json');
 const methodNames = require('../methodNames.json');
 
 const defaults = {

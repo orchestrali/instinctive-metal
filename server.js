@@ -18,8 +18,8 @@ var urlParse = require('url-parse');
 var app = express();
 
 var input = {
-  stage: 6,
-  class: "Slow Course"
+  stage: 4,
+  class: "Block",
 };
 
 let input1 = {};
@@ -35,7 +35,20 @@ let input2 = {};
 
 const handleInput3 = require('./src/directTraffic.js');
 const buildPage = require('./src/buildPage2.js');
+//const methodNames2 = require('./methodNames2.json');
 
+const methodLib = require('./src/library/methodArray.js');
+const methodSearch = require('./src/library/search.js');
+const compareLeads = require('./src/prove/compareLeads.js');
+const displayTest = require('./src/prove/display.js');
+const findLeads = require('./src/prove/findLHs.js');
+const compare = require('./src/prove/compare.js');
+const courseOrders = require('./src/prove/listCOs.js');
+const courseOrder = require('./src/prove/courseOrder.js');
+const findOne = require('./src/library/findOneOrMany.js');
+const findMethod = require('./src/library/findMethod.js');
+const findPost = require('./src/library/findPost.js');
+const createNames = require('./src/library/methodNames.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -54,35 +67,81 @@ app.get("/methods/:stage", function (request, response) {
 });
 */
 
+const serialize = require('./src/library/serialize.js');
+
+let query = {
+  name: {$regex: 'jim', $options: 'i'}
+}
+
+  //
+//findOne(query, '', (result) => {console.log(result)});
+//findPost(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
+//console.log(findMethod(input));
+//console.log(serialize(query));
+//for (var i=0; i < result.length; i++) {console.log(result[i].title)}
+//console.log(require('./methodNames.json')[2].classes[0].methods[0].length);
+//createNames(() => {});
+
+//methodSearch(input);
 
 app.get("/methodnames", function (request, response) {
-  response.sendFile(__dirname + '/methodNames.json');
+  response.sendFile(__dirname + '/methodNames2.json');
 })
 
 app.get("/sm", function (request, response) {
   response.sendFile(__dirname + '/minorsurprise.json');
 })
 
+app.get("/compare", function (request, response) {
+  let inputs = findLeads(input1, input2);
+  let uniques = compare(inputs);
+  response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
+})
+//*/
+///*
+app.get("/courseorder", function (request, response) {
+  response.send(courseOrder("123456"));
+});
+
+//*/
+app.get("/updatenames", function (request, response) {
+  createNames(() => {response.send('ok')});
+});
 ///*
 
 
 
 
 app.get("/", function (request, response) {
-  response.send(handleInput3(request.query, 'grid'));
+  handleInput3(request.query, 'grid', (results) => {
+    response.send(results);
+  });
   //response.send(parsePN());
   //response.send(handleInput3(request.body));
 });
+/*
+app.post("/", function (request, response) {
+  console.log(request.body);
+  //response.sendStatus(200);
+  //response.send(request.body);
+  response.send(handleInput3(request.body, 'grid'));
+});
+*/
 
 app.get("/graphs", function (request, response) {
-  response.send(handleInput3(request.query, 'graphs'));
+  handleInput3(request.query, 'graphs', (results) => {
+    response.send(results);
+  });
   //response.sendFile(__dirname + '/src/mockupgrid.svg');
   //response.send(leadSVG());
 });
 
 
+
 app.get("/staff", function (request, response) {
-  response.send(handleInput3(request.query,'staff'));
+  handleInput3(request.query, 'staff', (results) => {
+    response.send(results);
+  });
 });
 
 app.get("/staff2", function (request, response) {
@@ -92,9 +151,16 @@ app.get("/staff2", function (request, response) {
 });
 
 
-app.get("/practice", function (request, response) {
-  response.send(handleInput3(request.query,'practice'));
+app.get("/library", function (request, response) {
+  response.send(methodSearch(input));
 });
+
+app.get("/practice", function (request, response) {
+  handleInput3(request.query, 'practice', (results) => {
+    response.send(results);
+  });
+});
+
 
 app.get("/surpriseminor", function (request, response) {
   response.sendFile(__dirname + "/views/surprise-minor.html");

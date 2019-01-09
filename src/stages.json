@@ -1,0 +1,134 @@
+[
+  {
+    "num": 4,
+    "name": "Minimus",
+    "classes": [
+      "Bob",
+      "Place",
+      "Treble Bob",
+      "Treble Place",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 5,
+    "name": "Doubles",
+    "classes": [
+      "Bob",
+      "Place",
+      "Slow Course",
+      "Treble Place",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 6,
+    "name": "Minor",
+    "classes": [
+      "Bob",
+      "Place",
+      "Slow Course",
+      "Treble Bob",
+      "Treble Place",
+      "Delight",
+      "Surprise",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 7,
+    "name": "Triples",
+    "classes": [
+      "Bob",
+      "Place",
+      "Slow Course",
+      "Treble Place",
+      "Alliance",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 8,
+    "name": "Major",
+    "classes": [
+      "Bob",
+      "Place",
+      "Slow Course",
+      "Treble Bob",
+      "Treble Place",
+      "Delight",
+      "Surprise",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 9,
+    "name": "Caters",
+    "classes": [
+      "Bob",
+      "Place",
+      "Slow Course",
+      "Treble Place",
+      "Surprise",
+      "Principle"
+    ]
+  },
+  {
+    "num": 10,
+    "name": "Royal",
+    "classes": [
+      "Bob",
+      "Place",
+      "Treble Bob",
+      "Treble Place",
+      "Delight",
+      "Surprise",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  },
+  {
+    "num": 11,
+    "name": "Cinques",
+    "classes": [
+      "Bob",
+      "Place",
+      "Treble Place",
+      "Surprise",
+      "Alliance",
+      "Hybrid",
+      "Principle"
+    ]
+  },
+  {
+    "num": 12,
+    "name": "Maximus",
+    "classes": [
+      "Bob",
+      "Place",
+      "Treble Bob",
+      "Treble Place",
+      "Delight",
+      "Surprise",
+      "Alliance",
+      "Hybrid",
+      "Differential",
+      "Principle"
+    ]
+  }
+]
