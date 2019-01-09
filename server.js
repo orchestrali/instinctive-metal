@@ -92,6 +92,10 @@ app.get("/sm", function (request, response) {
   response.sendFile(__dirname + '/minorsurprise.json');
 })
 
+app.get("/stages", function (request, response) {
+  response.sendFile(__dirname + '/src/stages.json');
+});
+
 app.get("/compare", function (request, response) {
   let inputs = findLeads(input1, input2);
   let uniques = compare(inputs);

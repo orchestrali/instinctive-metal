@@ -9,6 +9,16 @@
 $(function() {
   console.log('hello world :o');
   var stage = Number($('select#stage option:checked').val());
+  var stages;
+  
+  $.getJSON('/stages/', function(body) {
+      //console.log(body);
+      stages = body;
+    }).fail(function( jqxhr, textStatus, error ) {
+    var err = textStatus + ", " + error;
+      //console.log("Text: " + jqxhr.responseText);
+    console.log( "Request Failed: " + err );
+    });
   
  
   
@@ -171,7 +181,9 @@ window.location.hash = 'svgs';
     }
     
     //new function to build classes
-    methodClasses(stage, (classes) => {
+    //now getting classes immediately from stages file
+    let classes = stages.find(o => o.num == stage).classes;
+    
       $('select#class').children().detach();
     $('<option></option>').prop({disabled: true, selected: true}).appendTo('select#class');
       $('<option></option').text("Plain").val("Plain").appendTo("select#class");
@@ -185,7 +197,7 @@ window.location.hash = 'svgs';
         //console.log(classes[i]);
         $('<option></option>').text(text).val(classes[i]).appendTo('select#class');
       }
-    })
+    
     
     
     
