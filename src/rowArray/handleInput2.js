@@ -43,8 +43,11 @@ module.exports = function handleInput(methodInfo, compInfo, tenor) {
     rowArray = arr;
   }
   
+  rowArray = addTenor(rowArray, compInfo.tenors);
+  
+  
   if (tenor == 'yes' && methodInfo.stage % 2 == 1) {
-    rowArray = addTenor(rowArray, methodInfo.stage+1);
+    //rowArray = addTenor(rowArray, methodInfo.stage+1);
   }
   return rowArray;
 }

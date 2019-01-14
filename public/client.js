@@ -8,8 +8,11 @@
 
 $(function() {
   console.log('hello world :o');
+  //console.log('window width', window.innerWidth);
   var stage = Number($('select#stage option:checked').val());
   var stages;
+  
+  //$('input#wWidth').prop('value', window.innerWidth);
   
   $.getJSON('/stages/', function(body) {
       //console.log(body);

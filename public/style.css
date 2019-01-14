@@ -3,6 +3,15 @@
 
 /* You might want to try something fancier: */
 /* less: http://lesscss.org/ */
+@font-face {
+    font-family: 'Helsinki';
+    src: url('https://cdn.glitch.com/d468f5d9-e9b6-43b0-81a0-d977a9f42682%2Fhelsinki-webfont.ttf?1547180691584') format('ttf'),
+         url('https://cdn.glitch.com/d468f5d9-e9b6-43b0-81a0-d977a9f42682%2Fhelsinki-webfont.woff?1547180699345') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 @media screen {
   /*general element and element-state styles*/
   * {
@@ -176,6 +185,10 @@
   
   /* FORM STYLING */
   
+  div#window {
+    display: none;
+  }
+  
   div.category {
     display: flex;
     flex-flow: column;
@@ -311,6 +324,22 @@
     display: none;
   }
   
+  div#timesig > p {
+    width: 100%;
+  }
+  
+  div#timeOpts ul {
+    padding-left: 0;
+  }
+  
+  li.time li {
+    margin-right: 20px;
+    font-family: Helsinki;
+    font-size: 35px;
+    line-height: .6;
+    
+  }
+  
   /* END FORM STYLING */
 
   /* svg styling */
@@ -318,6 +347,7 @@
   div.grid-container {
     /*margin-left: 40px;*/
     display: inline-block;
+    max-width: 1000px;
   }
   
   div.grid {
@@ -331,6 +361,10 @@
     /*float: left;*/
     margin-right: 0;
     margin-top: 0;
+  }
+  
+  svg.staff {
+    margin-bottom: 20px;
   }
 
   

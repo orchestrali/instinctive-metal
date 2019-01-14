@@ -15,7 +15,7 @@ module.exports = function buildCourse(rowZero, pn, rowNum) {
     let lead = buildLead(rowZero, pn, rowNum);
     
     rowZero = lead[lead.length-1].bells;
-    rowNum = ll*i+1;
+    rowNum += ll*i;
     rowArray = rowArray.concat(lead);
     lastrow = rowZero.join('');
     

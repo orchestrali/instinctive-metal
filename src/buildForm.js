@@ -11,6 +11,9 @@ module.exports = function buildForm(input) {
   
   //method stage and class
   let form = `
+<div id="window">
+  <!--<input type="number" id="wWidth" name="windowWidth" />-->
+</div>
 <div id="method-info" class="category">
   <p class="bold">
     Method info
@@ -130,7 +133,7 @@ form += `<div id="quantity" class="category">
             <label for="touchComp">
               <div>Composition:</div>
             </label>
-            <textarea id="touchComp" name="comp" rows="3" cols="30" autocomplete="off">${info.comp}</textarea>
+            <textarea id="touchComp" name="comp" rows="3" cols="30" autocomplete="off" ${info.compStatus} >${info.comp}</textarea>
           </div>
         </div>
       </li>
@@ -178,13 +181,13 @@ form += `<div id="call-info" class="category ${info.touchinfo}">
           <label for="bobPlaceNot">
             Bob place notation:
           </label>
-          <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" ` + info.bobPlaceNot + ` />
+          <input type="text" class="bob" id="bobPlaceNot" name="bobPlaceNot" ` + info.bobPlaceNot + ` ${info.compStatus}/>
         </li>
         <li>
           <label for="singlePlaceNot">
             Single place notation:
           </label>
-          <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + info.singlePlaceNot + ` />
+          <input type="text" class="single" id="singlePlaceNot" name="singlePlaceNot" ` + info.singlePlaceNot + ` ${info.compStatus}/>
         </li>
       </ul>
     </li>
@@ -194,7 +197,7 @@ form += `<div id="call-info" class="category ${info.touchinfo}">
           <label for="callLoc">
             Starting at row
           </label>
-          <input type="number" class="single" id="callLoc" name="callLoc" ` + info.callLoc + ` />
+          <input type="number" class="single" id="callLoc" name="callLoc" ` + info.callLoc + ` ${info.compStatus}/>
         </li>
       </ul>
     </li>

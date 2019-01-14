@@ -35,9 +35,9 @@ const pieces = [
     formAct: '/staff',
     method: 'get',
     pageTitle: 'Staff Notation Generator',
-    footer: '',
-    svgsBegin: '',
-    svgsEnd: '',
+    footer: '<script src="/staff.js"></script>',
+    svgsBegin: '<div class="grid-container">',
+    svgsEnd: '</div>',
     formPath: 'S'
   },
   {

@@ -62,8 +62,10 @@ module.exports = function fillForm(input) {
     //touch stuff visible
     if (input.quantity == 'touch') {
       formInput.touchinfo = '';
+      formInput.compStatus = '';
     } else {
       formInput.touchinfo = 'hidden';
+      formInput.compStatus = 'disabled';
     }
     
     
@@ -101,16 +103,12 @@ module.exports = function fillForm(input) {
   
   function buildStages(stage) {
     let options = '<option value disabled '+ function() {
-        if (stage == 0) {
-          return 'selected';
-        }
+      return stage == 0 ? 'selected' : '';
       }() + '>required</option>';
     //build dropdown menu for stage
     for (var i = 0; i < stages.length; ++i) {
       var option = '<option value="' + stages[i].num + '"' + function() {
-        if (stage == stages[i].num) {
-          return 'selected';
-        }
+        return stage == stages[i].num ? 'selected' : '';
       }() + '>' + stages[i].num + ' - ' + stages[i].name + '</option>';
       options += option;
     }

@@ -1,7 +1,7 @@
 const buildGraphs = require('./graphs.js');
 const printMethod = require('../bluelines/handleInput.js');
 const methodPractice = require('../practice/handleInput.js');
-const staffNot = require('./staffnotation.js');
+const staffNot = require('./staffnotation2.js');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
   let results = {};
@@ -36,7 +36,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     results.SVGs = obj.svg;
     results.script = obj.script;
   } else if (type == 'staff') {
-    results.SVGs = staffNot(rowArray, methodInfo.stage);
+    results.SVGs = staffNot(compInfo.rowZeroObj, rowArray, methodInfo.stage, displayInput);
   }
   return results;
 }

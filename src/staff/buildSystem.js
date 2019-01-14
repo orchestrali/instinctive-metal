@@ -1,7 +1,7 @@
 
 
 //number of bells should probably include a tenor for odd-bell methods
-module.exports = function buildSystem(rows, numBells) {
+module.exports = function buildSystem(rows, numBells, last) {
   let noteheads = '';
   let stems = '';
   let barlines = '';
@@ -13,12 +13,15 @@ module.exports = function buildSystem(rows, numBells) {
     
     //cycle through bells in row
     for (var j = 0; j < numBells; ++j) {
-      let current = rows[i].bells[j];
-      let cx = j*30+60+i*40+i*(numBells-1)*30;
-      let b = 50-5*(numBells-4);
-      let cy = 5*current + b;
+      let current = rows[i].bells[j]; //bell number
+      //margin 60, 30 for each place after 1, 40 between bars, width of previous bars, 
+      let cx = j*30+70+i*40+i*(numBells-1)*30; 
+      let b = 60-5*(numBells-4); //height of bell 0
+      let cy = 5*current + b; //bigger bells are lower on the staff which means higher y value
       let stemx;
       let stemdir;
+      //right now C is always the tenor
+      //so stems go up unless there are 8+ bells, when those above A go down
       if (numBells > 7 && current < numBells-5) {
         stemx = cx-5;
         stemdir = 35;
@@ -33,31 +36,42 @@ module.exports = function buildSystem(rows, numBells) {
              v ${stemdir}" />
     `
       if (current == numBells) {
-        ledgers += `<path d="M `+(cx-11)+` 70
+        ledgers += `<path d="M `+(cx-11)+` 80
            h 22"/>
     `
       }
     }
+    //90 (60 clef, 10 time sig, 20 after last note) plus barwidth*numBars + between-bar width
+    let barEnd = 90+(numBells-1)*30*(i+1)+i*40;
     
-    let barEnd = 80+(numBells-1)*30*(i+1)+i*40;
-          barlines += `<path d="M ${barEnd} 20
-             V 60" />
+    if (last && i == rows.length-1) {
+      barlines += `<path d="M ${barEnd+1} 29.5
+             v 41" stroke-width="3" />
           `
+    } else {
+      barlines += `<path d="M ${barEnd} 30
+             v 40" />
+          `
+    }
+    
+          
     
     if (rows[i].rowNum % 2 == 0) {
-      barlines += `<path d="M ${barEnd-2} 20
-             V 60" />
+      barlines += `<path d="M ${barEnd-3} 30
+             v 40" />
           `
     }
     
     
   }
   
-  let things = {};
-  things.noteheads = noteheads;
-  things.stems = stems;
-  things.barlines = barlines;
-  things.ledgers = ledgers;
+  let things = {
+    noteheads: noteheads,
+    stems: stems,
+    barlines: barlines,
+    ledgers: ledgers
+  };
+  
   
   return things;
 }
