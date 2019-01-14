@@ -71,7 +71,7 @@ let query = {
 //findOne(query, '', (result) => {console.log(result)});
 //findPost(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
 //console.log(findMethod(input));
-//console.log(serialize(query));
+//console.log('♭');
 //for (var i=0; i < result.length; i++) {console.log(result[i].title)}
 //console.log(require('./methodNames.json')[2].classes[0].methods[0].length);
 //createNames(() => {});
@@ -91,14 +91,14 @@ app.get("/stages", function (request, response) {
 });
 
 app.get("/compare", function (request, response) {
-  let inputs = findLeads(input1, input2);
-  let uniques = compare(inputs);
-  response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
+  //let inputs = findLeads(input1, input2);
+  //let uniques = compare(inputs);
+  //response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
 })
 //*/
 ///*
 app.get("/courseorder", function (request, response) {
-  response.send(courseOrder("123456"));
+  //response.send(courseOrder("123456"));
 });
 
 //*/
@@ -107,10 +107,15 @@ app.get("/updatenames", function (request, response) {
 });
 ///*
 
+app.get("/teststaff", function (request, response) {
+  response.sendFile(__dirname + '/views/stafftest.html');
+});
+
 
 
 
 app.get("/", function (request, response) {
+  //console.log(request.query);
   handleInput3(request.query, 'grid', (results) => {
     response.send(results);
   });
@@ -150,7 +155,7 @@ app.get("/staff2", function (request, response) {
 
 
 app.get("/library", function (request, response) {
-  response.send(methodSearch(input));
+  //response.send(methodSearch(input));
 });
 
 app.get("/practice", function (request, response) {

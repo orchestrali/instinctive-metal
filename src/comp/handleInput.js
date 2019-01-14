@@ -1,16 +1,25 @@
 const parseLH = require('./leadhead.js');
 const parseTouch = require('./composition.js');
+const addTenor = require('../rowArray/addTenor.js');
 
 //take compInput and generate compInfo object with rowZero (array), rowZeroObj, quantity, touch, touchType
 module.exports = function compInfo(compInput, stage) {
-  let compObject = {};
-  compObject.quantity = compInput.quantity;
+  let compObject = {
+    quantity: compInput.quantity,
+    tenors: Number(compInput.tenors)
+  };
+  
   let rowZero = parseLH(compInput, stage);
   compObject.rowZero = rowZero;
   
-  let rowZeroObj = {};
-      rowZeroObj.rowNum = 0;
-      rowZeroObj.bells = rowZero;
+  let rowZeroObj = {
+    rowNum: 0,
+    bells: rowZero
+  };
+  
+  if (compObject.tenors > 0) {
+    rowZeroObj = addTenor([rowZeroObj], compObject.tenors)[0]
+  }
   
   compObject.rowZeroObj = rowZeroObj;
   
@@ -22,6 +31,6 @@ module.exports = function compInfo(compInput, stage) {
     //compObject.touchType = 'leadend';
   }
   
-  console.log(compObject);
+  //console.log(compObject);
   return compObject;
 }

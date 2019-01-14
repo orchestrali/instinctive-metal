@@ -51,7 +51,7 @@ module.exports = function directTraffic(input, type, cb) {
       rowArray = rowGen(methodInfo, compInfo, "yes");
     }
 
-    //console.log("first row bells: ", rowArray[0].bells);
+    //console.log("row array: ", rowArray);
     //generate SVGs
     let results = buildSVGs(methodInfo, compInfo, rowArray, displayInput, type);
     SVGs = results.SVGs;
