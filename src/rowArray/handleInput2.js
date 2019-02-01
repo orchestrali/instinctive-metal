@@ -1,5 +1,6 @@
 const addCalls = require('./addCalls.js');
 const addTenor = require('./addTenor.js');
+const addNames = require('./addLHs.js');
 
 const inputs = [
   {
@@ -22,9 +23,9 @@ const inputs = [
   }
 ];
 
-module.exports = function handleInput(methodInfo, compInfo, tenor) {
+module.exports = function handleInput(methodInfo, compInfo) {
   let rowArray;
-  let comp;
+  let comp = [];
   //console.log('bob pn length', methodInfo.placeNot.bob.length);
   
   if (compInfo.quantity != 'touch') {
@@ -44,10 +45,7 @@ module.exports = function handleInput(methodInfo, compInfo, tenor) {
   }
   
   rowArray = addTenor(rowArray, compInfo.tenors);
+  rowArray = addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
   
-  
-  if (tenor == 'yes' && methodInfo.stage % 2 == 1) {
-    //rowArray = addTenor(rowArray, methodInfo.stage+1);
-  }
-  return rowArray;
+  return {array: rowArray, comp: comp};
 }

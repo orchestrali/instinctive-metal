@@ -8,31 +8,32 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
   results.script = '';
   let width = 270;
   if (type == 'grid') {
-    let info = {};
-    info.rowZeroObj = compInfo.rowZeroObj;
-    info.plainPN = methodInfo.placeNot.plain;
-    info.numBells = methodInfo.stage;
-    info.leadLength = methodInfo.leadLength;
+    let info = {
+      rowZeroObj: compInfo.rowZeroObj,
+      placeNot: methodInfo.placeNot,
+      numBells: methodInfo.stage,
+      leadLength: methodInfo.leadLength,
+      comp: compInfo.leadendcomp
+    };
     if (methodInfo.name.indexOf('Stedman') > -1 || methodInfo.name.indexOf('Erin') > -1) {
       info.method = methodInfo.name.slice(0,4);
     }
-    if (displayInput.numbers) {
-      info.displayNums = true;
-    } else {
-      info.displayNums = false;
-    }
+    
     results.SVGs = printMethod(displayInput, info, rowArray);
   } else if (type == 'graphs') {
     results.SVGs = buildGraphs(rowArray, width);
   } else if (type == 'practice') {
-    let info = {};
-    info.rowZeroObj = compInfo.rowZeroObj;
-    info.plainPN = methodInfo.placeNot.plain;
-    info.stage = methodInfo.stage;
-    info.huntbells = displayInput.huntbells;
-    info.bluebell = Number(displayInput.blueBell);
-    info.bluecolor = displayInput.blueBellc;
-    let obj = methodPractice(rowArray, info);
+    let info = {
+      rowZeroObj: compInfo.rowZeroObj,
+      placeNot: methodInfo.placeNot,
+      stage: methodInfo.stage,
+      comp: compInfo.leadendcomp,
+    };
+    
+    //info.huntbells = displayInput.huntbells;
+    //info.bluebell = Number(displayInput.blueBell);
+    //info.bluecolor = displayInput.blueBellc;
+    let obj = methodPractice(rowArray, info, displayInput);
     results.SVGs = obj.svg;
     results.script = obj.script;
   } else if (type == 'staff') {

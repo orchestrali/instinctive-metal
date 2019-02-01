@@ -13,9 +13,13 @@ module.exports = function handleInput(displayInput, info, rowArray) {
       }
       rowArray.unshift(rowZeroObj);
       //console.log(rowArray[0]);
-  let pathArray = ungroupPaths(handlePaths(displayInput, info.plainPN, info.numBells), rowArray);
+  let pathArray = ungroupPaths(handlePaths(displayInput, info), rowArray);
   //console.log(pathArray);
-  
+  if (displayInput.numbers) {
+    info.displayNums = true;
+  } else {
+    info.displayNums = false;
+  }
   if (displayInput.pagination) {
         let svgs = pagedSVGs(rowArray, pathArray, info);
         return svgs;

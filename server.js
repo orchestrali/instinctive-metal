@@ -102,7 +102,7 @@ app.get("/courseorder", function (request, response) {
 });
 
 //*/
-app.get("/updatenames", function (request, response) {
+app.get("/updatenames"+process.env.SECRET, function (request, response) {
   createNames(() => {response.send('ok')});
 });
 ///*

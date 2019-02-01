@@ -75,7 +75,7 @@ $(function() {
   
   //search new json methodNames file, returns array of arrays with methods
   function methodNames(stage, checkedClass, cb) {
-    $.getJSON('/methodnames/', function(body) {
+    $.getJSON('https://instinctive-metal.glitch.me/methodnames/', function(body) {
       if (checkedClass == "Plain") {
         var plainClasses = ["Bob", "Place", "Slow Course"]
         let classMethods = [];
@@ -501,7 +501,7 @@ window.location.hash = 'svgs';
    //console.log('clicked');
    if ($('#touch').is(':checked')) {
      //console.log('touch chosen');
-     $('#touchNot').prop({required: true, placeholder: 'required'});
+     $('#touchComp').prop({disabled: false, required: true, placeholder: 'required'});
      //console.log('select#methodName.val(): ', $('select#methodName').val());
      
        //console.log('yes');
@@ -511,7 +511,7 @@ window.location.hash = 'svgs';
        //$('#single').css("display", "inline-block");
      
    } else {
-     $('#touchNot').prop("required", false);
+     $('#touchComp').prop({required: false, disabled: true});
      $('div#call-info').slideUp(1000, "swing");
      $('li#compinfo').slideUp(1000, "swing");
    }

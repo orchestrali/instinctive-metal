@@ -40,6 +40,7 @@ $(function() {
   $("#methodname").click(function() {
     //console.log(methods[0]);
     if (started == 0) {
+      started = 1;
       $("#methodname:hover").css("cursor", "auto");
       prevClick = Date.now();
       getMethod();

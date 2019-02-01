@@ -3,8 +3,14 @@
 module.exports = function buildForm(input) {
   
   let blueOptions = '<option value disabled selected></option>';
+  let huntbells = 'checked', drawLH = 'checked', showNums = 'checked';
+  let score = '';
   
   if (input != 0) {
+    if (input.keepscore) {score = 'checked'};
+    if (!input.huntbells) {huntbells = ''};
+    if (!input.drawLH) {drawLH = ''};
+    if (!input.numbers) {showNums = ''};
     
     for (var i = 1; i <= input.stage; ++i) {
       //build dropdown menu for blue bell options
@@ -25,12 +31,24 @@ module.exports = function buildForm(input) {
   <p class="bold">
     Practice options
   </p>
-  
   <div class="input">
-    <label for="huntbells">
-      <input type="checkbox" checked id="huntbells" name="huntbells" value="draw-hunts" />
-      Draw hunt bell line(s)
-    </label>
+    <label for="numbers">
+    <input type="checkbox" ${showNums} id="show-nums" name="numbers" value="show" />
+    Show numbers</label>
+  </div>
+  <div class="input">
+    <span>
+      <label for="huntbells">
+        <input type="checkbox" ${huntbells} id="huntbells" name="huntbells" value="draw-hunts" />
+        Draw hunt bell line(s)
+      </label>
+    </span>
+    <span>
+      <label for="drawLH">
+        <input type="checkbox" ${drawLH} id="drawLH" name="drawLH" value="yes" />
+        Draw lead-end lines
+      </label>
+    </span>
   </div>
   <div class="input">
     <span>
@@ -48,7 +66,12 @@ module.exports = function buildForm(input) {
       <input type="text" id="blueBellc" name="blueBellc" value="blue"/>
     </span>
   </div class="input">
-  
+  <div class="input">
+    <label for="keepscore">
+      <input type="checkbox" ${score} id="keepscore" name="keepscore" value="yes" />
+      Keep score
+    </label>
+  </div>
 </div>
         
      `;

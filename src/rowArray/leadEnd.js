@@ -25,18 +25,18 @@ module.exports = function leadEnd(methodInfo, compInfo) {
   
   for (var i = 0; i < comp.length; i++) {
     let type = comp[i];
-    console.log('building lead of type ' + type);
+    //console.log('building lead of type ' + type);
     let typeName = leadEnds.find(o => o.name == type).fullname;
     pn = methodInfo.placeNot[typeName];
     
     let oneLead = buildLead(rowZero, pn, rowNum);
     if (i == 0) {
-      console.log('first lead pn length', pn.length);
+      //console.log('first lead pn length', pn.length);
     }
     rowZero = oneLead[oneLead.length-1].bells;
     rowNum = (i+1)*ll + 1;
     rowArray = rowArray.concat(oneLead);
-    console.log('rowArray length: ', rowArray.length);
+    //console.log('rowArray length: ', rowArray.length);
   }
   
   return {rows: rowArray, comp: comp};

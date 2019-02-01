@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Change Ringing Method/Touch Printer</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <style id="printPaging"></style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Change Ringing Method/Touch Printer
+      </h1>
+    </header>
+    
+    <main>
+     <div id="form">
+       <form action="#" method="get" autocomplete="off">
+         <div id="method-info" class="category">
+          <p class="bold">
+            Method info
+          </p>
+          <div class="input">
+            <span>
+              <label for="stage">
+                Stage:
+              </label>
+              <select id="stage" name="stage" required="">
+                <option value disabled >required</option>
+                <option value="4" >4 - Minimus</option>
+                <option value="5" >5 - Doubles</option>
+                <option value="6" >6 - Minor</option>
+                <option value="7" >7 - Triples</option>
+                <option value="8" >8 - Major</option>
+                <option value="9" >9 - Caters</option>
+                <option value="10" >10 - Royal</option>
+                <option value="11" >11 - Cinques</option>
+                <option value="12" >12 - Maximus</option>
+              </select>
+              
+            </span>
+           </div>
+         </div>
+         <div id="appearance" class="category">
+          <p class="bold">
+            Display options
+          </p>
+          <p>
+            <label for="tenors">Tenor(s) behind: </label>
+            <input type="number" id="tenors" name="tenors" value="0" />
+          </p>
+          <p>
+            <input type="checkbox" checked id="handstroke-gap" name="gap" value="yes" />
+            <label for="gap">Include handstroke gap</label>
+          </p>
+           
+           <div id="timesig" class="input">
+            <p>
+              <input type="checkbox" checked id="time-sig" name="includeTime" value="yes" />
+              <label for="includeTime">Include time signature</label>
+            </p>
+            <div id="timeOpts">
+              <fieldset>
+                <legend>
+                  Time signature
+                </legend>
+                <ul>
+                  
+                </ul>
+              </fieldset>
+            </div>
+          </div>
+           <div class="input">
+            <span>
+              <label for="keysig">
+                Tenor/key signature:
+              </label>
+              <select id="keysig" name="keysig">
+                <option value="F♯">F♯ / 6 sharps</option>
+                <option value="F">F / 1 flat</option>
+                <option value="E">E / 4 sharps</option>
+                <option value="E♭">E♭ / 3 flats</option>
+                <option value="D">D / 2 sharps</option>
+                <option value="D♭">D♭ / 5 flats</option>
+                <option value="C" selected>C / 0</option>
+                <option value="B">B / 5 sharps</option>
+                <option value="B♭">B♭ / 2 flats</option>
+                <option value="A">A / 3 sharps</option>
+                <option value="A♭">A♭ / 4 flats</option>
+                <option value="G">G / 1 sharp</option>
+                <option value="G♭">G♭ / 6 flats</option>
+              </select>
+             </span>
+             <span>
+              <label for="actTenor">
+                Acting tenor: 
+              </label>
+              <select id="actTenor" name="actTenor">
+              </select>
+            </span>
+           </div>
+         </div>
+       </form>
+       
+      </div>
+      
+    </main>
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+    <script src="/staff.js"></script>
+  </body>
+</html>
