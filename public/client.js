@@ -55,16 +55,7 @@ $(function() {
     console.log( "Request Failed: " + err );
     });
   }
-  function getPlaces(cb) {
-    $.getJSON('/bellpaths', function(body) {
-      
-      cb(body);
-    }).fail(function( jqxhr, textStatus, error ) {
-    var err = textStatus + ", " + error;
-      //console.log("Text: " + jqxhr.responseText);
-    console.log( "Request Failed: " + err );
-    });
-  }
+  
   
   //nav toggle
   $("#nav-options").click(function() {
@@ -75,7 +66,7 @@ $(function() {
   
   //search new json methodNames file, returns array of arrays with methods
   function methodNames(stage, checkedClass, cb) {
-    $.getJSON('https://instinctive-metal.glitch.me/methodnames/', function(body) {
+    $.getJSON('/methodnames/', function(body) {
       if (checkedClass == "Plain") {
         var plainClasses = ["Bob", "Place", "Slow Course"]
         let classMethods = [];
