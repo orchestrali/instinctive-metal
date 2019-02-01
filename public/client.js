@@ -55,7 +55,7 @@ $(function() {
     console.log( "Request Failed: " + err );
     });
   }
-  
+
   
   //nav toggle
   $("#nav-options").click(function() {
@@ -367,8 +367,15 @@ window.location.hash = 'svgs';
             if (methods.length < 16) {
               buildList(methods, "list-item");
             } else {
+              let methodSet = [];
+              let numMethods = 15;
               //if there are 16 or more methods, add 15 at random to a different array and display those
-              let methodSet = getMethods(methods, 15);
+              if (methods.indexOf("Little Bob") > -1) {
+                methodSet.push("Little Bob");
+                methods.splice(methods.indexOf("Little Bob"), 1);
+                numMethods -= 1;
+              }
+              methodSet = methodSet.concat(getMethods(methods, numMethods));
               buildList(methodSet, "list-item");
             }
           } 
