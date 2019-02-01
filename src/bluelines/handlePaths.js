@@ -3,23 +3,23 @@ const blueGroups = require('./handleGroups.js');
 const allLines = require('./allLines.js');
 
 //input here is displayInput
-module.exports = function handlePaths(input, plainPN, numBells) {
+module.exports = function handlePaths(input, info) {
   //console.log(input);
   let bellPaths = [];
   
   if (input.blueGroup1) {
     //determine bells to be pathed & weight and color
-    bellPaths.push(blueGroups(input,1,plainPN,numBells))
+    bellPaths.push(blueGroups(input,1,info))
   } 
   if (input.blueGroup2) {
     //same for blueGroup2  
-    bellPaths.push(blueGroups(input,2,plainPN,numBells))
+    bellPaths.push(blueGroups(input,2,info))
   } else if (input.huntBellw) {
     //find hunt bells and add them to bell paths with weight and input.huntColor
     let huntBells = {};
     huntBells.weight = input.huntBellw;
     huntBells.color = input.huntColor;
-    huntBells.bells = findHunt(plainPN, numBells);
+    huntBells.bells = findHunt(info.placeNot, info.numBells, info.comp);
     bellPaths.push(huntBells);
     //add bluebell to paths with weight and color
     let bluebell = {};
@@ -31,7 +31,7 @@ module.exports = function handlePaths(input, plainPN, numBells) {
     }
   } else if (input.bell1w) {
     //add each bell to bell paths
-    bellPaths = bellPaths.concat(allLines(input, numBells));
+    bellPaths = bellPaths.concat(allLines(input, info.numBells));
   }
   return bellPaths;
 }

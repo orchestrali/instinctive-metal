@@ -47,7 +47,7 @@ module.exports = function fillForm(input) {
         formInput[categories.text[i]] = '';
       }
     }
-    formInput.comp = input.comp;
+    formInput.comp = input.comp ? input.comp : '';
     //check appropriate boxes
     for (var i = 0; i < categories.check.length; i++) {
       let checkbox = categories.check[i];

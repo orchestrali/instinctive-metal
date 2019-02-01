@@ -44,12 +44,9 @@ module.exports = function directTraffic(input, type, cb) {
   
   function next() {
     //generate row array
-    let rowArray;
-    if (type == 'practice') {
-       rowArray = rowGen(methodInfo, compInfo, "no");
-    } else {
-      rowArray = rowGen(methodInfo, compInfo, "yes");
-    }
+    let r = rowGen(methodInfo, compInfo);
+    let rowArray = r.array;
+    compInfo.leadendcomp = r.comp;
 
     //console.log("row array: ", rowArray);
     //generate SVGs

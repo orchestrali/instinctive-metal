@@ -114,7 +114,8 @@ module.exports = function buildFormS(input) {
   form += `<p>
     <input type="checkbox" ${checkboxes.mobile} id="mobile" name="mobile" value="yes" />
     <label for="mobile">Mobile version</label>
-  </p>`;
+  </p>
+</div>`;
   
   return form;
 }

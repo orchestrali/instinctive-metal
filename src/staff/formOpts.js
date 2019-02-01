@@ -52,8 +52,10 @@ function tenOpts(keysig, numBells, actTen) {
       letter = getChar(letter, -1);
     }
     let selected = keysig[0]+'P' == actTen ? 'selected' : '';
+  if (numBells < 11) {
     options += `        <option value="${keysig[0]}P" ${selected}>${keysig} pentatonic</option>`;
-    
+  }
+  
     
     return options;
   }

@@ -86,7 +86,9 @@ $(function() {
             `;
       letter = getChar(letter, -1);
     }
-    options += `        <option value="${keysig[0]}P">${keysig} pentatonic</option>`;
+    if (numBells < 11) {
+      options += `        <option value="${keysig[0]}P">${keysig} pentatonic</option>`;
+    }
     
     $('select#actTenor > option').remove();
     

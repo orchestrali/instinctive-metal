@@ -1,6 +1,7 @@
 div.grid-container {
   
   display: block;
+  position: relative;
   }
 
 div.buttons, div#arrows {
@@ -23,9 +24,23 @@ svg#container {
 
 .finished {
   display: none;
+  position: absolute;
+  font-family: Verdana;
+  bottom: 125px;
+  left: 82px;
+  background-color: rgba(255,255,255,0.7);
 }
 
-path {
+.invisible {
+  fill: none;
+}
+
+.translucent {
+  fill: white;
+  fill-opacity: 0.8;
+}
+
+path.bellpath {
   stroke-dasharray: 26;
   stroke-dashoffset: 26;
   animation: dash 500ms linear forwards;
