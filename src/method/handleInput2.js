@@ -5,6 +5,7 @@ const callPN = require('./callPN.js');
 const addCalls = require('./addCalls.js');
 var stedman
 
+//was new file for getting methodInfo from xml files
 module.exports = function methodInfo(methodInput) {
   //build methodInfo object with name, stage, place notations, lead length, call location(s)
   let methodInfo = {};

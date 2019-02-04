@@ -1,6 +1,7 @@
 const addCalls = require('./addCalls.js');
 const addTenor = require('./addTenor.js');
 const addNames = require('./addLHs.js');
+const stages = require('../stages.json');
 
 const inputs = [
   {
@@ -26,6 +27,8 @@ const inputs = [
 module.exports = function handleInput(methodInfo, compInfo) {
   let rowArray;
   let comp = [];
+  let stage = methodInfo.stage;
+  let stageName = stages.find(o => o.num == stage).name;
   //console.log('bob pn length', methodInfo.placeNot.bob.length);
   
   if (compInfo.quantity != 'touch') {
@@ -46,6 +49,11 @@ module.exports = function handleInput(methodInfo, compInfo) {
   
   rowArray = addTenor(rowArray, compInfo.tenors);
   rowArray = addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
+  if (methodInfo.name == "Stedman " + stageName || methodInfo.name == "Erin " + stageName) {
+    let start = methodInfo.name == "Stedman " + stageName ? 2 : 0;
+    console.log("start "+start);
+    rowArray = addNames(rowArray, 6, start, "new six");
+  }
   
   return {array: rowArray, comp: comp};
 }

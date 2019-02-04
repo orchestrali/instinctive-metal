@@ -1,10 +1,12 @@
 const places = require('../places');
 
 //info needed: bluebell, blue color, rowZero
-module.exports = function buildSVG(rowZero, numRows, displayInput) {
+module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
+  let rowZero = rowZeroObj.bells
   let bluebell = Number(displayInput.blueBell);
   let blueplace = rowZero.indexOf(bluebell)+1;
   let score = displayInput.keepscore ? true : false;
+  let instruction = rowZeroObj.instruction ? rowZeroObj.instruction : "";
   
   let rowZeroStr = "";
   for (var i = 0; i < rowZero.length; i++) {
@@ -50,7 +52,7 @@ module.exports = function buildSVG(rowZero, numRows, displayInput) {
   <g id="placenums" style="fill: rgb(155,155,155); font-family: Verdana; font-size: 10px" text-anchor="center">
 `
     for (var i = 0; i < rowZero.length; i++) {
-      placenums += `<text x="${textx+2+i*16}" y="${placenumY}">${i+1}</text>
+      placenums += `<text x="${textx+2+i*16}" y="${placenumY}">${places[i]}</text>
 `
     }
     placenums += `</g>`
@@ -80,6 +82,10 @@ module.exports = function buildSVG(rowZero, numRows, displayInput) {
     </g>
     <circle id="bluecircle" cx="`+cx+`" cy="34" r="3" fill="` + displayInput.blueBellc + `">
     </circle>
+
+    <g id="placebells" style="stroke: ${displayInput.blueBellc}; fill: ${displayInput.blueBellc}; font-size: 10px; text-anchor: middle">
+
+    </g>
   
   </svg>
   ${placenums}
@@ -103,6 +109,9 @@ module.exports = function buildSVG(rowZero, numRows, displayInput) {
   </path>
   </g>
 </svg>
+</div>
+<div id="tutorial">
+  ${instruction}
 </div>
 <div class="finished">
   <p>That's all! <button id="restart" type="button">Restart</button></p>
