@@ -48,5 +48,6 @@ module.exports = [
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
-    <script src="/client.js"></script>`
+    <script src="/client.js"></script>
+    <script src="/index.js"></script>`
 ]

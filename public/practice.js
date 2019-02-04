@@ -17,16 +17,24 @@ $(function() {
   let huntPaths = window.huntpaths;
   let rowObjArr = window.rowObjArr;
   var places = '1234567890ET';
+  
+  let params = (new URL(document.location)).searchParams;
+  let stage = Number(params.get("stage"));
+  let name = params.has("methodName") ? params.get("methodName") : null;
+  console.log("methodName " + name);
+  
   //console.log(bluePlaces[0]);
-  let numbers = $("#show-nums").is(":checked") ? true : false;
+  let numbers = params.has("numbers");
+  let tutor = params.has("tutorial");
+  let firstInstruct = tutor ? $("#tutorial").text() : "";
   
   var i = 1;
-  let stage;
+  let numBells;
   if (rowObjArr) {
-    stage = rowObjArr[0].bells.length; //actually numbells
+    numBells = rowObjArr[0].bells.length; //actually numbells
   }
-  let textx = 115 - 8*(stage - 6);
-  let startx = 120 - 8*(stage - 6);
+  let textx = 115 - 8*(numBells - 6);
+  let startx = 120 - 8*(numBells - 6);
   
   let svg = document.getElementById("container");
   let timeMove;
@@ -158,9 +166,12 @@ $(function() {
       row.push(places[number-1]);
     }
     
-    if (rowObjArr[i-1].name == "leadhead" && $("#drawLH").is(":checked")) {
+    let lines = name == "Stedman" || name == "Erin" ? "new six" : "leadhead";
+    if ($("#drawLH").is(":checked") && (rowObjArr[i-1].name == lines)) {
       addLH(textx, 20*i+25);
     }
+    if (rowObjArr[i-1].name == "leadhead" && tutor) addPlaceBell(textx, 20*i+25);
+    
     addRow(row, i, rowObjArr[i-1].type, row2type);
     addLine(bluePlaces, 'bluepath', i, lastClickInt);
     i++;
@@ -181,6 +192,8 @@ $(function() {
     $("#treblepath path").remove();
     $("#bluepath path").remove();
     $("#LHlines path").remove();
+    $("#placebells circle").remove();
+    $("#placebells text").remove();
     $('#err-count').text('Errors: 0');
     $('#change-count').text('Changes: 0');
     svg.setAttributeNS(null, "viewBox", "0 0 320 400");
@@ -194,6 +207,7 @@ $(function() {
     lastClick = null;
     medClickInt = 2000;
     numErrors = 0;
+    $("#tutorial").text(firstInstruct);
     
   });
   
@@ -203,6 +217,9 @@ $(function() {
     if (numbers) {
       addText(textx, 20*i+40, row.join(' '),'numbers');
       TweenMax.from("#numbers text:last-child", 1, {opacity:0, ease: Linear.easeIn});
+    }
+    if (rowObjArr[i-1].instruction) {
+      $("#tutorial").text(rowObjArr[i-1].instruction);
     }
     if (call == "b") {
       addText(textx-45, 20*i+40, "bob", "callMarkers");
@@ -227,7 +244,7 @@ $(function() {
   }
   
   function addLH(x, y) {
-    let width = stage*16-7;
+    let width = numBells*16-7;
     let element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     let d = `M ${x} ${y}
              h ${width}`;
@@ -235,6 +252,28 @@ $(function() {
     let g = document.getElementById("LHlines");
     g.appendChild(element);
     TweenMax.from("#LHlines path:last-child", 0.8, {opacity:0, ease: Linear.easeIn});
+  }
+  //same x, y as addLH
+  function addPlaceBell(x, y) {
+    let element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    element.setAttributeNS(null, "cx", x+numBells*16+8);
+    element.setAttributeNS(null, "cy", y+9);
+    element.setAttributeNS(null, "r", 8);
+    element.setAttributeNS(null, "fill", "none");
+    
+    let e = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    e.setAttributeNS(null, 'x', x+numBells*16+8);
+    e.setAttributeNS(null, 'y', y+12);
+    e.setAttributeNS(null, 'stroke', "none");
+    let text = places[bluePlaces[i]-1];
+    let textN = document.createTextNode(text);
+    e.appendChild(textN);
+    
+    let g = document.getElementById("placebells");
+    g.appendChild(element);
+    g.appendChild(e);
+    TweenMax.from("#placebells circle:nth-last-child(2)", 0.8, {opacity:0, ease: Linear.easeIn});
+    TweenMax.from("#placebells text:last-child", 0.8, {opacity:0, ease: Linear.easeIn});
   }
   
   

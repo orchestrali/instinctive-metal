@@ -4,10 +4,11 @@ module.exports = function buildForm(input) {
   
   let blueOptions = '<option value disabled selected></option>';
   let huntbells = 'checked', drawLH = 'checked', showNums = 'checked';
-  let score = '';
+  let score = '', tutorial = '';
   
   if (input != 0) {
     if (input.keepscore) {score = 'checked'};
+    if (input.tutorial) {tutorial = 'checked'};
     if (!input.huntbells) {huntbells = ''};
     if (!input.drawLH) {drawLH = ''};
     if (!input.numbers) {showNums = ''};
@@ -67,10 +68,18 @@ module.exports = function buildForm(input) {
     </span>
   </div class="input">
   <div class="input">
+    <span>
     <label for="keepscore">
       <input type="checkbox" ${score} id="keepscore" name="keepscore" value="yes" />
       Keep score
     </label>
+    </span>
+    <span>
+    <label for="tutorial">
+      <input type="checkbox" ${tutorial} id="tutor" name="tutorial" value="yes" />
+      Tutorial mode
+    </label>
+    </span>
   </div>
 </div>
         

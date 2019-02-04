@@ -1,5 +1,5 @@
 
-
+//old function for finding methods in .json file
 module.exports = function findMethod(input) {
   var stage = Number(input.stage);
   var methodClass = input.methodClass;

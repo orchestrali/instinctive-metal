@@ -39,7 +39,7 @@ module.exports = function methodInfo(methodInput, cb) {
   }
   
   function next() {
-    if (methodInfo.name.indexOf("Stedman") > -1 || methodInfo.name.indexOf("Erin") > -1) {
+    if (methodInfo.name == "Stedman " + stageName || methodInfo.name == "Erin " + stageName) {
       //stedman(methodInput, methodInfo.name);
     }
 

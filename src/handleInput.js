@@ -34,7 +34,7 @@ module.exports = function directTraffic(input, type, cb) {
   ///*
   methodParse(methodInput, (obj) => {
     methodInfo = obj;
-    console.log('methodInfo', methodInfo);
+    //console.log('methodInfo', methodInfo);
     cb(next());
   });
   //*/

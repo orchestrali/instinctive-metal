@@ -14,12 +14,17 @@ console.log('nextRow', nextRowFromPlaces(currentRow, changePlaces));
 var express = require('express');
 var bodyParser = require('body-parser');
 var urlParse = require('url-parse');
+var morgan = require('morgan');
 
 var app = express();
 
-var input = {
-  stage: 4,
-  class: "Block",
+var input = { stage: '8',
+  methodClass: 'Surprise',
+  methodName: 'Bristol Surprise',
+  placeNotation: '',
+  leadhead: 'rounds',
+  otherLeadhead: '',
+  quantity: 'plaincourse',
 };
 
 let input1 = {};
@@ -32,17 +37,24 @@ let input2 = {};
   input2.methodName = "London Surprise";
 
 
+const rowGen = require('./src/rowArray.js');
+const tutorial = require('./src/tutorial/test.js');
+
+/*
+rowGen(input, (arr) => {
+  let stage = Number(input.stage);
+  console.log(tutorial(arr, 4, stage));
+});
+*/
 
 const handleInput3 = require('./src/directTraffic.js');
 const buildPage = require('./src/buildPage2.js');
 //const methodNames2 = require('./methodNames2.json');
 
-
-
-
 const findOne = require('./src/library/findOneOrMany.js');
 const findPost = require('./src/library/findPost.js');
 const createNames = require('./src/library/methodNames.js');
+const record = require('./src/record/router.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -50,16 +62,9 @@ const createNames = require('./src/library/methodNames.js');
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-/*
-app.get("/methods/:stage", function (request, response) {
-  //console.log('sending file ', __dirname + '/methods' + request.params.stage + '.json');
-  response.sendFile(__dirname + '/methods' + request.params.stage + '.json');
-  //response.sendFile(__dirname + '/methods' + request.params.stage + '.xml');
-  //response.send("hello");
-});
-*/
 
 const serialize = require('./src/library/serialize.js');
 
@@ -115,7 +120,8 @@ app.get("/teststaff", function (request, response) {
 
 
 app.get("/", function (request, response) {
-  //console.log(request.query);
+  //console.log("url " + request.url);
+  record(request, response, (r) => console.log(r));
   handleInput3(request.query, 'grid', (results) => {
     response.send(results);
   });
@@ -132,6 +138,8 @@ app.post("/", function (request, response) {
 */
 
 app.get("/graphs", function (request, response) {
+  //console.log("path " + request.path);
+  record(request, response, (r) => console.log(r));
   handleInput3(request.query, 'graphs', (results) => {
     response.send(results);
   });
@@ -142,6 +150,8 @@ app.get("/graphs", function (request, response) {
 
 
 app.get("/staff", function (request, response) {
+  //console.log("path " + request.path);
+  record(request, response, (r) => console.log(r));
   handleInput3(request.query, 'staff', (results) => {
     response.send(results);
   });
@@ -159,6 +169,7 @@ app.get("/library", function (request, response) {
 });
 
 app.get("/practice", function (request, response) {
+  record(request, response, (r) => console.log(r));
   handleInput3(request.query, 'practice', (results) => {
     response.send(results);
   });
@@ -166,6 +177,7 @@ app.get("/practice", function (request, response) {
 
 
 app.get("/surpriseminor", function (request, response) {
+  record(request, response, (r) => console.log(r));
   response.sendFile(__dirname + "/views/surprise-minor.html");
 });
 

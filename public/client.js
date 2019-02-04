@@ -26,19 +26,8 @@ $(function() {
  
   
   function getStageName(stage) {
-    var stageName;
+    var stageName = stages.find(o => o.num == stage).name;
     //console.log("stage", stage);
-    //console.log($("select#stage option:nth-child(4)").val());
-    var array = $("select#stage option").filter(function() {
-      return $(this).val() == stage;
-    });
-    var text = $("select#stage option:contains("+stage+")").text();
-    //console.log(text);
-    if (stage < 10) {
-      stageName = text.substring(4);
-    } else {
-      stageName = text.substring(5);
-    }
     return stageName;
   }
   

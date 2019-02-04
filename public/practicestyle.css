@@ -17,6 +17,16 @@ svg#container {
   position: absolute;
 }
 
+#tutorial {
+  position: absolute;
+  width: 316px;
+  height: 24px;
+  font-family: Verdana;
+  bottom: 165px;
+  left: 2;
+  background-color: rgba(255,255,255,0.8);
+  text-align: center;
+}
 
 .visible {
   color: black;
