@@ -3,6 +3,16 @@ module.exports = [
   `<!DOCTYPE html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${process.env.GTAG}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '${process.env.GTAG}');
+    </script>
+
     <title>Change Ringing `,
   `</title>
     <meta name="description" content="A cool thing made with Glitch">
