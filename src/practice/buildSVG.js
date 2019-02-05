@@ -6,7 +6,12 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   let bluebell = Number(displayInput.blueBell);
   let blueplace = rowZero.indexOf(bluebell)+1;
   let score = displayInput.keepscore ? true : false;
-  let instruction = rowZeroObj.instruction ? rowZeroObj.instruction : "";
+  let instruction = "";
+  let instClass = `class="invisible"`;
+  if (rowZeroObj.instruction) {
+    instruction = rowZeroObj.instruction;
+    instClass = "";
+  }
   
   let rowZeroStr = "";
   for (var i = 0; i < rowZero.length; i++) {
@@ -110,7 +115,7 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   </g>
 </svg>
 </div>
-<div id="tutorial">
+<div id="tutorial" ${instClass}>
   ${instruction}
 </div>
 <div class="finished">
