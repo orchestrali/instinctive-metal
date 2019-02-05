@@ -6,12 +6,12 @@ module.exports = function describe(rowArray, bell, stage) {
   console.log("starting description");
   console.log("rowArray length " + rowArray.length);
   let i = 0;
-  let s = getPlace(0);
+  
   let work = [];
   
   while (i < rowArray.length-2) {
     //console.log("i equals " + i);
-    s = getPlace(i);
+    let s = getPlace(i);
     let t = getPlace(i+1);
     let u = getPlace(i+2);
     //console.log("s: "+s+", t: "+t+", u: "+u);
@@ -77,7 +77,7 @@ module.exports = function describe(rowArray, bell, stage) {
         rowArray[i].instruction = "Point " + placeName(t);
         i+=2;
       } else {
-        let count = 1;
+      let count = 1;
         let starti = i;
         i+=3;
         while (getPlace(i) == t && getPlace(i+1) == s) {
@@ -125,6 +125,12 @@ module.exports = function describe(rowArray, bell, stage) {
   function getPlace(j) {
     return rowArray[j] ? rowArray[j].bells.indexOf(bell)+1 : null;
   }
+  
+  var fakeGetPlace = function(bell) {
+    return function(j) {
+      return rowArray[j] ? rowArray[j].bells.indexOf(bell)+1 : null;
+    }
+  };
   
   function checkPlace(row, value) {
     if (getPlace(row) == value) return true;
