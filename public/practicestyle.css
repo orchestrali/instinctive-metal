@@ -23,7 +23,7 @@ svg#container {
   height: 24px;
   font-family: Verdana;
   bottom: 165px;
-  left: 2;
+  left: 2px;
   background-color: rgba(255,255,255,0.8);
   text-align: center;
 }
@@ -43,6 +43,7 @@ svg#container {
 
 .invisible {
   fill: none;
+  opacity: 0;
 }
 
 .translucent {
