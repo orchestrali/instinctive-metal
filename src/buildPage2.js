@@ -57,7 +57,7 @@ const buildTitle = require('./title.js');
 const headers = require('./headers.js');
 
 module.exports = function buildPage(errors, svgs, script, input, type) {
-  console.log('building page');
+  console.log('building page of type '+type);
   let anchor = '';
   let title = '';
   let info = pieces.find(o => o.type == type);
@@ -65,6 +65,7 @@ module.exports = function buildPage(errors, svgs, script, input, type) {
   if (errors.length > 0) {
     errStr = '<p>' + errors.join('</p><p>') + '</p>';
   }
+  //console.log("error string", errStr);
   
   let header = headers[0] + info.pageTitle + headers[1] + script + headers[2] + info.pageTitle + headers[3] + navOptions(type) + headers[4];
   
@@ -75,6 +76,7 @@ module.exports = function buildPage(errors, svgs, script, input, type) {
   let formExtra = require('./buildForm' + info.formPath + '.js');
   
   if (Object.keys(input).length > 0 && errors.length == 0) {
+    //console.log("there is input and no errors");
     //form = buildForm(input);
     title = buildTitle(input);
     anchor = '<a name="svgs"></a>';

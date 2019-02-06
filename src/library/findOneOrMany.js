@@ -27,7 +27,7 @@ module.exports = function findOne(query, s, cb) {
                                 //console.log('embedded object');
                                 return serialize(v, k);
                               } else {
-                                return encodeURIComponent(k) + "=" + encodeURIComponent(v);
+                                return encodeURIComponent(k) + "=" + encodeURIComponent(v).replace(/%20/g, '+');
                               }
           
                             }()        

@@ -231,8 +231,9 @@ window.location.hash = 'svgs';
     $(document.body).on('click.menuHide', function(){
         var $body = $(this);
         $("#methodList li").hide();
-
+        checkName();
         $body.off('click.menuHide');
+      
     });
     //check if stage and class are selected and display warning if either isn't
     let stage = $('select#stage option:checked').val();
@@ -244,8 +245,31 @@ window.location.hash = 'svgs';
         $('li#warning').css("display", "list-item");
       }
     }
+    checkName();
   });
   
+  function check(val) {
+      let names = [];
+      let list = $("#methodList li");
+      for (var i = 1; i <= list.length; i++) {
+        names.push($("#methodList li:nth-child("+i+")").text());
+      }
+      if (names.some(e => e == val) && val.length > 0) return true;
+      else return false;
+    }
+  
+  
+  function checkName() {
+    //console.log("method list li", $("#methodList li").text());
+    console.log("checking value", check($("#methodName").val()));
+    if ($("#noMethods").length == 0 && $('li#warning').length == 0 && check($("#methodName").val())) {
+      console.log("valid method");
+      $("#validName").prop("checked", true);
+    } else {
+      $("#validName").prop("checked", false);
+    }
+    
+  }
   
   function searchWarning() {
       $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
@@ -271,6 +295,7 @@ window.location.hash = 'svgs';
   
   //when typing in the methodName field
   $("#methodName").on("keyup", function(event) {
+    checkName();
     //body click causes methodList to be hidden
     $(document.body).on('click.menuHide', function(){
         //console.log('body click');
@@ -470,6 +495,7 @@ window.location.hash = 'svgs';
       //enter key
     } else if (event.which == 13) {
       $("#methodName").val($("li.selected").text());
+      checkName();
       $("#methodList li").hide();
     }
         }
@@ -480,6 +506,10 @@ window.location.hash = 'svgs';
     } else {
       $('<li id="badChar"></li>').text("unrecognized character in search").css("display", "list-item").appendTo($("#methodList"));
     }
+    
+    //console.log("method list li", $("#methodList li").text());
+    
+    
   });
   //end of method search function
   

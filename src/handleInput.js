@@ -18,11 +18,11 @@ module.exports = function directTraffic(input, type, cb) {
   let width = 270;
   let SVGs;
   console.log(type);
-  //console.log(compInput);
+  console.log(methodInput);
   //check for errors, first round; return page if there are any.
   let errors = checkError(methodInput, compInput);
   if (errors.length > 0) {
-    return build(errors, [], '', input, type);
+    cb(build(errors, [], '', input, type));
   }
   
   //parse compInput
