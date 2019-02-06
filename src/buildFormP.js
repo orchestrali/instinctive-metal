@@ -56,7 +56,7 @@ module.exports = function buildForm(input) {
       <label for="blueBell">
         Practice on bell:
       </label>
-      <select id="blueBell" name="blueBell" >
+      <select id="blueBell" name="blueBell" required>
         ` + blueOptions + `
       </select>
     </span>

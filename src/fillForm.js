@@ -2,7 +2,7 @@ const stages = require('./stages.json');
 const methodNames = require('../methodNames2.json');
 
 const defaults = {
-  checkblank: {value: '', vars: ['other', 'plaincourse', 'touch', 'leadend', 'callplace', 'a', 'b', 'd', 'cust']},
+  checkblank: {value: '', vars: ['validName', 'other', 'plaincourse', 'touch', 'leadend', 'callplace', 'a', 'b', 'd', 'cust']},
   inputblank: {value: '', vars: ['placeNotation', 'methodName', 'otherLeadhead', 'comp']},
   checked: {value: 'checked', vars: ['rounds', 'onelead']},
   disabled: {value: 'disabled', vars: ['bobPlaceNot', 'singlePlaceNot', 'callLoc']},
@@ -35,6 +35,10 @@ module.exports = function fillForm(input) {
     formInput.methodPlaceholder = "Select a stage and class to search methods";
   } else {
     //yes input
+    /*
+    if (input.validName) {
+      formInput.validName = "checked";
+    } */
     //console.log('yes input');
     //stage options
     formInput.options = buildStages(Number(input.stage));
@@ -95,8 +99,8 @@ module.exports = function fillForm(input) {
           }
         }() + '>' + text + '</option>';
       }
+      
     }
-    
     
   }
   

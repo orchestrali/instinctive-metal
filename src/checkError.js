@@ -8,6 +8,7 @@ var callPlaceTokens = ['h', 'w', 'm', 'b', 'i'];
 var touchGroup = ['(', ')', '[', ']', '{', '}'];
 
 module.exports = function findError(methodInput, compInput) {
+  console.log("checking for errors");
   let errors = [];
   let stage = Number(methodInput.stage);
   
@@ -54,6 +55,16 @@ module.exports = function findError(methodInput, compInput) {
   } else {
     //console.log('leadhead is rounds');
   }
+  
+  //methodName and placeNotation
+  if (methodInput.methodName.length == 0 && methodInput.placeNotation.length == 0) {
+    errors.push("Error: you must supply either a method name or place notation");
+  } else if (methodInput.methodName.length > 0 && methodInput.placeNotation.length > 0) {
+    errors.push("Error: you must supply either a method name or place notation, not both");
+  } else if (methodInput.placeNotation.length == 0 && !methodInput.validName) {
+    errors.push("Error: invalid method name");
+  }
+  
   
 
   if (compInput.touch) {
@@ -166,6 +177,6 @@ module.exports = function findError(methodInput, compInput) {
       
      
   }
-
+console.log("errors length", errors.length);
 return errors;
 }
