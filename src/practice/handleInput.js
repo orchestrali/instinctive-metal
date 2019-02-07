@@ -18,7 +18,7 @@ module.exports = function handle(rowArray, info, displayInput) {
   }
   let rowZero = rowArray[0];
   //generate place array(s) for hunt bell(s)
-  if (displayInput.huntbells == "draw-hunts") {
+  if (displayInput.huntbells == "draw") {
     let huntbells = findhunt(info.placeNot, info.stage, info.comp);
     
     for (var i = 0; i < huntbells.length; i++) {
