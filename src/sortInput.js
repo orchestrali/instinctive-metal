@@ -8,7 +8,7 @@ module.exports = function sortInput(input) {
   
   for (var key in input) {
     if (catIndexed[key]) {
-      object[catIndexed[key]][key] = input[key];
+      object[catIndexed[key]][key] = input[key].trim();
     }
   }
   

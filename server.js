@@ -69,7 +69,7 @@ app.use(morgan(':url'));
 const serialize = require('./src/library/serialize.js');
 
 let query = {
-  name: {$regex: 'jim', $options: 'i'}
+  name: {$regex: 'wallis', $options: 'i'}
 }
 
   //console.log(methodNames2[0].classes[0].methods);

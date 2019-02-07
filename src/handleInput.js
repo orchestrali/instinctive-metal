@@ -8,6 +8,8 @@ const buildSVGs = require('./svgs/handleInput.js');
 
 const build = require('./buildPage2.js');
 
+const stages = require('./stages.json');
+
 
 module.exports = function directTraffic(input, type, cb) {
   let sortedInput = sortInput(input);
@@ -15,12 +17,15 @@ module.exports = function directTraffic(input, type, cb) {
   let compInput = sortedInput.composition;
   let displayInput = sortedInput.display;
   let stage = Number(input.stage);
+  let stageName = stages.find(o => o.num == stage).name;
   let width = 270;
   let SVGs;
   console.log(type);
   console.log(methodInput);
   //check for errors, first round; return page if there are any.
-  let errors = checkError(methodInput, compInput);
+  let errResults = checkError(methodInput, compInput);
+  let errors = errResults.errors;
+  methodInput.nameLower = errResults.realName ? errResults.realName : null;
   if (errors.length > 0) {
     cb(build(errors, [], '', input, type));
     return;
@@ -35,6 +40,7 @@ module.exports = function directTraffic(input, type, cb) {
   ///*
   methodParse(methodInput, (obj) => {
     methodInfo = obj;
+    if (methodInfo.name) input.methodName = methodInfo.name.substring(0, methodInfo.name.length-stageName.length-1);
     //console.log('methodInfo', methodInfo);
     cb(next());
   });

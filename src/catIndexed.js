@@ -4,8 +4,6 @@ const categories = {
   display: ['numbers', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial']
 }
 
-const booleans = ['numbers', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial'];
-const numbers = ['stage', 'callLoc', 'tenors', 'blueBell'];
 
 const catIndexed = (function(cats) {
   let index = {};
