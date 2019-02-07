@@ -8,6 +8,7 @@ var validCompTokens = ['p', 'b', 's'];
 var leadendTokens = ['p', 'b', 's'];
 var callPlaceTokens = ['h', 'w', 'm', 'b', 'i'];
 var touchGroup = ['(', ')', '[', ']', '{', '}'];
+var plainClasses = ["Bob", "Place", "Slow Course"];
 
 module.exports = function findError(methodInput, compInput) {
   console.log("checking for errors");
@@ -15,6 +16,7 @@ module.exports = function findError(methodInput, compInput) {
   let stage = Number(methodInput.stage);
   let methodClass = methodInput.methodClass;
   let stageName = stages.find(o => o.num == stage).name;
+  let realMethod;
   
   //'x' or '-' in odd-bell method place notation
   if (stage % 2 == 1 && (methodInput.placeNotation.indexOf('x') > -1 || methodInput.placeNotation.indexOf('-') > -1)) {
@@ -60,28 +62,83 @@ module.exports = function findError(methodInput, compInput) {
     //console.log('leadhead is rounds');
   }
   
-  let name = methodInput.methodName;
+  let name = methodInput.methodName.toLowerCase();
+  let stageLower = stageName.toLowerCase();
+  let classLower = methodClass.toLowerCase();
   //methodName and placeNotation
   if (methodInput.methodName.length == 0 && methodInput.placeNotation.length == 0) {
     errors.push("Error: you must supply either a method name or place notation");
   } else if (methodInput.methodName.length > 0 && methodInput.placeNotation.length > 0) {
     errors.push("Error: you must supply either a method name or place notation, not both");
   } else if (methodInput.placeNotation.length == 0 && !methodInput.validName) {
-    let validMethods = methodNames.find(o => o.stage == stage).classes.find(o => o.class == methodClass).methods[0];
-    //console.log(validMethods);
+    let validMethods = [];
+    if (methodClass == "Plain") {
+      
+      for (var i = 0; i < plainClasses.length; i++) {
+        validMethods = validMethods.concat(methodNames.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods[0]);
+      }
+    } else {
+      validMethods = methodNames.find(o => o.stage == stage).classes.find(o => o.class == methodClass).methods[0];
+    }
+    //console.log(name + " " + stageName);
+    //console.log("number of valid methods", validMethods.length);
+    let nameWords = name.split(' ');
     let nameFull = name;
-    if (name.indexOf(stageName) == -1) {
-      nameFull += " " + stageName;
+    for (var i = 0; i < nameWords.length; i++) {
+      //nameFull += nameWords[i][0].toUpperCase() + 
+    }
+    let matches = [];
+    if (nameWords[nameWords.length-1] != stageLower) {
+      console.log("no stage name");
+      testClass(nameWords.length-1, " "+stageLower);
+      
+    } else {
+      testClass(nameWords.length-2, "");
+    }
+    
+    function testClass(index, suffix) {
+      let baseName = nameWords.slice(0, index+1).join(" ");
+      console.log("baseName", baseName);
+      if (methodClass == "Plain") {
+        if (plainClasses.some(e => e.toLowerCase() == nameWords[index])) {
+          nameFull += suffix;
+          console.log("nameFull", nameFull);
+        } else {
+          let testMethods = [];
+          for (var i = 0; i < plainClasses.length; i++) {
+            testMethods.push(baseName + " " + plainClasses[i].toLowerCase() + " " + stageLower);
+          }
+          console.log("testMethods", testMethods);
+          for (var j = 0; j < testMethods.length; j++) {
+            if (testName(testMethods[j])) {
+              matches.push(testMethods[j]);
+            }
+          }
+        }
+        
+        
+      } else if (nameWords[index] != classLower) {
+        console.log("no class name");
+        nameFull = baseName + " " + classLower + " " + stageLower;
+      } else {
+        nameFull += suffix;
+      }
+    }
+    
+    function testName(name) {
+      return validMethods.some(e => {
+        return e.toLowerCase() == name;
+      });
     }
     
     let exact = validMethods.some(e => {
-      return e == nameFull;
+      return e.toLowerCase() == nameFull;
     })
     //console.log(exact)
-    let matches = [];
+    
     if (!exact) {
       validMethods.forEach(function (e) {
-        if (e.indexOf(name) > -1) {
+        if (e.toLowerCase().indexOf(name) > -1) {
           matches.push(e)
         }
       })
@@ -90,6 +147,8 @@ module.exports = function findError(methodInput, compInput) {
       } else {
         errors.push("Error: invalid method name");
       }
+    } else {
+      realMethod = nameFull;
     }
     
     
@@ -220,5 +279,5 @@ module.exports = function findError(methodInput, compInput) {
   }
 console.log("errors length", errors.length);
   console.log(errors);
-return errors;
+return {errors: errors, realName: realMethod};
 }

@@ -6,7 +6,7 @@ module.exports = function buildTitle(input) {
   if (input.methodName == undefined || input.methodName == '') {
     html += input.placeNotation;
   } else {
-    let stageName = stages.find(o => o.num == input.stage).name;
+    let stageName = stages.find(o => o.num == Number(input.stage)).name;
     html += input.methodName + " " + stageName;
     
   }
