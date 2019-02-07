@@ -49,7 +49,7 @@ rowGen(input, (arr) => {
 
 const handleInput3 = require('./src/directTraffic.js');
 const buildPage = require('./src/buildPage2.js');
-//const methodNames2 = require('./methodNames2.json');
+const methodNames2 = require('./methodNames2.json');
 
 const findOne = require('./src/library/findOneOrMany.js');
 const findPost = require('./src/library/findPost.js');
@@ -72,7 +72,7 @@ let query = {
   name: {$regex: 'jim', $options: 'i'}
 }
 
-  //
+  //console.log(methodNames2[0].classes[0].methods);
 //findOne(query, '', (result) => {console.log(result)});
 //findPost(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
 //console.log(findMethod(input));

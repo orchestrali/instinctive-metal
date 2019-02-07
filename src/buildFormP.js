@@ -40,7 +40,7 @@ module.exports = function buildForm(input) {
   <div class="input">
     <span>
       <label for="huntbells">
-        <input type="checkbox" ${huntbells} id="huntbells" name="huntbells" value="draw-hunts" />
+        <input type="checkbox" ${huntbells} id="huntbells" name="huntbells" value="draw" />
         Draw hunt bell line(s)
       </label>
     </span>

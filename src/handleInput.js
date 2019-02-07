@@ -23,6 +23,7 @@ module.exports = function directTraffic(input, type, cb) {
   let errors = checkError(methodInput, compInput);
   if (errors.length > 0) {
     cb(build(errors, [], '', input, type));
+    return;
   }
   
   //parse compInput

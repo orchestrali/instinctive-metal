@@ -1,4 +1,6 @@
 const places = require('./places');
+const methodNames = require("../methodNames2.json");
+const stages = require('./stages.json');
 
 var validNotTokens = [',', '+', '&', 'x', '.', '-'];
 var validGroupTokens = ['',',', '+', '&,', '&,+', '+,', '+,&'];
@@ -11,6 +13,8 @@ module.exports = function findError(methodInput, compInput) {
   console.log("checking for errors");
   let errors = [];
   let stage = Number(methodInput.stage);
+  let methodClass = methodInput.methodClass;
+  let stageName = stages.find(o => o.num == stage).name;
   
   //'x' or '-' in odd-bell method place notation
   if (stage % 2 == 1 && (methodInput.placeNotation.indexOf('x') > -1 || methodInput.placeNotation.indexOf('-') > -1)) {
@@ -56,14 +60,51 @@ module.exports = function findError(methodInput, compInput) {
     //console.log('leadhead is rounds');
   }
   
+  let name = methodInput.methodName;
   //methodName and placeNotation
   if (methodInput.methodName.length == 0 && methodInput.placeNotation.length == 0) {
     errors.push("Error: you must supply either a method name or place notation");
   } else if (methodInput.methodName.length > 0 && methodInput.placeNotation.length > 0) {
     errors.push("Error: you must supply either a method name or place notation, not both");
   } else if (methodInput.placeNotation.length == 0 && !methodInput.validName) {
-    errors.push("Error: invalid method name");
+    let validMethods = methodNames.find(o => o.stage == stage).classes.find(o => o.class == methodClass).methods[0];
+    //console.log(validMethods);
+    let nameFull = name;
+    if (name.indexOf(stageName) == -1) {
+      nameFull += " " + stageName;
+    }
+    
+    let exact = validMethods.some(e => {
+      return e == nameFull;
+    })
+    //console.log(exact)
+    let matches = [];
+    if (!exact) {
+      validMethods.forEach(function (e) {
+        if (e.indexOf(name) > -1) {
+          matches.push(e)
+        }
+      })
+      if (matches.length > 1) {
+        errors.push("Error: more than one method matches search");
+      } else {
+        errors.push("Error: invalid method name");
+      }
+    }
+    
+    
+    /*
+    
+    
+      */
+    
   }
+  
+  /*
+  /['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+/.test(value) || /['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9\s]+/.test(value)
+  
+  
+  */
   
   
 
@@ -178,5 +219,6 @@ module.exports = function findError(methodInput, compInput) {
      
   }
 console.log("errors length", errors.length);
+  console.log(errors);
 return errors;
 }
