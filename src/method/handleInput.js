@@ -23,7 +23,8 @@ module.exports = function methodInfo(methodInput, cb) {
     //if the method is known, name, stage, parsed plain PN, and lead length come from the database
     let knownMethod;
     let amp = /&(?!=amp)/gi;
-    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase().replace(amp, "&amp;"), $options: 'i'}}, '', (res) => {
+    //.replace(amp, "&amp;")
+    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, '', (res) => {
       //console.log(res);
       knownMethod = buildMethod(res);
       methodInfo.name = knownMethod.name;

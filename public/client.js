@@ -11,6 +11,7 @@ $(function() {
   //console.log('window width', window.innerWidth);
   var stage = Number($('select#stage option:checked').val());
   var stages;
+  let checkedClass;
   
   //$('input#wWidth').prop('value', window.innerWidth);
   
@@ -102,24 +103,21 @@ $(function() {
   }
   
  //location.hash = 'svgs';
-window.location.hash = 'svgs';
+  window.location.hash = 'svgs';
   var bluelines = '';
-  recalcBlue(stage);
   
   
   function recalcBlue(stage) {
     for (var i = 1; i <= stage; ++i) {
-      
-      
-      var li = '<li><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select id="bell' + i + 'w" name="bell' + i + `w">
-              <option value="0">none</option>
-              <option value="1">thin</option>
-              <option value="2" selected>thick</option>`
-      + `</select>
-          <label for="bell` + i + `c">
+      var li = '<li><span><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select class="weight" id="bell' + i + 'w" name="bell' + i + `w">
+              <option class="weight" value="0">none</option>
+              <option class="weight" value="1">thin</option>
+              <option class="weight" value="2" selected>thick</option>`
+      + `</select></span>
+          <span><label for="bell` + i + `c">
               color:
             </label>
-            <input type="text" id="bell` + i + `c" name="bell` + i + `c" /></li>`;
+            <input class="color" type="text" id="bell` + i + `c" name="bell` + i + `c" /></span></li>`;
       
       bluelines += li;
       //$(li).appendTo('div#everyline > ul');
@@ -136,12 +134,7 @@ window.location.hash = 'svgs';
     //remove methods from name dropdown
     $('ul#methodList').children().detach();
     $("#methodName").val("");
-    
-    //remove blueBell options and add a blank selected option
-    $('select#blueBell').children().detach();
-    //console.log($('div#basic-lines input').prop("disabled"));
-    $('<option></option>').prop({selected: true, disabled: true}).appendTo('select#blueBell');
-    
+
     //if a non-empty class is selected, make sure the methodName placeholder is blank (is this possible?)
     if ($("select#class option:checked").text() != "") {
       $("#methodName").prop("placeholder", "");
@@ -150,19 +143,6 @@ window.location.hash = 'svgs';
     //if the placeholder and class are blank, set the placeholder
     if ($("#methodName").prop("placeholder") == "" && $("select#class option:checked").text() == "") {
       $("#methodName").prop("placeholder", "Select a stage and class to search methods");
-    }
-    
-    //if the basic lines aren't disabled, add options to the blueBell dropdown
-    if (!$('div#basic-lines input').prop("disabled")) {
-      for (var i = 1; i <= stage; ++i) {
-      $('<option></option').text(i).val(i).appendTo('select#blueBell');
-      }
-    }
-    
-    //build options to draw every line
-    recalcBlue(stage);
-    if ($("div#everyline").css("display") == "block") {
-      $('div#everyline > ul').append(bluelines);
     }
     
     //new function to build classes
@@ -183,16 +163,13 @@ window.location.hash = 'svgs';
         $('<option></option>').text(text).val(classes[i]).appendTo('select#class');
       }
     
-    
-    
-    
   })
   
   
   //when class changes
   $('#class').change(function() {
     stage = $('select#stage option:checked').val();
-    let checkedClass = $('select#class option:checked').val();
+    checkedClass = $('select#class option:checked').val();
     
     //remove methods from dropdown
     $('ul#methodList').children().detach();
@@ -202,16 +179,8 @@ window.location.hash = 'svgs';
       $("#methodName").prop("placeholder", "");
     }
     
-    
     $("#methodName").val("");
     
-    //if class is principle/differential hide the option to draw hunt-bell line(s)
-    if (checkedClass == 'Principle' || checkedClass == 'Differential') {
-      $('p#hunt-bells').slideUp(400);
-    } else {
-      $('p#hunt-bells').slideDown(400);
-    }
-     
   });
   
   
@@ -231,7 +200,7 @@ window.location.hash = 'svgs';
     $(document.body).on('click.menuHide', function(){
         var $body = $(this);
         $("#methodList li").hide();
-        checkName();
+        //checkName();
         $body.off('click.menuHide');
       
     });
@@ -245,7 +214,7 @@ window.location.hash = 'svgs';
         $('li#warning').css("display", "list-item");
       }
     }
-    checkName();
+    //checkName();
   });
   
   function check(val) {
@@ -295,7 +264,7 @@ window.location.hash = 'svgs';
   
   //when typing in the methodName field
   $("#methodName").on("keyup", function(event) {
-    checkName();
+    //checkName();
     //body click causes methodList to be hidden
     $(document.body).on('click.menuHide', function(){
         //console.log('body click');
@@ -495,7 +464,7 @@ window.location.hash = 'svgs';
       //enter key
     } else if (event.which == 13) {
       $("#methodName").val($("li.selected").text());
-      checkName();
+      //checkName();
       $("#methodList li").hide();
     }
         }
@@ -514,26 +483,26 @@ window.location.hash = 'svgs';
   //end of method search function
   
   
- $('#quantity').change(function() {
+  $('#quantity').change(function() {
    //console.log('clicked');
    if ($('#touch').is(':checked')) {
      //console.log('touch chosen');
      $('#touchComp').prop({disabled: false, required: true, placeholder: 'required'});
      //console.log('select#methodName.val(): ', $('select#methodName').val());
-     
+
        //console.log('yes');
-       
+
        $('div#call-info').slideDown(1000, "swing");
        $('li#compinfo').slideDown(1000, "swing");
        //$('#single').css("display", "inline-block");
-     
+
    } else {
      $('#touchComp').prop({required: false, disabled: true});
      $('div#call-info').slideUp(1000, "swing");
      $('li#compinfo').slideUp(1000, "swing");
    }
-   
- })
+
+  })
   
   $('#call-info').change(function() {
     if ($('#cust').is(':checked')) {
@@ -554,124 +523,7 @@ window.location.hash = 'svgs';
     $('.single').prop("disabled", false);
   })
   
-  //set lines for bell groups
-$('button#line-groups').click(function() {
-  //console.log($(this).attr("id"));
-  $('div#bellgroups input').prop("disabled", false);
-  $('select#blueGroup1').append(`<option value="all">All bells</option>
-                 <option value="hunt" selected>Hunt bells</option>
-                 <option value="work" >Working bells</option>
-                 <option value="none" >No bells</option>`);
-  $('select#blueGroup1w').append(`<option value="1" selected>thin</option>
-              <option value="2">thick</option>`);
-  $('input#blueGroup1c').prop("value", "red");
-  $('select#blueGroup2').append(`<option value="all">All bells</option>
-                 <option value="hunt">Hunt bells</option>
-                 <option value="work" selected>Working bells</option>
-                 <option value="none" >No bells</option>`);
-  $('select#blueGroup2w').append(`<option value="1">thin</option>
-              <option value="2" selected>thick</option>`);
-  $('input#blueGroup2c').prop("value", "blue");
-  
-  $('div#basic-lines select').children($('option')).detach();
-  $('div#basic-lines input').prop("disabled", true);
-  $('div#bellgroups').slideDown(600, function() {
-    
-    $('div#basic-lines').slideUp(400);
-  });
-  
-});
-  
-  //set lines for every bell
-$('button#every-line').click(function() {
-  //console.log($(this).attr("id"));
-  $('div#basic-lines select').children($('option')).detach();
-  $('div#basic-lines input').prop("disabled", true);
-  $('div#everyline > ul').append(bluelines);
-  $('div#everyline').slideDown(600, function() {
-    $('div#basic-lines').slideUp(400);
-  });
-  
-});
-  
-  //return to basic line options
-$('button.return-basic').click(function() {
-  console.log($(this).attr("id"));
-  
-  //detach the advanced options
-  if ($(this).attr("id") == "from-groups") {
-    console.log('toggling from bellgroups');
-    toggleBlueInput("bellgroups");
-  } else if ($(this).attr("id") == "from-all") {
-    toggleBlueInput("everyline");
-  }
-  
-  $('select#huntBellw').append(`<option value="1" selected>thin</option>
-              <option value="2">thick</option>`);
-  $('div#basic-lines input').prop("disabled", false);
-  for (var i = 1; i <= stage; ++i) {
-      $('<option></option').text(i).val(i).appendTo('select#blueBell');
-  }
-  $('select#blueBellw').append(`<option value="1">thin</option>
-              <option value="2" selected>thick</option>`);
-  
-  $('div#basic-lines').slideDown(600, function() {
-    $('div#everyline').slideUp(400);
-    $('div#bellgroups').slideUp(400);
-  });
-});
-  
-  
-let other;
-  //when bluegroup selection changes
-$('#blueGroup1, #blueGroup2').change(function() {
-  
-  let id = $(this).attr("id");
-  let otherID;
-  if (id == "blueGroup1") {
-    otherID = "group2";
-  } else if (id == "blueGroup2") {
-    otherID = "group1";
-  }
-  
-  //if the selection is all or none, remove the other group
-  if ($(this).val() == 'all' || $(this).val() == 'none') {
-    if (!other) {
-      other = $("#" + otherID).detach();
-    }
-    
-    $("#" + otherID).detach();
-    console.log(other);
-    //if the selection is none, disable color input
-    if ($(this).val() == 'none') {
-      
-      $('input#' + id + 'c').prop({disabled: true, value: ''});
-    } else {
-      $('input#' + id + 'c').prop("disabled", false);
-    }
-  }
-  
-  //if the selection is hunt or work AND one option has been detached, reattach it
-  if (($(this).val() == 'hunt' || $(this).val() == 'work') && other) {
-    console.log('yes');
-    console.log(other);
-    let id = $(this).attr("id");
-    //console.log($('#' + other));
-    other.appendTo($('div#bellgroups ul'));
-    other = null;
-    $('input#' + id + 'c').prop("disabled", false);
-  }
-  
-});
-  
-  
-  
-function toggleBlueInput(hide) {
-  console.log('options to detach: ', $('div#' + hide).find('option').length);
-  $('div#' + hide + ' option').detach();
-  $('div#' + hide + ' input').prop("disabled", true);
-  
-}
+
   
 let gridWidth = (stage + (stage % 2))*16;
   //console.log('stage: ', stage);

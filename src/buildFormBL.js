@@ -1,33 +1,8 @@
-
+const fillForm = require("./bluelines/formOpts.js");
 
 module.exports = function buildForm(input) {
   
-  let blueOptions = '<option value disabled selected></option>';
-  let advLines = '';
-  
-  if (input != 0) {
-    
-    for (var i = 1; i <= input.stage; ++i) {
-      //build dropdown menu for blue bell options
-      var option = '<option value="' + i + '"' + function() {
-        if (Number(input.blueBell) == i) {
-          return 'selected';
-        }
-      }() + '>' + i + '</option>';
-      blueOptions += option;
-      //build options for blue lines for every bell
-      var li = '<li><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select id="bell' + i + 'w" name="bell' + i + `w">
-              <option value="1" selected>thin</option>
-              <option value="2">thick</option>`
-      + `</select>
-          <label for="bell` + i + `c">
-              color:
-            </label>
-            <input type="text" id="bell` + i + `c" name="bell` + i + `c" /></li>`;
-      advLines += li;
-      
-    }
-  }
+  let formInfo = fillForm(input);
   
   
   let form = `
@@ -36,25 +11,26 @@ module.exports = function buildForm(input) {
     Display options
   </p>
   <p>
-    <input type="checkbox" checked id="show-nums" name="numbers" value="show" />
+    <input type="checkbox" ${formInfo.numbers} id="show-nums" name="numbers" value="show" />
     <label for="numbers">Show numbers</label>
   </p>
-  <div id="basic-lines">
+`
+  //basic lines
+  form += `<div id="basic-lines" ${formInfo.basicDisplay}>
     <div class="input" id="hunt-bells">
       <span>
         <label for="huntBellw">
           Draw hunt bell line(s): 
         </label>
-        <select id="huntBellw" name="huntBellw">
-          <option value="1" selected>thin</option>
-          <option value="2">thick</option>
+        <select class="weight" id="huntBellw" name="huntBellw">
+          ${formInfo.huntW}
         </select>
       </span>
       <span>
         <label for="huntColor">
           color:
         </label>
-        <input type="text" id="huntColor" name="huntColor" value="red"/>
+        <input type="text" id="huntColor" name="huntColor" ${formInfo.huntC}/>
       </span>
     </div>
     <div class="input">
@@ -63,20 +39,19 @@ module.exports = function buildForm(input) {
           Draw path for bell:
         </label>
         <select id="blueBell" name="blueBell" >
-          ` + blueOptions + `
+          ${formInfo.blueOptions}
         </select>
         <label for="blueBellw">
         </label>
         <select id="blueBellw" name="blueBellw">
-          <option value="1">thin</option>
-          <option value="2" selected>thick</option>
+          ${formInfo.blueW}
         </select>
       </span>
       <span>
         <label for="blueBellc">
           color:
         </label>
-        <input type="text" id="blueBellc" name="blueBellc" value="blue"/>
+        <input type="text" id="blueBellc" name="blueBellc" ${formInfo.blueC}/>
       </span>
     </div>
     <p>
@@ -89,7 +64,9 @@ module.exports = function buildForm(input) {
       </button>
     </p>
   </div>
-  <div id="bellgroups">
+  `
+  //lines for bell groups
+  form += `<div id="bellgroups" ${formInfo.groupDisplay}>
     <button class="return-basic" id="from-groups" type="button">
     Return to basic options
     </button>
@@ -97,50 +74,21 @@ module.exports = function buildForm(input) {
       Draw lines for: 
     </p>
     <ul>
-      <li id="group1">
-        <span>
-          <label for="blueGroup1"></label>
-          <select id="blueGroup1" name="blueGroup1">
-          </select>
-          <label for="blueGroup1w"></label>
-          <select id="blueGroup1w" name="blueGroup1w">
-          </select>
-        </span>
-        <span>
-          <label for="blueGroup1c">
-            color:
-          </label>
-          <input type="text" id="blueGroup1c" name="blueGroup1c" disabled/>
-        </span>
-      </li>
-      <li id="group2">
-        <span>
-          <label for="blueGroup2"></label>
-          <select id="blueGroup2" name="blueGroup2">
-          </select>
-          <label for="blueGroup2w"></label>
-          <select id="blueGroup2w" name="blueGroup2w">
-          </select>
-        </span>
-        <span>
-          <label for="blueGroup2c">
-            color:
-          </label>
-          <input type="text" id="blueGroup2c" name="blueGroup2c" disabled/>
-        </span>
-      </li>
+      ${formInfo.bellGroups}
     </ul>
   </div>
-  <div id="everyline">
+  `
+  //lines for every bell
+  form += `<div id="everyline" ${formInfo.everyDisplay}>
     <button class="return-basic" id="from-all" type="button">
     Return to basic options
     </button>
     <ul>
-      
+      ${formInfo.everyline}
     </ul>
   </div>
   <p>
-    <input type="checkbox" id="pagination" name="pagination" value="paginate">
+    <input type="checkbox" ${formInfo.pagination} id="pagination" name="pagination" value="paginate">
     <label for="pagination">Include page breaks</label>
   </p>
 </div>

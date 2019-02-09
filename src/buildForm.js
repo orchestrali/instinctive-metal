@@ -11,9 +11,6 @@ module.exports = function buildForm(input) {
   
   //method stage and class
   let form = `
-<div id="valid">
-  <input type="checkbox" ${info.validName} id="validName" name="validName" value="true"/>
-</div>
 <div id="method-info" class="category">
   <p class="bold">
     Method info

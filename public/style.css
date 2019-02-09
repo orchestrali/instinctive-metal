@@ -99,6 +99,7 @@
   
   span {
     margin-right: 10px;
+    display: inline-block;
   }
   
   footer {
@@ -338,6 +339,10 @@
     font-size: 35px;
     line-height: .6;
     
+  }
+  
+  select.weight {
+    margin-right: 10px;
   }
   
   /* END FORM STYLING */

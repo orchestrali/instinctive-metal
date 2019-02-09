@@ -62,6 +62,7 @@ module.exports = function findError(methodInput, compInput) {
     //console.log('leadhead is rounds');
   }
   
+  //validate name
   let name = methodInput.methodName.toLowerCase();
   let stageLower = stageName.toLowerCase();
   let classLower = methodClass.toLowerCase();
@@ -70,10 +71,11 @@ module.exports = function findError(methodInput, compInput) {
     errors.push("Error: you must supply either a method name or place notation");
   } else if (methodInput.methodName.length > 0 && methodInput.placeNotation.length > 0) {
     errors.push("Error: you must supply either a method name or place notation, not both");
-  } else if (methodInput.placeNotation.length == 0 && !methodInput.validName) {
+  } else if (methodInput.placeNotation.length == 0) {
+    
     let validMethods = [];
+    //if the class is plain, got to add methods from Bob, Place, and Slow Course classes
     if (methodClass == "Plain") {
-      
       for (var i = 0; i < plainClasses.length; i++) {
         validMethods = validMethods.concat(methodNames.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods[0]);
       }
@@ -88,36 +90,36 @@ module.exports = function findError(methodInput, compInput) {
       //nameFull += nameWords[i][0].toUpperCase() + 
     }
     let matches = [];
+    let testMethods = [];
+    //check if last word is stage name
     if (nameWords[nameWords.length-1] != stageLower) {
       console.log("no stage name");
+      //check if last word is class name
       testClass(nameWords.length-1, " "+stageLower);
-      
     } else {
+      //check if penultimate word is class name
       testClass(nameWords.length-2, "");
     }
     
     function testClass(index, suffix) {
       let baseName = nameWords.slice(0, index+1).join(" ");
-      console.log("baseName", baseName);
+      //console.log("baseName", baseName);
       if (methodClass == "Plain") {
-        if (plainClasses.some(e => e.toLowerCase() == nameWords[index])) {
+        //if the (pen)ultimate word matches one of the plain classes, just add the suffix
+        if (plainClasses.some(e => e.toLowerCase() == nameWords[index]) || nameWords[index-1] + " " + nameWords[index] == "slow course") {
           nameFull += suffix;
-          console.log("nameFull", nameFull);
+          //console.log("nameFull", nameFull);
         } else {
-          let testMethods = [];
+          //otherwise, add each of the three possible class names to the test array
           for (var i = 0; i < plainClasses.length; i++) {
             testMethods.push(baseName + " " + plainClasses[i].toLowerCase() + " " + stageLower);
           }
-          console.log("testMethods", testMethods);
-          for (var j = 0; j < testMethods.length; j++) {
-            if (testName(testMethods[j])) {
-              matches.push(testMethods[j]);
-            }
-          }
+          //console.log("testMethods", testMethods);
+          
         }
         
         
-      } else if (nameWords[index] != classLower) {
+      } else if (nameWords[index] != classLower && nameWords[index-1] + " " + nameWords[index] != classLower) {
         console.log("no class name");
         nameFull = baseName + " " + classLower + " " + stageLower;
       } else {
@@ -131,12 +133,18 @@ module.exports = function findError(methodInput, compInput) {
       });
     }
     
-    let exact = validMethods.some(e => {
-      return e.toLowerCase() == nameFull;
-    })
+    testMethods.push(nameFull);
     //console.log(exact)
+    for (var j = 0; j < testMethods.length; j++) {
+      if (testName(testMethods[j])) {
+        matches.push(testMethods[j]);
+      }
+    }
+    
+    let exact = matches.length == 1 ? true : false;
     
     if (!exact) {
+      matches = [];
       validMethods.forEach(function (e) {
         if (e.toLowerCase().indexOf(name) > -1) {
           matches.push(e)
@@ -148,23 +156,14 @@ module.exports = function findError(methodInput, compInput) {
         errors.push("Error: invalid method name");
       }
     } else {
-      realMethod = nameFull;
+      realMethod = matches[0];
     }
-    
-    
-    /*
-    
-    
-      */
     
   }
   
   /*
   /['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+/.test(value) || /['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9\s]+/.test(value)
-  
-  
   */
-  
   
 
   if (compInput.touch) {
@@ -251,10 +250,6 @@ module.exports = function findError(methodInput, compInput) {
           }
         }
         
-        //bob or single start = 0
-        if (methodInput.bobStart == 0 || methodInput.singleStart == 0) {
-          errors.push("Error: call locations must be a non-zero integer");
-        }
       }
 
       function testPN(pn) {
