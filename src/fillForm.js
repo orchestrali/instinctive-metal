@@ -22,7 +22,8 @@ module.exports = function fillForm(input) {
   
   //no input
   if (Object.keys(input).length == 0) {
-    //console.log('no input');
+    console.log('no input');
+    //set all the form inputs to their default values
     for (var key in defaults) {
       for (var j = 0; j < defaults[key].vars.length; j++) {
         formInput[defaults[key].vars[j]] = defaults[key].value;
@@ -30,18 +31,15 @@ module.exports = function fillForm(input) {
     }
     
     formInput.touchinfo = 'hidden';
-    formInput.options = buildStages(0);
+    formInput.options = buildStages(0); //stage options
     formInput.classOptions = '<option value disabled selected></option>';
     formInput.methodPlaceholder = "Select a stage and class to search methods";
   } else {
     //yes input
-    /*
-    if (input.validName) {
-      formInput.validName = "checked";
-    } */
     //console.log('yes input');
     //stage options
     formInput.options = buildStages(Number(input.stage));
+    formInput.validName = input.validName ? "checked" : "";
     //put input into text fields
     for (var i = 0; i < categories.text.length; i++) {
       let val = input[categories.text[i]];

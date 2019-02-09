@@ -4,7 +4,7 @@ const pieces = [
     formAct: '/',
     method: 'post',
     pageTitle: 'Method/Touch Printer',
-    footer: '',
+    footer: '<script src="/grid.js"></script>',
     svgsBegin: '<div class="grid-container">',
     svgsEnd: '</div>',
     formPath: 'BL',

@@ -69,12 +69,17 @@ app.use(morgan(':url'));
 const serialize = require('./src/library/serialize.js');
 
 let query = {
-  name: {$regex: 'wallis', $options: 'i'}
+  name: {$regex: '&amp;', $options: 'i'}
+}
+
+let q = {
+  query: query,
+  fields: "title"
 }
 
   //console.log(methodNames2[0].classes[0].methods);
-//findOne(query, '', (result) => {console.log(result)});
-//findPost(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
+//findOne(query, 's', (result) => {console.log(result)});
+//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
 //console.log(findMethod(input));
 //console.log('♭');
 //for (var i=0; i < result.length; i++) {console.log(result[i].title)}
