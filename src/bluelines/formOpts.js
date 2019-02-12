@@ -20,7 +20,7 @@ module.exports = function formOpts(input) {
       basicDisplay: "",
       groupDisplay: "",
     }
-    console.log(bellgroup);
+    //console.log(bellgroup);
     return formInfo;
   }
   
