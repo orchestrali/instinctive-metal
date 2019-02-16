@@ -119,7 +119,7 @@ module.exports = function findError(methodInput, compInput) {
         }
         
         
-      } else if (nameWords[index] != classLower && nameWords[index-1] + " " + nameWords[index] != classLower) {
+      } else if (classLower != "principle" && classLower != "differential" && nameWords[index] != classLower && nameWords[index-1] + " " + nameWords[index] != classLower) {
         console.log("no class name");
         nameFull = baseName + " " + classLower + " " + stageLower;
       } else {
