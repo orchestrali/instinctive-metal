@@ -2,12 +2,14 @@ const buildGraphs = require('./graphs.js');
 const printMethod = require('../bluelines/handleInput.js');
 const methodPractice = require('../practice/handleInput.js');
 const staffNot = require('./staffnotation2.js');
+const stages = require('../stages.json');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
   let results = {};
   results.script = '';
   let width = 270;
   if (type == 'grid') {
+    let stageName = stages.find(o => o.num == methodInfo.stage).name;
     let info = {
       rowZeroObj: compInfo.rowZeroObj,
       placeNot: methodInfo.placeNot,
@@ -15,7 +17,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
       leadLength: methodInfo.leadLength,
       comp: compInfo.leadendcomp
     };
-    if (methodInfo.name.indexOf('Stedman') > -1 || methodInfo.name.indexOf('Erin') > -1) {
+    if (methodInfo.name == "Stedman"+" "+stageName || methodInfo.name == "Erin"+" "+stageName) {
       info.method = methodInfo.name.slice(0,4);
     }
     
