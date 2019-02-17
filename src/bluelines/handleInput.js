@@ -8,11 +8,13 @@ module.exports = function handleInput(displayInput, info, rowArray) {
   //console.log('rowZeroObj', rowZeroObj);
   
   //add tenor to odd-bell methods
-      if (info.numBells % 2 == 1) {
-        rowZeroObj.bells.push(info.numBells + 1);
-      }
-      rowArray.unshift(rowZeroObj);
-      //console.log(rowArray[0]);
+  /*
+  if (info.numBells % 2 == 1) {
+    rowZeroObj.bells.push(info.numBells + 1);
+  }
+   */
+  rowArray.unshift(rowZeroObj);
+  //console.log(rowArray[0]);
   let pathArray = ungroupPaths(handlePaths(displayInput, info), rowArray);
   //console.log(pathArray);
   if (displayInput.numbers) {
