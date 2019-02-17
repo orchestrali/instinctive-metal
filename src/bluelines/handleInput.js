@@ -5,7 +5,7 @@ const pagedSVGs = require('./pagedPrint.js');
 
 module.exports = function handleInput(displayInput, info, rowArray) {
   let rowZeroObj = info.rowZeroObj;
-  //console.log('rowZeroObj', rowZeroObj);
+  //console.log('info.comp', info.comp);
   
   //add tenor to odd-bell methods
   /*

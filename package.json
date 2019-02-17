@@ -2,9 +2,9 @@
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-  "name": "my-glitch-app",
+  "name": "changeringing",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "description": "Print and practice change-ringing methods and touches",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -16,7 +16,7 @@
     "xml-js": "^1.6.8",
     "url-parse": "^1.4.4",
     "request": "^2.88.0",
-    "mongoose": "^5.4.9",
+    "mongoose": "^5.4.13",
     "morgan": "^1.9.1"
   },
   "engines": {
@@ -29,6 +29,12 @@
   "keywords": [
     "node",
     "glitch",
-    "express"
+    "express",
+    "bells",
+    "bell",
+    "change-ringing",
+    "ringing",
+    "methods",
+    "method"
   ]
 }

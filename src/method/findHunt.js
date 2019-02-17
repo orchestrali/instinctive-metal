@@ -1,27 +1,43 @@
 const rounds = require('../rounds.js');
 const buildLead = require('../rowArray/buildLead2.js');
+const leadNames = [{letter: "p", name: "plain"},{letter: "b", name: "bob"}, {letter: "s", name: "single"}];
 
 module.exports = function findHuntBells(pns, numBells, comp) {
-  let placeNot;
-    if (comp.indexOf("b") == -1 && comp.indexOf("s") == -1) {
-      placeNot = pns.plain;
-    } else if (comp.indexOf("s") > -1 && comp.indexOf("b") == -1) {
-      placeNot = pns.single;
-    } else {
-      placeNot = pns.bob;
-    }
+  
+  let pLead = buildLead(rounds(numBells), pns.plain, 1);
+  let pHunts = testHunts(pLead, numBells);
+  
+  let leads = [];
+  if (comp.indexOf("b") > -1) leads.push("b");
+  if (comp.indexOf("s") > -1) leads.push("s");
+  
+  for (var i = 0; i < leads.length; i++) {
+    let pn = leadNames.find(o => o.letter == leads[i]).name;
+    let lead = buildLead(rounds(numBells), pns[pn], 1)
+    let hunts = testHunts(lead, numBells);
+    let j = 0;
+    do {
+      if (hunts.indexOf(pHunts[j]) == -1) {
+        pHunts.splice(j, 1);
+      } else {
+        j++;
+      }
+    } while (j < pHunts.length)
+  }
+  
+  
+  return pHunts;
+}
 
-  let rowZero = rounds(numBells);
-  let rowArray = buildLead(rounds(numBells), placeNot, 1);
-  let huntBells = [];
-  
+function testHunts(rowArray, stage) {
+  let rowZero = rounds(stage);
   let lastRow = rowArray[rowArray.length - 1].bells;
-  
-  for (var i = 0; i < numBells; ++i) {
+  let hunts = [];
+  for (var i = 0; i < stage; ++i) {
     if (lastRow[i] == rowZero[i]) {
-      huntBells.push(rowZero[i]);
+      hunts.push(rowZero[i]);
     }
   }
-  //console.log('huntBells: ', huntBells);
-  return huntBells;
+  
+  return hunts;
 }

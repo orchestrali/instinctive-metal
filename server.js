@@ -77,7 +77,8 @@ let q = {
   fields: "title"
 }
 
-  //console.log(methodNames2[0].classes[0].methods);
+
+//console.log(methodNames2[0].classes[0].methods);
 //findOne(query, 's', (result) => {console.log(result)});
 //findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
 //console.log(findMethod(input));
