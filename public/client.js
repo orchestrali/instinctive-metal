@@ -159,9 +159,9 @@ $(function() {
       } else {
         text = classes[i];
       }
-        //console.log(classes[i]);
-        $('<option></option>').text(text).val(classes[i]).appendTo('select#class');
-      }
+      //console.log(classes[i]);
+      $('<option></option>').text(text).val(classes[i]).appendTo('select#class');
+    }
     
   })
   

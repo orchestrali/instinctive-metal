@@ -65,22 +65,33 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
+//
 
 const serialize = require('./src/library/serialize.js');
 
 let query = {
-  name: {$regex: '&amp;', $options: 'i'}
+  //pn: {$regex: '^[123456]{4}\\.[123456]{4}\\.[123456]{2}\\.[123456]{4}', $options: 'gi'},
+  stage: 6,
+  fchGroups: { $exists: true }
+  //leadHeadCode: {$in: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm']},
+  //class: "Surprise",
+  //"classification.little": false,
+  //"classification.differential": false,
+  //numHunts: 1,
+  //symmetry: "palindromic"
 }
-
+//['a', 'b', 'c', 'd', 'e', 'f']
+//['g', 'h', 'j', 'k', 'l', 'm']
 let q = {
   query: query,
-  fields: "title"
+  fields: "title fchGroups"
 }
 
-
+//^-1[456]-[123]6-[12345]+6,1[26]
 //console.log(methodNames2[0].classes[0].methods);
-//findOne(query, 's', (result) => {console.log(result)});
+//findOne(query, '', (result) => {console.log(result)});
 //findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
+//console.log(result.length)
 //console.log(findMethod(input));
 //console.log('♭');
 //for (var i=0; i < result.length; i++) {console.log(result[i].title)}
@@ -120,6 +131,12 @@ app.get("/updatenames"+process.env.SECRET, function (request, response) {
 
 app.get("/teststaff", function (request, response) {
   response.sendFile(__dirname + '/views/stafftest.html');
+});
+
+app.post("/rowarray", function (req, res) {
+  rowGen(req.body, (arr) => {
+    res.send(arr);
+  });
 });
 
 

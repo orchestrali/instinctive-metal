@@ -65,7 +65,7 @@ module.exports = function findError(methodInput, compInput) {
   //validate name
   let name = methodInput.methodName.toLowerCase();
   let stageLower = stageName.toLowerCase();
-  let classLower = methodClass.toLowerCase();
+  let classLower = methodClass ? methodClass.toLowerCase() : null;
   //methodName and placeNotation
   if (methodInput.methodName.length == 0 && methodInput.placeNotation.length == 0) {
     errors.push("Error: you must supply either a method name or place notation");
