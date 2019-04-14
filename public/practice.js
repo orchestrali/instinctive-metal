@@ -6,6 +6,19 @@ $(function() {
   console.log("hi from the other file!");
   //console.log(window.bluepath);
   
+  function blueBellOpts(stage) {
+    $("select#blueBell option:nth-child(n+2)").remove();
+    for (var i = 1; i <= stage; ++i) {
+      $('<option></option').text(i).val(i).appendTo('select#blueBell');
+    }
+  }
+  var formStage = Number($('select#stage option:checked').val());
+  
+  $('#stage').change(function() {
+    formStage = Number($('select#stage option:checked').val());
+    blueBellOpts(formStage);
+  })
+  
   var TweenLite = window.TweenLite;
   var TweenMax = window.TweenMax;
   var TimelineMax = window.TimelineMax;
