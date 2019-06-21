@@ -1,4 +1,5 @@
 const buildLead = require('./buildLead2.js');
+const finish = require('./finish.js');
 
 var leadEnds = [
   {
@@ -39,5 +40,5 @@ module.exports = function leadEnd(methodInfo, compInfo) {
     //console.log('rowArray length: ', rowArray.length);
   }
   
-  return {rows: rowArray, comp: comp};
+  return finish(rowArray, comp, methodInfo);
 }
