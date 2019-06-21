@@ -1,6 +1,6 @@
 const request = require('request');
 
-module.exports = function findOne(query, s, cb) {
+module.exports = function findPost(query, s, cb) {
   let url = 'https://vivacious-port.glitch.me/method'+s;
   
   

@@ -37,7 +37,7 @@ let input2 = {};
   input2.methodName = "London Surprise";
 
 
-const rowGen = require('./src/rowArray.js');
+
 const tutorial = require('./src/tutorial/test.js');
 
 /*
@@ -55,6 +55,7 @@ const findOne = require('./src/library/findOneOrMany.js');
 const findPost = require('./src/library/findPost.js');
 const createNames = require('./src/library/methodNames.js');
 const record = require('./src/record/router.js');
+const rowGen = require('./src/rowArray.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -68,30 +69,33 @@ app.use(morgan(':url'));
 //
 
 const serialize = require('./src/library/serialize.js');
+const max = require('./src/query/max.js');
 
 let query = {
   //pn: {$regex: '^[123456]{4}\\.[123456]{4}\\.[123456]{2}\\.[123456]{4}', $options: 'gi'},
-  stage: 6,
-  fchGroups: { $exists: true }
+  stage: 7,
+  //leadHeadCode: { $exists: false },
+  //title: "Cambridge Surprise Minor"
   //leadHeadCode: {$in: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm']},
-  //class: "Surprise",
-  //"classification.little": false,
+  //class: "Principle",
+  //"classification.trebleDodging": true,
   //"classification.differential": false,
-  //numHunts: 1,
+  leadHead: "1647253",
   //symmetry: "palindromic"
 }
 //['a', 'b', 'c', 'd', 'e', 'f']
 //['g', 'h', 'j', 'k', 'l', 'm']
 let q = {
   query: query,
-  fields: "title fchGroups"
+  fields: "title leadHeadCode pbOrder"
 }
 
 //^-1[456]-[123]6-[12345]+6,1[26]
 //console.log(methodNames2[0].classes[0].methods);
-//findOne(query, '', (result) => {console.log(result)});
-//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
+//findOne(query, 's', (result) => {console.log(result.length)});
+//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title, result[i].leadHeadCode)}});
 //console.log(result.length)
+//console.log(max(result, "leadLength"))
 //console.log(findMethod(input));
 //console.log('♭');
 //for (var i=0; i < result.length; i++) {console.log(result[i].title)}

@@ -1,7 +1,10 @@
 const buildLead = require('./buildLead2.js');
 const callPlaces = require("../method/callplaces.js");
 const rounds = require("../rounds.js");
+const places = require('../places.js');
+const rowStr = require('../rowStr.js');
 const buildInfo = require("./leadInfo.js");
+const finish = require('./finish.js');
 
 var leadEnds = [{name: 'b',fullname: 'bob'},{name: 's',fullname: 'single'}];
 
@@ -42,9 +45,10 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
     //new leadhead = last row of built lead
     rowZero = rowArray[rowArray.length - 1].bells;
   }
-  let lastcallrow = rowArray[rowArray.length - 1].bells.join('');
+  //let lastcallrow = rowStr(rowArray[rowArray.length - 1].bells);
   //add plain leads after the last call lead
-  if (lastcallrow == rounds(stage).join('')) {
+  /*
+  if (lastcallrow == places.substring(0, stage)) {
     console.log("last call produced rounds")
     return {rows: rowArray, comp: comp};
   } else {
@@ -58,7 +62,8 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
     } while (rowZero.join('') != rounds(stage).join('') && rowZero.join('') != lastcallrow)
     return {rows: rowArray, comp: comp};
   }
+  */
 
 
-
+  return finish(rowArray, comp, methodInfo);
 }
