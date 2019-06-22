@@ -124,6 +124,10 @@ form += `<div id="quantity" class="category">
                 <label for="callPlace"><input type="radio" id="callPlace" name="touchType" value="callplace" ${info.callplace}/>
                 Call place</label>
               </li>
+              <li>
+                <label for="leadnums"><input type="radio" id="leadnums" name="touchType" value="numbers" ${info.numbers}/>
+                Lead numbers</label>
+              </li>
             </ul>
           </fieldset>
           <div>

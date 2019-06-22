@@ -11,9 +11,9 @@ I am very grateful for Nick Reilingh's help on this and other projects.
 
 Things I hope to someday add or fix 
 ------------
-updated February 16, 2019
+updated June 22, 2019
 
-- touches of Stedman (these don't work currently)
+- instructions for entering compositions
 - option to let the app predict what the calls are rather than having to specify for any touch
 - a dropdown menu of common touches
 - spliced compositions

@@ -11,7 +11,7 @@ module.exports = function compInfo(compInput, stage) {
   
   let rowZero = parseLH(compInput, stage);
   compObject.rowZero = rowZero;
-  console.log("comp handleinput", rowZero);
+  //console.log("comp handleinput", rowZero);
   
   let rowZeroObj = {
     rowNum: 0,

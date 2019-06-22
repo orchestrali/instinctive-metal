@@ -19,16 +19,19 @@ var morgan = require('morgan');
 var app = express();
 
 var input = { 
-  stage: '8',
-  methodClass: 'Surprise',
-  methodName: 'Bristol Surprise',
+  stage: '7',
+  methodClass: 'Principle',
+  methodName: 'Erin',
   placeNotation: '',
   leadhead: 'rounds',
   otherLeadhead: '',
   quantity: 'touch',
-  touchType: 'leadend',
-  comp: 'bbb',
-  callType: 'a'
+  touchType: 'numbers',
+  comp: '1.6.8s.12',
+  callType: 'cust',
+  bobPlaceNot: '5',
+  singlePlaceNot: '567',
+  callLoc: '1'
 };
 
 let input1 = {};
@@ -81,12 +84,12 @@ let query = {
   //pn: {$regex: '^[123456]{4}\\.[123456]{4}\\.[123456]{2}\\.[123456]{4}', $options: 'gi'},
   stage: 7,
   //leadHeadCode: { $exists: false },
-  //title: "Cambridge Surprise Minor"
+  title: "Erin Triples"
   //leadHeadCode: {$in: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm']},
   //class: "Principle",
   //"classification.trebleDodging": true,
   //"classification.differential": false,
-  leadHead: "1647253",
+  //leadHead: "1647253",
   //symmetry: "palindromic"
 }
 //['a', 'b', 'c', 'd', 'e', 'f']
@@ -98,7 +101,7 @@ let q = {
 
 //^-1[456]-[123]6-[12345]+6,1[26]
 //console.log(methodNames2[0].classes[0].methods);
-//findOne(query, 's', (result) => {console.log(result.length)});
+//findOne(query, '', (result) => {console.log(result)});
 //findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title, result[i].leadHeadCode)}});
 //console.log(result.length)
 //console.log(max(result, "leadLength"))

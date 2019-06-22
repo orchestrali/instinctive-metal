@@ -21,7 +21,7 @@ module.exports = function directTraffic(input, type, cb) {
   let width = 270;
   let SVGs;
   console.log(type);
-  console.log(methodInput);
+  //console.log(methodInput);
   //check for errors, first round; return page if there are any.
   let errResults = checkError(methodInput, compInput);
   let errors = errResults.errors;

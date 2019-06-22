@@ -11,7 +11,7 @@ const defaults = {
 const categories = {
   option: ['stage', 'methodClass'],
   text: ['placeNotation', 'methodName', 'otherLeadhead', 'bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart'],
-  check: [{key: 'callType', values: ['a', 'b', 'd', 'cust']}, {key:'leadhead', values: ['rounds', 'other']}, {key: 'quantity', values: ['onelead', 'plaincourse', 'touch']}, {key: 'touchType', values: ['leadend', 'callplace']}]
+  check: [{key: 'callType', values: ['a', 'b', 'd', 'cust']}, {key:'leadhead', values: ['rounds', 'other']}, {key: 'quantity', values: ['onelead', 'plaincourse', 'touch']}, {key: 'touchType', values: ['leadend', 'callplace', 'numbers']}]
 }
 
 

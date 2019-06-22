@@ -6,6 +6,7 @@ module.exports = function buildLines(width, rowArrayLength, info) {
 
   if (info.method == 'Sted') {
     j = -60;
+    leadLength = 6;
   } else if (info.method == 'Erin') {
     j = 20;
   } else {

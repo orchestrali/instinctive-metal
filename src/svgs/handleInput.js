@@ -18,7 +18,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
       leadLength: methodInfo.leadLength,
       comp: compInfo.leadendcomp
     };
-    if (methodInfo.name == "Stedman"+" "+stageName || methodInfo.name == "Erin"+" "+stageName) {
+    if (methodInfo.name == "Stedman "+stageName || methodInfo.name == "Erin "+stageName) {
       info.method = methodInfo.name.slice(0,4);
     }
     

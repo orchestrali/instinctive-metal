@@ -16,8 +16,8 @@ var leadEnds = [
   }
 ];
 
-module.exports = function leadEnd(methodInfo, compInfo) {
-  let comp = compInfo.touch;
+module.exports = function leadEnd(methodInfo, compInfo, leads) {
+  let comp = leads ? leads : compInfo.touch;
   let rowArray = [];
   let rowZero = compInfo.rowZero;
   let pn;
