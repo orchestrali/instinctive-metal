@@ -40,5 +40,6 @@ module.exports = function leadEnd(methodInfo, compInfo) {
     //console.log('rowArray length: ', rowArray.length);
   }
   
-  return finish(rowArray, comp, methodInfo);
+  return {rows: rowArray, comp: comp};
+  //return finish(rowArray, comp, methodInfo);
 }

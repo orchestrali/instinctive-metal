@@ -11,14 +11,19 @@ module.exports = function compInfo(compInput, stage) {
   
   let rowZero = parseLH(compInput, stage);
   compObject.rowZero = rowZero;
+  console.log("comp handleinput", rowZero);
   
   let rowZeroObj = {
     rowNum: 0,
-    bells: rowZero
+    bells: []
   };
   
+  for (var i = 0; i < stage; i++) {
+    rowZeroObj.bells.push(rowZero[i]);
+  }
+  
   if (compObject.tenors > 0) {
-    rowZeroObj = addTenor([rowZeroObj], compObject.tenors)[0]
+    addTenor(stage, [rowZeroObj], compObject.tenors)
   }
   
   compObject.rowZeroObj = rowZeroObj;
@@ -31,6 +36,6 @@ module.exports = function compInfo(compInput, stage) {
     //compObject.touchType = 'leadend';
   }
   
-  //console.log(compObject);
+  console.log(compObject);
   return compObject;
 }

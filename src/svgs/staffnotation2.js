@@ -2,6 +2,7 @@ const width = 1100;
 const build = require("../staff/assemble2.js");
 
 module.exports = function staff(rowZero, rowArray, stage, displayInput) {
+  //console.log("staffnotation2", rowZero);
   let numBells = rowArray[0].bells.length;
   let numBars;
   let numSystems;

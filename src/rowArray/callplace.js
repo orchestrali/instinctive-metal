@@ -64,6 +64,6 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
   }
   */
 
-
-  return finish(rowArray, comp, methodInfo);
+  return {rows: rowArray, comp: comp};
+  //return finish(rowArray, comp, methodInfo);
 }
