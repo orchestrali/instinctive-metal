@@ -5,6 +5,7 @@ const staffNot = require('./staffnotation2.js');
 const stages = require('../stages.json');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
+  //console.log("svgs/handleInput", compInfo.rowZeroObj);
   let results = {};
   results.script = '';
   let width = 270;

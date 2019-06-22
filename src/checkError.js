@@ -63,6 +63,7 @@ module.exports = function findError(methodInput, compInput) {
   }
   
   //validate name
+  let grandsire = ["grandsire", "double grandsire", "reverse grandsire"];
   let name = methodInput.methodName.toLowerCase();
   let stageLower = stageName.toLowerCase();
   let classLower = methodClass ? methodClass.toLowerCase() : null;
@@ -71,7 +72,7 @@ module.exports = function findError(methodInput, compInput) {
     errors.push("Error: you must supply either a method name or place notation");
   } else if (methodInput.methodName.length > 0 && methodInput.placeNotation.length > 0) {
     errors.push("Error: you must supply either a method name or place notation, not both");
-  } else if (methodInput.placeNotation.length == 0 && name != "grandsire") {
+  } else if (methodInput.placeNotation.length == 0 && grandsire.indexOf(name) == -1) {
     
     let validMethods = [];
     //if the class is plain, got to add methods from Bob, Place, and Slow Course classes

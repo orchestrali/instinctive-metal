@@ -18,13 +18,17 @@ var morgan = require('morgan');
 
 var app = express();
 
-var input = { stage: '8',
+var input = { 
+  stage: '8',
   methodClass: 'Surprise',
   methodName: 'Bristol Surprise',
   placeNotation: '',
   leadhead: 'rounds',
   otherLeadhead: '',
-  quantity: 'plaincourse',
+  quantity: 'touch',
+  touchType: 'leadend',
+  comp: 'bbb',
+  callType: 'a'
 };
 
 let input1 = {};
@@ -40,12 +44,6 @@ let input2 = {};
 
 const tutorial = require('./src/tutorial/test.js');
 
-/*
-rowGen(input, (arr) => {
-  let stage = Number(input.stage);
-  console.log(tutorial(arr, 4, stage));
-});
-*/
 
 const handleInput3 = require('./src/directTraffic.js');
 const buildPage = require('./src/buildPage2.js');
@@ -67,6 +65,14 @@ app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 //
+
+
+/*
+rowGen(input, (arr) => {
+  //let stage = Number(input.stage);
+  //console.log(tutorial(arr, 4, stage));
+});
+*/
 
 const serialize = require('./src/library/serialize.js');
 const max = require('./src/query/max.js');

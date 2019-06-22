@@ -2,6 +2,7 @@ const addCalls = require('./addCalls.js');
 const addTenor = require('./addTenor.js');
 const addNames = require('./addLHs.js');
 const stages = require('../stages.json');
+const finish = require('./finish.js');
 
 const inputs = [
   {
@@ -30,6 +31,7 @@ module.exports = function handleInput(methodInfo, compInfo) {
   let stage = methodInfo.stage;
   let stageName = stages.find(o => o.num == stage).name;
   //console.log('bob pn length', methodInfo.placeNot.bob.length);
+  //console.log("rowArray handleInput", compInfo.rowZero);
   
   if (compInfo.quantity != 'touch') {
     let path = inputs.find(o => o.name == compInfo.quantity).file;
@@ -40,19 +42,23 @@ module.exports = function handleInput(methodInfo, compInfo) {
     let f = require(path);
     //console.log('function: ', f);
     let results = f(methodInfo, compInfo);
-    rowArray = results.rows;
-    comp = results.comp;
+    let results2 = finish(results.rows, results.comp, methodInfo);
+    rowArray = results2.rows;
+    comp = results2.comp;
     //console.log(methodInfo);
-    let arr = addCalls(rowArray, comp, methodInfo.leadLength, methodInfo.callLoc);
-    rowArray = arr;
+    addCalls(rowArray, comp, methodInfo.leadLength, methodInfo.callLoc);
+    //console.log("later", rowArray);
   }
-  
-  rowArray = addTenor(rowArray, compInfo.tenors);
-  rowArray = addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
+  //console.log(compInfo.rowZeroObj);
+  //console.log(rowArray);
+  //rowArray = 
+  addTenor(stage, rowArray, compInfo.tenors);
+  //rowArray = 
+  addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
   if (methodInfo.name == "Stedman " + stageName || methodInfo.name == "Erin " + stageName) {
     let start = methodInfo.name == "Stedman " + stageName ? 2 : 0;
     console.log("start "+start);
-    rowArray = addNames(rowArray, 6, start, "new six");
+    addNames(rowArray, 6, start, "new six");
   }
   
   return {array: rowArray, comp: comp};
