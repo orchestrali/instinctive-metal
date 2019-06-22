@@ -13,7 +13,7 @@ module.exports = function lexer(compStr, type) {
     let token = {};
     token.value = compInput[i];
     
-    if (compInput[i]*1 > 0) {
+    if (compInput[i] == "0" || Number(compInput[i] > 0)) {
       token.type = 'number';
     } else if (compInput[i] == "!") {
       token.type = 'obsbell'
@@ -27,12 +27,18 @@ module.exports = function lexer(compStr, type) {
       } else {
         token.type = 'letter';
       }     
+    } else if (compInput[i] == "." && type == 'numbers') {
+      token.type = "separator";
+    }
+    if (compInput[i] == "\r") {
+      console.log("line end");
+      //console.log(isNaN(compInput[i]));
     }
     if (token.type) {
       tokens.push(token);
     }
     
   }
-  //console.log(tokens);
+  console.log(tokens);
   return tokens;
 }

@@ -900,7 +900,7 @@ shrinkwrapVersion: 3
 specifiers:
   express: ^4.16.4
   express-validator: ^5.3.1
-  mongoose: ^5.4.13
+  mongoose: ^5.5.12
   morgan: ^1.9.1
   node-xml: ^1.0.2
   request: ^2.88.0

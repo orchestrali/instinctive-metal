@@ -15,7 +15,7 @@ const callTypes = [
     placeNot: [1,2],
   },
   {
-    type: "d",
+    type: "d", //grandsire
     placeNot: [1],
     callLoc: "leadLength-1"
   }

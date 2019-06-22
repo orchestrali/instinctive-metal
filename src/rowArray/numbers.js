@@ -1,7 +1,8 @@
 var leadEnds = [{name: 'b',fullname: 'bob'},{name: 's',fullname: 'single'}];
 var sample = [{lead: 1, call: "b"}]
 
-module.exports = function numbers(methodInfo, compInfo) {
+module.exports = function numbers(compInfo) {
+  //console.log(compInfo.touch);
   let comp = [];
   let current = 1;
   let touch = compInfo.touch;
@@ -19,7 +20,7 @@ module.exports = function numbers(methodInfo, compInfo) {
         current++;
       }
     }
-    
   }
-  
+  console.log(comp)
+  return comp;
 }

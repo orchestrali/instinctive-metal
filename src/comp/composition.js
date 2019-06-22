@@ -1,6 +1,7 @@
  const lexer = require('./compLexer.js');
 const parseLetters = require('./compLetters.js');
 const expandAbbr = require('./compAbbr.js');
+const numbers = require('./numbers.js');
 
 module.exports = function parseComp(compStr, type) {
   let tokens = lexer(compStr, type);
@@ -8,6 +9,9 @@ module.exports = function parseComp(compStr, type) {
   if (type == 'callplace') {
     tokens = parseLetters(tokens);
     //console.log(tokens);
+  }
+  if (type == 'numbers') {
+    return numbers(tokens);
   }
   //expand abbreviations using numbers
   let composition = expandAbbr(tokens);

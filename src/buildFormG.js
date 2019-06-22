@@ -11,5 +11,5 @@ module.exports = function buildFormG(input) {
     <input type="number" id="tenors" name="tenors" value="${tenors}" />
   </p>`
   
-  return '';
+  return form;
 }

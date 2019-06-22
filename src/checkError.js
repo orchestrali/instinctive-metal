@@ -4,7 +4,6 @@ const stages = require('./stages.json');
 
 var validNotTokens = [',', '+', '&', 'x', '.', '-'];
 var validGroupTokens = ['',',', '+', '&,', '&,+', '+,', '+,&'];
-var validCompTokens = ['p', 'b', 's'];
 var leadendTokens = ['p', 'b', 's'];
 var callPlaceTokens = ['h', 'w', 'm', 'b', 'i'];
 var touchGroup = ['(', ')', '[', ']', '{', '}'];
@@ -173,19 +172,16 @@ module.exports = function findError(methodInput, compInput) {
     //unrecognized token in composition
     for (var i = 0; i < compInput.touch.length; ++i) {
       let token = compArr[i];
-      if (compInput.touchType == 'leadend') {
-        if (leadendTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
-          errors.push("Error: unrecognized token in touch");
-        }
-      } else if (compInput.touchType == 'callplace') {
-        if (leadendTokens.indexOf(token) == -1 && callPlaceTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
-          errors.push("Error: unrecognized token in touch");
-        }
+      if (leadendTokens.indexOf(token) == -1 && touchGroup.indexOf(token) == -1 && isNaN(token)) {
+        if (compInput.touchType == 'leadend') errors.push("Error: unrecognized token in touch");
+        if (compInput.touchType == 'callplace' && callPlaceTokens.indexOf(token) == -1) errors.push("Error: unrecognized token in touch");
+        if (compInput.touchType == 'numbers' && token != ".") errors.push("Error: unrecognized token in touch");
       }
+      
     }
     //no actual calls in touch
     if ((compInput.touchType == 'leadend' && compArr.filter(e => leadendTokens.indexOf(e) > -1).length == 0) || (compInput.touchType == 'callplace' && compArr.filter(e => (callPlaceTokens.indexOf(e) > -1 || stage >= Number(e) > 0)).length == 0)) {
-      errors.push("Error: no actual calls in touch");
+      errors.push("Error: no actual leads in touch");
     }
     //mismatched parentheses/brackets (only checks if the number of opening and closing symbols match)
     for (var i = 0; i < touchGroup.length-1; i+=2) {
