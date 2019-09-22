@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "express-validator": "^5.3.1",
+    "express-validator": "^6.2.0",
     "node-xml": "^1.0.2",
-    "xml-js": "^1.6.8",
-    "url-parse": "^1.4.4",
+    "xml-js": "^1.6.11",
+    "url-parse": "^1.4.7",
     "request": "^2.88.0",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.7.1",
     "morgan": "^1.9.1"
   },
   "engines": {
