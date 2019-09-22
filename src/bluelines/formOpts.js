@@ -1,14 +1,15 @@
 const inputs = ['huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', ];
-const checkboxes = ['numbers', 'drawLH', 'pagination'];
+const checkboxes = ['numbers', 'drawLH', 'pagination', 'pn'];
 const groupInputs = ['blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2'];
 const groupOpts = [{value: "all", text: "All bells"}, {value: "hunt", text: "Hunt bells"}, {value: "work", text: "Working bells"}, {value: "none", text: "No bells"}];
-const display = ['numbers', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'drawLH'];
+const display = ['numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'drawLH'];
 
 module.exports = function formOpts(input) {
   if (input == 0 || display.every(k => !input[k])) {
     let formInfo = {
       numbers: "checked",
       drawLH: "checked",
+      pn: "",
       pagination: "",
       bellGroups: bellgroup,
       everyline: "",
@@ -30,6 +31,7 @@ module.exports = function formOpts(input) {
     numbers: input.numbers ? "checked" : "",
     drawLH: input.drawLH ? "checked" : "",
     pagination: input.pagination ? "checked" : "",
+    pn: input.pn && input.quantity != "touch" ? "checked" : input.quantity === "touch" ? "disabled" : "",
     bellGroups: "",
     everyline: "",
     blueOptions: "<option value disabled ",

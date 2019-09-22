@@ -86,6 +86,16 @@ $(function() {
      
   });
   
+  $('#quantity').change(function() {
+   //console.log('clicked');
+   if ($('#touch').is(':checked')) {
+     $("#show-pn").prop("disabled", true);
+   } else {
+     $("#show-pn").prop("disabled", false);
+   }
+    
+  });
+  
 
   
   //set lines for bell groups

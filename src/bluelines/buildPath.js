@@ -1,12 +1,12 @@
 
 
-module.exports = function buildPath(rowArray, bell) {
+module.exports = function buildPath(rowArray, bell, x) {
   let bellNum = bell.bell;
   let weight = bell.weight;
   let color = bell.color;
   let bellIndex = rowArray[0].bells.indexOf(bellNum);
   let path = `<g style="stroke: `+ color +`; stroke-width: `+weight+`; fill:none;">
-      <path d="M` + (bellIndex*16+45) + `,10`;;
+      <path d="M` + (bellIndex*16+x) + `,10`;;
   //console.log('building path for bell ' + bellNum)
   //console.log('path ' + path);
   for (var i = 1; i < rowArray.length; ++i) {
