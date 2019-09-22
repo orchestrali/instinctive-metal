@@ -2,9 +2,10 @@ const inputs = ['huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 
 const checkboxes = ['numbers', 'drawLH', 'pagination'];
 const groupInputs = ['blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2'];
 const groupOpts = [{value: "all", text: "All bells"}, {value: "hunt", text: "Hunt bells"}, {value: "work", text: "Working bells"}, {value: "none", text: "No bells"}];
+const display = ['numbers', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'drawLH'];
 
 module.exports = function formOpts(input) {
-  if (input == 0) {
+  if (input == 0 || display.every(k => !input[k])) {
     let formInfo = {
       numbers: "checked",
       drawLH: "checked",

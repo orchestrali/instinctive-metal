@@ -17,12 +17,12 @@ module.exports = function buildForm(input) {
 `
   //basic lines
   form += `<div id="basic-lines" ${formInfo.basicDisplay}>
-    <div class="input" id="hunt-bells">
+    <div class="input hunts" id="hunt-bells">
       <span>
         <label for="huntBellw">
           Draw hunt bell line(s): 
         </label>
-        <select class="weight" id="huntBellw" name="huntBellw">
+        <select class="weight hunts" id="huntBellw" name="huntBellw">
           ${formInfo.huntW}
         </select>
       </span>
@@ -30,7 +30,7 @@ module.exports = function buildForm(input) {
         <label for="huntColor">
           color:
         </label>
-        <input type="text" id="huntColor" name="huntColor" ${formInfo.huntC}/>
+        <input type="text" id="huntColor" class="hunts" name="huntColor" ${formInfo.huntC}/>
       </span>
     </div>
     <div class="input">

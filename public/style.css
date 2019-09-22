@@ -131,6 +131,10 @@
     visibility: visible;
   }
   
+  .disabled {
+    color: darkturquoise;
+  }
+  
   fieldset.borderless {
     border: 0;
   }

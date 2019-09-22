@@ -57,6 +57,7 @@ const findPost = require('./src/library/findPost.js');
 const createNames = require('./src/library/methodNames.js');
 const record = require('./src/record/router.js');
 const rowGen = require('./src/rowArray.js');
+const findMod = require('./src/library/findMod.js');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -81,28 +82,37 @@ const serialize = require('./src/library/serialize.js');
 const max = require('./src/query/max.js');
 
 let query = {
-  //pn: {$regex: '^[123456]{4}\\.[123456]{4}\\.[123456]{2}\\.[123456]{4}', $options: 'gi'},
-  stage: 7,
+  name: {$regex: "camel", $options: 'i'}, //
+  //stage: 12, //{$in: [5,7,9,11,13,15,17]},
   //leadHeadCode: { $exists: false },
-  title: "Erin Triples"
-  //leadHeadCode: {$in: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm']},
-  //class: "Principle",
+  //oldtitle: {$size: 1}
+  //leadHeadCode: {$in: ['g', 'h', 'j1', 'j2', 'j3', 'k1', 'k2', 'j4', 'j', 'k3', 'k4', 'k', 'l', 'm']},
+  //class: "Hybrid",
   //"classification.trebleDodging": true,
-  //"classification.differential": false,
-  //leadHead: "1647253",
-  //symmetry: "palindromic"
+  //"classification.plain": true,
+  //methods: {$gt: 100},
+  //huntBells: {$gt: 20},
+  //leadHead: {$in: ["135264", "156342", "164523", "142635"]},
+  //huntPath: [1,2,3,4,5,5,4,3,2,1]
+  //$or: [{"classes.stages": 6}, {"classes.stages": 4}]
 }
 //['a', 'b', 'c', 'd', 'e', 'f']
 //['g', 'h', 'j', 'k', 'l', 'm']
 let q = {
   query: query,
-  fields: "title leadHeadCode pbOrder"
+  fields: "title"
 }
 
 //^-1[456]-[123]6-[12345]+6,1[26]
 //console.log(methodNames2[0].classes[0].methods);
-//findOne(query, '', (result) => {console.log(result)});
-//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title, result[i].leadHeadCode)}});
+//findOne(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
+//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {if (!result[i].huntBells.includes(1)) {console.log(result[i].title, result[i].huntBells)}}});
+
+//findMod(query, "methods", (result) => {
+//if (result.length < 11) result.forEach(r => console.log(r.title));
+//else console.log(result.length);
+//});
+//
 //console.log(result.length)
 //console.log(max(result, "leadLength"))
 //console.log(findMethod(input));
@@ -112,39 +122,41 @@ let q = {
 //createNames(() => {});
 
 //methodSearch(input);
+const routes = {
+  app: function (request, response, type) {
+    record(request, response, (r) => console.log(r));
+    handleInput3(request.query, type, (results) => {
+      response.send(results);
+    });
+  },
+  files: {
+    methodnames: "/methodNames2.json",
+    sm: "/minorsurprise.json",
+    stages: "/src/stages.json",
+    teststaff: "/views/stafftest.html",
+    surpriseminor: "/views/surprise-minor.html"
+  },
+  updatenames: function (request, response) {
+    if (request.query.secret === process.env.SECRET) {
+      createNames(() => {response.send('ok')});
+    } else {
+      response.send('ok');
+    }
+  }
+}
 
-app.get("/methodnames", function (request, response) {
-  response.sendFile(__dirname + '/methodNames2.json');
-})
 
-app.get("/sm", function (request, response) {
-  response.sendFile(__dirname + '/minorsurprise.json');
-})
-
-app.get("/stages", function (request, response) {
-  response.sendFile(__dirname + '/src/stages.json');
-});
-
-app.get("/compare", function (request, response) {
+//app.get("/compare", function (request, response) {
   //let inputs = findLeads(input1, input2);
   //let uniques = compare(inputs);
   //response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
-})
+//});
 //*/
 ///*
-app.get("/courseorder", function (request, response) {
+//app.get("/courseorder", function (request, response) {
   //response.send(courseOrder("123456"));
-});
+//});
 
-//*/
-app.get("/updatenames"+process.env.SECRET, function (request, response) {
-  createNames(() => {response.send('ok')});
-});
-///*
-
-app.get("/teststaff", function (request, response) {
-  response.sendFile(__dirname + '/views/stafftest.html');
-});
 
 app.post("/rowarray", function (req, res) {
   rowGen(req.body, (arr) => {
@@ -156,42 +168,27 @@ app.post("/rowarray", function (req, res) {
 
 
 app.get("/", function (request, response) {
-  //console.log("url " + request.url);
-  record(request, response, (r) => console.log(r));
-  handleInput3(request.query, 'grid', (results) => {
-    response.send(results);
-  });
-  //response.send(parsePN());
-  //response.send(handleInput3(request.body));
+  //console.log(request.headers.referer);
+  routes.app(request, response, 'grid');
 });
-/*
-app.post("/", function (request, response) {
-  console.log(request.body);
+
+///*
+app.get("/:param", function (request, response) {
+  let p = request.params.param;
+  if (['graphs', 'staff', 'practice'].includes(p)) {
+    routes.app(request, response, p);
+  } else if (routes.files[p]) {
+    response.sendFile(__dirname + routes.files[p]);
+  } else if (p === "updatenames"+process.env.SECRET) {
+    createNames(() => {response.send('ok')});
+  } else {
+    response.sendStatus(404);
+  }
   //response.sendStatus(200);
-  //response.send(request.body);
-  response.send(handleInput3(request.body, 'grid'));
+  
 });
-*/
+//*/
 
-app.get("/graphs", function (request, response) {
-  //console.log("path " + request.path);
-  record(request, response, (r) => console.log(r));
-  handleInput3(request.query, 'graphs', (results) => {
-    response.send(results);
-  });
-  //response.sendFile(__dirname + '/src/mockupgrid.svg');
-  //response.send(leadSVG());
-});
-
-
-
-app.get("/staff", function (request, response) {
-  //console.log("path " + request.path);
-  record(request, response, (r) => console.log(r));
-  handleInput3(request.query, 'staff', (results) => {
-    response.send(results);
-  });
-});
 
 app.get("/staff2", function (request, response) {
   //response.send(urlParse(request.originalUrl, true).query);
@@ -201,21 +198,12 @@ app.get("/staff2", function (request, response) {
 
 
 app.get("/library", function (request, response) {
+  //console.log("test param: ", request.params.test);
+  response.send("no");
   //response.send(methodSearch(input));
 });
 
-app.get("/practice", function (request, response) {
-  record(request, response, (r) => console.log(r));
-  handleInput3(request.query, 'practice', (results) => {
-    response.send(results);
-  });
-});
 
-
-app.get("/surpriseminor", function (request, response) {
-  record(request, response, (r) => console.log(r));
-  response.sendFile(__dirname + "/views/surprise-minor.html");
-});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

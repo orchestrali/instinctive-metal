@@ -11,7 +11,7 @@ const defaults = {
 const categories = {
   option: ['stage', 'methodClass'],
   text: ['placeNotation', 'methodName', 'otherLeadhead', 'bobPlaceNot', 'bobStart', 'singlePlaceNot', 'singleStart'],
-  check: [{key: 'callType', values: ['a', 'b', 'd', 'cust']}, {key:'leadhead', values: ['rounds', 'other']}, {key: 'quantity', values: ['onelead', 'plaincourse', 'touch']}, {key: 'touchType', values: ['leadend', 'callplace', 'numbers']}]
+  check: [{key: 'callType', values: ['a', 'b', 'd', 'cust']}, {key:'leadhead', values: ['rounds', 'other'], default: 'rounds'}, {key: 'quantity', values: ['onelead', 'plaincourse', 'touch'], default: 'onelead'}, {key: 'touchType', values: ['leadend', 'callplace', 'numbers']}]
 }
 
 
@@ -35,6 +35,7 @@ module.exports = function fillForm(input) {
     formInput.classOptions = '<option value disabled selected></option>';
     formInput.methodPlaceholder = "Select a stage and class to search methods";
   } else {
+    
     //yes input
     //console.log('yes input');
     //stage options
@@ -54,7 +55,9 @@ module.exports = function fillForm(input) {
     for (var i = 0; i < categories.check.length; i++) {
       let checkbox = categories.check[i];
       for (var j = 0; j < checkbox.values.length; j++) {
-        if (checkbox.values[j] == input[checkbox.key]) {
+        if (!input[checkbox.key] && checkbox.default === checkbox.values[j]) {
+          formInput[checkbox.values[j]] = "checked";
+        } else if (checkbox.values[j] == input[checkbox.key]) {
           formInput[checkbox.values[j]] = "checked";
         } else {
           formInput[checkbox.values[j]] = "";
@@ -71,35 +74,30 @@ module.exports = function fillForm(input) {
     }
     
     
+    
     //classes
-    if (input.methodClass == "") {
+    if (!input.methodClass || input.methodClass == "") {
       formInput.methodPlaceholder = "Select a stage and class to search methods";
-      formInput.classOptions = '';
     } else {
       formInput.methodPlaceholder = '';
-      formInput.classOptions = '<option value="Plain">Plain</option>'
-      
-      //find class options for the stage
-     
-      var classes = stages.find(o => o.num == Number(input.stage)).classes;
-      
-      //add class options
-      for (var i = 0; i < classes.length; ++i) {
-        let text;
-        if (classes[i] == "Bob" || classes[i] == "Place" || classes[i] == "Slow Course") {
-          text = "- " + classes[i];
-        } else {
-          text = classes[i];
-        }
-        formInput.classOptions += '<option value="' + classes[i] + '" ' + function() {
-          if (classes[i] == input.methodClass) {
-            return 'selected';
-          }
-        }() + '>' + text + '</option>';
+    }
+    
+    formInput.classOptions = buildclass(input.methodClass);
+    
+  }
+  
+  function buildclass(select) {
+    let options = '<option value disabled '+ (select ? "" : "selected") + '></option>';
+    if (Number(input.stage) > 0) {
+      let classes = stages.find(o => o.num == Number(input.stage)).classes;
+      options += '<option value="Plain" ' + (select==="Plain" ? "selected" : "") + '>Plain</option>';
+      for (let i = 0; i < classes.length; i++) {
+        let text = ["Bob", "Place", "Slow Course"].includes(classes[i]) ? "- "+classes[i] : classes[i];
+        options += '<option value="'+classes[i]+'" ' + (select===classes[i] ? "selected" : "") + '>'+text+'</option>';
       }
       
     }
-    
+    return options;
   }
   
   

@@ -67,14 +67,6 @@ module.exports = function directTraffic(input, type, cb) {
   }
   
   /*
-  if (type == 'grid') {
-    return buildPageBL([], SVGs, input);
-  } else if (type == 'graphs') {
-    return buildPage([], SVGs, input);
-  } else if (type == 'practice') {
-    return buildPageP([], SVGs, input);
-  } else if (type == 'staff') {
-    return buildPageS([], SVGs, input);
-  }
+  
   */
 }
