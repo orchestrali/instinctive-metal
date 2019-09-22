@@ -13,6 +13,8 @@ module.exports = function buildForm(input) {
   <p>
     <input type="checkbox" ${formInfo.numbers} id="show-nums" name="numbers" value="show" />
     <label for="numbers">Show numbers</label>
+    <input type="checkbox" ${formInfo.pn} id="show-pn" name="pn" value="show" />
+    <label for="pn">Show place notation</label>
   </p>
 `
   //basic lines

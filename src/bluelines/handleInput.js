@@ -17,6 +17,7 @@ module.exports = function handleInput(displayInput, info, rowArray) {
   //console.log(rowArray[0]);
   let pathArray = ungroupPaths(handlePaths(displayInput, info), rowArray);
   //console.log(pathArray);
+  info.displayPN = displayInput.pn;
   if (displayInput.numbers) {
     info.displayNums = true;
   } else {
