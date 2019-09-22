@@ -4,14 +4,17 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
-
+// this file deals with the parts of the form common to all app tools (except the surprise minor game)
+// also svg layout below the form
 
 $(function() {
   console.log('hello world :o');
   //console.log('window width', window.innerWidth);
   var stage = Number($('select#stage option:checked').val());
   var stages;
-  let checkedClass;
+  let checkedClass = $('select#class option:checked').val();
+  //console.log(checkedClass ? "class selected" : "no class");
+  
   
   //$('input#wWidth').prop('value', window.innerWidth);
   
@@ -33,6 +36,12 @@ $(function() {
   }
   
   let methodList;
+  if (stage && checkedClass) {
+    methodNames(stage, checkedClass, (mm) => {
+      methodList = mm;
+    });
+  }
+  
   
   //get old json method files
   function methods(stage, cb) {
@@ -78,7 +87,7 @@ $(function() {
       var err = textStatus + ", " + error;
       //console.log("Text: " + jqxhr.responseText);
     console.log( "Request Failed: " + err );
-    })
+    });
   }
   
   //get array of classes from new methodnames file
@@ -99,11 +108,13 @@ $(function() {
       var err = textStatus + ", " + error;
       //console.log("Text: " + jqxhr.responseText);
     console.log( "Request Failed: " + err );
-    })
+    });
   }
   
  //location.hash = 'svgs';
-  window.location.hash = 'svgs';
+  if ($(".anchor").length) {
+    window.location.hash = 'svgs';
+  }
   var bluelines = '';
   
   
@@ -124,6 +135,41 @@ $(function() {
       
     }
   }
+  
+  const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType'];
+  
+  
+  $('form').change(function() {
+    console.log("form change");
+    let form = document.forms[0];
+    let data = new FormData(form);
+    let query = {};
+    for (let k of data) {
+      if (keys.includes(k[0]) && k[1] != "") {
+        query[k[0]] = k[1];
+      }
+    }
+    let str = "?switch=true&";
+    for (let key in query) {
+      str += encodeURIComponent(key) + "=" + encodeURIComponent(query[key]).replace(/%20/g, "+") + "&";
+    }
+    console.log(query);
+    
+    const links = ["switchG", "switchBL", "switchS", "switchP"];
+    $('#nav-options ul li').each(function (i) {
+      $(this).children("a").attr("href", (j, val) => {
+        if (!val.includes("surpriseminor")) {
+          if (val.includes("?")) {
+            return val.slice(0, val.indexOf("?")) + str.slice(0,-1);
+          } else {
+            return val + str;
+          }
+        }
+      });
+    });
+  });
+  
+  
   
   //when the stage changes
   $('#stage').change(function() {
@@ -168,7 +214,7 @@ $(function() {
   
   //when class changes
   $('#class').change(function() {
-    stage = $('select#stage option:checked').val();
+    stage = Number($('select#stage option:checked').val());
     checkedClass = $('select#class option:checked').val();
     
     //remove methods from dropdown
@@ -177,9 +223,26 @@ $(function() {
     //if there's a stage make the search placeholder blank
     if (stage) {
       $("#methodName").prop("placeholder", "");
+      methodNames(stage, checkedClass, (mm) => {
+        methodList = mm;
+      });
     }
     
     $("#methodName").val("");
+    
+    if (["Principle", "Differential"].includes(checkedClass)) {
+      $("input.hunts").val("");
+      $("select.hunts > option:first-child").prop("selected", true);
+      $("input.hunts").prop({disabled: true, checked: false});
+      $("select.hunts").prop("disabled", true);
+      $("div.hunts").addClass("disabled");
+      $("span.hunts").addClass("disabled");
+    } else {
+      $("input.hunts").prop("disabled", false);
+      $("select.hunts").prop("disabled", false);
+      $("div.hunts").removeClass("disabled");
+      $("span.hunts").removeClass("disabled");
+    }
     
   });
   
@@ -191,6 +254,9 @@ $(function() {
       event.preventDefault();
       return false;
     }
+  });
+  $("form input").on("keyup", function (event) {
+    $("form").change();
   });
   
   
@@ -251,11 +317,13 @@ $(function() {
     $("#methodName").val($(this).text());
     $("#methodList li").hide();
     e.stopPropagation();
+    $("form").change();
   });
   
   //don't trigger the body click for a methodName click
   $("#methodName").on("click", function(e) {
     e.stopPropagation();
+    
     $("#methodList li").css("display", "list-item");
   });
   
@@ -288,7 +356,7 @@ $(function() {
     } else if (/['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+/.test(value) || /['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9]+['"\(\)\-™\.,/?!₁₃²£=ṟèéêáóíúûůåñöøäë&ča-zA-Z0-9\s]+/.test(value)) {
       let stageName = getStageName(stage);
       
-      methodNames(stage, checkedClass, (methodList) => {
+      
         //console.log(methodList);
         //calculate number of methods in the class
         let numArrays = methodList.length;
@@ -468,7 +536,7 @@ $(function() {
       $("#methodList li").hide();
     }
         }
-    })
+    
     
     } else if (value == "") {
       $("#methodList li").remove();

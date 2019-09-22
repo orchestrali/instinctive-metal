@@ -9,7 +9,8 @@ module.exports = function buildFormG(input) {
   form += `<p>
     <label for="tenors">Tenor(s) behind: </label>
     <input type="number" id="tenors" name="tenors" value="${tenors}" />
-  </p>`
+  </p>
+  </div>`
   
   return form;
 }

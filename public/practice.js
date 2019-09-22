@@ -17,7 +17,7 @@ $(function() {
   $('#stage').change(function() {
     formStage = Number($('select#stage option:checked').val());
     blueBellOpts(formStage);
-  })
+  });
   
   var TweenLite = window.TweenLite;
   var TweenMax = window.TweenMax;
@@ -228,8 +228,10 @@ $(function() {
   function addRow(row, i, type, call) {
     //console.log('adding a row');
     if (numbers) {
-      addText(textx, 20*i+40, row.join(' '),'numbers');
-      TweenMax.from("#numbers text:last-child", 1, {opacity:0, ease: Linear.easeIn});
+      for (let j = 0; j < row.length; j++) {
+        addText(textx+j*16, 20*i+40, row[j], 'numbers');
+      }
+      TweenMax.from("#numbers text:nth-last-child(-n+"+row.length+")", 1, {opacity:0, ease: Linear.easeIn});
     }
     if (rowObjArr[i-1].instruction) {
       $("#tutorial").text(rowObjArr[i-1].instruction);

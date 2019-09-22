@@ -75,11 +75,11 @@ module.exports = function buildPage(errors, svgs, script, input, type) {
       <form action="${info.formAct}" method="get" autocomplete="off">`
   let formExtra = require('./buildForm' + info.formPath + '.js');
   
-  if (Object.keys(input).length > 0 && errors.length == 0) {
+  if (svgs.length > 0 && errors.length == 0) {
     //console.log("there is input and no errors");
     //form = buildForm(input);
     title = buildTitle(input);
-    anchor = '<a name="svgs"></a>';
+    anchor = '<a name="svgs" class="anchor"></a>';
   }
   
   var page = header + errStr + formBegin + buildForm(input) + formExtra(input) + formEnd + anchor + title + info.svgsBegin + svgs.join('') + info.svgsEnd + footer;

@@ -15,6 +15,8 @@ module.exports = function directTraffic(input, type, cb) {
   
   if (validInputs == 0) {
     cb(build([],[],'', 0, type));
+  } else if (validInputs > 0 && input.switch === "true") {
+    cb(build([], [], '', input, type));
   } else {
     //buildpage
     return handleInput(input, type, cb);

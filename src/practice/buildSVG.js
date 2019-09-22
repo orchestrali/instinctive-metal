@@ -14,9 +14,7 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   }
   
   let rowZeroStr = "";
-  for (var i = 0; i < rowZero.length; i++) {
-    rowZeroStr += places[rowZero[i]-1] + " ";
-  }
+  
   
   let cx = 120 - 8*(rowZero.length-6) + (blueplace-1)*16;
   let textx = 115 - 8*(rowZero.length-6);
@@ -27,15 +25,19 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
     errY = 370;
     placenumY = 350;
     scoreboard = `    <rect class="translucent" x="50" y="375" width="220" height="24" />
-      <g id="scoreboard" style="font-family: Verdana; fill: #000;">
+      <g id="scoreboard" style="font-family: Verdana, sans-serif; fill: #000;">
         <text x="157" y="392" text-anchor="end" id="change-count">Changes: 0</text>
         <text x="183" y="392" id="err-count">Errors: 0</text>
       </g>`
   }
   
-  let numbers = `<g id="numbers" style="font-family: Verdana; fill: #000;">
-      <text x="`+textx+`" y="40">` + rowZeroStr + `</text>
-    </g>
+  let numbers = `<g id="numbers" style="font-family: Verdana, sans-serif; fill: #000; font-size: 16px;">
+`;
+  for (var i = 0; i < rowZero.length; i++) {
+    numbers += `<text x="`+(textx+i*16)+`" y="40">`+places[rowZero[i]-1] + `</text>`;
+  }
+  numbers += `
+</g>
 `;
   
   let height = numRows*20+370;

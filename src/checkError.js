@@ -16,6 +16,12 @@ module.exports = function findError(methodInput, compInput) {
   let methodClass = methodInput.methodClass;
   let stageName = stages.find(o => o.num == stage).name;
   let realMethod;
+  if (!methodInput.placeNotation) {
+    methodInput.placeNotation = "";
+  }
+  if (!methodInput.methodName) {
+    methodInput.methodName = "";
+  }
   
   //'x' or '-' in odd-bell method place notation
   if (stage % 2 == 1 && (methodInput.placeNotation.indexOf('x') > -1 || methodInput.placeNotation.indexOf('-') > -1)) {
@@ -62,7 +68,7 @@ module.exports = function findError(methodInput, compInput) {
   }
   
   //validate name
-  let grandsire = ["grandsire", "double grandsire", "reverse grandsire"];
+  let grandsire = ["grandsire", "double grandsire", "reverse grandsire", "little grandsire", "union", "reverse union", "double union", "little union"];
   let name = methodInput.methodName.toLowerCase();
   let stageLower = stageName.toLowerCase();
   let classLower = methodClass ? methodClass.toLowerCase() : null;
