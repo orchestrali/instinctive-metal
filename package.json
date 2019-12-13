@@ -16,7 +16,7 @@
     "xml-js": "^1.6.11",
     "url-parse": "^1.4.7",
     "request": "^2.88.0",
-    "mongoose": "^5.8.0",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1"
   },
   "engines": {
