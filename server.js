@@ -179,8 +179,8 @@ app.get("/:param", function (request, response) {
     routes.app(request, response, p);
   } else if (routes.files[p]) {
     response.sendFile(__dirname + routes.files[p]);
-  } else if (p === "updatenames"+process.env.SECRET) {
-    createNames(() => {response.send('ok')});
+  } else if (p === "updatenames") {
+    routes.updatenames(request, response);
   } else {
     response.sendStatus(404);
   }
