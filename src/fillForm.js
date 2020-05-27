@@ -32,7 +32,7 @@ module.exports = function fillForm(input) {
     
     formInput.touchinfo = 'hidden';
     formInput.options = buildStages(0); //stage options
-    formInput.classOptions = '<option value disabled selected></option>';
+    formInput.classOptions = '<option value selected></option>';
     formInput.methodPlaceholder = "Select a stage and class to search methods";
   } else {
     
