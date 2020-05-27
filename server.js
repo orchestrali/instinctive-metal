@@ -59,7 +59,6 @@ const record = require('./src/record/router.js');
 const rowGen = require('./src/rowArray.js');
 const findMod = require('./src/library/findMod.js');
 
-var chamberopen = false;
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -83,47 +82,9 @@ rowGen(input, (arr) => {
 const serialize = require('./src/library/serialize.js');
 const max = require('./src/query/max.js');
 
-let query = {
-  name: {$regex: "camel", $options: 'i'}, //
-  //stage: 12, //{$in: [5,7,9,11,13,15,17]},
-  //leadHeadCode: { $exists: false },
-  //oldtitle: {$size: 1}
-  //leadHeadCode: {$in: ['g', 'h', 'j1', 'j2', 'j3', 'k1', 'k2', 'j4', 'j', 'k3', 'k4', 'k', 'l', 'm']},
-  //class: "Hybrid",
-  //"classification.trebleDodging": true,
-  //"classification.plain": true,
-  //methods: {$gt: 100},
-  //huntBells: {$gt: 20},
-  //leadHead: {$in: ["135264", "156342", "164523", "142635"]},
-  //huntPath: [1,2,3,4,5,5,4,3,2,1]
-  //$or: [{"classes.stages": 6}, {"classes.stages": 4}]
-}
-//['a', 'b', 'c', 'd', 'e', 'f']
-//['g', 'h', 'j', 'k', 'l', 'm']
-let q = {
-  query: query,
-  fields: "title"
-}
 
-//^-1[456]-[123]6-[12345]+6,1[26]
-//console.log(methodNames2[0].classes[0].methods);
-//findOne(query, 's', (result) => {for (var i=0; i < result.length; i++) {console.log(result[i].title)}});
-//findPost(q, 's', (result) => {for (var i=0; i < result.length; i++) {if (!result[i].huntBells.includes(1)) {console.log(result[i].title, result[i].huntBells)}}});
 
-//findMod(query, "methods", (result) => {
-//if (result.length < 11) result.forEach(r => console.log(r.title));
-//else console.log(result.length);
-//});
-//
-//console.log(result.length)
-//console.log(max(result, "leadLength"))
-//console.log(findMethod(input));
-//console.log('♭');
-//for (var i=0; i < result.length; i++) {console.log(result[i].title)}
-//console.log(require('./methodNames.json')[2].classes[0].methods[0].length);
-//createNames(() => {});
 
-//methodSearch(input);
 const routes = {
   app: function (request, response, type) {
     record(request, response, (r) => console.log(r));
@@ -136,9 +97,7 @@ const routes = {
     sm: "/minorsurprise.json",
     stages: "/src/stages.json",
     teststaff: "/views/stafftest.html",
-    surpriseminor: "/views/surprise-minor.html",
-    stedman: "/views/stedman.html",
-    chamberofsecrets: chamberopen ? "/views/secretsopen.html" : "/views/secrets.html"
+    surpriseminor: "/views/surprise-minor.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {
@@ -146,24 +105,9 @@ const routes = {
     } else {
       response.send('ok');
     }
-  },
-  openchamber: function (request, response) {
-    chamberopen = true;
-    response.send('ok');
   }
 }
 
-
-//app.get("/compare", function (request, response) {
-  //let inputs = findLeads(input1, input2);
-  //let uniques = compare(inputs);
-  //response.send({Leadheads: inputs, Uniques: uniques, "coursing orders": courseOrders(uniques)});
-//});
-//*/
-///*
-//app.get("/courseorder", function (request, response) {
-  //response.send(courseOrder("123456"));
-//});
 
 
 app.post("/rowarray", function (req, res) {
