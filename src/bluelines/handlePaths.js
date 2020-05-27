@@ -14,7 +14,8 @@ module.exports = function handlePaths(input, info) {
   if (input.blueGroup2) {
     //same for blueGroup2  
     bellPaths.push(blueGroups(input,2,info))
-  } else if (input.huntBellw) {
+  } 
+  if (input.huntBellw) {
     //find hunt bells and add them to bell paths with weight and input.huntColor
     let huntBells = {};
     huntBells.weight = input.huntBellw;
@@ -22,14 +23,16 @@ module.exports = function handlePaths(input, info) {
     huntBells.bells = findHunt(info.placeNot, info.numBells, info.comp);
     bellPaths.push(huntBells);
     //add bluebell to paths with weight and color
-    let bluebell = {};
-    if(input.blueBell) {
-      bluebell.bells = [Number(input.blueBell)];
-      bluebell.weight = input.blueBellw;
-      bluebell.color = input.blueBellc;
-      bellPaths.push(bluebell);
-    }
-  } else if (input.bell1w) {
+    
+  }
+  let bluebell = {};
+  if(input.blueBell) {
+    bluebell.bells = [Number(input.blueBell)];
+    bluebell.weight = input.blueBellw;
+    bluebell.color = input.blueBellc;
+    bellPaths.push(bluebell);
+  }
+  if (input.bell1w) {
     //add each bell to bell paths
     bellPaths = bellPaths.concat(allLines(input, info.numBells));
   }

@@ -24,10 +24,10 @@ module.exports = function handleInput(displayInput, info, rowArray) {
     info.displayNums = false;
   }
   if (displayInput.pagination) {
-        let svgs = pagedSVGs(rowArray, pathArray, info);
-        return svgs;
-      } else {
-        let methodSVGs = printMethod(rowArray, pathArray, info);
-        return methodSVGs;
-      }
+    let svgs = pagedSVGs(rowArray, pathArray, info);
+    return svgs;
+  } else {
+    let methodSVGs = printMethod(rowArray, pathArray, info);
+    return methodSVGs;
+  }
 }

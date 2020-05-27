@@ -59,6 +59,8 @@ const record = require('./src/record/router.js');
 const rowGen = require('./src/rowArray.js');
 const findMod = require('./src/library/findMod.js');
 
+var chamberopen = false;
+
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -134,7 +136,9 @@ const routes = {
     sm: "/minorsurprise.json",
     stages: "/src/stages.json",
     teststaff: "/views/stafftest.html",
-    surpriseminor: "/views/surprise-minor.html"
+    surpriseminor: "/views/surprise-minor.html",
+    stedman: "/views/stedman.html",
+    chamberofsecrets: chamberopen ? "/views/secretsopen.html" : "/views/secrets.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {
@@ -142,6 +146,10 @@ const routes = {
     } else {
       response.send('ok');
     }
+  },
+  openchamber: function (request, response) {
+    chamberopen = true;
+    response.send('ok');
   }
 }
 
@@ -181,6 +189,8 @@ app.get("/:param", function (request, response) {
     response.sendFile(__dirname + routes.files[p]);
   } else if (p === "updatenames") {
     routes.updatenames(request, response);
+  } else if (p === "openchamber") {
+    routes.openchamber(request, response);
   } else {
     response.sendStatus(404);
   }

@@ -18,6 +18,7 @@ module.exports = function formOpts(input) {
       blueC: `value="blue"`,
       huntW: addWeight(0, 1),
       huntC: `value="red"`,
+      hunts: "",
       everyDisplay: "",
       basicDisplay: "",
       groupDisplay: "",
@@ -39,6 +40,7 @@ module.exports = function formOpts(input) {
     blueC: "",
     huntW: "",
     huntC: "",
+    hunts: input.methodClass === "Principle" ? "disabled" : "",
     everyDisplay: "",
     basicDisplay: "",
     groupDisplay: "",
@@ -60,7 +62,7 @@ module.exports = function formOpts(input) {
     }
   }
   
-  if (input.huntBellw) formInfo.huntW = addWeight(0, Number(input.huntBellw));
+  formInfo.huntW = addWeight(0, input.huntBellw ? Number(input.huntBellw) : 1);
   formInfo.huntC = input.huntColor ? `value="${input.huntColor}"` : "disabled";
   if (input.blueBellw) formInfo.blueW = addWeight(1, Number(input.blueBellw));
   formInfo.blueC = input.blueBellc ? `value="${input.blueBellc}"` : "disabled";
