@@ -38,11 +38,18 @@ module.exports = function directTraffic(input, type, cb) {
   let methodInfo; // = methodParse(methodInput);
   //return next();
   ///*
-  methodParse(methodInput, (obj) => {
-    methodInfo = obj;
-    if (methodInfo.name) input.methodName = methodInfo.name.substring(0, methodInfo.name.length-stageName.length-1);
-    //console.log('methodInfo', methodInfo);
-    cb(next());
+  methodParse(methodInput, (err, obj) => {
+    if (!err) {
+      methodInfo = obj;
+      if (methodInfo.name) input.methodName = methodInfo.name.substring(0, methodInfo.name.length-stageName.length-1);
+      //console.log('methodInfo', methodInfo);
+      cb(next());
+    } else {
+      console.log('building page with error');
+      cb(build(err, [], '', input, type));
+      return;
+    }
+    
   });
   //*/
   //console.log(methodInfo);

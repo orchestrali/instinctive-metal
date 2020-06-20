@@ -70,7 +70,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-
+//
 
 
 /*
@@ -89,7 +89,7 @@ const max = require('./src/query/max.js');
 const routes = {
   app: function (request, response, type) {
     request.query.type = type;
-    record(request, response, (r) => console.log(r));
+    //record(request, response, (r) => console.log(r));
     router(request.query, (results) => {
       response.send(results);
     });
