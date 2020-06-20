@@ -24,13 +24,19 @@ module.exports = function methodInfo(methodInput, cb) {
     let knownMethod;
     let amp = /&(?!=amp)/gi;
     //.replace(amp, "&amp;")
-    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, '', (res) => {
+    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, '', (err, res) => {
       //console.log(res);
-      knownMethod = buildMethod(res);
-      methodInfo.name = knownMethod.name;
-      methodInfo.placeNot.plain = knownMethod.plainPN;
-      methodInfo.leadLength = knownMethod.leadLength;
-      next();
+      if (!err) {
+        knownMethod = buildMethod(res);
+        methodInfo.name = knownMethod.name;
+        methodInfo.placeNot.plain = knownMethod.plainPN;
+        methodInfo.leadLength = knownMethod.leadLength;
+        next();
+      } else {
+        console.log('find method error');
+        cb(err);
+      }
+      
     });
     
   } else {
@@ -65,7 +71,7 @@ module.exports = function methodInfo(methodInput, cb) {
       methodInfo.callLoc = methodInfo.placeNot.plain.length;
     }
 
-    cb(methodInfo);
+    cb(null, methodInfo);
   }
   
 }
