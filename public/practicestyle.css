@@ -1,8 +1,8 @@
-div.grid-container {
+div#grid-container {
   
   display: block;
   position: relative;
-  }
+}
 
 div.buttons, div#arrows {
   margin-left: 80px;

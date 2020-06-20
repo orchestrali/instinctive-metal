@@ -23,7 +23,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     }
     
     results.SVGs = printMethod(displayInput, info, rowArray);
-  } else if (type == 'graphs') {
+  } else if (type == 'graph') {
     results.SVGs = buildGraphs(rowArray, width);
   } else if (type == 'practice') {
     let info = {

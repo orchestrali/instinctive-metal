@@ -58,6 +58,7 @@ const createNames = require('./src/library/methodNames.js');
 const record = require('./src/record/router.js');
 const rowGen = require('./src/rowArray.js');
 const findMod = require('./src/library/findMod.js');
+const router = require('./src/router.js');
 
 
 // we've started you off with Express, 
@@ -69,7 +70,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-//
+
 
 
 /*
@@ -87,8 +88,9 @@ const max = require('./src/query/max.js');
 
 const routes = {
   app: function (request, response, type) {
+    request.query.type = type;
     record(request, response, (r) => console.log(r));
-    handleInput3(request.query, type, (results) => {
+    router(request.query, (results) => {
       response.send(results);
     });
   },
@@ -97,7 +99,8 @@ const routes = {
     sm: "/minorsurprise.json",
     stages: "/src/stages.json",
     teststaff: "/views/stafftest.html",
-    surpriseminor: "/views/surprise-minor.html"
+    surpriseminor: "/views/surprise-minor.html",
+    index: "/views/index.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {
@@ -105,6 +108,11 @@ const routes = {
     } else {
       response.send('ok');
     }
+  },
+  test: function(request, response, type) {
+    router(request.query, (results) => {
+      response.send(results);
+    });
   }
 }
 
@@ -128,13 +136,15 @@ app.get("/", function (request, response) {
 app.get("/:param", function (request, response) {
   let p = request.params.param;
   if (['graphs', 'staff', 'practice'].includes(p)) {
-    routes.app(request, response, p);
+    routes.app(request, response, p === "graphs" ? "graph" : p);
   } else if (routes.files[p]) {
     response.sendFile(__dirname + routes.files[p]);
   } else if (p === "updatenames") {
     routes.updatenames(request, response);
   } else if (p === "openchamber") {
     routes.openchamber(request, response);
+  } else if (p === "test") {
+    routes.test(request, response, "test");
   } else {
     response.sendStatus(404);
   }
