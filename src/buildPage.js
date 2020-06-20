@@ -1,7 +1,5 @@
 
 
-
-const buildForm = require('./buildForm.js');
 const buildTitle = require('./title.js');
 const headers = require('./index.js');
 const stages = require('./stages.json');

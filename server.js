@@ -48,8 +48,7 @@ let input2 = {};
 const tutorial = require('./src/tutorial/test.js');
 
 
-const handleInput3 = require('./src/directTraffic.js');
-const buildPage = require('./src/buildPage2.js');
+
 const methodNames2 = require('./methodNames2.json');
 
 const findOne = require('./src/library/findOneOrMany.js');
@@ -157,7 +156,7 @@ app.get("/:param", function (request, response) {
 app.get("/staff2", function (request, response) {
   //response.send(urlParse(request.originalUrl, true).query);
   response.send(request.query);
-  //response.send(handleInput3(urlParse(request.originalUrl, true).query, 'staff'));
+  
 });
 
 
