@@ -68,7 +68,7 @@ module.exports = function buildForm(input) {
       </label>
       <input type="text" id="blueBellc" name="blueBellc" value="blue"/>
     </span>
-  </div class="input">
+  </div>
   <div class="input">
     <span>
     <label for="keepscore">

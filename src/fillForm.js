@@ -21,7 +21,7 @@ module.exports = function fillForm(input) {
   //console.log('input: ', input);
   
   //no input
-  if (Object.keys(input).length == 0) {
+  if (Object.keys(input).length === 0) {
     console.log('no input');
     //set all the form inputs to their default values
     for (var key in defaults) {

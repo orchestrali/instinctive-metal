@@ -136,7 +136,7 @@ $(function() {
     }
   }
   
-  const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType'];
+  const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type'];
   
   
   $('form').change(function() {
@@ -209,7 +209,7 @@ $(function() {
       $('<option></option>').text(text).val(classes[i]).appendTo('select#class');
     }
     
-  })
+  });
   
   
   //when class changes
@@ -284,14 +284,14 @@ $(function() {
   });
   
   function check(val) {
-      let names = [];
-      let list = $("#methodList li");
-      for (var i = 1; i <= list.length; i++) {
-        names.push($("#methodList li:nth-child("+i+")").text());
-      }
-      if (names.some(e => e == val) && val.length > 0) return true;
-      else return false;
+    let names = [];
+    let list = $("#methodList li");
+    for (var i = 1; i <= list.length; i++) {
+      names.push($("#methodList li:nth-child("+i+")").text());
     }
+    if (names.some(e => e == val) && val.length > 0) return true;
+    else return false;
+  }
   
   
   function checkName() {
@@ -580,7 +580,7 @@ $(function() {
       $('.bob').prop("disabled", true);
       $('.single').prop("disabled", true);
     }
-  })
+  });
   
   
   $('.bob, .single').click(function() {
@@ -589,11 +589,11 @@ $(function() {
     $('#cust').prop("checked", true);
     $('.bob').prop("disabled", false);
     $('.single').prop("disabled", false);
-  })
+  });
   
 
   
-let gridWidth = (stage + (stage % 2))*16;
+  let gridWidth = (stage + (stage % 2))*16;
   //console.log('stage: ', stage);
   console.log('gridWidth: ', gridWidth);
   //console.log('window width: ', $(window).width());

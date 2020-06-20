@@ -200,7 +200,7 @@ $(function() {
 }
   
   $("#restart").click(function() {
-    $("#numbers text:nth-child(n+2)").remove();
+    $("#numbers text:nth-child(n+"+(1+numBells)+")").remove();
     $("#callMarkers text").remove();
     $("#treblepath path").remove();
     $("#bluepath path").remove();

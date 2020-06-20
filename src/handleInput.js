@@ -6,7 +6,7 @@ const compParse = require('./comp/handleInput.js');
 const rowGen = require('./rowArray/handleInput2.js');
 const buildSVGs = require('./svgs/handleInput.js');
 
-const build = require('./buildPage2.js');
+const build = require('./buildPage.js');
 
 const stages = require('./stages.json');
 
