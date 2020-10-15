@@ -3,6 +3,7 @@ const printMethod = require('../bluelines/handleInput.js');
 const methodPractice = require('../practice/handleInput.js');
 const staffNot = require('./staffnotation2.js');
 const stages = require('../stages.json');
+const buildplayer = require('./player.js');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
   //console.log("svgs/handleInput", compInfo.rowZeroObj);
@@ -41,6 +42,11 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     results.script = obj.script;
   } else if (type == 'staff') {
     results.SVGs = staffNot(compInfo.rowZeroObj, rowArray, methodInfo.stage, displayInput);
+  }
+  if (displayInput.player) {
+    let r = buildplayer(methodInfo.stage+compInfo.tenors, displayInput, rowArray);
+    results.script += r.script;
+    results.player = r.player;
   }
   return results;
 }

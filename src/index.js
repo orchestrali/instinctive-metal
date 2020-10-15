@@ -53,7 +53,7 @@ module.exports = [
   `
         </div>
         
-        <form action="/test" method="get" autocomplete="off">
+        <form action="/" method="get" autocomplete="off">
         
           <div id="method-info" class="category">
             <p class="bold">
@@ -75,6 +75,10 @@ module.exports = [
                   <option value="10">10 - Royal</option>
                   <option value="11">11 - Cinques</option>
                   <option value="12">12 - Maximus</option>
+                  <option value="13">13 - Sextuples</option>
+                  <option value="14">14 - Fourteen</option>
+                  <option value="15">15 - Septuples</option>
+                  <option value="16">16 - Sixteen</option>
                 </select>
               </span>
               <span>
@@ -100,7 +104,7 @@ module.exports = [
               <label for="placeNotation">
                 Place notation:
               </label>
-              <input type="text" id="place-notation" name="placeNotation" minlength="1" autocomplete="off"/>
+              <input type="text" id="placeNotation" name="placeNotation" minlength="1" autocomplete="off"/>
             </div>      
           </div>
           <div id="quantity" class="category">
@@ -272,6 +276,8 @@ module.exports = [
                 <label for="numbers">Show numbers</label>
                 <input type="checkbox" id="show-pn" name="pn" value="show" />
                 <label for="pn">Show place notation</label>
+                <input type="checkbox" id="player-grid" name="player" value="include" />
+                <label for="player">Include method player</label>
               </p>
               
               <div id="basic-lines" class="gridopt">
@@ -389,6 +395,10 @@ module.exports = [
                   
                 </ul>
               </div>
+              <p>
+                <label for="tenors">Tenor(s) behind: </label>
+                <input type="number" id="btenors" name="tenors" value="0" />
+              </p>
               
               <p>
                 <input type="checkbox" id="pagination" name="pagination" value="paginate">
@@ -403,6 +413,10 @@ module.exports = [
               <p>
                 <label for="tenors">Tenor(s) behind: </label>
                 <input type="number" id="gtenors" name="tenors" value="0" />
+              </p>
+              <p>
+                <input type="checkbox" id="player-graph" name="player" value="include" />
+                <label for="player">Include method player</label>
               </p>
             </div>
             
@@ -468,6 +482,27 @@ module.exports = [
               <p>
                 <input type="checkbox" id="mobile" name="mobile" value="yes" />
                 <label for="mobile">Mobile version</label>
+              </p>
+              <p>
+                <input type="checkbox" id="player-staff" name="player" value="include" />
+                <label for="player">Include method player</label>
+              </p>
+            </div>
+
+            <div id="playeropts" class="hidden">
+              <p class="bold">
+                Player options
+              </p>
+              <fieldset>
+                <legend>Sounds</legend>
+                <ul>
+                  <li><label for="hand"><input type="radio" name="sounds" value="hand" id="hand" />handbells (sounds courtesy of Mabel)</label></li>
+                  <li><label for="tower"><input type="radio" name="sounds" value="tower" id="tower" />tower bells (Vancouver Holy Rosary Cathedral )</label></li>
+                </ul>
+              </fieldset>
+              <p>
+                <label for="numrounds">Rows of rounds at start: </label>
+                <input type="number" id="numrounds" name="numrounds" value="2" step="1" min="0" />
               </p>
             </div>
             
@@ -554,6 +589,7 @@ module.exports = [
     <script src="/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
     <script src="/practice.js"></script>
+    <script src="/player.js"></script>
   </body>
 </html>
 `

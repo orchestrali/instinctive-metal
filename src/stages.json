@@ -124,5 +124,45 @@
       "Differential",
       "Principle"
     ]
+  },
+  {
+    "num": 13,
+    "name": "Sextuples",
+    "classes": [
+      "Bob",
+      "Principle"
+    ]
+  },
+  {
+    "num": 14,
+    "name": "Fourteen",
+    "classes": [
+      "Bob",
+      "Treble Bob",
+      "Delight",
+      "Surprise",
+      "Alliance"
+    ]
+  },
+  {
+    "num": 15,
+    "name": "Septuples",
+    "classes": [
+      "Bob",
+      "Principle"
+    ]
+  },
+  {
+    "num": 16,
+    "name": "Sixteen",
+    "classes": [
+      "Bob",
+      "Treble Bob",
+      "Treble Place",
+      "Delight",
+      "Surprise",
+      "Alliance",
+      "Hybrid"
+    ]
   }
 ]

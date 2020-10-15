@@ -1,6 +1,6 @@
-const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors'];
+const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
 
-
+// new client-side file for combined form (except surprise minor game)
 
 $(function() {
   console.log('hello world :o');
@@ -11,16 +11,17 @@ $(function() {
   }
   
   $("div.type:nth-of-type(n+2)").find(":input").prop("disabled", true);
-  let type = "grid";
+  var type = "grid";
   let gridtype = "basic-lines";
   $("div.gridopt:nth-of-type(n+2)").find(":input").prop("disabled", true);
+  $("#highlight").css("height", "19px");
   
   
   
   let selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
-  let texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors'];
-  let radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig'];
-  let checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial'];
+  let texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes'];
+  let radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
+  let checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
   
   for (let i = 1; i < 13; i++) {
     keys.push('bell'+i+'w', 'bell'+i+'c');
@@ -33,6 +34,12 @@ $(function() {
   let obj = {};
   let params = 0;
   for (let p of q) {
+    if (p[0] === "tenors") {
+      params++;
+      ["gtenors","stenors","btenors"].forEach(w => {
+        obj[w] = p[1];
+      });
+    }
     if (keys.includes(p[0])) {
       params++;
       obj[p[0]] = p[1];
@@ -114,7 +121,9 @@ $(function() {
     
     adjustTime(numBells);
     tenOpts(keysig, numBells);
-    
+    if (type === "grid") {
+      $("#highlight").css("width", numBells*16);
+    }
     
   });
   
@@ -460,10 +469,20 @@ $(function() {
     
     $(".type").addClass("hidden");
     $("div#"+type+"opts").removeClass("hidden");
-    
+    $("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : 0);
+    if (type === "graph") {
+      $("#highlight").css("width", "270px");
+    }
     
   });
   
+  $('input[name="player"]').on("change", function() {
+    if ($(this).is(":checked")) {
+      $("#playeropts").slideDown(600);
+    } else {
+      $("#playeropts").slideUp(400);
+    }
+  });
   
   // **** GRID **** //
   
@@ -637,6 +656,7 @@ $(function() {
   
   checked.forEach(c => {
     if (obj[c]) {
+      console.log(c);
       $("input[name='"+c+"']").prop("checked", true);
     } else if (params > 0) {
       $("input[name='"+c+"']").prop("checked", false);
