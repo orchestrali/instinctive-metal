@@ -6,7 +6,7 @@ const addTenor = require('../rowArray/addTenor.js');
 module.exports = function compInfo(compInput, stage) {
   let compObject = {
     quantity: compInput.quantity,
-    tenors: Number(compInput.tenors)
+    tenors: compInput.tenors ? Number(compInput.tenors) : 0
   };
   
   let rowZero = parseLH(compInput, stage);

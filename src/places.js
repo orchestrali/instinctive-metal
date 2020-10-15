@@ -1,1 +1,1 @@
-module.exports = '1234567890ET';
+module.exports = '1234567890ETABCD';

@@ -27,7 +27,7 @@ module.exports = function directTraffic(input, type, cb) {
   let errors = errResults.errors;
   methodInput.nameLower = errResults.realName ? errResults.realName : null;
   if (errors.length > 0) {
-    cb(build(errors, [], '', input, type));
+    cb(build(errors, {}, input, type));
     return;
   }
   
@@ -46,7 +46,7 @@ module.exports = function directTraffic(input, type, cb) {
       cb(next());
     } else {
       console.log('building page with error');
-      cb(build(err, [], '', input, type));
+      cb(build(err, {}, input, type));
       return;
     }
     
@@ -65,10 +65,9 @@ module.exports = function directTraffic(input, type, cb) {
     //console.log("row array: ", rowArray);
     //generate SVGs
     let results = buildSVGs(methodInfo, compInfo, rowArray, displayInput, type);
-    SVGs = results.SVGs;
-    let script = results.script;
+    
     //buildpage
-    let page = build([], SVGs, script, input, type);
+    let page = build([], results, input, type);
     //console.log(page);
     return page;
   }

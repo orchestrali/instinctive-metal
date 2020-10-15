@@ -128,7 +128,7 @@ app.post("/rowarray", function (req, res) {
 
 app.get("/", function (request, response) {
   //console.log(request.headers.referer);
-  routes.app(request, response, 'grid');
+  routes.app(request, response, request.query.type ? request.query.type : "grid");
 });
 
 ///*
@@ -140,8 +140,6 @@ app.get("/:param", function (request, response) {
     response.sendFile(__dirname + routes.files[p]);
   } else if (p === "updatenames") {
     routes.updatenames(request, response);
-  } else if (p === "openchamber") {
-    routes.openchamber(request, response);
   } else if (p === "test") {
     routes.test(request, response, "test");
   } else {

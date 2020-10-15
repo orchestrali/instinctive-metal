@@ -14,7 +14,7 @@ module.exports = function directTraffic(input, cb) {
   
   
   if (validInputs === 0) {
-    cb(build([],[],'', 0, type));
+    cb(build([],{}, 0, type));
   } else {
     //buildpage
     return handleInput(input, type, cb);

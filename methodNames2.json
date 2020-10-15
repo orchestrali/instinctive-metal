@@ -45,10 +45,6 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": []
-      },
-      {
         "class": "Treble Bob",
         "methods": [
           [
@@ -199,11 +195,41 @@
             "Ramsbottom Treble Bob Minimus",
             "Reverse Gunville Treble Bob Minimus",
             "Cock Ring Treble Bob Minimus",
+            "Vindaloo Treble Bob Minimus",
+            "Madras Treble Bob Minimus",
+            "Dhansak Treble Bob Minimus",
+            "Bhuna Treble Bob Minimus",
+            "96 Treble Bob Minimus",
+            "Reverse Angela Treble Bob Minimus",
+            "Reverse Himbleton Treble Bob Minimus",
+            "Reverse Breamore Treble Bob Minimus",
+            "Reverse Langley Treble Bob Minimus",
+            "Reverse Hinton Treble Bob Minimus",
+            "Reverse Toller Fratrum Treble Bob Minimus",
+            "Reverse Barby Treble Bob Minimus",
+            "Reverse Ufton Nervet Treble Bob Minimus",
+            "Reverse Brimpton Treble Bob Minimus",
+            "Reverse Newtown Treble Bob Minimus",
+            "Reverse Chaddleworth Treble Bob Minimus",
+            "Larkrise Treble Bob Minimus",
+            "Reverse Ashwicke Treble Bob Minimus",
+            "Reverse Brown's Folly Treble Bob Minimus",
+            "Reverse Fosse Lane Treble Bob Minimus",
+            "Reverse Little Solsbury Hill Treble Bob Minimus",
+            "Reverse Marshfield Treble Bob Minimus",
+            "Reverse Monkswood Reservoir Treble Bob Minimus",
+            "Reverse Northend Treble Bob Minimus",
+            "Reverse Ramsbottom Treble Bob Minimus",
+            "Reverse St Catherine's Valley Treble Bob Minimus",
+            "Reverse Sham Castle Treble Bob Minimus",
+            "Reverse Steway Lane Treble Bob Minimus",
+            "The Paddocks Treble Bob Minimus",
             "East Hardon Treble Bob Minimus",
             "Stambridge Treble Bob Minimus",
             "West Hanningfield Treble Bob Minimus",
             "Westley Heights Treble Bob Minimus",
             "Also Bolux Double Treble Bob Minimus",
+            "Smiffey Treble Bob Minimus",
             "Really Bolux Triple Treble Bob Minimus",
             "Absolutely Bolux Quadruple Treble Bob Minimus",
             "Immensely Bolux Quintuple Treble Bob Minimus",
@@ -223,6 +249,9 @@
             "Pleiades Treble Place Minimus",
             "Orion Treble Place Minimus",
             "Cassiopeia Treble Place Minimus",
+            "Don't Leave Your Handbells on The Train Treble Place Minimus",
+            "X-Border Treble Place Minimus",
+            "Covid Lockdown Treble Place Minimus",
             "Barby Treble Place Minimus",
             "Edgcote Treble Place Minimus",
             "Church Stowe Treble Place Minimus",
@@ -282,14 +311,6 @@
         ]
       },
       {
-        "class": "Delight",
-        "methods": []
-      },
-      {
-        "class": "Surprise",
-        "methods": []
-      },
-      {
         "class": "Alliance",
         "methods": [
           [
@@ -314,7 +335,95 @@
             "Daglingworth Alliance Minimus",
             "Clearwell Alliance Minimus",
             "Countryside Alliance Minimus",
+            "In These Unprecedented And Challenging Times Our First Priority Is The Safety Of Our Staff Alliance Minimus",
+            "Reverse Adbaston Alliance Minimus",
+            "Reverse Allexton Alliance Minimus",
+            "Reverse Ayston Alliance Minimus",
+            "Reverse Barkeston Alliance Minimus",
+            "Reverse Bobbington Alliance Minimus",
+            "Reverse Burrito Alliance Minimus",
+            "Reverse Burrough-on-the-Hill Alliance Minimus",
+            "Reverse Carlton-by-Bosworth Alliance Minimus",
+            "Reverse Chebsey Alliance Minimus",
+            "Reverse Chimichanga Alliance Minimus",
+            "Reverse Chipmunk Alliance Minimus",
+            "Reverse Colton Alliance Minimus",
+            "Reverse Cubley Alliance Minimus",
+            "Reverse Dalby-on-the-Wolds Alliance Minimus",
+            "Reverse Denstone Alliance Minimus",
+            "Reverse Drayton Bassett Alliance Minimus",
+            "Reverse Elvaston Alliance Minimus",
+            "Reverse Enchilada Alliance Minimus",
+            "Reverse Flauta Alliance Minimus",
+            "Reverse Foremark Alliance Minimus",
+            "Reverse Hunter GR9 Alliance Minimus",
+            "Reverse Jet Provost Alliance Minimus",
+            "Reverse Lichfield St Chad Alliance Minimus",
+            "Reverse Lyndon Alliance Minimus",
+            "Reverse Marston-on-Dove Alliance Minimus",
+            "Reverse Muston Alliance Minimus",
+            "Reverse Norbury Alliance Minimus",
+            "Reverse Orton-on-the-Hill Alliance Minimus",
+            "Reverse Peatling Magna Alliance Minimus",
+            "Reverse Phantom F4 Alliance Minimus",
+            "Reverse Pickwell Alliance Minimus",
+            "Reverse Sibson Alliance Minimus",
+            "Reverse Sparsholt Alliance Minimus",
+            "Reverse South Luffenham Alliance Minimus",
+            "Reverse Stoughton Alliance Minimus",
+            "Reverse Sutton Scarsdale Alliance Minimus",
+            "Reverse Taco Alliance Minimus",
+            "Reverse Taddington Alliance Minimus",
+            "Reverse Tamale Alliance Minimus",
+            "Reverse Tilton-on-the-Hill Alliance Minimus",
+            "Reverse Tornado F3 Alliance Minimus",
+            "Reverse Tugby Alliance Minimus",
+            "Reverse Vulcan B2 Alliance Minimus",
+            "Reverse South Croxton Alliance Minimus",
             "Sparsholt Alliance Minimus",
+            "Dalby-on-the-Wolds Alliance Minimus",
+            "Tugby Alliance Minimus",
+            "Carlton-by-Bosworth Alliance Minimus",
+            "Muston Alliance Minimus",
+            "Burrough-on-the-Hill Alliance Minimus",
+            "South Luffenham Alliance Minimus",
+            "Peatling Magna Alliance Minimus",
+            "Sibson Alliance Minimus",
+            "Lyndon Alliance Minimus",
+            "Pickwell Alliance Minimus",
+            "Ayston Alliance Minimus",
+            "Barkeston Alliance Minimus",
+            "Chebsey Alliance Minimus",
+            "Elvaston Alliance Minimus",
+            "South Croxton Alliance Minimus",
+            "Bobbington Alliance Minimus",
+            "Norbury Alliance Minimus",
+            "Taddington Alliance Minimus",
+            "Adbaston Alliance Minimus",
+            "Tilton-on-the-Hill Alliance Minimus",
+            "Lichfield St Chad Alliance Minimus",
+            "Sutton Scarsdale Alliance Minimus",
+            "Colton Alliance Minimus",
+            "Allexton Alliance Minimus",
+            "Denstone Alliance Minimus",
+            "Orton-on-the-Hill Alliance Minimus",
+            "Stoughton Alliance Minimus",
+            "Drayton Bassett Alliance Minimus",
+            "Marston-on-Dove Alliance Minimus",
+            "Cubley Alliance Minimus",
+            "Foremark Alliance Minimus",
+            "Burrito Alliance Minimus",
+            "Chimichanga Alliance Minimus",
+            "Chipmunk Alliance Minimus",
+            "Enchilada Alliance Minimus",
+            "Flauta Alliance Minimus",
+            "Hunter GR9 Alliance Minimus",
+            "Jet Provost Alliance Minimus",
+            "Phantom F4 Alliance Minimus",
+            "Taco Alliance Minimus",
+            "Tamale Alliance Minimus",
+            "Tornado F3 Alliance Minimus",
+            "Vulcan B2 Alliance Minimus",
             "Norwich Alliance Minimus",
             "Glarsgow Alliance Minimus",
             "Llonndonn Alliance Minimus",
@@ -336,26 +445,6 @@
             "Elsie Mary Minimus",
             "Audrey Minimus",
             "Flat Rock Minimus"
-          ]
-        ]
-      },
-      {
-        "class": "Differential",
-        "methods": [
-          [
-            "Cross Differential Minimus",
-            "Llanarthne Differential Minimus",
-            "Ten Rides Differential Minimus",
-            "Mr Wood's Double Differential Minimus",
-            "St Alphege Differential Minimus",
-            "Egloskerry Differential Minimus",
-            "New Boatman's Differential Minimus",
-            "Boatman's Differential Minimus",
-            "Ayston Differential Minimus",
-            "Tinwell Differential Minimus",
-            "Reverse Tinwell Differential Minimus",
-            "Lyndon Differential Minimus",
-            "Ridlington Differential Minimus"
           ]
         ]
       },
@@ -388,6 +477,7 @@
             "Reverse Tinwell Minimus",
             "Lyndon Minimus",
             "Ridlington Minimus",
+            "Southrise Minimus",
             "Sixty Minimus"
           ]
         ]
@@ -1246,75 +1336,6 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": [
-          [
-            "Kempton Little Slow Course Doubles",
-            "Spital Little Slow Course Doubles",
-            "Ickenham Little Slow Course Doubles",
-            "Twyford Little Slow Course Doubles",
-            "Chipstead Slow Course Doubles",
-            "Poyle Slow Course Doubles",
-            "Oakley Slow Course Doubles",
-            "Itchingfield Slow Course Doubles",
-            "Yeoveney Slow Course Doubles",
-            "Ockham Slow Course Doubles",
-            "Colne Slow Course Doubles",
-            "Colnbrook Slow Course Doubles",
-            "Broughton Slow Course Doubles",
-            "Chesham Slow Course Doubles",
-            "Crane Slow Course Doubles",
-            "Cranford Slow Course Doubles",
-            "Hascombe Slow Course Doubles",
-            "Runemede Slow Course Doubles",
-            "Raveningham Slow Course Doubles",
-            "Thornborough Slow Course Doubles",
-            "Longford Slow Course Doubles",
-            "Harmondsworth Slow Course Doubles",
-            "Heathrow Slow Course Doubles",
-            "Cambridgeshire Slow Course Doubles",
-            "Scarletts Slow Course Doubles",
-            "Eton Slow Course Doubles",
-            "Merton Slow Course Doubles",
-            "Candlesby Slow Course Doubles",
-            "Boveney Slow Course Doubles",
-            "Slapton Slow Course Doubles",
-            "Bedfont Slow Course Doubles",
-            "Rugby Slow Course Doubles",
-            "St Edmund Slow Course Doubles",
-            "Glamorgan Slow Course Doubles",
-            "Cornwall Slow Course Doubles",
-            "Denbighshire Slow Course Doubles",
-            "Cardiganshire Slow Course Doubles",
-            "Pinchbeck Slow Course Doubles",
-            "Huntingdonshire Slow Course Doubles",
-            "Leicestershire Slow Course Doubles",
-            "Northamptonshire Slow Course Doubles",
-            "Oxfordshire Slow Course Doubles",
-            "Pembrokeshire Slow Course Doubles",
-            "Caunton Slow Course Doubles",
-            "Brecon Slow Course Doubles",
-            "Somerset Slow Course Doubles",
-            "Surrey Slow Course Doubles",
-            "Westmorland Slow Course Doubles",
-            "Yorkshire Slow Course Doubles",
-            "Norwell Slow Course Doubles",
-            "Bilborough Slow Course Doubles",
-            "Shelford Slow Course Doubles",
-            "St Ursula the Fat Slow Course Doubles",
-            "Bogan Slow Course Doubles",
-            "St Sepulcre's Slow Course Doubles",
-            "Prince George Alexander Louis Slow Course Doubles",
-            "Princess Charlotte Elizabeth Diana Slow Course Doubles",
-            "Lenton Slow Course Doubles"
-          ]
-        ]
-      },
-      {
-        "class": "Treble Bob",
-        "methods": []
-      },
-      {
         "class": "Treble Place",
         "methods": [
           [
@@ -1328,7 +1349,7 @@
             "Wells Treble Place Doubles",
             "Chilham Treble Place Doubles",
             "Barsham Treble Place Doubles",
-            "Witney-on-Wye Treble Place Doubles",
+            "Whitney-on-Wye Treble Place Doubles",
             "Carmarthen Treble Place Doubles",
             "Flynn's Very Own Treble Place Doubles",
             "Christmas Eve Treble Place Doubles",
@@ -1393,14 +1414,6 @@
             "Karen's Dad's Birthday Treble Place Doubles"
           ]
         ]
-      },
-      {
-        "class": "Delight",
-        "methods": []
-      },
-      {
-        "class": "Surprise",
-        "methods": []
       },
       {
         "class": "Alliance",
@@ -2575,11 +2588,14 @@
             "New Kid on The Block Bob Minor",
             "Clunbury Bob Minor",
             "Bickleigh Bob Minor",
+            "Double Danbury Bob Minor",
             "Test Valley Bob Minor",
             "Snodhill Bob Minor",
             "Urishay Bob Minor",
             "New Year's Day Bob Minor",
             "Turnastone Bob Minor",
+            "Socially-Distanced Bob Minor",
+            "V J Day Bob Minor",
             "Sugar of Lead Bob Minor",
             "Monkshood Bob Minor",
             "Wolf's Bane Bob Minor",
@@ -3171,7 +3187,8 @@
             "Chip Off The Old Block Bob Minor",
             "Western Diamondback Bob Minor",
             "Twisted Flax Bob Minor",
-            "Lagrange Bob Minor"
+            "Lagrange Bob Minor",
+            "Clemens Bob Minor"
           ]
         ]
       },
@@ -3241,6 +3258,7 @@
             "Christmas Eve Place Minor",
             "Single Vision Place Minor",
             "Single Concrete Block Place Minor",
+            "Margaret Howes Place Minor",
             "Roncobello Place Minor",
             "Shadwell Differential Place Minor",
             "Turnpike Lane Differential Place Minor",
@@ -3271,254 +3289,6 @@
             "Harborne Place Minor",
             "Single Rayford Place Minor",
             "Breeze Block Place Minor"
-          ]
-        ]
-      },
-      {
-        "class": "Slow Course",
-        "methods": [
-          [
-            "Chalfont Slow Course Minor",
-            "Cottesmore Slow Course Minor",
-            "Dunwich Slow Course Minor",
-            "Black Swan Slow Course Minor",
-            "Baker Street Slow Course Minor",
-            "Plastic Swan Slow Course Minor",
-            "Horton Slow Course Minor",
-            "Snitterfield Slow Course Minor",
-            "Adrian Parry Slow Course Minor",
-            "Wormsley Slow Course Minor",
-            "King's Cross St Pancras Slow Course Minor",
-            "Harrow-on-the-Hill Slow Course Minor",
-            "Finchley Road Slow Course Minor",
-            "Bolstone Slow Course Minor",
-            "Old Street Slow Course Minor",
-            "Hampstead Slow Course Minor",
-            "Hoarwithy Slow Course Minor",
-            "Arsenal Slow Course Minor",
-            "East London Line Slow Course Minor",
-            "Earls Court Slow Course Minor",
-            "Acton Town Slow Course Minor",
-            "Little Birch Slow Course Minor",
-            "The Castle Slow Course Minor",
-            "Little Dewchurch Slow Course Minor",
-            "The Plough Slow Course Minor",
-            "Grosmont Slow Course Minor",
-            "The Angel Slow Course Minor",
-            "Ewyas Harold Slow Course Minor",
-            "The Dog Slow Course Minor",
-            "Jake Robert Slow Course Minor",
-            "Canonford Slow Course Minor",
-            "Blythburgh Slow Course Minor",
-            "Vinedale Slow Course Minor",
-            "Rhiannon Margaret Slow Course Minor",
-            "Eardisley Slow Course Minor",
-            "Prior's Frome Slow Course Minor",
-            "Durlow Common Slow Course Minor",
-            "Monkhide Slow Course Minor",
-            "Pixley Slow Course Minor",
-            "Trumpet Slow Course Minor",
-            "Aylton Slow Course Minor",
-            "Bringsty Common Slow Course Minor",
-            "Edgware Slow Course Minor",
-            "Finchley Central Slow Course Minor",
-            "Risbury Slow Course Minor",
-            "Russell Square Slow Course Minor",
-            "Turnham Green Slow Course Minor",
-            "Leicester Square Slow Course Minor",
-            "Alperton Slow Course Minor",
-            "Piccadilly Circus Slow Course Minor",
-            "Paddington Slow Course Minor",
-            "Bromyard Slow Course Minor",
-            "Green Park Slow Course Minor",
-            "Linley Green Slow Course Minor",
-            "Euston Square Slow Course Minor",
-            "Croxley Slow Course Minor",
-            "Neasden Slow Course Minor",
-            "Maplin Slow Course Minor",
-            "Woodton Slow Course Minor",
-            "Clewer Slow Course Minor",
-            "Wadenhoe Slow Course Minor",
-            "Lyddington Slow Course Minor",
-            "Edgware Road Slow Course Minor",
-            "North Wembley Slow Course Minor",
-            "Carey Slow Course Minor",
-            "Dollis Hill Slow Course Minor",
-            "West Harrow Slow Course Minor",
-            "Blackfriars Slow Course Minor",
-            "Stanmore Slow Course Minor",
-            "Ballingham Slow Course Minor",
-            "East Finchley Slow Course Minor",
-            "Totteridge & Whetstone Slow Course Minor",
-            "Welshpool Slow Course Minor",
-            "North Ealing Slow Course Minor",
-            "South Kensington Slow Course Minor",
-            "Oakwood Slow Course Minor",
-            "Arnos Grove Slow Course Minor",
-            "The Bell Slow Course Minor",
-            "Malvern Slow Course Minor",
-            "Kentchurch Slow Course Minor",
-            "The Bridge Slow Course Minor",
-            "Stoke Edith Slow Course Minor",
-            "Tarrington Slow Course Minor",
-            "Easily Done! Slow Course Minor",
-            "Forden Slow Course Minor",
-            "Yearsett Slow Course Minor",
-            "Golders Green Slow Course Minor",
-            "Mill Hill East Slow Course Minor",
-            "Edwyn Ralph Slow Course Minor",
-            "Osterley Slow Course Minor",
-            "Barons Court Slow Course Minor",
-            "Cockfosters Slow Course Minor",
-            "Ickenham Slow Course Minor",
-            "Regent's Park Slow Course Minor",
-            "Wembley Central Slow Course Minor",
-            "Munderfield Slow Course Minor",
-            "Swiss Cottage Slow Course Minor",
-            "Northwick Park Slow Course Minor",
-            "Rickmansworth Slow Course Minor",
-            "Queensbury Slow Course Minor",
-            "Dorney Slow Course Minor",
-            "Utricularia Slow Course Minor",
-            "Taff Slow Course Minor",
-            "Irongate Slow Course Minor",
-            "Winkfield Slow Course Minor",
-            "Marylebone Slow Course Minor",
-            "Oxford Circus Slow Course Minor",
-            "Tillington Common Slow Course Minor",
-            "Kilburn Slow Course Minor",
-            "North Harrow Slow Course Minor",
-            "Warren Street Slow Course Minor",
-            "Bond Street Slow Course Minor",
-            "Ledgemoor Slow Course Minor",
-            "Kentish Town Slow Course Minor",
-            "Burnt Oak Slow Course Minor",
-            "Kingswood Slow Course Minor",
-            "Ealing Common Slow Course Minor",
-            "Gloucester Road Slow Course Minor",
-            "Hammersmith Slow Course Minor",
-            "Knightsbridge Slow Course Minor",
-            "Ridge Hill Slow Course Minor",
-            "Hegdon Slow Course Minor",
-            "Nupton Slow Course Minor",
-            "Dinmore Slow Course Minor",
-            "Llangua Slow Course Minor",
-            "Rowlstone Slow Course Minor",
-            "White Rocks Slow Course Minor",
-            "Bagwyllydiart Slow Course Minor",
-            "Brimpton Slow Course Minor",
-            "Burlingjobb Slow Course Minor",
-            "Wenhaston Slow Course Minor",
-            "Harlesden Slow Course Minor",
-            "Portway Slow Course Minor",
-            "Hergest Ridge Slow Course Minor",
-            "Mansell Lacy Slow Course Minor",
-            "St James's Park Slow Course Minor",
-            "Watford Slow Course Minor",
-            "Kingsbury Slow Course Minor",
-            "Credenhill Slow Course Minor",
-            "Bank Slow Course Minor",
-            "West Finchley Slow Course Minor",
-            "Yarsop Slow Course Minor",
-            "Finsbury Park Slow Course Minor",
-            "Shoreditch Slow Course Minor",
-            "Holborn Slow Course Minor",
-            "Eastcote Slow Course Minor",
-            "Chadnor Slow Course Minor",
-            "Eaton Hill Slow Course Minor",
-            "Westhope Slow Course Minor",
-            "Shucknall Slow Course Minor",
-            "Pyon Slow Course Minor",
-            "Adzor Slow Course Minor",
-            "Garnons Slow Course Minor",
-            "Sutton Slow Course Minor",
-            "Turnant Slow Course Minor",
-            "Llanveynoe Slow Course Minor",
-            "Cwmyoy Slow Course Minor",
-            "Walterstone Slow Course Minor",
-            "Garway Hill Slow Course Minor",
-            "Wormbridge Slow Course Minor",
-            "Vowchurch Slow Course Minor",
-            "Craswall Slow Course Minor",
-            "Ken and Dorothy Nicholas' 50th Wedding Anniversary Slow Course Minor",
-            "St Deiniols Slow Course Minor",
-            "Around 50 Slow Course Minor",
-            "Ruth's on the Treble Slow Course Minor",
-            "Black Cygnet Slow Course Minor",
-            "Julie McDonnell Slow Course Minor",
-            "Sarnia Slow Course Minor",
-            "Coolydoody Slow Course Minor",
-            "Holywell Slow Course Minor",
-            "Hilton Slow Course Minor",
-            "Houghton Slow Course Minor",
-            "Bermondsey Slow Course Minor",
-            "The Gabba Slow Course Minor",
-            "WACA Slow Course Minor",
-            "Trent Bridge Slow Course Minor",
-            "Edgbaston Slow Course Minor",
-            "Sabina Park Slow Course Minor",
-            "Kensington Oval Slow Course Minor",
-            "Basin Reserve Slow Course Minor",
-            "Eden Park Slow Course Minor",
-            "Newlands Slow Course Minor",
-            "Centurion Slow Course Minor",
-            "Premadasa Slow Course Minor",
-            "Galle Slow Course Minor",
-            "Wankhede Slow Course Minor",
-            "Eden Gardens Slow Course Minor",
-            "Sam Maguire Slow Course Minor",
-            "Southgate Slow Course Minor",
-            "St George East Bristol Slow Course Minor",
-            "All Saints Nottingham Slow Course Minor",
-            "Chipping Barnet Slow Course Minor",
-            "St John Cardiff Slow Course Minor",
-            "St Mary Staines Slow Course Minor",
-            "Tottenham Slow Course Minor",
-            "Uplyme Slow Course Minor",
-            "Salcombe Slow Course Minor",
-            "Berkhamsted Slow Course Minor",
-            "Little Gaddesden Slow Course Minor",
-            "Wordsley Slow Course Minor",
-            "Old Hill Slow Course Minor",
-            "Trumpington Slow Course Minor",
-            "Wollaton Slow Course Minor",
-            "Wragby Slow Course Minor",
-            "Harborne Slow Course Minor",
-            "Saltby Slow Course Minor",
-            "TMS Slow Course Minor",
-            "My Dear Old Thing Slow Course Minor",
-            "Bearded Wonder Slow Course Minor",
-            "Johnners Slow Course Minor",
-            "Aggers Slow Course Minor",
-            "CMJ Slow Course Minor",
-            "Boycott Bingo Slow Course Minor",
-            "Corridor of Uncertainty Slow Course Minor",
-            "John Arlott Slow Course Minor",
-            "Shipping Forecast Slow Course Minor",
-            "View from the Boundary Slow Course Minor",
-            "Leg Over Slow Course Minor",
-            "The Alderman Slow Course Minor",
-            "Stick of Rhubarb Slow Course Minor",
-            "Chocolate Cake Slow Course Minor",
-            "The Primary Club Slow Course Minor",
-            "Shilpa Slow Course Minor",
-            "Slip Slow Course Minor",
-            "Gully Slow Course Minor",
-            "Third Man Slow Course Minor",
-            "Point Slow Course Minor",
-            "Fly Slip Slow Course Minor",
-            "Deep Extra Slow Course Minor",
-            "Cover Slow Course Minor",
-            "Mid Off Slow Course Minor",
-            "Long Off Slow Course Minor",
-            "Mid On Slow Course Minor",
-            "Long On Slow Course Minor",
-            "Mid Wicket Slow Course Minor",
-            "Square Leg Slow Course Minor",
-            "Fine Leg Slow Course Minor",
-            "Long Leg Slow Course Minor",
-            "Leg Slip Slow Course Minor",
-            "Cow Corner Slow Course Minor"
           ]
         ]
       },
@@ -5709,6 +5479,7 @@
             "Evelyn Delight Minor",
             "Bland Delight Minor",
             "Alex Delight Minor",
+            "Lobster Delight Minor",
             "Micheldever Delight Minor",
             "Hafnium II Delight Minor",
             "Julie McDonnell Delight Minor",
@@ -7710,6 +7481,7 @@
             "Millennial Alliance Minor",
             "St Martha Little Alliance Minor",
             "Hudson Alliance Minor",
+            "Molloy Alliance Minor",
             "Ballcock Alliance Minor"
           ]
         ]
@@ -8406,6 +8178,8 @@
             "East Ilsley Bob Triples",
             "St Lawrence's Bob Triples",
             "Stiltshire Bob Triples",
+            "Devonport Naval Base Bob Triples",
+            "Pukerua Bay Bob Triples",
             "Barrow-upon-Humber Bob Triples",
             "John David Bob Triples",
             "St Hugh Bob Triples",
@@ -8522,20 +8296,6 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": [
-          [
-            "Candlesby Slow Course Triples",
-            "Poyle Slow Course Triples",
-            "Da Staines-upon-Thames Massive Slow Course Triples"
-          ]
-        ]
-      },
-      {
-        "class": "Treble Bob",
-        "methods": []
-      },
-      {
         "class": "Treble Place",
         "methods": [
           [
@@ -8546,14 +8306,6 @@
             "Llansteffan Treble Place Triples"
           ]
         ]
-      },
-      {
-        "class": "Delight",
-        "methods": []
-      },
-      {
-        "class": "Surprise",
-        "methods": []
       },
       {
         "class": "Alliance",
@@ -8568,10 +8320,6 @@
             "Fellowship of the Ring Alliance Triples"
           ]
         ]
-      },
-      {
-        "class": "Hybrid",
-        "methods": []
       },
       {
         "class": "Differential",
@@ -8643,6 +8391,7 @@
             "Erith Little Bob Major",
             "Northfleet Little Bob Major",
             "New College Little Bob Major",
+            "Ping Link Little Bob Major",
             "Inverse Little Bob Major",
             "Red Dwarf Little Bob Major",
             "Ickham Little Bob Major",
@@ -9986,6 +9735,7 @@
             "Double College Bob Major",
             "St Nicholas College Bob Major",
             "Double Darlaston Bob Major",
+            "Double Hunslet Bob Major",
             "Clementine Bob Major",
             "Cheltenham Minster Bob Major",
             "Evening Exercise Bob Major",
@@ -10028,18 +9778,6 @@
             "Double Cumberland Place Major",
             "Single Cumberland Place Major",
             "Amaranth Little Place Major"
-          ]
-        ]
-      },
-      {
-        "class": "Slow Course",
-        "methods": [
-          [
-            "Haselbech Slow Course Major",
-            "Maplin Slow Course Major",
-            "Clewer Slow Course Major",
-            "Lyddington Slow Course Major",
-            "Black Cygnet Slow Course Major"
           ]
         ]
       },
@@ -18943,18 +18681,6 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": [
-          [
-            "Candlesby Slow Course Caters"
-          ]
-        ]
-      },
-      {
-        "class": "Treble Bob",
-        "methods": []
-      },
-      {
         "class": "Treble Place",
         "methods": [
           [
@@ -18966,10 +18692,6 @@
             "Surfleet Treble Place Caters"
           ]
         ]
-      },
-      {
-        "class": "Delight",
-        "methods": []
       },
       {
         "class": "Surprise",
@@ -18987,14 +18709,6 @@
             "Regulus Alliance Caters"
           ]
         ]
-      },
-      {
-        "class": "Hybrid",
-        "methods": []
-      },
-      {
-        "class": "Differential",
-        "methods": []
       },
       {
         "class": "Principle",
@@ -19208,10 +18922,6 @@
             "Little Little Penultimus Little Place Royal"
           ]
         ]
-      },
-      {
-        "class": "Slow Course",
-        "methods": []
       },
       {
         "class": "Treble Bob",
@@ -21761,24 +21471,12 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": []
-      },
-      {
-        "class": "Treble Bob",
-        "methods": []
-      },
-      {
         "class": "Treble Place",
         "methods": [
           [
             "Kent Treble Place Cinques"
           ]
         ]
-      },
-      {
-        "class": "Delight",
-        "methods": []
       },
       {
         "class": "Surprise",
@@ -21797,18 +21495,6 @@
             "Regulus Alliance Cinques"
           ]
         ]
-      },
-      {
-        "class": "Hybrid",
-        "methods": [
-          [
-            "Tiebout's Mental Block Differential Little Hybrid Cinques"
-          ]
-        ]
-      },
-      {
-        "class": "Differential",
-        "methods": []
       },
       {
         "class": "Principle",
@@ -21895,10 +21581,6 @@
         ]
       },
       {
-        "class": "Slow Course",
-        "methods": []
-      },
-      {
         "class": "Treble Bob",
         "methods": [
           [
@@ -21937,7 +21619,8 @@
             "Japura Little Treble Place Maximus",
             "Percy's Tea Strainer Treble Place Maximus",
             "Frumious Little Treble Place Maximus",
-            "Bandersnatch Little Treble Place Maximus"
+            "Bandersnatch Little Treble Place Maximus",
+            "Tricycle Differential Little Treble Place Maximus"
           ]
         ]
       },
@@ -22860,6 +22543,251 @@
             "Strange Maximus",
             "Quark Maximus",
             "Ganymede Maximus"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "stage": 13,
+    "classes": [
+      {
+        "class": "Bob",
+        "methods": [
+          [
+            "Plain Bob Sextuples",
+            "Grandsire Sextuples"
+          ]
+        ]
+      },
+      {
+        "class": "Principle",
+        "methods": [
+          [
+            "Erin Sextuples",
+            "Stedman Sextuples"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "stage": 14,
+    "classes": [
+      {
+        "class": "Bob",
+        "methods": [
+          [
+            "Bastow Little Bob Fourteen",
+            "Kent Little Bob Fourteen",
+            "Little Bob Fourteen",
+            "Crayford Little Bob Fourteen",
+            "Gainsborough Little Bob Fourteen",
+            "Plain Bob Fourteen",
+            "Grandsire Fourteen"
+          ]
+        ]
+      },
+      {
+        "class": "Treble Bob",
+        "methods": [
+          [
+            "Gonville Little Treble Bob Fourteen",
+            "Oxford Treble Bob Fourteen",
+            "Kent Treble Bob Fourteen"
+          ]
+        ]
+      },
+      {
+        "class": "Delight",
+        "methods": [
+          [
+            "Yellowstone Delight Fourteen"
+          ]
+        ]
+      },
+      {
+        "class": "Surprise",
+        "methods": [
+          [
+            "Littleport Little Surprise Fourteen",
+            "Bristol Little Surprise Fourteen",
+            "Bristol12 Little Surprise Fourteen",
+            "York Surprise Fourteen",
+            "Winchester Surprise Fourteen",
+            "Cambridge Surprise Fourteen",
+            "St Swithun Surprise Fourteen",
+            "Vermuyden Surprise Fourteen",
+            "Yorkshire Surprise Fourteen",
+            "Lincolnshire Surprise Fourteen",
+            "Tintwistle Surprise Fourteen",
+            "Leatherhead Surprise Fourteen",
+            "Oberon Surprise Fourteen",
+            "Worcester Surprise Fourteen",
+            "Bristol Surprise Fourteen",
+            "Pudsey Surprise Fourteen",
+            "Newgate Surprise Fourteen",
+            "London No.3 Surprise Fourteen",
+            "Leicestershire Surprise Fourteen",
+            "Fulham Surprise Fourteen",
+            "Aerilon Surprise Fourteen",
+            "Leonis Surprise Fourteen",
+            "Tauron Surprise Fourteen",
+            "Canceron Surprise Fourteen",
+            "Aquarion Surprise Fourteen",
+            "Gemenon Surprise Fourteen",
+            "Picon Surprise Fourteen",
+            "Agathon Surprise Fourteen",
+            "Albanian Surprise Fourteen",
+            "Zalinky Surprise Fourteen",
+            "Libran Surprise Fourteen",
+            "Horsleydown Surprise Fourteen",
+            "Ariella Surprise Fourteen",
+            "Bristow Surprise Fourteen",
+            "Woodstock Surprise Fourteen",
+            "Cornish Surprise Fourteen",
+            "Zarek Surprise Fourteen",
+            "Athena Surprise Fourteen",
+            "Starbuck Surprise Fourteen"
+          ]
+        ]
+      },
+      {
+        "class": "Alliance",
+        "methods": [
+          [
+            "Julie McDonnell Little Alliance Fourteen",
+            "Linx Little Alliance Fourteen",
+            "Old Milverton Alliance Fourteen",
+            "Maypole Alliance Fourteen",
+            "Cranesthorpe Alliance Fourteen",
+            "Akenfield Alliance Fourteen"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "stage": 15,
+    "classes": [
+      {
+        "class": "Bob",
+        "methods": [
+          [
+            "Plain Bob Septuples",
+            "Grandsire Septuples"
+          ]
+        ]
+      },
+      {
+        "class": "Principle",
+        "methods": [
+          [
+            "Erin Septuples",
+            "Stedman Septuples"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "stage": 16,
+    "classes": [
+      {
+        "class": "Bob",
+        "methods": [
+          [
+            "Bastow Little Bob Sixteen",
+            "Little Bob Sixteen",
+            "Crayford Little Bob Sixteen",
+            "Plain Bob Sixteen",
+            "Birmingham Bob Sixteen",
+            "Grandsire Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Treble Bob",
+        "methods": [
+          [
+            "Gonville Little Treble Bob Sixteen",
+            "Kent Treble Bob Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Treble Place",
+        "methods": [
+          [
+            "Slinkety Differential Little Treble Place Sixteen",
+            "Europa Little Treble Place Sixteen",
+            "Prospero Little Treble Place Sixteen",
+            "Big Slink Differential Little Treble Place Sixteen",
+            "Ariel Little Treble Place Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Delight",
+        "methods": [
+          [
+            "Melbourne Delight Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Surprise",
+        "methods": [
+          [
+            "Glazgow Little Surprise Sixteen",
+            "Littleport Little Surprise Sixteen",
+            "Glasgow Little Surprise Sixteen",
+            "Bristol Little Surprise Sixteen",
+            "Clyde Little Surprise Sixteen",
+            "Bristol12 Little Surprise Sixteen",
+            "Bristol14 Little Surprise Sixteen",
+            "Superlative Surprise Sixteen",
+            "York Surprise Sixteen",
+            "Feering Surprise Sixteen",
+            "Phobos Moon Surprise Sixteen",
+            "Cambridge Surprise Sixteen",
+            "Yorkshire Surprise Sixteen",
+            "Lincolnshire Surprise Sixteen",
+            "Sawley Surprise Sixteen",
+            "Ealing Surprise Sixteen",
+            "Leatherhead Surprise Sixteen",
+            "Bristol Surprise Sixteen",
+            "Wembley Surprise Sixteen",
+            "Strathclyde Surprise Sixteen",
+            "Londinium Surprise Sixteen",
+            "Newgate Surprise Sixteen",
+            "Parkhurst Surprise Sixteen",
+            "Leicestershire Surprise Sixteen",
+            "Fulham Surprise Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Alliance",
+        "methods": [
+          [
+            "Fleet Place Little Alliance Sixteen",
+            "Leda Little Alliance Sixteen",
+            "Chaldene Little Alliance Sixteen",
+            "Io Little Alliance Sixteen",
+            "Deimos Moon Little Alliance Sixteen",
+            "Palgravia Alliance Sixteen",
+            "Cantuara Alliance Sixteen",
+            "Callisto Megale Little Alliance Sixteen",
+            "Cantuar No.1 Alliance Sixteen"
+          ]
+        ]
+      },
+      {
+        "class": "Hybrid",
+        "methods": [
+          [
+            "London Link Differential Sixteen"
           ]
         ]
       }
