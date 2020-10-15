@@ -21,9 +21,12 @@ $(function() {
     let delay = calcdelay(pealspeed);
     let type = $("#type input:checked").attr("id");
     let left = 0, top = 0;
-    let dy;
+    let dy,dx;
+    let startleft;
+    let numbars;
+    let numrounds = Number($("#numrounds").val());
     
-    $("#pausebutton").hide();
+    $("#pausebutton,#playbutton").hide();
     
     setupSample(0);
     //console.log("container width", $(".grid-container").css("width"));
@@ -32,15 +35,23 @@ $(function() {
       left = Number($("text:first-child").attr("x"))-2;
       $("#highlight").css("left", (left || "38")+"px");
       dy = 20;
+    } else if (type === "staff") {
+      startleft = Number($("svg:first-child .noteheads ellipse:first-child").attr("cx"))-12;
+      left = Number($("svg:nth-child(2) .noteheads ellipse:first-child").attr("cx"))-12;
+      $("#highlight").css("left", startleft + "px");
+      dx = 30;
+      dy = 140;
+      numbars = $("svg:nth-child(2) .barlines path").length;
     }
     
     
     $("#playbutton").on("click", function() {
       playing = !playing;
       if (audioCtx.state === 'suspended') {
-        console.log("resuming audio");
+        //console.log("resuming audio");
         audioCtx.resume();
-        if (type === "grid") $("#highlight").css({"border": "2px solid teal"});
+        if (type === "grid" && $("#indicate").is(":checked")) $("#highlight").css({"border": "2px solid teal"});
+        if (type === "staff" && $("#indicate").is(":checked") && $("#rowzero").is(":checked")) $("#highlight").css({"border": "3px solid teal"});
       }
       
       
@@ -79,7 +90,29 @@ $(function() {
     $('input[name="hours"],input[name="minutes"]').change(function() {
       pealspeed = Number($('input[name="hours"]').val())*60 + Number($('input[name="minutes"]').val());
       delay = calcdelay(pealspeed);
-      console.log(delay);
+      let query = window.location.search;
+      ["hours", "minutes"].forEach(w => {
+        if (query.includes(w)) {
+          query = query.replace(new RegExp(w+"=\\d+"), w+"="+$("#"+w).val());
+        } else {
+          query += "&"+w+"="+$("#"+w).val();
+        }
+      });
+      if (history) {
+        history.pushState('', '', "/"+query+window.location.hash);
+      }
+      
+      //console.log(delay);
+    });
+    
+    $("#indicate").change(function() {
+      if (!$(this).is(":checked")) {
+        $("#highlight").css("border", "none");
+      } else {
+        let border = {grid: "2px", graph: "5px", staff: "3px"};
+        border = border[type];
+        $("#highlight").css("border", border + " solid teal");
+      }
     });
     
     function calcdelay(p) {
@@ -90,10 +123,14 @@ $(function() {
     function scheduler() {
       while (nextBellTime < audioCtx.currentTime + schedule && rownum < rowArray.length) {
         scheduleRing(place, nextBellTime);
-        if (place === numbells-1 && rownum === Number($("#numrounds").val())-1 && type === "graph") {
+        if (place === numbells-1 && rownum === numrounds-1 && type === "graph" && $("#indicate").is(":checked")) {
           $("#highlight").css({"border": "5px solid teal"});
+        } else if (place === numbells-1 && rownum === numrounds-1 && type === "staff" && $("#indicate").is(":checked") && !$("#rowzero").is(":checked")) {
+          $("#highlight").css({"border": "3px solid teal"});
+        } else if (type === "staff") {
+          movehighlight();
         }
-        else if (place === numbells-1 && rownum >= Number($("#numrounds").val())-1) {
+        else if (place === numbells-1 && rownum >= numrounds-1) {
           movehighlight();
         }
         nextPlace()
@@ -126,6 +163,10 @@ $(function() {
           top += 178;
         }
         $("#highlight").animate({top: top+"px", left: left+"px"}, 400);
+      } else if (type === "staff") {
+        if (place > 0) {
+          $("#highlight").animate({left: "+=30"}, 100);
+        } 
       }
       
       return;
@@ -140,9 +181,30 @@ $(function() {
         place = 0;
         stroke *= -1;
         rownum++;
-        
+        if (type === "staff") {
+          nextSystem();
+        }
       }
 
+    }
+    
+    function nextSystem() {
+      let dur = stroke === -1 ? 1000*delay : 2000*delay;
+      if (rownum <= numrounds ) {
+            //let dur = stroke === -1 ? 150 : 300;
+            if (rownum === numrounds && $("#rowzero").is(":checked")) {
+              $("#highlight").animate({left: left+"px", top: "+=144px"}, dur);
+            } else {
+              $("#highlight").animate({left: startleft+"px"}, dur);
+            }
+          } else if ((rownum-numrounds)%numbars === 0) {
+            //let dur = stroke === -1 ? 200 : 400;
+            $("#highlight").animate({left: left+"px", top: "+=144px"}, dur);
+          } else {
+            
+            let x = stroke === -1 ? "+=40px" : "+=70px";
+            $("#highlight").animate({left: x}, dur);
+          }
     }
     
     function playSample(audioContext, audioBuffer, t) {
@@ -162,7 +224,9 @@ $(function() {
           i++;
           setupSample(i);
         } else {
-          console.log("finished setting up");
+          //console.log("finished setting up");
+          $("#wait").hide();
+          $("#playbutton").show();
         }
       }, (e) => { console.log(e) });
     }

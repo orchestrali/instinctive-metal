@@ -35,7 +35,7 @@ module.exports = function assemble(rows, numBells, displayInfo, first, last) {
     <!--time sig would go here-->
     ${time}
     <!--noteheads-->
-    <g style="stroke:black; stroke-width:1; fill:black; ">
+    <g style="stroke:black; stroke-width:1; fill:black; " class="noteheads">
       ${things.noteheads}
     </g>
     <!--stems-->
@@ -51,7 +51,7 @@ module.exports = function assemble(rows, numBells, displayInfo, first, last) {
       ${things.rests}
     </g>
     <!--bar lines-->
-    <g style="stroke:black; stroke-width:1; fill:black; ">
+    <g style="stroke:black; stroke-width:1; fill:black; " class="barlines">
       ${barlines}
     </g>
     <!--bar number-->

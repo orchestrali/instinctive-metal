@@ -497,7 +497,7 @@ module.exports = [
                 <legend>Sounds</legend>
                 <ul>
                   <li><label for="hand"><input type="radio" name="sounds" value="hand" id="hand" />handbells (sounds courtesy of Mabel)</label></li>
-                  <li><label for="tower"><input type="radio" name="sounds" value="tower" id="tower" />tower bells (Vancouver Holy Rosary Cathedral )</label></li>
+                  <li><label for="tower"><input type="radio" name="sounds" value="tower" id="tower" />tower bells (Vancouver Holy Rosary Cathedral)</label></li>
                 </ul>
               </fieldset>
               <p>
