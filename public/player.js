@@ -25,6 +25,9 @@ $(function() {
     let startleft;
     let numbars;
     let numrounds = Number($("#numrounds").val());
+    let gap = $("#handstroke-gap").is(":checked");
+    let stafftimer;
+    let lastplace = 0;
     
     $("#pausebutton,#playbutton").hide();
     
@@ -57,6 +60,10 @@ $(function() {
       
       if (playing) {
         nextBellTime = audioCtx.currentTime;
+        lastplace = -1;
+        if (type === "staff") {
+          requestAnimationFrame(staff);
+        }
         scheduler();
         $("#pausebutton").show();
         $("#playbutton").hide();
@@ -70,6 +77,7 @@ $(function() {
       $("#pausebutton").hide();
       $("#playbutton").show();
       clearTimeout(timeout);
+      //clearTimeout(stafftimer);
       $("#player input").prop("disabled", false);
     });
     
@@ -84,6 +92,9 @@ $(function() {
         $("#highlight").css({left: 0, border: "none"});
         left = 0;
         top = 0;
+      }
+      if (type === "staff") {
+        $("#highlight").css({left: startleft + "px"});
       }
     });
     
@@ -127,10 +138,7 @@ $(function() {
           $("#highlight").css({"border": "5px solid teal"});
         } else if (place === numbells-1 && rownum === numrounds-1 && type === "staff" && $("#indicate").is(":checked") && !$("#rowzero").is(":checked")) {
           $("#highlight").css({"border": "3px solid teal"});
-        } else if (type === "staff") {
-          movehighlight();
-        }
-        else if (place === numbells-1 && rownum >= numrounds-1) {
+        } else if (place === numbells-1 && rownum >= numrounds-1 && type != "staff") {
           movehighlight();
         }
         nextPlace()
@@ -145,7 +153,7 @@ $(function() {
     
     function scheduleRing(p, t) {
       let bell = bells.find(b => b.num === rowArray[rownum].bells[p]);
-      queue.push({bell: bell.bell, stroke: stroke, time: t});
+      queue.push({bell: bell.bell, stroke: stroke, time: t, place: p});
 
       if (bell) {
         playSample(audioCtx, bell.buffer, t);
@@ -163,11 +171,7 @@ $(function() {
           top += 178;
         }
         $("#highlight").animate({top: top+"px", left: left+"px"}, 400);
-      } else if (type === "staff") {
-        if (place > 0) {
-          $("#highlight").animate({left: "+=30"}, 100);
-        } 
-      }
+      } 
       
       return;
     }
@@ -177,34 +181,56 @@ $(function() {
 
       place++;
       if (place === numbells) {
-        if (stroke === -1) nextBellTime += delay; //add handstroke gap
+        if (stroke === -1 && (gap || type != "staff")) nextBellTime += delay; //add handstroke gap
         place = 0;
         stroke *= -1;
         rownum++;
-        if (type === "staff") {
-          nextSystem();
-        }
+        
       }
+      if (type === "staff") {
+          //nextSystem();
+        }
 
     }
     
-    function nextSystem() {
-      let dur = stroke === -1 ? 1000*delay : 2000*delay;
-      if (rownum <= numrounds ) {
-            //let dur = stroke === -1 ? 150 : 300;
-            if (rownum === numrounds && $("#rowzero").is(":checked")) {
-              $("#highlight").animate({left: left+"px", top: "+=144px"}, dur);
-            } else {
-              $("#highlight").animate({left: startleft+"px"}, dur);
-            }
-          } else if ((rownum-numrounds)%numbars === 0) {
-            //let dur = stroke === -1 ? 200 : 400;
+    
+    function staff() {
+      let current = lastplace;
+      let currentTime = audioCtx.currentTime;
+      
+      while (queue.length && queue[0].time < currentTime - 0.1) {
+        current = queue[0].place;
+        queue.splice(0,1);
+      }
+      if (lastplace != current) {
+        nextSystem(current);
+        lastplace = current;
+      }
+      requestAnimationFrame(staff)
+    }
+    
+    function nextSystem(current) {
+      if (current < numbells-1) {
+        $("#highlight").animate({left: "+=30"}, 100);
+      } else {
+        let dur = stroke === -1 || !gap ? 900*delay : 1900*delay;
+        if (rownum <= numrounds ) {
+          //let dur = stroke === -1 ? 150 : 300;
+          if (rownum === numrounds && $("#rowzero").is(":checked")) {
             $("#highlight").animate({left: left+"px", top: "+=144px"}, dur);
           } else {
-            
-            let x = stroke === -1 ? "+=40px" : "+=70px";
-            $("#highlight").animate({left: x}, dur);
+            $("#highlight").animate({left: startleft+"px"}, dur);
           }
+        } else if ((rownum-numrounds)%numbars === 0) {
+          //let dur = stroke === -1 ? 200 : 400;
+          $("#highlight").animate({left: left+"px", top: "+=144px"}, dur);
+        } else {
+
+          let x = stroke === -1 || !gap ? "+=40px" : "+=70px";
+          $("#highlight").animate({left: x}, dur);
+        }
+      }
+      
     }
     
     function playSample(audioContext, audioBuffer, t) {
