@@ -45,7 +45,7 @@ $(function() {
       obj[p[0]] = p[1];
     }
   }
-  console.log(obj);
+  //console.log(obj);
   
   
   
@@ -64,7 +64,7 @@ $(function() {
   $('#stage').change(function() {
     
     stage = Number($('select#stage option:checked').val());
-    console.log("stage: ", stage);
+    //console.log("stage: ", stage);
     checkedClass = "";
     
     //remove methods from name dropdown
@@ -194,7 +194,7 @@ $(function() {
     $(document.body).on('click.menuHide', function(){
         var $body = $(this);
         $("#methodList li").hide();
-        //checkName();
+        
         $body.off('click.menuHide');
       
     });
@@ -208,12 +208,12 @@ $(function() {
         $('li#warning').css("display", "list-item");
       }
     }
-    //checkName();
+    
   });
   
   //when a method in the dropdown list is clicked on, make it the methodName value and hide the list
   $("#methodList").on("click", "li", function(e) {
-    console.log('method clicked 1');
+    //console.log('method clicked 1');
     $("#methodName").val($(this).text());
     $("#methodList li").hide();
     e.stopPropagation();
@@ -388,7 +388,7 @@ $(function() {
           //enter key
         } else if (event.which == 13) {
           $("#methodName").val($("li.selected").text());
-          //checkName();
+          
           $("#methodList li").hide();
         }
         
@@ -449,7 +449,7 @@ $(function() {
   
   $("#type").change(function() {
     type = $("#type input:checked").attr("id");
-    console.log(type);
+    //console.log(type);
     
     
     $("#type li").removeClass("selected");
@@ -469,9 +469,18 @@ $(function() {
     
     $(".type").addClass("hidden");
     $("div#"+type+"opts").removeClass("hidden");
-    $("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : 0);
+    $("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : "106px");
     if (type === "graph") {
       $("#highlight").css("width", "270px");
+    } else if (type === "staff") {
+      $("#highlight").css("width", "24px");
+    }
+    
+    $("#stage option:nth-child(n+11)").prop("disabled", type === "staff");
+    if (type === "practice") {
+      $("#playeropts").hide();
+    } else if ($("#player-"+type).is(":checked")) {
+      $("#playeropts").slideDown(600);
     }
     
   });
@@ -522,7 +531,7 @@ $(function() {
   
   //return to basic line options
   $('button.return-basic').click(function() {
-    console.log($(this).attr("id"));
+    //console.log($(this).attr("id"));
     gridtype = "basic-lines";
     toggleGridTypes();
     $('div#basic-lines').slideDown(600, function() {
@@ -551,7 +560,7 @@ $(function() {
       }
 
       $("#" + otherID).detach();
-      console.log(other);
+      //console.log(other);
       //if the selection is none, disable color input
       if ($(this).val() == 'none') {
 
@@ -563,8 +572,8 @@ $(function() {
 
     //if the selection is hunt or work AND one option has been detached, reattach it
     if (($(this).val() == 'hunt' || $(this).val() == 'work') && other) {
-      console.log('yes');
-      console.log(other);
+      //console.log('yes');
+      //console.log(other);
       let id = $(this).attr("id");
       //console.log($('#' + other));
       other.appendTo($('div#bellgroups ul'));
@@ -641,12 +650,7 @@ $(function() {
     
   });
   
-  radios.forEach(r => {
-    if (obj[r]) {
-      $("input[value='"+obj[r]+"']").prop("checked", true);
-      $("#"+r).change();
-    }
-  });
+  
   
   texts.forEach(t => {
     if (obj[t]) {
@@ -656,7 +660,7 @@ $(function() {
   
   checked.forEach(c => {
     if (obj[c]) {
-      console.log(c);
+      //console.log(c);
       $("input[name='"+c+"']").prop("checked", true);
     } else if (params > 0) {
       $("input[name='"+c+"']").prop("checked", false);
@@ -666,12 +670,18 @@ $(function() {
     }
   });
   
+  radios.forEach(r => {
+    if (obj[r]) {
+      $("input[value='"+obj[r]+"']").prop("checked", true);
+      $("#"+r).change();
+    }
+  });
   
   
   
   let gridWidth = (stage + (stage % 2))*16;
   //console.log('stage: ', stage);
-  console.log('gridWidth: ', gridWidth);
+  //console.log('gridWidth: ', gridWidth);
   //console.log('window width: ', $(window).width());
   //number of columns per viewport
   let numSVGs = Math.floor(($( window ).width() - 76)/(gridWidth + 38));
@@ -682,7 +692,7 @@ $(function() {
   
   //number of columns per letter size page
   let printNumSVGs = Math.floor(670/(gridWidth + 38));
-  console.log("printNumSVGs", printNumSVGs);
+  //console.log("printNumSVGs", printNumSVGs);
   let lastPage = $('div.grid').length % printNumSVGs;
   if (lastPage == 0) {
     lastPage = printNumSVGs;
@@ -728,27 +738,7 @@ $(function() {
     $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
   }
   
-  function check(val) {
-    let names = [];
-    let list = $("#methodList li");
-    for (var i = 1; i <= list.length; i++) {
-      names.push($("#methodList li:nth-child("+i+")").text());
-    }
-    if (names.some(e => e == val) && val.length > 0) return true;
-    else return false;
-  }
   
-  function checkName() {
-    //console.log("method list li", $("#methodList li").text());
-    console.log("checking value", check($("#methodName").val()));
-    if ($("#noMethods").length == 0 && $('li#warning').length == 0 && check($("#methodName").val())) {
-      console.log("valid method");
-      $("#validName").prop("checked", true);
-    } else {
-      $("#validName").prop("checked", false);
-    }
-    
-  }
   
   //build filtered methodSet
   function getMethods(methods, howMany) {
