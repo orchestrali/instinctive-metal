@@ -485,7 +485,7 @@ module.exports = [
               </p>
               <p>
                 <input type="checkbox" id="player-staff" name="player" value="include" />
-                <label for="player">Include method player</label>
+                <label for="player">Include method player (sounds may not match notation)</label>
               </p>
             </div>
 
