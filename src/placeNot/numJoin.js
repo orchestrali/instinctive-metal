@@ -1,13 +1,13 @@
 module.exports = function numJoin(tokens) {
   //console.log('starting numJoin', tokens);
-  var arrayNumJoin = [];
-  var prevToken = 'all change';
+  let arrayNumJoin = [];
+  let prevToken = 'all change';
   //console.log('hi');
   //console.log(tokens);
-  for (var i = 0; i < tokens.length; ++i) {
-    if (prevToken == tokens[i].type && prevToken == 'number') {
+  for (let i = 0; i < tokens.length; ++i) {
+    if (tokens[i].type === 'number' && prevToken === 'number') {
       arrayNumJoin[arrayNumJoin.length - 1].value += tokens[i].value;
-    } else if (tokens[i].type == 'separator') {
+    } else if (tokens[i].type === 'separator') {
       prevToken = 'separator';
     } else {
       arrayNumJoin.push(tokens[i]);
