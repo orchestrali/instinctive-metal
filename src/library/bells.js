@@ -62,22 +62,22 @@ module.exports = [
   {
     bell: "a6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell81.wav"
+    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell81.wav"
   },
   {
     bell: "b6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell83.wav"
+    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell83.wav"
   },
   {
     bell: "c7",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell84.wav"
+    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell84.wav"
   },
   {
     bell: "d7",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell86.wav"
+    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell86.wav"
   },
   
   

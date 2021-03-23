@@ -7,7 +7,7 @@ var validGroupTokens = ['',',', '+', '&,', '&,+', '+,', '+,&'];
 var leadendTokens = ['p', 'b', 's'];
 var callPlaceTokens = ['h', 'w', 'm', 'b', 'i'];
 var touchGroup = ['(', ')', '[', ']', '{', '}'];
-var plainClasses = ["Bob", "Place", "Slow Course"];
+var plainClasses = ["Bob", "Place"];
 
 module.exports = function findError(methodInput, compInput) {
   console.log("checking for errors");

@@ -14,11 +14,12 @@
     "express-validator": "^6.6.0",
     "node-xml": "^1.0.2",
     "xml-js": "^1.6.11",
-    "url-parse": "^1.4.7",
+    "url-parse": "^1.5.1",
     "request": "^2.88.0",
-    "mongoose": "^5.10.9",
+    "mongoose": "^5.11.20",
     "morgan": "^1.10.0",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.21",
+    "axios": "^0.21.1"
   },
   "engines": {
     "node": "8.x"

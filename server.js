@@ -69,7 +69,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(morgan(':url'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-//
+//createNames(() => {});
 
 
 /*
@@ -81,8 +81,11 @@ rowGen(input, (arr) => {
 
 const serialize = require('./src/library/serialize.js');
 const max = require('./src/query/max.js');
+const random = require('./src/random.js');
 
 
+//random({id: 40936});
+//findOne({title: "Cheeky Little Surprise Minor"}, '', (err, res) => {console.log(err || res)});
 
 
 const routes = {
@@ -99,7 +102,8 @@ const routes = {
     stages: "/src/stages.json",
     teststaff: "/views/stafftest.html",
     surpriseminor: "/views/surprise-minor.html",
-    index: "/views/index.html"
+    index: "/views/index.html",
+    stedman: "/views/stedman.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {

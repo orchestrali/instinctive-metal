@@ -1,22 +1,27 @@
 const places = require('../places');
 
 
-module.exports = function lexer(placeNot, numBells) {
-  var tokens = [];
+module.exports = function lexer(placeNot) {
+  let tokens = [];
   
-  for (var i = 0; i < placeNot.length; ++i) {
-    var token = {};
-    if (placeNot[i] == '&' || placeNot[i] == ',' || placeNot[i] == '+'){
-      //console.log('grouping token ' + placeNot[i]);
-      token.type = 'grouping token';
-    } else if (placeNot[i] == '.') {
-      token.type = 'separator';
-    } else if (placeNot[i] == 'x' || placeNot[i] == '-') {
-      token.type = 'all change';
-    } else if (places.indexOf(placeNot[i]) >= 0) {
-      token.type = 'number';
+  for (let i = 0; i < placeNot.length; ++i) {
+    let token = {value: placeNot[i]};
+    switch (placeNot[i]) {
+      case '&':
+      case ',':
+      case '+':
+        token.type = 'grouping token';
+        break;
+      case '.':
+        token.type = "separator";
+        break;
+      case "x":
+      case "-":
+        token.type = "all change";
+        break;
+      default:
+        if (places.includes(placeNot[i])) token.type = "number";
     }
-    token.value = placeNot[i];
     tokens.push(token);
   }
   
