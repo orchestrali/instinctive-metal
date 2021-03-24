@@ -15,7 +15,8 @@
     "mongoose": "^5.12.1",
     "morgan": "^1.10.0",
     "lodash": "^4.17.21",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "mquery": "^3.2.4"
   },
   "engines": {
     "node": "8.x"
