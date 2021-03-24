@@ -13,7 +13,6 @@ console.log('nextRow', nextRowFromPlaces(currentRow, changePlaces));
 // init project
 var express = require('express');
 var bodyParser = require('body-parser');
-var urlParse = require('url-parse');
 var morgan = require('morgan');
 
 var app = express();
@@ -156,7 +155,7 @@ app.get("/:param", function (request, response) {
 
 
 app.get("/staff2", function (request, response) {
-  //response.send(urlParse(request.originalUrl, true).query);
+  
   response.send(request.query);
   
 });

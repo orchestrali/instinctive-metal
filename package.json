@@ -11,12 +11,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "express-validator": "^6.6.0",
-    "node-xml": "^1.0.2",
-    "xml-js": "^1.6.11",
-    "url-parse": "^1.5.1",
     "request": "^2.88.0",
-    "mongoose": "^5.11.20",
+    "mongoose": "^5.12.1",
     "morgan": "^1.10.0",
     "lodash": "^4.17.21",
     "axios": "^0.21.1"
