@@ -39,6 +39,7 @@ module.exports = function handleInput(methodInfo, compInfo) {
   //console.log("rowArray handleInput", compInfo.rowZero);
   
   if (compInfo.quantity != 'touch') {
+    //build one lead or plain course
     let path = inputs.find(o => o.name == compInfo.quantity).file;
     let f = require(path);
     rowArray = f(compInfo.rowZero, methodInfo.placeNot.plain, 1);
@@ -65,11 +66,19 @@ module.exports = function handleInput(methodInfo, compInfo) {
     }
     //console.log("later", rowArray);
   }
-  //console.log(compInfo.rowZeroObj);
-  //console.log(rowArray);
-  //rowArray = 
+  let hunts = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].slice(0,stage);
+  for (let i = methodInfo.leadLength-1; i < rowArray.length; i+=methodInfo.leadLength ) {
+    for (let b = 1; b <= stage; b++) {
+      if (hunts.includes(b) && rowArray[i].bells.indexOf(b) !== compInfo.rowZero.indexOf(b)) {
+        let j = hunts.indexOf(b);
+        hunts.splice(j, 1);
+      }
+    }
+  }
+  
+  
   addTenor(stage, rowArray, compInfo.tenors);
-  //rowArray = 
+  
   addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
   if (methodInfo.name == "Stedman " + stageName || methodInfo.name == "Erin " + stageName) {
     let start = methodInfo.name == "Stedman " + stageName ? 2 : 0;
@@ -77,5 +86,5 @@ module.exports = function handleInput(methodInfo, compInfo) {
     addNames(rowArray, 6, start, "new six");
   }
   
-  return {array: rowArray, comp: comp};
+  return {array: rowArray, comp: comp, hunts: hunts};
 }

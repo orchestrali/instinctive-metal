@@ -1,4 +1,3 @@
-const findHunt = require('../method/findHunt.js');
 const blueGroups = require('./handleGroups.js');
 const allLines = require('./allLines.js');
 
@@ -20,7 +19,7 @@ module.exports = function handlePaths(input, info) {
     let huntBells = {};
     huntBells.weight = input.huntBellw;
     huntBells.color = input.huntColor;
-    huntBells.bells = findHunt(info.placeNot, info.numBells, info.comp);
+    huntBells.bells = info.hunts;
     bellPaths.push(huntBells);
     //add bluebell to paths with weight and color
     

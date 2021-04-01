@@ -57,7 +57,7 @@ module.exports = function methodInfo(methodInput, cb) {
       methodInfo.placeNot.bob = callInfo.bobPN;
       methodInfo.placeNot.single = callInfo.singlePN;
       methodInfo.callLoc = callInfo.callLoc;
-    } else if (methodInput.callType = "cust") {
+    } else if (methodInput.callType === "cust") {
       let calls = callInfo(methodInput, methodInfo.leadLength);
       methodInfo.callLoc = calls.callLoc;
       //add bob PN to PN object

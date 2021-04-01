@@ -1,4 +1,4 @@
-const endpoints = ['/', '/graphs', '/staff', '/practice', '/method', '/methods', '/surpriseminor', '/performance', '/performances'];
+const endpoints = ['/', '/graphs', '/staff', '/practice', '/surpriseminor', '/stedman'];
 const booleans = [{path: '/', fields: ['numbers', 'pagination']}, {path: '/practice', fields: ['numbers', 'huntbells', 'keepscore', 'drawLH', 'tutorial']}, {path: '/staff', fields: ['gap', 'includeTime', 'rowzero', 'mobile']}];
 const numbers = ['stage', 'callLoc', 'tenors', 'blueBell'];
 const exclude = [process.env.MAC_VAN, process.env.PHONE_VAN, process.env.PHONE_UBC, process.env.MAC_UBC, process.env.MAC_UMASS, process.env.PHONE_UM, process.env.PHONE_UM2];
@@ -10,10 +10,11 @@ module.exports = function record(req, res) {
       console.log("test request");
       return null;
     } else {
+      let type = req.query.type;
       let record = {
         date: req._startTime,
         host: req.hostname,
-        endpoint: req.path,
+        endpoint: req.path === '/' && type !== "grid" ? "/"+(type === "graph" ? "graphs" : type) : req.path,
         resStatus: res.statusCode,
         query: {}
       };

@@ -17,7 +17,8 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
       placeNot: methodInfo.placeNot,
       numBells: methodInfo.stage,
       leadLength: methodInfo.leadLength,
-      comp: compInfo.leadendcomp
+      comp: compInfo.leadendcomp,
+      hunts: compInfo.hunts
     };
     if (methodInfo.name == "Stedman "+stageName || methodInfo.name == "Erin "+stageName) {
       info.method = methodInfo.name.slice(0,4);
@@ -32,6 +33,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
       placeNot: methodInfo.placeNot,
       stage: methodInfo.stage,
       comp: compInfo.leadendcomp,
+      hunts: compInfo.hunts
     };
     
     //info.huntbells = displayInput.huntbells;

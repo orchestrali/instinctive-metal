@@ -1,4 +1,4 @@
-const keys = ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
+const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
 
 // new client-side file for combined form (except surprise minor game)
 
@@ -19,11 +19,11 @@ $(function() {
   
   
   let selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
-  let texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes'];
+  let texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes', 'complibid'];
   let radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
   let checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
   
-  for (let i = 1; i < 13; i++) {
+  for (let i = 1; i < 17; i++) {
     keys.push('bell'+i+'w', 'bell'+i+'c');
     texts.push('bell'+i+'c');
     selects.push('bell'+i+'w');
@@ -53,10 +53,12 @@ $(function() {
   var stages = window.stages;
   let bellgroups, everyline, huntbellw, bluebell, bluebellw;
   let bluelines = '';
+  let mode = "methods";
   
   if (obj.stage) {
     stage = Number(obj.stage);
   }
+  
   
   checkedClass = $('select#methodClass option:checked').val();
   
@@ -129,9 +131,29 @@ $(function() {
   
   
   
+  $("button#switch").on("click", function() {
+    mode = mode === "methods" ? "complib" : "methods";
+    let stagespan = $("#stagespan").detach();
+    if (mode === "complib") {
+      $(this).text("Click to search for a method title or enter place notation");
+      $("#method-info,#quantity,#call-info").hide();
+      $("#method-info,#quantity,#call-info").find(":input").prop("disabled", true);
+      $("#complib div.input:nth-child(2)").append(stagespan);
+      $("#complibid").prop("disabled", false);
+      $("#complib").show();
+    } else {
+      $(this).text("Click to enter a complib.org composition ID instead");
+      $("#complibid").prop("disabled", true);
+      $("#complib").hide();
+      $("#method-info,#quantity").find(":input").prop("disabled", false);
+      $("#method-info div.input:first-of-type").prepend(stagespan);
+      $("#method-info,#quantity").show();
+    }
+  });
   
-  
-  
+  if (obj.complibid) {
+    $("button#switch").click();
+  }
   
   
   

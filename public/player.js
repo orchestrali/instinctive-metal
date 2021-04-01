@@ -250,7 +250,7 @@ $(function() {
           i++;
           setupSample(i);
         } else {
-          //console.log("finished setting up");
+          console.log("finished setting up");
           $("#wait").hide();
           $("#playbutton").show();
         }

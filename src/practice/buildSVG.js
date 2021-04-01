@@ -7,11 +7,18 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   let blueplace = rowZero.indexOf(bluebell)+1;
   let score = displayInput.keepscore ? true : false;
   let instruction = "";
+  let call = "";
   let instClass = `class="invisible"`;
   if (rowZeroObj.instruction) {
     instruction = rowZeroObj.instruction;
     instClass = "";
   }
+  if (rowZeroObj.method) {
+    instClass = "";
+    
+    instruction += `<div id="currentmethod">`+rowZeroObj.method+`</div>`;
+  }
+  
   
   let rowZeroStr = "";
   
@@ -29,6 +36,11 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
         <text x="157" y="392" text-anchor="end" id="change-count">Changes: 0</text>
         <text x="183" y="392" id="err-count">Errors: 0</text>
       </g>`
+  }
+  
+  if (rowZeroObj.call) {
+    let x = rowZeroObj.call === "b" ? textx-45 : textx-55;
+    call += `<text x="${x}" y="40">${(rowZeroObj.call === "b" ? "bob" : "single")}</text>`;
   }
   
   let numbers = `<g id="numbers" style="font-family: Verdana, sans-serif; fill: #000; font-size: 16px;">
@@ -77,6 +89,7 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
     ${numbers}
   
     <g id="callMarkers" style="font-family: Verdana; fill: #000;">
+      ${call}
     </g>
   
     <g id="LHlines" style="stroke: black; stroke-width: 1; fill: none;">
