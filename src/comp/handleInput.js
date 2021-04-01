@@ -36,6 +36,6 @@ module.exports = function compInfo(compInput, stage) {
     //compObject.touchType = 'leadend';
   }
   
-  console.log(compObject);
+  //console.log(compObject);
   return compObject;
 }

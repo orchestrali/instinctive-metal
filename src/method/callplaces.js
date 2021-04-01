@@ -1,4 +1,4 @@
-const buildLead = require("../rowArray/buildLead.js");
+const buildLead = require("../rowArray/buildLead2.js");
 const rounds = require("../rounds.js");
 const callNames = require("./callNames.js");
 
@@ -7,18 +7,9 @@ var testCallPos = [{placebell: 2, bobname: 'i', singlename: 3},{placebell: 4, bo
 module.exports = function callPlaces(methodInfo) {
   let stage = methodInfo.stage;
   let calls = callNames(stage);
-  let leadInfo = {};
-    leadInfo.rowZero = rounds(stage);
-    leadInfo.placeNot = methodInfo.placeNot.bob;
-    leadInfo.rowNum = 1;
-    leadInfo.leadType = {name: "b"};
-  let bobEnd = buildLead(leadInfo)[methodInfo.leadLength-1].bells;
-  let leadInfo2 = {};
-  leadInfo2.rowZero = rounds(stage);
-  leadInfo2.placeNot = methodInfo.placeNot.single;
-  leadInfo2.rowNum = 1;
-  leadInfo2.leadType = {name: "s"};
-  let singleEnd = buildLead(leadInfo2)[methodInfo.leadLength-1].bells;
+  
+  let bobEnd = buildLead(rounds(stage), methodInfo.placeNot.bob, 1)[methodInfo.leadLength-1].bells;
+  let singleEnd = buildLead(rounds(stage), methodInfo.placeNot.single, 1)[methodInfo.leadLength-1].bells;
   
   let callplaces = [];
   for (var i = 1; i <= stage; i++) {

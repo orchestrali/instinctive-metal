@@ -18,6 +18,10 @@
   * {
     box-sizing: border-box;
   }
+  
+  a {
+    text-decoration: none;
+  }
 
   body {
     font-family: helvetica, arial, sans-serif;
@@ -196,6 +200,10 @@
     flex-flow: row wrap;
     margin-bottom: 7px;
     align-items: center;
+  }
+  
+  div#complib {
+    margin-top: 16px;
   }
   
   /* method info */

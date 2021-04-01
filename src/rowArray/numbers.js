@@ -1,6 +1,7 @@
 var leadEnds = [{name: 'b',fullname: 'bob'},{name: 's',fullname: 'single'}];
 var sample = [{lead: 1, call: "b"}]
 
+//convert a touch expressed in lead numbers to a list of *all* the lead ends
 module.exports = function numbers(compInfo) {
   //console.log(compInfo.touch);
   let comp = [];

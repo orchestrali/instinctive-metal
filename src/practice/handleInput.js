@@ -1,4 +1,3 @@
-const findhunt = require("../method/findHunt.js");
 const placeArray = require("../placeArray/buildArray.js");
 const stringify = require("./stringify.js");
 const buildSVG = require("./buildSVG.js");
@@ -17,9 +16,11 @@ module.exports = function handle(rowArray, info, displayInput) {
     rowArray = tutorial(rowArray, bluebell, info.stage);
   }
   let rowZero = rowArray[0];
+  if (rowArray[1].method) rowZero.method = rowArray[1].method;
+  if (rowArray[1].type) rowZero.call = rowArray[1].type;
   //generate place array(s) for hunt bell(s)
   if (displayInput.huntbells == "draw") {
-    let huntbells = findhunt(info.placeNot, info.stage, info.comp);
+    let huntbells = info.hunts;
     
     for (var i = 0; i < huntbells.length; i++) {
       let array = placeArray(rowArray, huntbells[i]);

@@ -1,4 +1,4 @@
- const lexer = require('./compLexer.js');
+const lexer = require('./compLexer.js');
 const parseLetters = require('./compLetters.js');
 const expandAbbr = require('./compAbbr.js');
 const numbers = require('./numbers.js');

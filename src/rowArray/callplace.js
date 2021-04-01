@@ -3,7 +3,6 @@ const callPlaces = require("../method/callplaces.js");
 const rounds = require("../rounds.js");
 const places = require('../places.js');
 const rowStr = require('../rowStr.js');
-const buildInfo = require("./leadInfo.js");
 const finish = require('./finish.js');
 
 var leadEnds = [{name: 'b',fullname: 'bob'},{name: 's',fullname: 'single'}];

@@ -18,5 +18,8 @@ module.exports = function buildTitle(input) {
   }
   
   html += `</h1>`;
-  return html
+  if (input.complibid && input.complibid.length) {
+    html += `<a href="https://complib.org/composition/${input.complibid}" target="blank">View on complib</a>`;
+  }
+  return html;
 }

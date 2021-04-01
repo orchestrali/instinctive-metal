@@ -1,4 +1,3 @@
-const findHunt = require('../method/findHunt.js');
 const rounds = require('../rounds.js');
 
 module.exports = function handleGroups(input, groupNum, info) {
@@ -15,10 +14,10 @@ module.exports = function handleGroups(input, groupNum, info) {
     paths.bells = rounds(numBells);
   } else if (group == 'none') {
   } else if (group == 'hunt') {
-    paths.bells = findHunt(info.placeNot, info.numBells, info.comp);
+    paths.bells = info.hunts;
     
   } else if (group == 'work') {
-    let huntBells = findHunt(info.placeNot, info.numBells, info.comp);
+    let huntBells = info.hunts;
     paths.bells = [];
     for (var i = 1; i <= numBells; ++i) {
       if (huntBells.indexOf(i) == -1) {

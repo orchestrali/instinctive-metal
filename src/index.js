@@ -47,6 +47,7 @@ module.exports = [
 
           </ul>
         </div>
+        <button type="button" id="switch">Click to enter a complib.org composition ID instead</button>
        
         <div class="errors">
 `,
@@ -54,13 +55,22 @@ module.exports = [
         </div>
         
         <form action="/" method="get" autocomplete="off">
-        
+          <div id="complib" class="category hidden">
+            <div class="input">
+              <label for="complibid">
+                Enter a complib.org composition ID:
+              </label>
+              <input type="number" id="complibid" name="complibid" disabled />
+            </div>
+            <div class="input">
+            </div>
+          </div>
           <div id="method-info" class="category">
             <p class="bold">
               Method info
             </p>
             <div class="input">
-              <span>
+              <span id="stagespan">
                 <label for="stage">
                   Stage:
                 </label>

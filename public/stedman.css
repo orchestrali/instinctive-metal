@@ -1,0 +1,208 @@
+body {
+    font-family: helvetica, arial, sans-serif;
+    margin: 25px;
+  }
+
+  h1 {
+    font-weight: bold;
+    color: black;
+  }
+
+a {
+  text-decoration: none;
+  color: black;
+  
+}
+
+p {
+  margin: 8px 0;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+#nav-options {
+  background-color: aliceblue;
+  color: steelblue;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+#nav-options p {
+  width: 80%;
+  margin: 8px 8px;
+  display: inline-block;
+}
+#nav-options li a {
+  color: darkslateblue;
+}
+
+#nav-options ul {
+  margin-top: 0;
+  padding-bottom: 8px;
+  padding-left: 20px;
+  display: none;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 8px solid steelblue;
+  margin-right: 8px;
+  margin-top: 8px;
+  display: inline-block;
+  transition: transform 600ms ease;
+}
+
+.rotate {
+  transform: rotate(-90deg);
+}
+
+main {
+  max-width: 1500px;
+}
+
+
+#workcycle {
+  width: 200px;
+  margin: 0 auto;
+  
+}
+
+.flexrow {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.flexcol {
+  display: flex;
+  flex-flow: column;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+#stages > div, #buttons > div {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 4px;
+}
+#stages > div.selected {
+  background-color: black;
+  color: white;
+}
+
+
+#workellipse {
+  position: relative;
+  flex-flow: row;
+}
+#workellipse > div {
+  height: 236px;
+  min-width: 100px;
+  justify-content: center;
+  margin: 0 10px;
+  flex: none;
+}
+
+div#dodges {
+  justify-content: space-between;
+  
+}
+#dodgeslow, #dodgequick {
+  flex-flow: row;
+}
+
+.station {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin: 10px;
+  flex: none;
+}
+.station.quick {
+  border: 3px solid lightblue;
+}
+.station.slow {
+  border: 3px solid red;
+}
+#slow {
+  position: relative;
+}
+#slow > div.station {
+  position: absolute;
+}
+#tuesday {
+  top: 30px;
+  left: 80px;
+}
+#wednesday {
+  top: 80px;
+  left: 160px;
+}
+#thursday {
+  top: 130px;
+  left: 80px;
+}
+#friday {
+  top: 160px;
+  left: 0;
+}
+div#bellcontainer {
+  position: absolute;
+  
+}
+
+div.bell {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size: 11pt;
+  transition: top 1s linear, left 1s linear;
+}
+
+div.label {
+  position: absolute;
+  top: 56px;
+  font-size: 8pt;
+}
+
+.bell.quick {
+  left: 27px;
+  top: 107px;
+}
+
+.bell.dodgeslow {
+  top: 27px;
+  left: 223px;
+}
+.bell.test {
+  top: 27px;
+  left: 147px;
+}
+
+.bell.dodgequick {
+  top: 187px;
+  left: 223px;
+}
+
+.bell.tuesday {
+  top: 57px;
+  left: 400px;
+}
+
+.bell.thursday {
+  top: 157px;
+  left: 400px;
+}

@@ -33,29 +33,14 @@ var input = {
   callLoc: '1'
 };
 
-let input1 = {};
-  input1.stage = 6;
-  input1.methodClass = "Surprise";
-  input1.methodName = "Cambridge Surprise";
-let input2 = {};
-  input2.stage = 6;
-  input2.methodClass = "Surprise";
-  input2.methodName = "London Surprise";
 
 
 
-const tutorial = require('./src/tutorial/test.js');
 
 
 
-const methodNames2 = require('./methodNames2.json');
-
-const findOne = require('./src/library/findOneOrMany.js');
-const findPost = require('./src/library/findPost.js');
 const createNames = require('./src/library/methodNames.js');
-const record = require('./src/record/router.js');
 const rowGen = require('./src/rowArray.js');
-const findMod = require('./src/library/findMod.js');
 const router = require('./src/router.js');
 
 
@@ -70,14 +55,10 @@ app.use(morgan(':url'));
 // http://expressjs.com/en/starter/basic-routing.html
 //createNames(() => {});
 
-
-/*
-rowGen(input, (arr) => {
-  //let stage = Number(input.stage);
-  //console.log(tutorial(arr, 4, stage));
-});
-*/
-
+const record = require('./src/record/router.js');
+const findOne = require('./src/library/findOneOrMany.js');
+const findPost = require('./src/library/findPost.js');
+const findMod = require('./src/library/findMod.js');
 const serialize = require('./src/library/serialize.js');
 const max = require('./src/query/max.js');
 const random = require('./src/random.js');
@@ -153,19 +134,6 @@ app.get("/:param", function (request, response) {
 });
 //*/
 
-
-app.get("/staff2", function (request, response) {
-  
-  response.send(request.query);
-  
-});
-
-
-app.get("/library", function (request, response) {
-  //console.log("test param: ", request.params.test);
-  response.send("no");
-  //response.send(methodSearch(input));
-});
 
 
 

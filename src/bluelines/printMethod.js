@@ -1,8 +1,9 @@
 const printRows = require('./printRows.js');
 const printPaths = require('./printPaths.js');
 const printCalls = require('./printCalls.js');
-const leadheads = require('./leadheadLines.js');
+const leadheads = require('./leadLines.js');
 const printpn = require('./printPN.js');
+const addMethod = require('./methods.js');
 
 module.exports = function printSVG(rowArray, pathArray, info) {
   //console.log(rowArray[0]);
@@ -22,10 +23,12 @@ module.exports = function printSVG(rowArray, pathArray, info) {
   let rows = info.displayNums ? printRows(rowArray, x) : "";
   let paths = printPaths(pathArray, rowArray, x+5);
   let calls = printCalls(rowArray);
-  let lines = leadheads(gridWidth, rowArray.length, info, x-2);
+  let lines = leadheads(gridWidth, rowArray.filter(r => r.name).map(r => r.rowNum), x-2);
+  let methods = rowArray.some(r => r.method) ? addMethod(rowArray, x) : "";
+  if (methods.length) gridWidth += 250;
   
   let svg = `<div class="grid"><svg class="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="` + gridWidth + `" height="` + height + `">
-` + rows + lines + pn + calls + paths + `</svg></div>`
+` + rows + lines + pn + calls + paths + methods + `</svg></div>`
   //console.log(svg);
   return [svg];
 }

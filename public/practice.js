@@ -66,7 +66,7 @@ $(function() {
     let value = $(this).prop("value")*1;
     //console.log(value);
     checkButton(value);
-  })
+  });
   
   //use arrow keys for practice
   $(document.body).on("keydown", function(e) {
@@ -80,7 +80,7 @@ $(function() {
       checkButton(value);
     }
     
-  })
+  });
   
   
   function checkButton(button) {
@@ -179,11 +179,11 @@ $(function() {
       row.push(places[number-1]);
     }
     
-    let lines = name == "Stedman" || name == "Erin" ? "new six" : "leadhead";
-    if ($("#drawLH").is(":checked") && (rowObjArr[i-1].name == lines)) {
+    let lines = ["new six", "leadhead", "LE", "HL", "SE"];
+    if ($("#drawLH").is(":checked") && lines.includes(rowObjArr[i-1].name)) {
       addLH(textx, 20*i+25);
     }
-    if (rowObjArr[i-1].name == "leadhead" && tutor) addPlaceBell(textx, 20*i+25);
+    if (["leadhead", "LE"].includes(rowObjArr[i-1].name) && tutor) addPlaceBell(textx, 20*i+25);
     
     addRow(row, i, rowObjArr[i-1].type, row2type);
     addLine(bluePlaces, 'bluepath', i, lastClickInt);
@@ -235,6 +235,10 @@ $(function() {
     }
     if (rowObjArr[i-1].instruction) {
       $("#tutorial").text(rowObjArr[i-1].instruction);
+    }
+    if (i+1 < rowObjArr.length && rowObjArr[i+1].method && $("#currentmethod")) {
+      
+      $("#currentmethod").text(rowObjArr[i+1].method);
     }
     if (call == "b") {
       addText(textx-45, 20*i+40, "bob", "callMarkers");
