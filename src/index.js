@@ -44,6 +44,9 @@ module.exports = [
              <li>
                <a href="./surpriseminor">Surprise Minor name quiz</a>
             </li>
+            <li>
+               <a href="./stedman">Stedman tips and tricks</a>
+            </li>
 
           </ul>
         </div>
