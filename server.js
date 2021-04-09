@@ -83,7 +83,8 @@ const routes = {
     teststaff: "/views/stafftest.html",
     surpriseminor: "/views/surprise-minor.html",
     index: "/views/index.html",
-    stedman: "/views/stedman.html"
+    stedman: "/views/stedman.html",
+    home: "/views/home.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {
