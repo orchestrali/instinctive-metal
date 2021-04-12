@@ -6,7 +6,7 @@ module.exports = function findOne(query, s, cb) {
   let result;
   let timedout = false;
   
-  console.log(url);
+  //console.log(url);
   
   timeout = setTimeout(function() {
     //if (!result) {

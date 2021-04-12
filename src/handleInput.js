@@ -19,7 +19,7 @@ module.exports = function directTraffic(input, type, cb) {
   if (compInput.complibid) {
     complib(compInput.complibid, (res) => {
       if (res) {
-        console.log("results");
+        //console.log("results");
         let results = buildSVGs(res.methodInfo, res.compInfo, res.rowArray, displayInput, type);
         input.placeNotation = res.compInfo.title;
         cb(build([], results, input, type));
@@ -34,7 +34,7 @@ module.exports = function directTraffic(input, type, cb) {
     let stageName = stages.find(o => o.num == stage).name;
     let width = 270;
     let SVGs;
-    console.log(type);
+    //console.log(type);
     //console.log(methodInput);
     //check for errors, first round; return page if there are any.
     let errResults = checkError(methodInput, compInput);
