@@ -1,14 +1,7 @@
 // server.js
 // where your node app starts
 
-/*
-const nextRowFromPlaces = require('./src/nick.js');
-let currentRow = [2,1,3,4,6,5,12,11,8,7,9,10];
-console.log('currentRow', currentRow);
-let changePlaces = [1,10];
-console.log('places', changePlaces);
-console.log('nextRow', nextRowFromPlaces(currentRow, changePlaces));
-*/
+
 
 // init project
 var express = require('express');

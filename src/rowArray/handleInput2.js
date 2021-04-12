@@ -82,7 +82,7 @@ module.exports = function handleInput(methodInfo, compInfo) {
   addNames(rowArray, methodInfo.leadLength, methodInfo.leadLength-1, "leadhead");
   if (methodInfo.name == "Stedman " + stageName || methodInfo.name == "Erin " + stageName) {
     let start = methodInfo.name == "Stedman " + stageName ? 2 : 0;
-    console.log("start "+start);
+    //console.log("start "+start);
     addNames(rowArray, 6, start, "new six");
   }
   

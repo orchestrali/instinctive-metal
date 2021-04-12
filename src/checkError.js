@@ -10,7 +10,7 @@ var touchGroup = ['(', ')', '[', ']', '{', '}'];
 var plainClasses = ["Bob", "Place"];
 
 module.exports = function findError(methodInput, compInput) {
-  console.log("checking for errors");
+  //console.log("checking for errors");
   let errors = [];
   let stage = Number(methodInput.stage);
   let methodClass = methodInput.methodClass;
@@ -99,7 +99,7 @@ module.exports = function findError(methodInput, compInput) {
     let testMethods = [];
     //check if last word is stage name
     if (nameWords[nameWords.length-1] != stageLower) {
-      console.log("no stage name");
+      //console.log("no stage name");
       //check if last word is class name
       testClass(nameWords.length-1, " "+stageLower);
     } else {
@@ -126,7 +126,7 @@ module.exports = function findError(methodInput, compInput) {
         
         
       } else if (classLower != "principle" && classLower != "differential" && nameWords[index] != classLower && nameWords[index-1] + " " + nameWords[index] != classLower) {
-        console.log("no class name");
+        //console.log("no class name");
         nameFull = baseName + " " + classLower + " " + stageLower;
       } else {
         nameFull += suffix;
@@ -155,7 +155,7 @@ module.exports = function findError(methodInput, compInput) {
         if (e.toLowerCase().indexOf(name) > -1) {
           matches.push(e)
         }
-      })
+      });
       if (matches.length > 1) {
         errors.push("Error: more than one method matches search");
       } else {
@@ -174,7 +174,7 @@ module.exports = function findError(methodInput, compInput) {
 
   if (compInput.touch) {
     let compArr = compInput.touch.toLowerCase().split('');
-    console.log(compArr);
+    //console.log(compArr);
     //unrecognized token in composition
     for (var i = 0; i < compInput.touch.length; ++i) {
       let token = compArr[i];
@@ -275,7 +275,7 @@ module.exports = function findError(methodInput, compInput) {
       
      
   }
-console.log("errors length", errors.length);
-  console.log(errors);
+//console.log("errors length", errors.length);
+  //console.log(errors);
 return {errors: errors, realName: realMethod};
 }
