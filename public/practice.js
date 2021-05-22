@@ -6,6 +6,34 @@ $(function() {
   console.log("hi from the other file!");
   //console.log(window.bluepath);
   
+  let checked = 10;
+  let timeout;
+  check();
+  
+  $("#submit").on("click", () => {
+    let type = $("#type input:checked").attr("id");
+    if (type === "practice") {
+      checked = 0;
+      timeout = setTimeout(check, 50);
+    }
+  });
+  
+  function check() {
+    if (window.bluepath && $(".results").length) {
+      clearTimeout(timeout);
+      practice();
+    } else {
+      checked++;
+      if (checked < 10) {
+        timeout = setTimeout(check, 50);
+      } else {
+        clearTimeout(timeout);
+      }
+    }
+  }
+  
+  function practice() {
+  console.log("starting");
   function blueBellOpts(stage) {
     $("select#blueBell option:nth-child(n+2)").remove();
     for (var i = 1; i <= stage; ++i) {
@@ -234,7 +262,12 @@ $(function() {
       TweenMax.from("#numbers text:nth-last-child(-n+"+row.length+")", 1, {opacity:0, ease: Linear.easeIn});
     }
     if (rowObjArr[i-1].instruction) {
-      $("#tutorial").text(rowObjArr[i-1].instruction);
+      let text = rowObjArr[i-1].instruction;
+      if (rowObjArr[i-1].with) {
+        text += " with the "+rowObjArr[i-1].with;
+      }
+      if (rowObjArr[i-1].instruction2) text += "("+rowObjArr[i-1].instruction2+")";
+      $("#tutorial").text(text);
     }
     if (i+1 < rowObjArr.length && rowObjArr[i+1].method && $("#currentmethod")) {
       
@@ -329,7 +362,11 @@ $(function() {
 
 }
   
+}
   
   
-  
-})
+});
+
+function checkstatus() {
+  return window.bluepath;
+}

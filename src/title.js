@@ -1,7 +1,7 @@
 const stages = require('./stages.json');
 
 module.exports = function buildTitle(input) {
-  let html = `<h1>`;
+  let html = `<h1 class="results">`;
   
   if (input.methodName == undefined || input.methodName == '') {
     html += input.placeNotation;
@@ -19,7 +19,7 @@ module.exports = function buildTitle(input) {
   
   html += `</h1>`;
   if (input.complibid && input.complibid.length) {
-    html += `<a href="https://complib.org/composition/${input.complibid}" target="blank">View on complib</a>`;
+    html += `<a href="https://complib.org/composition/${input.complibid}" target="blank" class="results">View on complib</a>`;
   }
   return html;
 }

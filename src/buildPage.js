@@ -6,7 +6,7 @@ const stages = require('./stages.json');
 const buildplayer = require('./svgs/player.js');
 
 //new streamlined page?? June 18 2020
-module.exports = function buildPage(errors, results, input, type) {
+module.exports = function buildPage(errors, results, input, type, raw) {
   
   let anchor = '';
   let title = '';
@@ -16,6 +16,7 @@ module.exports = function buildPage(errors, results, input, type) {
     errStr = '<p>' + errors.join('</p><p>') + '</p>';
   }
   //console.log("error string", errStr);
+  
   
   let header = headers[0] + `<script> window.stages = ${JSON.stringify(stages)} </script>` + (results.script ? results.script : "") + headers[1];
   
@@ -29,12 +30,23 @@ module.exports = function buildPage(errors, results, input, type) {
     if (input.player) {
       title += results.player;
     }
-    anchor = '<a name="svgs" class="anchor"></a>';
+    anchor = '<a name="svgs" class="anchor results"></a>';
     //stuff = (type === "graph" ? "" : type === "practice" ? '<div id="grid-container">' : '<div class="grid-container">') + results.SVGs.join('') + (type === "graph" ? "" : '</div>');
-    stuff = (type === "practice" ? '<div id="grid-container">' : '<div class="grid-container">') + results.SVGs.join('') + '<div id="highlight"></div></div>';
+    stuff = type === "simulator" ? results.SVGs : (type === "practice" ? '<div id="grid-container" class="results">' : '<div class="grid-container results">') + results.SVGs.join('') + '<div id="highlight"></div></div>';
   }
   
   var page = header + errStr + headers[2] + anchor + title + stuff + footer;
+  if (raw) {
+    let o = {
+      errors: errStr,
+      html: anchor+title+stuff
+    };
+    if (results.script) {
+      o.script = results.script;
+    }
+    return o;
+  } else {
+    return page;
+  }
   
-  return page;
 }

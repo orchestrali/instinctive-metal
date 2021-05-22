@@ -14,11 +14,16 @@ module.exports = function stringify(rowArray, huntpaths, bluepath) {
     rows.push(row);
   }
   
-  let script = `<script> window.rowObjArr = ${JSON.stringify(rowArray)}
+  let script = `<script class="results"> window.rowObjArr = ${JSON.stringify(rowArray)}
                         window.rowArray = ${JSON.stringify(rows)}
                         window.huntpaths = ${JSON.stringify(huntpaths)}
                         window.bluepath = ${JSON.stringify(bluepath)}
                 </script>`
-  
+  let info = {
+    rowObjArr: rowArray,
+    rowArray: rows,
+    huntpaths: huntpaths,
+    bluepath: bluepath
+  }
   return script;
 }

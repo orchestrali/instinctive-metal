@@ -254,6 +254,21 @@
             "Pembroke College Treble Bob Minimus",
             "Gonville & Caius College Treble Bob Minimus",
             "Trinity Hall Treble Bob Minimus",
+            "Corpus Christi College Treble Bob Minimus",
+            "Magdalene College Treble Bob Minimus",
+            "King's College Treble Bob Minimus",
+            "Queens' College Treble Bob Minimus",
+            "St Catharine's College Treble Bob Minimus",
+            "Jesus College Treble Bob Minimus",
+            "Christ's College Treble Bob Minimus",
+            "St John's College Treble Bob Minimus",
+            "Trinity College Treble Bob Minimus",
+            "Emmanuel College Treble Bob Minimus",
+            "Peterhouse Treble Bob Minimus",
+            "Clare College Treble Bob Minimus",
+            "Pembroke College Treble Bob Minimus",
+            "Gonville & Caius College Treble Bob Minimus",
+            "Trinity Hall Treble Bob Minimus",
             "Corpus Christi College Treble Bob Minimus"
           ]
         ]
@@ -588,6 +603,9 @@
             "A Partridge In A Pear Tree Treble Place Minimus",
             "St Agatha's Treble Place Minimus",
             "Forewood Treble Place Minimus",
+            "Shipping Container Treble Place Minimus",
+            "Freight Treble Place Minimus",
+            "Teesport Treble Place Minimus",
             "Shipping Container Treble Place Minimus",
             "Freight Treble Place Minimus",
             "Teesport Treble Place Minimus"
@@ -981,6 +999,7 @@
             "Sgurr na Lapaich Minimus",
             "Uluru Minimus",
             "A' Mharconaich Minimus",
+            "Dockyard Minimus",
             "Dockyard Minimus"
           ]
         ]
@@ -4956,7 +4975,8 @@
             "University College Treble Place Minor",
             "Merton College Little Treble Place Minor",
             "Plain Short Course Treble Place Minor",
-            "Christmas Crackers Treble Place Minor"
+            "Christmas Crackers Treble Place Minor",
+            "Brightwell Baldwin Treble Place Minor"
           ]
         ]
       },
@@ -6203,7 +6223,15 @@
             "Out at 2 Delight Minor",
             "Twinkling Delight Minor",
             "Quarantine Delight Minor",
-            "Joe's Delight Minor"
+            "Joe's Delight Minor",
+            "Joe's Delight Minor",
+            "Dark Star Delight Minor",
+            "Death Star Delight Minor",
+            "Five Star Delight Minor",
+            "Orion's Belt Delight Minor",
+            "Keystroke Delight Minor",
+            "Key Stage 4 Delight Minor",
+            "Ordnance Survey Delight Minor"
           ]
         ]
       },
@@ -7904,7 +7932,14 @@
             "Cheeky Little Surprise Minor",
             "Redlands Road Surprise Minor",
             "Ben and Ellen's Wedding Day Surprise Minor",
-            "St Thomas Surprise Minor"
+            "St Thomas Surprise Minor",
+            "Redlands Road Surprise Minor",
+            "Ben and Ellen's Wedding Day Surprise Minor",
+            "St Thomas Surprise Minor",
+            "La Bohème Surprise Minor",
+            "Lode Star Surprise Minor",
+            "Wellcombe Bottom Surprise Minor",
+            "West Side Story Surprise Minor"
           ]
         ]
       },
@@ -8356,6 +8391,7 @@
             "S2 under George Orwell Minor",
             "S5 under Chieveley Minor",
             "Pitman Minor",
+            "Cross Minor",
             "Cross Minor"
           ]
         ]
@@ -8994,7 +9030,8 @@
             "Ground Hog Day Bob Triples",
             "Hokumtode Bob Triples",
             "St David's Day Bob Triples",
-            "Raveningham Bob Triples"
+            "Raveningham Bob Triples",
+            "Union Flag Day Bob Triples"
           ]
         ]
       },
@@ -10496,7 +10533,8 @@
             "Clewer Slow Bob Major",
             "Broadley Little Bob Major",
             "Martyrs Link Little Bob Major",
-            "St Thomas Becket Bob Major"
+            "St Thomas Becket Bob Major",
+            "Walpurgis Eve Bob Major"
           ]
         ]
       },
@@ -10672,7 +10710,8 @@
             "Dire Treble Bob Major",
             "Fifty Treble Bob Major",
             "Yucky Treble Bob Major",
-            "Bishop's Cleeve Treble Bob Major"
+            "Bishop's Cleeve Treble Bob Major",
+            "Carolina Reaper Treble Bob Major"
           ]
         ]
       },
@@ -18548,7 +18587,11 @@
             "Superlol Surprise Major",
             "Premlative Surprise Major",
             "Kendrick Surprise Major",
-            "Sandiacre Surprise Major"
+            "Sandiacre Surprise Major",
+            "Stamford All Saints Surprise Major",
+            "Kendrick Surprise Major",
+            "Sandiacre Surprise Major",
+            "Tillington Surprise Major"
           ]
         ]
       },
@@ -21755,6 +21798,7 @@
             "Shortheath Surprise Royal",
             "T'owd Tup Surprise Royal",
             "Snowdonia Surprise Royal",
+            "Goulburn Surprise Royal",
             "Goulburn Surprise Royal"
           ]
         ]
@@ -23071,7 +23115,8 @@
             "ExCel Arena Surprise Maximus",
             "Horse Guards Surprise Maximus",
             "Velodrome Differential Surprise Maximus",
-            "Tenpo Little Surprise Maximus"
+            "Tenpo Little Surprise Maximus",
+            "Nuro Fen Surprise Maximus"
           ]
         ]
       },

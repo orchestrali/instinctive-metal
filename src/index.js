@@ -12,8 +12,8 @@ module.exports = [
       gtag('config', '${process.env.GTAG}');
     </script>
     <title>Change Ringing Method Tools</title>
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta name="description" content="View, hear, and practice change ringing methods">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/cfb69bf0-63cf-4333-87f2-94037fac2f71%2FBristol-major-short.png?v=1618258050267" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +57,7 @@ module.exports = [
   `
         </div>
         
-        <form action="/" method="get" autocomplete="off">
+        <form action="/" method="get" autocomplete="off" id="formform">
           <div id="complib" class="category hidden">
             <div class="input">
               <label for="complibid">
@@ -279,6 +279,10 @@ module.exports = [
                 <li>
                   <label for="practice">Method practice</label>
                   <input type="radio" id="practice" name="type" value="practice" class="hidden"/>
+                </li>
+                <li>
+                  <label for="simulator">Simulator</label>
+                  <input type="radio" id="simulator" name="type" value="simulator" class="hidden" />
                 </li>
               </ul>
             </fieldset>
@@ -576,7 +580,7 @@ module.exports = [
           </div>
           
             
-          <button type="submit">Submit</button>  
+          <button type="button" id="submit">Submit</button>  
           
         </form>
        
@@ -603,6 +607,7 @@ module.exports = [
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
     <script src="/practice.js"></script>
     <script src="/player.js"></script>
+    <script src="/simulator.js"></script>
   </body>
 </html>
 `

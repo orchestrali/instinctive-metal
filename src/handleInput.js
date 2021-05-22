@@ -11,7 +11,7 @@ const build = require('./buildPage.js');
 const stages = require('./stages.json');
 
 
-module.exports = function directTraffic(input, type, cb) {
+module.exports = function directTraffic(input, type, raw, cb) {
   let sortedInput = sortInput(input);
   let methodInput = sortedInput.methodInfo;
   let compInput = sortedInput.composition;
@@ -22,9 +22,9 @@ module.exports = function directTraffic(input, type, cb) {
         //console.log("results");
         let results = buildSVGs(res.methodInfo, res.compInfo, res.rowArray, displayInput, type);
         input.placeNotation = res.compInfo.title;
-        cb(build([], results, input, type));
+        cb(build([], results, input, type, raw));
       } else {
-        cb(build(["Error with complib ID"], {}, input, type));
+        cb(build(["Error with complib ID"], {}, input, type, raw));
       }
       
     });
@@ -41,7 +41,7 @@ module.exports = function directTraffic(input, type, cb) {
     let errors = errResults.errors;
     methodInput.nameLower = errResults.realName ? errResults.realName : null;
     if (errors.length > 0) {
-      cb(build(errors, {}, input, type));
+      cb(build(errors, {}, input, type, raw));
       return;
     }
 
@@ -60,7 +60,7 @@ module.exports = function directTraffic(input, type, cb) {
         cb(next());
       } else {
         console.log('building page with error');
-        cb(build(err, {}, input, type));
+        cb(build(err, {}, input, type, raw));
         return;
       }
 
@@ -77,7 +77,7 @@ module.exports = function directTraffic(input, type, cb) {
       let results = buildSVGs(methodInfo, compInfo, rowArray, displayInput, type);
 
       //buildpage
-      let page = build([], results, input, type);
+      let page = build([], results, input, type, raw);
       //console.log(page);
       return page;
     }

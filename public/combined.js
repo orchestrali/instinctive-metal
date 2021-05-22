@@ -1,4 +1,22 @@
 const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
+const selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
+const texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes', 'complibid'];
+const radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
+const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
+for (let i = 1; i < 17; i++) {
+  keys.push('bell'+i+'w', 'bell'+i+'c');
+  texts.push('bell'+i+'c');
+  selects.push('bell'+i+'w');
+}
+
+var type = "grid";
+let gridtype = "basic-lines";
+var stage, checkedClass;
+var stages = window.stages;
+let bellgroups, everyline, huntbellw, bluebell, bluebellw;
+let bluelines = '';
+let mode = "methods";
+let methodList;
 
 // new client-side file for combined form (except surprise minor game)
 
@@ -11,23 +29,15 @@ $(function() {
   }
   
   $("div.type:nth-of-type(n+2)").find(":input").prop("disabled", true);
-  var type = "grid";
-  let gridtype = "basic-lines";
+  
   $("div.gridopt:nth-of-type(n+2)").find(":input").prop("disabled", true);
   $("#highlight").css("height", "19px");
   
   
   
-  let selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
-  let texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes', 'complibid'];
-  let radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
-  let checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
   
-  for (let i = 1; i < 17; i++) {
-    keys.push('bell'+i+'w', 'bell'+i+'c');
-    texts.push('bell'+i+'c');
-    selects.push('bell'+i+'w');
-  }
+  
+  
   
   
   let q = new window.URLSearchParams(window.location.search);
@@ -49,11 +59,7 @@ $(function() {
   
   
   
-  var stage, checkedClass;
-  var stages = window.stages;
-  let bellgroups, everyline, huntbellw, bluebell, bluebellw;
-  let bluelines = '';
-  let mode = "methods";
+  
   
   if (obj.stage) {
     stage = Number(obj.stage);
@@ -156,7 +162,39 @@ $(function() {
   }
   
   
-  
+  $("#submit").on("click", function() {
+    $(".results").remove();
+    let form = document.getElementById("formform");
+    let data = new FormData(form);
+    let query = [];
+    
+    for (let key of data.entries()) {
+      query.push(encodeURIComponent(key[0]) +"="+ encodeURIComponent(key[1]).replace(/%20/g, "+"));
+      
+    }
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/raw?'+query.join("&"), true);
+    xhr.send();
+    
+    xhr.onload = function () {
+      let results = JSON.parse(xhr.responseText);
+      
+      if (results.errors) {
+        $(".errors").html(results.errors);
+      } else {
+        if (results.script) {
+          $("head").append(results.script);
+        }
+        $("main").append(results.html);
+        window.location.hash = 'svgs';
+        if (history) {
+          history.pushState('', '', "/?"+query.join("&")+window.location.hash);
+        }
+      }
+    }
+    
+  });
   
   
   //nav toggle
@@ -166,7 +204,7 @@ $(function() {
     
   });
   
-  let methodList;
+  
   if (stage && checkedClass) {
     methodNames(stage, checkedClass, (mm) => {
       methodList = mm;
@@ -498,8 +536,8 @@ $(function() {
       $("#highlight").css("width", "24px");
     }
     
-    $("#stage option:nth-child(n+11)").prop("disabled", type === "staff");
-    if (type === "practice") {
+    $("#stage option:nth-child(n+11)").prop("disabled", ["graph", "simulator"].includes(type));
+    if (["practice", "simulator"].includes(type)) {
       $("#playeropts").hide();
     } else if ($("#player-"+type).is(":checked")) {
       $("#playeropts").slideDown(600);
@@ -723,267 +761,276 @@ $(function() {
   
   
   
-  function getStageName(stage) {
-    var stageName = stages.find(o => o.num == stage).name;
-    //console.log("stage", stage);
-    return stageName;
-  }
-  
-  //search new json methodNames file, returns array of arrays with methods
-  function methodNames(stage, checkedClass, cb) {
-    $.getJSON('/methodnames/', function(body) {
-      if (checkedClass == "Plain") {
-        var plainClasses = ["Bob", "Place", "Slow Course"]
-        let classMethods = [];
-        for (var i = 0; i < plainClasses.length; i++) {
-          
-          let methods = body.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods;
-          for (var j = 0; j < methods.length; j++) {
-            classMethods.push(methods[j]);
-          }
-        }
-        //console.log("length of classMethods", classMethods.length);
-        cb(classMethods);
-      } else {
-        let classMethods = body.find(o => o.stage == stage).classes.find(o => o.class == checkedClass).methods;
-      //console.log("length of classMethods", classMethods.length);
-      cb(classMethods);
-      }
-    }).fail(function( jqxhr, textStatus, error ) {
-      var err = textStatus + ", " + error;
-      //console.log("Text: " + jqxhr.responseText);
-    console.log( "Request Failed: " + err );
-    });
-  }
-  
-  function searchWarning() {
-    $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
-  }
   
   
   
-  //build filtered methodSet
-  function getMethods(methods, howMany) {
-    let n = 0;
-    let methodSet = [];
-    do {
-      let methodNum = Math.floor(Math.random() * (methods.length));
-      methodSet.push(methods[methodNum]);
-      methods.splice(methodNum, 1);
-      n++
-    } while (n < howMany && methods.length > 0)
-      return methodSet;
-  }
   
-  //build the list items
-  function buildList(methods, display) {
-    for (var j = 0; j < methods.length; j++) {
-      $('<li></li>').text(methods[j]).css("display", display).appendTo($("#methodList"));
-    }
-  }
-  
-  function filterList(value) {
-    $("#methodList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  }
 
-  function removeItems(value) {
-    //console.log('removing items');
-    $("#methodList li").filter(function() {
-      return $(this).text().toLowerCase().indexOf(value) == -1
-    }).remove();
-    $("#methodList li").css("display", "list-item");
-  }
-  
-  function allLines(stage) {
-    for (var i = 1; i <= stage; ++i) {
-      var li = '<li><span><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select class="weight" id="bell' + i + 'w" name="bell' + i + `w">
-              <option class="weight" value="0">none</option>
-              <option class="weight" value="1">thin</option>
-              <option class="weight" value="2" selected>thick</option>`
-      + `</select></span>
-          <span><label for="bell` + i + `c">
-              color:
-            </label>
-            <input class="color" type="text" id="bell` + i + `c" name="bell` + i + `c" /></span></li>`;
-      
-      bluelines += li;
-      //$(li).appendTo('div#everyline > ul');
-      
-    }
-  }
-  
-  function blueBellOpts(stage) {
-    for (let i = 1; i <= stage; ++i) {
-      $('<option></option').text(i).val(i).appendTo('select.blueBell');
-    }
-  }
-  
-  function toggleHunts() {
-    if (["Principle", "Differential"].includes(checkedClass)) {
-      $("input.hunts").val("");
-      $("select.hunts > option:first-child").prop("selected", true);
-      $("input.hunts").prop({disabled: true, checked: false});
-      $("select.hunts").prop("disabled", true);
-      $("div.hunts").addClass("disabled");
-      $("span.hunts").addClass("disabled");
-    } else {
-      $("input.hunts").prop("disabled", false);
-      $("select.hunts").prop("disabled", false);
-      $("div.hunts").removeClass("disabled");
-      $("span.hunts").removeClass("disabled");
-    }
-    
-  }
-  
-  function detachBasic() {
-    huntbellw = $('div#basic-lines select#huntBellw').children($('option')).detach();
-    bluebellw = $('div#basic-lines select#blueBellw').children($('option')).detach();
-    bluebell = $('div#basic-lines select#blueBell').children($('option')).detach();
-  }
-  
-  function toggleBlueInput(hide) {
-    console.log('list items to detach: ', $('div#' + hide).find('li').length);
-    return $('div#' + hide + ' li').detach();
-  }
-  
-  function toggleGridTypes() {
-    $("div.gridopt").find(":input").prop("disabled", true);
-    $("#"+gridtype).find(":input").prop("disabled", false);
-  }
   
   
-  function tenOpts(keysig, numBells) {
-    const sharps = ['G', 'D', 'A', 'E', 'B', 'F♯'];
-    const flats = ['F', 'B♭', 'E♭', 'A♭', 'D♭', 'G♭'];
-    const sds = [4, 1, 5, 2, 6, 3, 7];
-    let numChoices = Math.min(13 - numBells, 7);
-    let numS = sharps.indexOf(keysig)+1;
-    let numF = flats.indexOf(keysig)+1;
-    
-    let options = '';
-    let letter = getChar(keysig, numChoices-1);
-    for (var i = 0; i < numChoices; i++) {
-      let selected = i == numChoices-1 ? "selected" : "";
-      let sd = numChoices-i;
-      let a = '';
-      
-      if (numS > 0) {
-        if (sds.reverse().slice(0, numS).indexOf(sd) > -1) {
-          a = '♯';
-        }
-        sds.reverse();
-      }
-      if (numF > 0 && sds.slice(0, numF).indexOf(sd) > -1) {
-        a = '♭';
-      }
-      
-      
-      options += `          <option value="${letter}" ${selected}>${letter}${a}</option>
-            `;
-      letter = getChar(letter, -1);
-    }
-    if (numBells < 11) {
-      options += `        <option value="${keysig[0]}P">${keysig} pentatonic</option>`;
-    }
-    
-    $('select#actTenor > option').remove();
-    
-    $('select#actTenor').append(options);
-    
-  }
   
-  function getChar(char, dir) {
-    let current = char.charCodeAt(0);
-    let next = current + dir;
-    
-    while (next < 65) {
-      next += 7;
-    }
-    
-    while (next > 71) {
-      next -= 7;
-    }
-    
-    return String.fromCharCode(next);
-  }
-  
-  function adjustTime(stage) {
-    $('div#timeOpts > fieldset > ul > li').remove();
-    
-    let gap;
-    if ($('#handstroke-gap').is(':checked')) {
-      gap = true;
-      //console.log('include handstroke gap');
-    }
-    
-    let handTS = buildTime(stage);
-    let backTS = gap ? buildTime(stage+1) : [];
-    
-    if ($('#time-sig').is(':checked')) {
-      
-      
-      $('div#timeOpts > fieldset > ul').append(timeOpts(handTS, backTS));
-    
-      $('div#timeOpts').slideDown(1000, "swing");
-    }
-    
-  }
-  
-  
-  function timeOpts(hand, back) {
-    var length = Math.max(hand.length, back.length);
-    let options = '';
-    let denoms = ['4', '2', '1'];
-    let ids = ['quarter', 'half', 'whole']
-    
-    for (var i = 0; i < length; i++) {
-      let handT = hand[i] ? hand[i] : hand[0];
-      let handB = hand[i] ? denoms[i] : '4';
-      let backT, backB;
-      if (back[i]) {
-        backT = back[i];
-        backB = denoms[i];
-      } else if (back[0]) {
-        backT = back[0];
-        backB = '4';
-      } 
-      let value = handT + '-' + handB + function() {
-        return backT && backB ? `-${backT}-${backB}` : '';
-      }();
-      let dispvalh = `${handT} <br/> ${handB}`; //needs updating
-      let dispvalb = backT && backB ? `${backT} <br/> ${backB}` : '';
-      
-      options += `<li class="time">
-        <label for="${ids[i]}">
-          <ul class="row">
-            <li>
-              <input type="radio" id="${ids[i]}" name="timesig" value="${value}" />
-            </li>
-            <li>
-              ${dispvalh}
-            </li>
-            <li>
-              ${dispvalb}
-            </li>
-          </ul>
-        </label>
-      </li>`;
-    }
-    return options;
-  }
-  
-  function buildTime(num) {
-    let options = [num];
-    if (num % 2 == 0) {
-      options.push(num/2);
-    }
-    if (num % 4 == 0) {
-      options.push(num/4);
-    }
-    return options;
-  }
   
   
 });
+
+
+
+
+function getStageName(stage) {
+  var stageName = stages.find(o => o.num == stage).name;
+  //console.log("stage", stage);
+  return stageName;
+}
+
+//search new json methodNames file, returns array of arrays with methods
+function methodNames(stage, checkedClass, cb) {
+  $.getJSON('/methodnames/', function(body) {
+    if (checkedClass == "Plain") {
+      var plainClasses = ["Bob", "Place"];
+      let classMethods = [];
+      for (var i = 0; i < plainClasses.length; i++) {
+
+        let methods = body.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods;
+        for (var j = 0; j < methods.length; j++) {
+          classMethods.push(methods[j]);
+        }
+      }
+      //console.log("length of classMethods", classMethods.length);
+      cb(classMethods);
+    } else {
+      let classMethods = body.find(o => o.stage == stage).classes.find(o => o.class == checkedClass).methods;
+    //console.log("length of classMethods", classMethods.length);
+    cb(classMethods);
+    }
+  }).fail(function( jqxhr, textStatus, error ) {
+    var err = textStatus + ", " + error;
+    //console.log("Text: " + jqxhr.responseText);
+  console.log( "Request Failed: " + err );
+  });
+}
+
+
+
+function searchWarning() {
+  $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
+}
+
+
+
+//build filtered methodSet
+function getMethods(methods, howMany) {
+  let n = 0;
+  let methodSet = [];
+  do {
+    let methodNum = Math.floor(Math.random() * (methods.length));
+    methodSet.push(methods[methodNum]);
+    methods.splice(methodNum, 1);
+    n++
+  } while (n < howMany && methods.length > 0)
+    return methodSet;
+}
+
+//build the list items
+function buildList(methods, display) {
+  for (var j = 0; j < methods.length; j++) {
+    $('<li></li>').text(methods[j]).css("display", display).appendTo($("#methodList"));
+  }
+}
+
+function filterList(value) {
+  $("#methodList li").filter(function() {
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  });
+}
+
+function removeItems(value) {
+  //console.log('removing items');
+  $("#methodList li").filter(function() {
+    return $(this).text().toLowerCase().indexOf(value) == -1
+  }).remove();
+  $("#methodList li").css("display", "list-item");
+}
+
+function allLines(stage) {
+  for (var i = 1; i <= stage; ++i) {
+    var li = '<li><span><label for="bell' + i + 'w" >Line for bell ' + i + ': </label><select class="weight" id="bell' + i + 'w" name="bell' + i + `w">
+            <option class="weight" value="0">none</option>
+            <option class="weight" value="1">thin</option>
+            <option class="weight" value="2" selected>thick</option>`
+    + `</select></span>
+        <span><label for="bell` + i + `c">
+            color:
+          </label>
+          <input class="color" type="text" id="bell` + i + `c" name="bell` + i + `c" /></span></li>`;
+
+    bluelines += li;
+
+  }
+}
+
+function blueBellOpts(stage) {
+  for (let i = 1; i <= stage; ++i) {
+    $('<option></option').text(i).val(i).appendTo('select.blueBell');
+  }
+}
+
+function toggleHunts() {
+  if (["Principle", "Differential"].includes(checkedClass)) {
+    $("input.hunts").val("");
+    $("select.hunts > option:first-child").prop("selected", true);
+    $("input.hunts").prop({disabled: true, checked: false});
+    $("select.hunts").prop("disabled", true);
+    $("div.hunts").addClass("disabled");
+    $("span.hunts").addClass("disabled");
+  } else {
+    $("input.hunts").prop("disabled", false);
+    $("select.hunts").prop("disabled", false);
+    $("div.hunts").removeClass("disabled");
+    $("span.hunts").removeClass("disabled");
+  }
+
+}
+
+function detachBasic() {
+  huntbellw = $('div#basic-lines select#huntBellw').children($('option')).detach();
+  bluebellw = $('div#basic-lines select#blueBellw').children($('option')).detach();
+  bluebell = $('div#basic-lines select#blueBell').children($('option')).detach();
+}
+
+function toggleBlueInput(hide) {
+  console.log('list items to detach: ', $('div#' + hide).find('li').length);
+  return $('div#' + hide + ' li').detach();
+}
+
+function toggleGridTypes() {
+  $("div.gridopt").find(":input").prop("disabled", true);
+  $("#"+gridtype).find(":input").prop("disabled", false);
+}
+
+
+function tenOpts(keysig, numBells) {
+  const sharps = ['G', 'D', 'A', 'E', 'B', 'F♯'];
+  const flats = ['F', 'B♭', 'E♭', 'A♭', 'D♭', 'G♭'];
+  const sds = [4, 1, 5, 2, 6, 3, 7];
+  let numChoices = Math.min(13 - numBells, 7);
+  let numS = sharps.indexOf(keysig)+1;
+  let numF = flats.indexOf(keysig)+1;
+
+  let options = '';
+  let letter = getChar(keysig, numChoices-1);
+  for (var i = 0; i < numChoices; i++) {
+    let selected = i == numChoices-1 ? "selected" : "";
+    let sd = numChoices-i;
+    let a = '';
+
+    if (numS > 0) {
+      if (sds.reverse().slice(0, numS).indexOf(sd) > -1) {
+        a = '♯';
+      }
+      sds.reverse();
+    }
+    if (numF > 0 && sds.slice(0, numF).indexOf(sd) > -1) {
+      a = '♭';
+    }
+
+
+    options += `          <option value="${letter}" ${selected}>${letter}${a}</option>
+          `;
+    letter = getChar(letter, -1);
+  }
+  if (numBells < 11) {
+    options += `        <option value="${keysig[0]}P">${keysig} pentatonic</option>`;
+  }
+
+  $('select#actTenor > option').remove();
+
+  $('select#actTenor').append(options);
+
+}
+
+function getChar(char, dir) {
+  let current = char.charCodeAt(0);
+  let next = current + dir;
+
+  while (next < 65) {
+    next += 7;
+  }
+
+  while (next > 71) {
+    next -= 7;
+  }
+
+  return String.fromCharCode(next);
+}
+
+function adjustTime(stage) {
+  $('div#timeOpts > fieldset > ul > li').remove();
+
+  let gap;
+  if ($('#handstroke-gap').is(':checked')) {
+    gap = true;
+    //console.log('include handstroke gap');
+  }
+
+  let handTS = buildTime(stage);
+  let backTS = gap ? buildTime(stage+1) : [];
+
+  if ($('#time-sig').is(':checked')) {
+    $('div#timeOpts > fieldset > ul').append(timeOpts(handTS, backTS));
+    $('div#timeOpts').slideDown(1000, "swing");
+  }
+
+}
+
+function timeOpts(hand, back) {
+  var length = Math.max(hand.length, back.length);
+  let options = '';
+  let denoms = ['4', '2', '1'];
+  let ids = ['quarter', 'half', 'whole']
+
+  for (var i = 0; i < length; i++) {
+    let handT = hand[i] ? hand[i] : hand[0];
+    let handB = hand[i] ? denoms[i] : '4';
+    let backT, backB;
+    if (back[i]) {
+      backT = back[i];
+      backB = denoms[i];
+    } else if (back[0]) {
+      backT = back[0];
+      backB = '4';
+    } 
+    let value = handT + '-' + handB + function() {
+      return backT && backB ? `-${backT}-${backB}` : '';
+    }();
+    let dispvalh = `${handT} <br/> ${handB}`; //needs updating
+    let dispvalb = backT && backB ? `${backT} <br/> ${backB}` : '';
+
+    options += `<li class="time">
+      <label for="${ids[i]}">
+        <ul class="row">
+          <li>
+            <input type="radio" id="${ids[i]}" name="timesig" value="${value}" />
+          </li>
+          <li>
+            ${dispvalh}
+          </li>
+          <li>
+            ${dispvalb}
+          </li>
+        </ul>
+      </label>
+    </li>`;
+  }
+  return options;
+}
+
+function buildTime(num) {
+  let options = [num];
+  if (num % 2 == 0) {
+    options.push(num/2);
+  }
+  if (num % 4 == 0) {
+    options.push(num/4);
+  }
+  return options;
+}

@@ -1,11 +1,40 @@
 
 
 $(function() {
-  let bells = window.bells;
-  if (bells && bells.length) {
+  
+  let type = $("#type input:checked").attr("id");
+  let checked = 10;
+  let timeout;
+  check();
+  
+  $("#submit").on("click", () => {
+    type = $("#type input:checked").attr("id");
+    if (!["practice", "simulator"].includes(type) && $("#player-"+type).is("checked")) {
+      checked = 0;
+      timeout = setTimeout(check, 50);
+    }
+  });
+  
+  function check() {
+    if (window.bells && !["practice", "simulator"].includes(type)) {
+      clearTimeout(timeout);
+      player();
+    } else {
+      checked++;
+      if (checked < 10) {
+        timeout = setTimeout(check, 50);
+      } else {
+        clearTimeout(timeout);
+      }
+    }
+  }
+  
+  
+  function player() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let numbells = window.numbells;
     let rowArray = window.rowArray;
+    let bells = window.bells;
     let rowspeed = 3;
     
     let stroke = 1;
