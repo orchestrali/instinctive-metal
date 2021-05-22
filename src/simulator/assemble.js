@@ -1,0 +1,26 @@
+const elements = require("./elements.js");
+const addrope = require("./addrope.js");
+
+
+module.exports = function assemble(numbells) {
+  let arr = [];
+  let pealspeed = Math.ceil((2*numbells+1)*2.3/numbells*252/6);
+  let hours = Math.floor(pealspeed/60);
+  let minutes = pealspeed % 60;
+  arr.push(hours, minutes);
+  let opts = '';
+  let bells = ``;
+  for (let i = 1; i <= numbells; i++) {
+    if (i > 1) {
+      opts += `<option value="${i}">${i}</option>
+      `;
+    }
+    bells += addrope(i);
+  }
+  arr.push(opts, bells);
+  let html = elements[0];
+  for (let i = 0; i < arr.length; i++) {
+    html += arr[i] + elements[i+1];
+  }
+  return html;
+}

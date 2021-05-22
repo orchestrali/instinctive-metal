@@ -4,11 +4,11 @@ const methodPractice = require('../practice/handleInput.js');
 const staffNot = require('./staffnotation2.js');
 const stages = require('../stages.json');
 const buildplayer = require('./player.js');
+const simulator = require('../simulator/router.js');
 
 module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInput, type) {
   //console.log("svgs/handleInput", compInfo.rowZeroObj);
   let results = {};
-  results.script = '';
   let width = 270;
   if (type == 'grid') {
     let stageName = stages.find(o => o.num == methodInfo.stage).name;
@@ -44,10 +44,14 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     results.script = obj.script;
   } else if (type == 'staff') {
     results.SVGs = staffNot(compInfo.rowZeroObj, rowArray, methodInfo.stage, displayInput);
+  } else if (type === "simulator") {
+    let obj = simulator(methodInfo.stage+compInfo.tenors, rowArray, compInfo.rowZero, methodInfo.name);
+    results.SVGs = obj.html;
+    results.script = obj.script;
   }
   if (displayInput.player) {
     let r = buildplayer(methodInfo.stage+compInfo.tenors, displayInput, rowArray);
-    results.script += r.script;
+    results.script = r.script;
     results.player = r.player;
   }
   return results;

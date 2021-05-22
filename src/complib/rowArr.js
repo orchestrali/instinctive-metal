@@ -21,6 +21,7 @@ module.exports = function organize(info, obj) {
       rowNum: i === 0 ? i : i-1,
       bells: r[0].split('').map(s => places.indexOf(s)+1)
     }
+    if (obj.rows[i][1].length) row.call = obj.rows[i][1];
     if (i-2 > -1) {
       let call = obj.rows[i-2][1];
       if (i === 2) call = call.slice(3);
@@ -40,6 +41,7 @@ module.exports = function organize(info, obj) {
       res.compInfo.rowZeroObj = row;
       
     } else if (i > 1) {
+      
       let current = [];
       for (let p = 0; p < obj.stage; p++) {
         if (row.bells[p] === prevrow[p]) {

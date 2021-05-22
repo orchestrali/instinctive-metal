@@ -62,10 +62,10 @@ const random = require('./src/random.js');
 
 
 const routes = {
-  app: function (request, response, type) {
+  app: function (request, response, type, raw) {
     request.query.type = type;
     //record(request, response, (r) => console.log(r));
-    router(request.query, (results) => {
+    router(request.query, raw, (results) => {
       response.send(results);
     });
   },
@@ -120,6 +120,9 @@ app.get("/:param", function (request, response) {
     routes.updatenames(request, response);
   } else if (p === "test") {
     routes.test(request, response, "test");
+  } else if (p === "raw") {
+    let type = request.query.type;
+    routes.app(request, response, type, true);
   } else {
     response.sendStatus(404);
   }

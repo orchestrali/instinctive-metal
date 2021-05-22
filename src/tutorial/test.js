@@ -41,15 +41,13 @@ module.exports = function describe(rowArray, bell, stage) {
         place+=dir;
       }
       
-      //if ((s != 1 && s != stage) || Math.abs(place-s) > 3 ) {}
+      
       work.push("Hunt " + dirName);
       i++;
       //console.log("i is now "+i);
     } else if (t == u) {
       //console.log("also make place");
-      //let last = i > 0 ? work[work.length-1].substring(0, 4) : "";
-      //let last2 = i > 0 ? work[work.length-1].indexOf("blows") : -1;
-      //let x = last == "Make" || last == "Lead" || last == "Lie " || i == 0 || last2 > -1 ? i : i+1;
+      
       let last = i > 0 ? work[work.length-1] : "";
       let x = last.indexOf("Point") == -1 || last.indexOf("Fish") == -1 ? i : i+1;
       let v = rowArray[i+3] ? getPlace(i+3) : null;
@@ -75,6 +73,7 @@ module.exports = function describe(rowArray, bell, stage) {
         let stroke = rowArray[i+1].rowNum % 2 == 1 ? " at hand" : " at back";
         work.push("Point " + placeName(t));
         rowArray[i].instruction = "Point " + placeName(t);
+        rowArray[i].with = getBell(i+1,s);
         i+=2;
       } else {
       let count = 1;
@@ -89,12 +88,14 @@ module.exports = function describe(rowArray, bell, stage) {
           let places = s > t ? t + "-" + s : s + "-" + t;
           work.push("Fishtail " + places + points);
           rowArray[starti].instruction = "Fishtail " + places + points;
+          rowArray[starti].with = getBell(starti+1,s);
           //if (getPlace(i) == s) 
           i--
         } else if (getPlace(i+1) == t || getPlace(i+1) == t+dir1 || getPlace(i+1) == null) {
           let places = s > t ? t + "-" + s : s + "-" + t;
           work.push(dodgeNum(count) + places + " " + dirname(dir1));
           rowArray[starti].instruction = dodgeNum(count) + places + " " + dirname(dir1);
+          rowArray[starti].with = getBell(starti+1,s);
         }
         
       }
@@ -103,13 +104,9 @@ module.exports = function describe(rowArray, bell, stage) {
     
   }
   
-  let poss = ["Make", "blows", "full", "Lie", "wrong"]
-  var match = function (element) {
-    return work[work.length-1].indexOf(element) > -1;
-  }
   let penult = getPlace(rowArray.length-2);
   let ult = getPlace(rowArray.length-1);
-  //if (poss.some(match)) {
+  
   if (i == rowArray.length-2) {
     let dir = ult-penult;
     if (dir != 0) {
@@ -119,22 +116,38 @@ module.exports = function describe(rowArray, bell, stage) {
       work.push(makePlace(ult));
       rowArray[rowArray.length-2].instruction = makePlace(ult);
     }
-  } //else if (["odge", "Point", "Fish"].some(match) && ult == penult) {
+  } 
+  
+  i = 0;
+  while (i < rowArray.length-6) {
+    if (!rowArray[i].instruction || (!rowArray[i].instruction.startsWith("Make") && !rowArray[i].instruction.startsWith("L"))) {
+      i++;
+    } else {
+      if ((rowArray[i].instruction.startsWith("M") || rowArray[i].instruction.startsWith("L")) && rowArray[i+2].instruction && rowArray[i+2].instruction.startsWith("Point") && rowArray[i+4].instruction && (rowArray[i+4].instruction.startsWith("M") || rowArray[i+4].instruction.startsWith("L")) && (!rowArray[i+5].instruction || !rowArray[i+5].instruction.startsWith("P"))) {
+        let instruct = " (Stedman whole turn";
+        if (rowArray[i].instruction.startsWith("M")) instruct += " "+rowArray[i].instruction[5]+"–"+rowArray[i+2].instruction[6];
+        instruct += ")";
+        rowArray[i].instruction2 = instruct;
+        rowArray[i+2].instruction2 = instruct;
+        rowArray[i+4].instruction2 = instruct;
+        i+=5;
+      } else {
+        i++;
+      }
+    }
+  }
     
   
   function getPlace(j) {
     return rowArray[j] ? rowArray[j].bells.indexOf(bell)+1 : null;
   }
   
-  var fakeGetPlace = function(bell) {
-    return function(j) {
-      return rowArray[j] ? rowArray[j].bells.indexOf(bell)+1 : null;
-    }
-  };
+  function getBell(row, place) {
+    return rowArray[row].bells[place-1];
+  }
   
   function checkPlace(row, value) {
-    if (getPlace(row) == value) return true;
-    else return false;
+    return getPlace(row) === value;
   }
   
   function makePlace(num, rownum) {

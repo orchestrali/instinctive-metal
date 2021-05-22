@@ -66,7 +66,7 @@
     display: flex;
     flex-flow: column;
     width: 100%;
-    max-width: 578px;
+    max-width: 642px;
     border-radius: 3px;
     position: relative;
   }
@@ -327,6 +327,9 @@
   fieldset#type li.selected {
     border-bottom: 1px solid rgb(204, 224, 244);
     background-color: rgb(204, 224, 244);
+  }
+  fieldset#type label:hover {
+    cursor: pointer;
   }
   
   
