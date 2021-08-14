@@ -84,5 +84,6 @@ module.exports = function organize(info, obj) {
   });
   res.compInfo.leadendcomp = comp;
   res.compInfo.hunts = hunts;
+  res.methodInfo.hunts = hunts;
   return res;
 }

@@ -1,4 +1,5 @@
 const rounds = require('../rounds.js');
+const places = require('../places.js');
 
 //take compInput and generate a row array of the leadhead
 module.exports = function leadhead(compInput, stage) {
@@ -13,15 +14,7 @@ module.exports = function leadhead(compInput, stage) {
     let row = compInput.otherLeadhead.split('');
     rowZero = [];
     for (var i = 0; i < stage; ++i) {
-      if (row[i] == '0') {
-        rowZero.push(10);
-      } else if (row[i] == 'E') {
-        rowZero.push(11);
-      } else if (row[i] == 'T') {
-        rowZero.push(12);
-      } else if (row[i]*1 > 0 && row[i]*1 < 10) {
-        rowZero.push(Number(row[i]));
-      }
+      rowZero.push(places.indexOf(row[i])+1);
     }
     
   }

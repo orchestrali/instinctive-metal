@@ -1,18 +1,22 @@
-const request = require('request');
+const axios = require('axios');
 
 module.exports = function findOne(query, mod, cb) {
   let url = 'https://vivacious-port.glitch.me/find/'+mod+'?'+serialize(query);
   
-  
   console.log(url);
   
-  request({url: url, form: query}, function (err, response, body) {
-    if (body) {
-      cb(JSON.parse(body));
+  axios.get(url)
+  .then(function(response) {
+    if (response.data) {
+      cb(response.data);
     } else {
       cb('no '+mod+' match');
     }
-    
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    cb();
   });
   
   function serialize(obj, prefix) {

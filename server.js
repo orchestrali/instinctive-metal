@@ -11,22 +11,25 @@ var morgan = require('morgan');
 var app = express();
 
 var input = { 
-  stage: '7',
-  methodClass: 'Principle',
-  methodName: 'Erin',
+  stage: '8',
+  methodClass: 'Surprise',
+  methodName: 'London',
   placeNotation: '',
   leadhead: 'rounds',
   otherLeadhead: '',
-  quantity: 'touch',
-  touchType: 'numbers',
-  comp: '1.6.8s.12',
-  callType: 'cust',
-  bobPlaceNot: '5',
-  singlePlaceNot: '567',
-  callLoc: '1'
+  quantity: 'plaincourse',
+  //touchType: 'numbers',
+  //comp: '1.6.8s.12',
+  //callType: 'cust',
+  //bobPlaceNot: '5',
+  //singlePlaceNot: '567',
+  //callLoc: '1'
 };
 
-
+var compinput = {
+  stage: '8',
+  complibid: '16363'
+}
 
 
 
@@ -57,9 +60,9 @@ const max = require('./src/query/max.js');
 const random = require('./src/random.js');
 
 
-//random({id: 40936});
+//random(compinput); //{id: 40936}
 //findOne({title: "Cheeky Little Surprise Minor"}, '', (err, res) => {console.log(err || res)});
-
+//
 
 const routes = {
   app: function (request, response, type, raw) {
@@ -86,8 +89,8 @@ const routes = {
       response.send('ok');
     }
   },
-  test: function(request, response, type) {
-    router(request.query, (results) => {
+  test: function(request, response, type, raw) {
+    router(request.query, raw, (results) => {
       response.send(results);
     });
   }
@@ -121,6 +124,7 @@ app.get("/:param", function (request, response) {
   } else if (p === "test") {
     routes.test(request, response, "test");
   } else if (p === "raw") {
+    console.log("raw");
     let type = request.query.type;
     routes.app(request, response, type, true);
   } else {
@@ -131,7 +135,7 @@ app.get("/:param", function (request, response) {
 });
 //*/
 
-
+//
 
 
 // listen for requests :)

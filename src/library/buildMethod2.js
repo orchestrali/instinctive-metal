@@ -8,6 +8,7 @@ module.exports = function buildMethod(method) {
   methodObj.class = method.class;
   methodObj.plain = method.classification.plain;
   methodObj.leadLength = method.leadLength;
+  methodObj.hunts = method.huntBells;
   
   return methodObj;
 }

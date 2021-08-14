@@ -31,6 +31,7 @@ module.exports = function methodInfo(methodInput, cb) {
         methodInfo.name = knownMethod.name;
         methodInfo.placeNot.plain = knownMethod.plainPN;
         methodInfo.leadLength = knownMethod.leadLength;
+        methodInfo.hunts = knownMethod.hunts;
         next();
       } else {
         console.log('find method error');

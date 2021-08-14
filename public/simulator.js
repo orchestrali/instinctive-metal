@@ -24,6 +24,7 @@ let robotopts = {
 };
 var method;
 var comp;
+var huntbells;
 var playing = false;
 var place = 0;
 var nextBellTime = 0.0;
@@ -49,6 +50,8 @@ var solidtreble;
 var highlightunder;
 var fadeabove;
 var displayplace;
+var instruct;
+var instructions = [];
 var running;
 
 $(function() {
@@ -70,6 +73,7 @@ $(function() {
     if (window.bells && $(".results").length) {
       clearTimeout(timeout);
       simulator();
+      
     } else {
       checked++;
       if (checked < 10) {
@@ -87,6 +91,7 @@ $(function() {
     bells = window.bells;
     rowArr = window.rowArray;
     firstcall = rowArr[0].call;
+    huntbells = window.hunts;
     //console.log(rowArr[2]);
     if (!running) {
       start();
@@ -109,6 +114,8 @@ $(function() {
       }
     });
     
+    $("#hours,#minutes").change(calcspeed);
+    
     $("#myrope").change(function() {
       let n = Number($("#myrope option:checked").val());
       assign(n);
@@ -123,10 +130,13 @@ $(function() {
     });
     
     $("#reset").on("click", function() {
-      if (!$("#reset").hasClass("disabled")) {
+      //if (!$("#reset").hasClass("disabled")) {
         $("#reset").addClass("disabled");
         $("#display").text("");
         $("#callcontainer").text("");
+      for (let i = 1; i <= numbells; i++) {
+        pull({bell: i, stroke: -1},audioCtx.currentTime+i*delay);
+      }
         rownum = 0;
         place = 0;
         roundscount = 0;
@@ -135,7 +145,15 @@ $(function() {
         stroke = 1;
         thatsall = false;
         currentcall = null;
+      for (let i = 0; i < rowArr.length; i++) {
+        let o = rowArr[i];
+        o.row.forEach(a => {
+          if (a[1]) a[1] = false;
+        });
       }
+      
+      if (instruct) $(".instruct").text("");
+      //}
     });
     
     //change stroke duration
@@ -202,6 +220,19 @@ $(function() {
       } else if (this.id === "waitforgaps") {
         robotopts.waitforgaps = $(this).prop("checked");
       } else {
+        if (this.id === "roundsrows") {
+          let rows = Number($(this).val());
+          let diff = rows - robotopts.roundsrows;
+          for (let i = 0; i < diff; i++) {
+            let row = [];
+            rowArr[i+1].row.forEach(a => row.push([a[0]]));
+            rowArr.unshift({row: row});
+          }
+          for (let i = 0; i > diff; i--) {
+            rowArr.shift()
+          }
+          if (rownum >= robotopts.roundsrows) rownum += diff;
+        }
         robotopts[this.id] = Number($(this).val());
         if (this.id === "nthrounds" && robotopts.nthrounds > 1) {
           robotopts.stopatrounds = true;
@@ -293,6 +324,16 @@ $(function() {
       }
     });
     
+    $("#instructions").on("click", function() {
+      instruct = $(this).prop("checked");
+      if (instruct && mybells[0]) {
+        setupInstruct();
+      } else {
+        $("#displayplace").prop("disabled", false);
+      }
+    });
+    
+    $("#reset").click();
   }
   
 });
@@ -430,6 +471,7 @@ function assign(n) {
         }
       }, 700);
     }
+    if (instruct) setupInstruct();
   }
   
 }
@@ -494,6 +536,7 @@ function pull(obj, t) {
         mbell.ringing = true;
         if (playing && rowArr[rownum+1]) {
           let p = rowArr[rownum].row.findIndex(a => a[0] === obj.bell);
+          
           let row = rowArr[rownum].row[p][1] ? rowArr[rownum+2] : rowArr[rownum+1];
           let i = row ? row.row.findIndex(a => a[0] === obj.bell) : -1;
           if (highlightunder) {
@@ -507,6 +550,16 @@ function pull(obj, t) {
             let b = i+1;
             $("#instruct"+obj.bell).text(b === 0 ? "???" : b === 1 ? "Lead" : b === 2 ? "2nd" : b === 3 ? "3rd" : b+"th");
           }
+          if (instruct) {
+            let j = rownum-robotopts.roundsrows+2;
+            if (rowArr[rownum].row[p][1]) j++;
+            if (instructions[j]) {
+              let text = instructions[j].instruction;
+              if (instructions[j].with) text += " with the "+instructions[j].with;
+              $("#instruct"+obj.bell).text(text);
+            }
+          }
+          
 
         }
       }
@@ -517,16 +570,18 @@ function pull(obj, t) {
       bell.stroke = obj.stroke * -1;
 
       let row = rowArr[rownum];
+      
       if (playing && row && mybells.includes(obj.bell)) { //&& row[place][0] === bell.num
         let i = row.row.findIndex(a => a[0] === obj.bell);
         if (!row.row[i][1] && ((rownum%2 === 0 && obj.stroke === 1) || (rownum%2 === 1 && obj.stroke === -1))) {
           row.row[i][1] = true;
-        } else if (rowArr[rownum+1] && ((rownum%2 === 0 && obj.stroke === -1) || (rownum%2 === 1 && obj.stroke === 1))) {
+        } else if (row.row[i][1] && rowArr[rownum+1] && ((rownum%2 === 0 && obj.stroke === -1) || (rownum%2 === 1 && obj.stroke === 1))) {
           let j = rowArr[rownum+1].row.findIndex(a => a[0] === obj.bell);
           if (j > -1 && !rowArr[rownum+1].row[j][1]) rowArr[rownum+1].row[j][1] = true;
         }
 
       }
+      
     }
 
     if (waiting) {
@@ -680,6 +735,8 @@ function thatisall() {
   $("#start").text("Start");
   $("#reset").removeClass("disabled");
   $("#options input").prop("disabled", false);
+  if (instruct) $("#displayplace").prop("disabled", true);
+  if (displayplace) $("#instructions").prop("disabled", true);
 }
 
 function updaterobot(obj) {
@@ -723,4 +780,169 @@ function setdur(s,i) {
   let n = duration/21;
   let dur = [0,14].includes(i) ? 3*n : [1,13].includes(i) ? 2*n : n;
   return dur;
+}
+
+function setupInstruct() {
+  $(".instruct").remove();
+  displayplace = false;
+  $("#displayplace").prop("checked", false);
+  $("#displayplace").prop("disabled", true);
+  describe(rowArr, mybells[0], Number(window.methodstage));
+  $("#chute"+mybells[0]).append(`<div id="instruct${mybells[0]}" class="instruct"></div>`);
+}
+
+
+const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
+function describe(rowArray, bell, stage) {
+  instructions = [];
+  var places = '1234567890ET';
+  let i = 1;
+  let work = [];
+
+  while (i < rowArray.length-2) {
+    let s = getPlace(i);
+    let t = getPlace(i+1);
+    let u = getPlace(i+2);
+
+    if (t == s && u == s) { 
+      let count = 3;
+      while (checkPlace(i+count, s)) {
+        count++;
+      }
+      work.push(count + " blows in " + placeName(s));
+      instructions[i] = {instruction: count + " blows in " + placeName(s)};
+      i += count-1;
+    } else if (t == s) {
+      //console.log("Make place");
+      work.push(makePlace(s, i));
+      instructions[i] = {instruction: makePlace(s, i)};
+      i++;
+    } else if (t-s === u-t) {
+      //console.log("Hunt");
+      let dir = t-s;
+      let dirName = dirname(dir);
+      let treble = huntbells[0] && getBell(i,s+dir) === huntbells[0] ? ", pass "+huntbells[0]+" in "+s+"–"+t : "";
+      instructions[i] = {instruction: "Hunt " + dirName};
+      let place = u;
+      while (getPlace(i+3)-place === dir) {
+        i++;
+        place+=dir;
+      }
+      work.push("Hunt " + dirName);
+      i++;
+      //console.log("i is now "+i);
+    } else if (t == u) {
+      //console.log("also make place");
+
+      let last = work.length > 0 ? work[work.length-1] : "";
+      let x = last.indexOf("Point") == -1 || last.indexOf("Fish") == -1 ? i : i+1;
+      let v = rowArray[i+3] ? getPlace(i+3) : null;
+      if (v != u) {
+        work.push(makePlace(t, i+1));
+        instructions[x] = {instruction: makePlace(t, i+1)};
+        i+=1;
+      } else {
+        let count = 3;
+        while (checkPlace(i+count+1, t)) {
+          count++;
+        }
+        work.push(count + " blows in " + placeName(t));
+        instructions[x] = {instruction: count + " blows in " + placeName(t)};
+        i += count;
+      }
+    } else {
+      //point, fishtail, or dodge
+      let dir1 = t-s;
+      let v = rowArray[i+3] ? getPlace(i+3) : null;
+
+      if (v == u || v-u != dir1) {
+        let stroke = (i+1) % 2 === 0 ? " at hand" : " at back";
+        work.push("Point " + placeName(t));
+        instructions[i] = {instruction: "Point " + placeName(t) + stroke};
+        instructions[i].with = getBell(i+1,s);
+        i+=1;
+      } else {
+      let count = 1;
+        let starti = i;
+        i+=3;
+        while (getPlace(i) == t && getPlace(i+1) == s) {
+          count++;
+          i+=2;
+        }
+        if (getPlace(i) == s || getPlace(i) == s+dir1*-1) {
+          let points = count > 2 ? ", " + count + " points " + placeName(t) : "";
+          let places = s > t ? t + "-" + s : s + "-" + t;
+          work.push("Fishtail " + places + points);
+          instructions[starti] = {instruction: "Fishtail " + places + points};
+          instructions[starti].with = getBell(starti+1,s);
+          //if (getPlace(i) == s) 
+          i-=2;
+        } else if (getPlace(i+1) == t || getPlace(i+1) == t+dir1 || getPlace(i+1) == null) {
+          let places = s > t ? t + "-" + s : s + "-" + t;
+          work.push(dodgeNum(count) + places + " " + dirname(dir1));
+          instructions[starti] = {instruction: dodgeNum(count) + places + " " + dirname(dir1)};
+          instructions[starti].with = getBell(starti+1,s);
+          i--;
+        }
+
+      }
+
+    }
+  }
+
+  let penult = getPlace(rowArray.length-2);
+  let ult = getPlace(rowArray.length-1);
+
+  if (i === rowArray.length-2) {
+    let dir = ult-penult;
+    if (dir != 0) {
+      work.push("Hunt " + dirname(dir));
+      instructions[rowArray.length-2] = {instruction: "Hunt " + dirname(dir)};
+    } else if (ult == penult) {
+      work.push(makePlace(ult));
+      instructions[rowArray.length-2] = {instruction: makePlace(ult)};
+    }
+  }
+
+  function getPlace(j) {
+    return rowArray[j] ? rowArray[j].row.findIndex(a => a[0] === bell)+1 : null;
+  }
+
+  function getBell(row, place) {
+    return rowArray[row].row[place-1][0];
+  }
+
+  function checkPlace(row, value) {
+    return getPlace(row) === value;
+  }
+
+  function makePlace(num, rownum) {
+    if (num == 1 && rownum % 2 == 1) return "Lead wrong";
+    else if (num == 1 ) return "Lead full";
+    else if (num == stage) return "Lie behind";
+    else return "Make " + placeName(num);
+  }
+
+  function dodgeNum(num) {
+    if (num == 1) return "Dodge ";
+    else if (num == 2) return "Double dodge ";
+    else return num + " dodges ";
+  }
+
+  function dirname(dir) {
+    let val = dir == 1 ? "up" : "down";
+    return val;
+  }
+
+  function placeName(num) {
+    //console.log("num to place " + num);
+    if (0 < num && num < 4) {
+      return placeNames[num-1].name;
+    } else {
+      return num + "ths";
+    }
+  }
+
+
+
 }

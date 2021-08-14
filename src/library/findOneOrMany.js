@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 
 module.exports = function findOne(query, s, cb) {
   let url = 'https://vivacious-port.glitch.me/method'+s+'?'+serialize(query);
@@ -13,33 +13,27 @@ module.exports = function findOne(query, s, cb) {
     timedout = true;
       cb(['sorry, database access problem; try again later']);
     //}
-  }, 15000)
+  }, 15000);
   
-  request({url: url, form: query}, function (err, response, body) {
-    if (body) {
-      try {
-        result = JSON.parse(body);
-        clearTimeout(timeout);
-        cb(null, result);
-      } catch (err) {
-        console.log(err);
-        console.log(body);
-        if (!timedout) {
-          clearTimeout(timeout);
-          cb(['sorry, database access problem; try again later']);
-        }
-        
-      }
-      
+  axios.get(url)
+  .then(function (response) {
+    if (response.data) {
+      clearTimeout(timeout);
+      cb(null, response.data);
     } else {
-      if (!timedout) {
-          clearTimeout(timeout);
-          cb(['no methods match']);
-        }
-      
+      clearTimeout(timeout);
+      cb(['no methods match']);
     }
-    
+  })
+  .catch(function (error) {
+    // handle error
+    if (!timedout) {
+      console.log(error);
+      clearTimeout(timeout);
+      cb(['no methods match']);
+    }
   });
+  
   
   function serialize(obj, prefix) {
     var str = [],
