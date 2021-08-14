@@ -575,6 +575,12 @@ module.exports = [
               </div>
               
             </div>
+            <div id="simulatoropts" class="type hidden">
+              <p>
+                <label for="tenors">Tenor(s) behind: </label>
+                <input type="number" id="mtenors" name="tenors" value="0" />
+              </p>
+            </div>
             
             
           </div>

@@ -41,6 +41,7 @@ module.exports = [
       <li class="following"><input type="checkbox" name="highlightunder" id="highlightunder" />Highlight the rope I should follow (lead when my rope is highlighted)</li>
       <li class="following"><input type="checkbox" name="fadeabove" id="fadeabove" />Fade the ropes above me</li>
       <li class="displayplace"><input type="checkbox" name="displayplace" id="displayplace" />Display the place I should be in</li>
+      <li class="displayplace"><input type="checkbox" name="instructions" id="instructions" />Display method instructions</li>
     </ul>
     <label for="mykeys">
       Keyboard controls

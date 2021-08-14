@@ -3,7 +3,7 @@ const bells = require("../library/bells.js");
 const rounds = require("../rounds.js");
 const words = ["call","type","name"];
 
-module.exports = function router(numbells, rowArr, rowzero, name) {
+module.exports = function router(numbells, rowArr, rowzero, method) {
   let current = bells.filter(b => b.type === "tower");
   let bellarr = [];
   for (let i = numbells; i > 0; i--) {
@@ -19,7 +19,7 @@ module.exports = function router(numbells, rowArr, rowzero, name) {
   if (rowArr[0].rowNum === 0 && rowArr[0].call) {
     rows[0].call = rowArr[0].call;
   } else {
-    rows[0].call = "Go "+(name.length ? name : "next time");
+    rows[0].call = "Go "+(method.name.length ? method.name : "next time");
   }
   for (let i = 0; i < rowArr.length; i++) {
     if (rowArr[i].rowNum > 0) {
@@ -38,6 +38,8 @@ module.exports = function router(numbells, rowArr, rowzero, name) {
   <script class="results">window.rowArray = ${JSON.stringify(rows)};
     window.bells = ${JSON.stringify(bellarr)}
     window.numbells = ${numbells};
+    window.hunts = ${JSON.stringify(method.hunts)};
+    window.methodstage = ${method.stage};
   </script>`;
   let results = {
     script: script,

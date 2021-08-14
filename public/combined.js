@@ -1,6 +1,6 @@
 const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
 const selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
-const texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'hours', 'minutes', 'complibid'];
+const texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'mtenors', 'hours', 'minutes', 'complibid'];
 const radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
 const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
 for (let i = 1; i < 17; i++) {
@@ -46,7 +46,7 @@ $(function() {
   for (let p of q) {
     if (p[0] === "tenors") {
       params++;
-      ["gtenors","stenors","btenors"].forEach(w => {
+      ["gtenors","stenors","btenors","mtenors"].forEach(w => {
         obj[w] = p[1];
       });
     }
@@ -184,6 +184,7 @@ $(function() {
         $(".errors").html(results.errors);
       } else {
         if (results.script) {
+          //console.log(results.script);
           $("head").append(results.script);
         }
         $("main").append(results.html);
