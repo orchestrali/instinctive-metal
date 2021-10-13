@@ -429,13 +429,31 @@ function pointer(e) {
   }
 }
 
+var listeners = [
+  {id: "hand15b", event: "endEvent", f: endpull},
+  {id: "back14b", event: "endEvent", f: endpull},
+  {id: "sally", event: "mouseover", f: pointer},
+  {id: "sally", event: "click", f: emitring},
+  {id: "tail", event: "mouseover", f: pointer},
+  {id: "tail", event: "click", f: emitring},
+  {id: "hand", event: "touchstart", f: emitring},
+  {id: "back", event: "touchstart", f: emitring},
+  {id: "hand", event: "touchend", f: prevent},
+  {id: "back", event: "touchend", f: prevent}
+];
+
+function prevent(e) {
+  e.preventDefault();
+}
 
 function assign(n) {
-  mybells.forEach(b => {
-    remove(document.getElementById("hand1b"+b));
-    remove(document.getElementById("back0b"+b));
-    document.getElementById("hand15b"+b).removeEventListener("endEvent", endpull);
-    document.getElementById("back14b"+b).removeEventListener("endEvent", endpull);
+  listeners.forEach(l => {
+    mybells.forEach(b => {
+      document.getElementById(l.id+b).removeEventListener(l.event, l.f);
+    });
+    if (n) {
+      document.getElementById(l.id+n).addEventListener(l.event, l.f);
+    }
   });
   if (n) {
     mybells = [n];
@@ -443,13 +461,7 @@ function assign(n) {
     keys += "j";
     mbells = [{num: n, keys: keys}];
     $("#mykeys").val(keys);
-    ["hand15b", "back14b"].forEach(id => {
-      document.getElementById(id+n).addEventListener("endEvent", endpull);
-    });
-    ["sally"+n, "tail"+n].forEach(id => {
-      document.getElementById(id).addEventListener("mouseenter", pointer);
-      document.getElementById(id).addEventListener("click", emitring);
-    });
+    
     let diff1 = centerrope[0] - n;
     let diff2 = n-centerrope[0];
     if (diff1 < 0) diff1 += numbells;
@@ -513,10 +525,10 @@ function emitring(e) {
   let num = this.id.startsWith("sally") ? Number(this.id.slice(5)) : Number(this.id.slice(4));
   let bell = bells.find(b => b.num === num);
   let o = {bell: bell.num};
-  if (this.id.startsWith("sally") && bell.stroke === 1) {
+  if ((this.id.startsWith("sally") || this.id.startsWith("hand")) && bell.stroke === 1) {
     o.stroke = 1;
 
-  } else if (this.id.startsWith("tail") && bell.stroke === -1) {
+  } else if ((this.id.startsWith("tail") || this.id.startsWith("back")) && bell.stroke === -1) {
     o.stroke = -1;
   }
   
@@ -821,7 +833,7 @@ function describe(rowArray, bell, stage) {
       //console.log("Hunt");
       let dir = t-s;
       let dirName = dirname(dir);
-      let treble = huntbells[0] && getBell(i,s+dir) === huntbells[0] ? ", pass "+huntbells[0]+" in "+s+"–"+t : "";
+      //let treble = huntbells[0] && getBell(i,s+dir) === huntbells[0] ? ", pass "+huntbells[0]+" in "+s+"–"+t : "";
       instructions[i] = {instruction: "Hunt " + dirName};
       let place = u;
       while (getPlace(i+3)-place === dir) {
