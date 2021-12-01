@@ -47,12 +47,18 @@ var lastcallrow = 0;
 var thatsall;
 var solidme;
 var solidtreble;
+var courseorder;
+var cosallies = false;
 var highlightunder;
 var fadeabove;
 var displayplace;
+var placebells = false;
+var standbehind = false;
 var instruct;
 var instructions = [];
 var running;
+const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
+var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#badbba","#a4e0b0","#71d184","#3fa654","#007317"];
 
 $(function() {
   let checked = 10;
@@ -62,6 +68,7 @@ $(function() {
   $("#submit").on("click", () => {
     let type = $("#type input:checked").attr("id");
     //console.log(type);
+    method = null, courseorder = null, cosallies = false, solidme = false, solidtreble = false;
     if (type === "simulator") {
       checked = 0;
       timeout = setTimeout(check, 100);
@@ -87,11 +94,28 @@ $(function() {
   
   function simulator() {
     //console.log($(".results").length);
+    
     numbells = window.numbells;
     bells = window.bells;
     rowArr = window.rowArray;
     firstcall = rowArr[0].call;
     huntbells = window.hunts;
+    if (window.courseorder) {
+      let arr = window.courseorder;
+      courseorder = [];
+      method = {co: arr};
+      //console.log(method);
+      method.co.forEach(n => courseorder.push(n));
+      $("#cosallies").on("click", function() {
+        cosallies = $(this).prop("checked");
+        if (cosallies) {
+          let n = courseorder.includes(mybells[0]) ? mybells[0] : courseorder[0];
+          colorsally(n);
+        } else {
+          sallycolor();
+        }
+      });
+    }
     //console.log(rowArr[2]);
     if (!running) {
       start();
@@ -145,6 +169,14 @@ $(function() {
         stroke = 1;
         thatsall = false;
         currentcall = null;
+      if (method && method.co && cosallies) {
+        //console.log("resetting course order");
+        courseorder = [];
+        method.co.forEach(n => courseorder.push(n));
+        if (courseorder.includes(mybells[0])) {
+          colorsally(mybells[0]);
+        }
+      }
       for (let i = 0; i < rowArr.length; i++) {
         let o = rowArr[i];
         o.row.forEach(a => {
@@ -193,7 +225,7 @@ $(function() {
     //ring with keyboard
     $("body").on("keydown", function(e) {
       let bell = mbells.find(o => o.keys.includes(e.key));
-      if (bell && !bell.ringing && !keysdown.includes(e.key)) {
+      if (bell && !bell.ringing && !keysdown.includes(e.key) && !standbehind) {
         keysdown.push(e.key);
         let stroke = bells.find(b => b.num === bell.num).stroke;
         let o = {bell: bell.num, stroke: stroke};
@@ -219,6 +251,7 @@ $(function() {
         robotopts.stopatrounds = $(this).prop("checked");
       } else if (this.id === "waitforgaps") {
         robotopts.waitforgaps = $(this).prop("checked");
+        waitgaps = $(this).prop("checked");
       } else {
         if (this.id === "roundsrows") {
           let rows = Number($(this).val());
@@ -331,6 +364,15 @@ $(function() {
       } else {
         $("#displayplace").prop("disabled", false);
       }
+    });
+    
+    $("#standbehind").on("click", function() {
+      standbehind = $(this).prop("checked");
+      listeners.forEach(l => {
+        mybells.forEach(b => {
+          standbehind ? document.getElementById(l.id+b).removeEventListener(l.event, l.f) : document.getElementById(l.id+b).addEventListener(l.event, l.f);
+        });
+      });
     });
     
     $("#reset").click();
@@ -451,7 +493,7 @@ function assign(n) {
     mybells.forEach(b => {
       document.getElementById(l.id+b).removeEventListener(l.event, l.f);
     });
-    if (n) {
+    if (n && !standbehind) {
       document.getElementById(l.id+n).addEventListener(l.event, l.f);
     }
   });
@@ -484,8 +526,29 @@ function assign(n) {
       }, 700);
     }
     if (instruct) setupInstruct();
+    if (cosallies) {
+      //console.log(courseorder);
+      colorsally(courseorder.includes(n) ? n : Number(window.methodstage));
+      
+    }
   }
   
+}
+
+function colorsally(n) {
+  $("#sally"+n).attr("fill", colors[0]);
+  let i = courseorder.indexOf(n);
+  for (let j = 1; j <= Math.floor(courseorder.length/2); j++) {
+    let next = i+j;
+    if (next >= courseorder.length) next -= courseorder.length;
+    $("#sally"+courseorder[next]).attr("fill", colors[j]);
+    if (courseorder.length%2 === 1 || j < Math.ceil(courseorder.length/2)) {
+      let before = i-j;
+      if (before < 0) before += courseorder.length;
+      $("#sally"+courseorder[before]).attr("fill", colors[colors.length-j]);
+    }
+
+  }
 }
 
 //given animation event find the buffer to play
@@ -620,10 +683,10 @@ function startplay() {
   $("#options input").prop("disabled", true);
   
   nextBellTime = audioCtx.currentTime;
-  if (rownum === 0 && !mybells.includes(1)) {
+  if (rownum === 0 && (!mybells.includes(1) || standbehind)) {
     place = -2;
   }
-  if (rownum === 0 && mybells.includes(1)) {
+  if (rownum === 0 && mybells.includes(1) && !standbehind) {
     waiting = true;
     requestAnimationFrame(animater);
   } else {
@@ -641,6 +704,39 @@ function nextPlace() {
   if (place === 1) {
     if (currentcall) {
       callqueue.push({call: currentcall, time: nextBellTime, rownum: rownum});
+    }
+    if (placebells && rowArr[rownum].name === "leadhead") {
+      for (let i = 1; i <= numbells; i++) {
+        let p = rowArr[rownum].row.findIndex(a => a[0] === i);
+        
+        $("#chute"+i+" .placebell").text(placeName(p+1)+" place bell");
+      }
+    }
+    let ct = $('input[name="callType"]:checked').val()
+    if (cosallies && ["b","s"].includes(rowArr[rownum].type) && ["a","b"].includes(ct)) {
+      let b = ct === "a" ? rowArr[rownum].row[3][0] : rowArr[rownum].row[Number(window.methodstage)-3][0];
+      let i = courseorder.indexOf(b);
+      let j;
+      switch (ct) {
+        case "b":
+          j = i-2;
+          if (j < 0) j+=courseorder.length-1;
+          break;
+        case "a":
+          j = i+2;
+          if (j >= courseorder.length) j-=courseorder.length-1;
+          break;
+      }
+      
+      if (rowArr[rownum].type === "s") {
+        courseorder[i] = courseorder[j];
+        courseorder[j] = b;
+      } else {
+        courseorder.splice(i,1);
+        courseorder.splice(j,0,b);
+      }
+      console.log(courseorder);
+      colorsally((mybells[0] && courseorder.includes(mybells[0])) ? mybells[0] : Number(window.methodstage));
     }
   }
   if (place === numbells) {
@@ -677,7 +773,7 @@ function scheduleRing(p, t) {
   if (p > -1) {
     let num = rowArr[rownum].row[p];
     //console.log(num);
-    let bell = num && num.length ? !mybells.includes(num[0]) : null;
+    let bell = num && num.length ? !mybells.includes(num[0]) || standbehind : null;
 
     if (bell) {
       //console.log("scheduling "+num[0] + " time "+t);
@@ -781,10 +877,9 @@ function fadeout(arr) {
 function sallycolor(e) {
   solidme = $("#solidme").prop("checked");
   solidtreble = $("#solidtreble").prop("checked");
-  $("#sally1").attr("fill", solidtreble ? "red" : "url(#sallypattern)");
-  mybells.forEach(b => {
-    $("#sally"+b).attr("fill", solidme ? "darkred" : "url(#sallypattern)");
-  });
+  for (let b = 1; b <= numbells; b++) {
+    $("#sally"+b).attr("fill", solidme && mybells.includes(b) ? "darkred" : solidtreble && b===1 ? "red" : "url(#sallypattern)");
+  }
 
 }
 
@@ -804,7 +899,7 @@ function setupInstruct() {
 }
 
 
-const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
+
 function describe(rowArray, bell, stage) {
   instructions = [];
   var places = '1234567890ET';
@@ -946,7 +1041,13 @@ function describe(rowArray, bell, stage) {
     return val;
   }
 
-  function placeName(num) {
+  
+
+
+
+}
+
+function placeName(num) {
     //console.log("num to place " + num);
     if (0 < num && num < 4) {
       return placeNames[num-1].name;
@@ -954,7 +1055,3 @@ function describe(rowArray, bell, stage) {
       return num + "ths";
     }
   }
-
-
-
-}

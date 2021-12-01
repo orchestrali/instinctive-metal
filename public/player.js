@@ -235,7 +235,7 @@ $(function() {
         nextSystem(current);
         lastplace = current;
       }
-      requestAnimationFrame(staff)
+      requestAnimationFrame(staff);
     }
     
     function nextSystem(current) {

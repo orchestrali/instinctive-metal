@@ -19,7 +19,7 @@ module.exports = function router(numbells, rowArr, rowzero, method) {
   if (rowArr[0].rowNum === 0 && rowArr[0].call) {
     rows[0].call = rowArr[0].call;
   } else {
-    rows[0].call = "Go "+(method.name.length ? method.name : "next time");
+    rows[0].call = "Go "+(method.name && method.name.length ? method.name : "next time");
   }
   for (let i = 0; i < rowArr.length; i++) {
     if (rowArr[i].rowNum > 0) {
@@ -40,10 +40,11 @@ module.exports = function router(numbells, rowArr, rowzero, method) {
     window.numbells = ${numbells};
     window.hunts = ${JSON.stringify(method.hunts)};
     window.methodstage = ${method.stage};
+    window.courseorder = ${method.courseorder ? JSON.stringify(method.courseorder) : 0};
   </script>`;
   let results = {
     script: script,
-    html: assemble(numbells)
+    html: assemble(numbells, method.courseorder)
   }
   return results;
 }

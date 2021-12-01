@@ -1,4 +1,4 @@
-var callPlaces = ['h', 'w', 'm', 'b', 'i'];
+var callPlaces = ['h', 'w', 'm', 'o', 'i'];
 var callTypes = ['p', 'b', 's'];
 var grouping = ['(', ')', '[', ']'];
 var groupStart = ['(', '[', '{'];
@@ -39,6 +39,6 @@ module.exports = function lexer(compStr, type) {
     }
     
   }
-  console.log(tokens);
+  //console.log(tokens);
   return tokens;
 }

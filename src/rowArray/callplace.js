@@ -17,7 +17,7 @@ module.exports = function callplace(methodInfo, compInfo, tenor) {
   let stage = methodInfo.stage;
   //get call name & place bell correspondences from somewhere
   let callPos = callPlaces(methodInfo);
-  
+  //console.log(compInfo.touch);
   let comp = [];
   //loop through touch
   for (var i = 0; i < compInfo.touch.length; ++i) {

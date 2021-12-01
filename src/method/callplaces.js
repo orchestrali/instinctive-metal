@@ -7,6 +7,7 @@ var testCallPos = [{placebell: 2, bobname: 'i', singlename: 3},{placebell: 4, bo
 module.exports = function callPlaces(methodInfo) {
   let stage = methodInfo.stage;
   let calls = callNames(stage);
+  //console.log(methodInfo.placeNot);
   
   let bobEnd = buildLead(rounds(stage), methodInfo.placeNot.bob, 1)[methodInfo.leadLength-1].bells;
   let singleEnd = buildLead(rounds(stage), methodInfo.placeNot.single, 1)[methodInfo.leadLength-1].bells;
@@ -21,5 +22,6 @@ module.exports = function callPlaces(methodInfo) {
     place.singlename = calls.find(o => o.place == singlePlace).callname;
     callplaces.push(place);
   }
+  //console.log(callplaces);
   return callplaces;
 }

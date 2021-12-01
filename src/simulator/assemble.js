@@ -2,7 +2,7 @@ const elements = require("./elements.js");
 const addrope = require("./addrope.js");
 
 
-module.exports = function assemble(numbells) {
+module.exports = function assemble(numbells, co) {
   let arr = [];
   let pealspeed = Math.ceil((2*numbells+1)*2.3/numbells*252/6);
   let hours = Math.floor(pealspeed/60);
@@ -17,7 +17,8 @@ module.exports = function assemble(numbells) {
     }
     bells += addrope(i);
   }
-  arr.push(opts, bells);
+  let cosally = co ? `<li><input type="checkbox" name="cosallies" id="cosallies" />Color sallies based on coursing order</li>` : "";
+  arr.push(opts, cosally, bells);
   let html = elements[0];
   for (let i = 0; i < arr.length; i++) {
     html += arr[i] + elements[i+1];
