@@ -10,7 +10,7 @@ module.exports = function callNames(stage) {
     if (i == 2) {
       call.callname = "i";
     } else if (i == 3) {
-      call.callname = "b";
+      call.callname = "o";
     } else if (i == stage) {
       call.callname = "h";
     } else if (i == stage-1) {

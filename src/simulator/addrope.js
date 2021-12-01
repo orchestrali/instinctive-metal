@@ -4,6 +4,7 @@ module.exports = function addrope(num) {
   let rope = `
   <div class="chute" id="chute${num}">
     <span class="bellnum">${num}</span>
+    <span class="placebell"></span>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="rope${num}" class="rope" width="60" height="500" viewBox="0 0 60 500" >
       <defs>
         <pattern id="sallypattern" x="0" y="0" width="1" height="0.13" >

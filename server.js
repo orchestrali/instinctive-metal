@@ -62,7 +62,7 @@ const random = require('./src/random.js');
 
 //random(compinput); //{id: 40936}
 //findOne({title: "Cheeky Little Surprise Minor"}, '', (err, res) => {console.log(err || res)});
-//
+//findPost({query: {stage: 3}, fields: "title"}, null, (res) => {console.log(res[0])});
 
 const routes = {
   app: function (request, response, type, raw) {

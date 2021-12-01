@@ -26,6 +26,9 @@ module.exports = [
       <li>
         <input type="checkbox" name="waitforgaps" id="waitforgaps" checked /><label for="waitforgaps">Wait for human ringer</label>
       </li>
+      <li>
+        <input type="checkbox" name="standbehind" id="standbehind" /><label for="standbehind">Give robot my bell</label>
+      </li>
     </ul>
     <label for="myrope">My rope:</label>
     <select id="myrope">
@@ -36,6 +39,7 @@ module.exports = [
     </select>
 
     <ul>
+    `,`
       <li><input type="checkbox" name="solidme" id="solidme" />Give my rope a solid-color sally</li>
       <li><input type="checkbox" name="solidtreble" id="solidtreble" />Give the treble a solid-color sally</li>
       <li class="following"><input type="checkbox" name="highlightunder" id="highlightunder" />Highlight the rope I should follow (lead when my rope is highlighted)</li>
