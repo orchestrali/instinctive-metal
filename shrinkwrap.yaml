@@ -4,6 +4,7 @@ dependencies:
   lodash: 4.17.21
   mongoose: 5.12.2
   morgan: 1.10.0
+  mpath: 0.8.4
   mquery: 3.2.4
   request: 2.88.0
 packages:
@@ -590,6 +591,12 @@ packages:
       node: '>=4.0.0'
     resolution:
       integrity: sha512-eb9rRvhDltXVNL6Fxd2zM9D4vKBxjVVQNLNijlj7uoXUy19zNDsIif5zR+pWmPCWNKwAtqyo4JveQm4nfD5+eA==
+  /mpath/0.8.4:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-DTxNZomBcTWlrMW76jy1wvV37X/cNNxPW1y2Jzd4DZkAaC5ZGsm8bfGfNOthcDuRJujXLqiuS6o3Tpy0JEoh7g==
   /mquery/3.2.4:
     dependencies:
       bluebird: 3.5.1
@@ -955,5 +962,6 @@ specifiers:
   lodash: ^4.17.21
   mongoose: ^5.12.1
   morgan: ^1.10.0
+  mpath: ^0.8.4
   mquery: ^3.2.4
   request: ^2.88.0
