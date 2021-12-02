@@ -10,12 +10,15 @@ module.exports = function assemble(numbells, co) {
   arr.push(hours, minutes);
   let opts = '';
   let bells = ``;
+  let start = Math.floor(numbells/2)+1;
+  let j = start;
   for (let i = 1; i <= numbells; i++) {
     if (i > 1) {
       opts += `<option value="${i}">${i}</option>
       `;
     }
-    bells += addrope(i);
+    bells += addrope(j);
+    j += (i%2 === 1 ? -i : i);
   }
   let cosally = co ? `<li><input type="checkbox" name="cosallies" id="cosallies" />Color sallies based on coursing order</li>` : "";
   arr.push(opts, cosally, bells);

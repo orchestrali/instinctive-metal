@@ -1,10 +1,10 @@
 const parsePN = require('../placeNot/parse.js');
-const findMethod = require('../library/findOneOrMany.js');
-const buildMethod = require('../library/buildMethod2.js');
+const buildMethod = require('../library/buildMethod.js');
 const callInfo = require('./callInfo.js');
 const callPN = require('./callPN.js');
 const addCalls = require('./addCalls.js');
 const stages = require('../stages.json');
+const methods = require('../methods.json');
 var stedman
 
 //originally this file was for finding methods in my hand-typed json files
@@ -21,25 +21,14 @@ module.exports = function methodInfo(methodInput, cb) {
   if (methodInput.methodName) {
     methodInfo.name = methodInput.nameLower ? methodInput.nameLower : methodInput.methodName + ' ' + stageName;
     //if the method is known, name, stage, parsed plain PN, and lead length come from the database
-    let knownMethod;
-    let amp = /&(?!=amp)/gi;
-    //.replace(amp, "&amp;")
-    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, true, (err, res) => {
-      //console.log(res);
-      if (!err) {
-        knownMethod = buildMethod(res);
-        methodInfo.name = knownMethod.name;
-        methodInfo.placeNot.plain = knownMethod.plainPN;
-        methodInfo.leadLength = knownMethod.leadLength;
-        methodInfo.hunts = knownMethod.hunts;
-        if (knownMethod.courseorder) methodInfo.courseorder = knownMethod.courseorder;
-        next();
-      } else {
-        console.log('find method error');
-        cb(err);
-      }
-      
-    });
+    let knownMethod = methods.find(o => o.name.toLowerCase() === methodInfo.name.toLowerCase());
+    if (knownMethod) {
+      buildMethod(methodInfo, knownMethod);
+      next();
+    } else {
+      console.log('find method error');
+      cb("err");
+    }
     
   } else {
     methodInfo.placeNot.plain = parsePN(methodInput.placeNotation, stage);

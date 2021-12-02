@@ -445,6 +445,7 @@ function rotate(dir) {
     }
     pos.push(o);
   }
+  
   dir === 1 ? pos.push(pos.shift()) : pos.unshift(pos.pop());
   for (let i = 1; i <= numbells; i++) {
     let bell = bells.find(b => b.num === i);
@@ -452,6 +453,20 @@ function rotate(dir) {
     bell.left = pos[i-1].left;
     bell.z = pos[i-1].z;
   }
+  /*
+  let n = dir === 1 ? numbells-1 : numbells;
+  let first = true;
+  while (n > 0) {
+    if (first) {
+      $("#bells").append($(".chute:nth-child("+n+")").detach());
+    } else {
+      $(".chute:nth-child("+(n+2)+")").after($(".chute:nth-child("+n+")").detach());
+    }
+    
+    n -= 2;
+    first = false;
+  }
+  */
 }
 
 function remove(e) {

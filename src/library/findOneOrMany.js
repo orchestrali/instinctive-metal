@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = function findOne(query, s, cb) {
-  let url = 'https://vivacious-port.glitch.me/method?'+(s ? serialize(query) : query);
+  let url = 'https://vivacious-port.glitch.me/method'+s+'?'+serialize(query);
   let timeout;
   let result;
   let timedout = false;
@@ -30,18 +30,7 @@ module.exports = function findOne(query, s, cb) {
     if (!timedout) {
       console.log(error);
       clearTimeout(timeout);
-      if (process.env.NAME !== "instinctive-metal") {
-        axios.get("https://orchestrali-instinctive-metal.glitch.me/method?" + (s ? serialize(query) : query))
-        .then((res) => {
-          cb(null, res.data);
-        })
-        .catch((err) => {
-          cb(['sorry, database access problem; try again later']);
-        });
-      } else {
-        cb(['sorry, database access problem; try again later']);
-      }
-      
+      cb(['no methods match']);
     }
   });
   

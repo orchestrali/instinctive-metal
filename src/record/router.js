@@ -6,13 +6,13 @@ module.exports = function router(req, res, cb) {
   let r = record(req, res);
   //console.log(r);
   if (r) {
-    connect((db) => {
+    connect(process.env.DB, (db) => {
       model.create(r, (err, doc) => {
         if (err) cb(err);
         else cb("record added");
       });
 
-    })
+    });
   } else {
     cb("no r");
   }
