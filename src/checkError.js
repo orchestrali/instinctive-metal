@@ -1,5 +1,5 @@
 const places = require('./places');
-const methodNames = require("../methodNames2.json");
+const methodNames = require("../public/methodNames.json");
 const stages = require('./stages.json');
 
 var validNotTokens = [',', '+', '&', 'x', '.', '-'];

@@ -7,7 +7,7 @@ const numbers = ['stage', 'callLoc', 'tenors', 'blueBell'];
 var getSchema = new Schema({
   date: Date,
   host: String,
-  endpoint: { type: String, enum: ['/', '/graphs', '/staff', '/practice', '/method', '/methods', '/surpriseminor', '/performance', '/performances', '/simulator', '/stedman'] },
+  endpoint: { type: String, enum: ['/', '/graphs', '/staff', '/practice', '/method', '/methods', '/surpriseminor', '/performance', '/performances'] },
   query: {},
   resStatus: Number
 });

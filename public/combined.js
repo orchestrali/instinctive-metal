@@ -16,12 +16,14 @@ var stages = window.stages;
 let bellgroups, everyline, huntbellw, bluebell, bluebellw;
 let bluelines = '';
 let mode = "methods";
+var methodNameList;
 let methodList;
 
 // new client-side file for combined form (except surprise minor game)
 
 $(function() {
   console.log('hello world :o');
+  
   
   //location.hash = 'svgs';
   if ($(".anchor").length) {
@@ -56,7 +58,7 @@ $(function() {
     }
   }
   //console.log(obj);
-  
+  getNames(obj, params);
   
   
   
@@ -207,9 +209,7 @@ $(function() {
   
   
   if (stage && checkedClass) {
-    methodNames(stage, checkedClass, (mm) => {
-      methodList = mm;
-    });
+    methodList = methodNames(stage, checkedClass);
   }
   
   //don't submit form if enter is pressed in an input
@@ -239,9 +239,7 @@ $(function() {
     //if there's a stage make the search placeholder blank
     if (stage) {
       $("#methodName").prop("placeholder", "");
-      methodNames(stage, checkedClass, (mm) => {
-        methodList = mm;
-      });
+      methodList = methodNames(stage, checkedClass);
     }
     
     $("#methodName").val("");
@@ -688,6 +686,46 @@ $(function() {
   
   
   
+  
+  
+  
+  
+  let gridWidth = (stage + (stage % 2))*16;
+  //console.log('stage: ', stage);
+  //console.log('gridWidth: ', gridWidth);
+  //console.log('window width: ', $(window).width());
+  //number of columns per viewport
+  let numSVGs = Math.floor(($( window ).width() - 76)/(gridWidth + 38));
+  //console.log('numSVGs: ', numSVGs);
+  let gridHeight = $('svg.grid').attr("height");
+  
+  $('div.grid').css("height", gridHeight);
+  
+  //number of columns per letter size page
+  let printNumSVGs = Math.floor(670/(gridWidth + 38));
+  //console.log("printNumSVGs", printNumSVGs);
+  let lastPage = $('div.grid').length % printNumSVGs;
+  if (lastPage == 0) {
+    lastPage = printNumSVGs;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+});
+
+
+function fillform(obj, params) {
   // fill form with query params //
   
   if (obj.type && obj.type !== 'grid') {
@@ -737,44 +775,7 @@ $(function() {
       $("#"+r).change();
     }
   });
-  
-  
-  
-  let gridWidth = (stage + (stage % 2))*16;
-  //console.log('stage: ', stage);
-  //console.log('gridWidth: ', gridWidth);
-  //console.log('window width: ', $(window).width());
-  //number of columns per viewport
-  let numSVGs = Math.floor(($( window ).width() - 76)/(gridWidth + 38));
-  //console.log('numSVGs: ', numSVGs);
-  let gridHeight = $('svg.grid').attr("height");
-  
-  $('div.grid').css("height", gridHeight);
-  
-  //number of columns per letter size page
-  let printNumSVGs = Math.floor(670/(gridWidth + 38));
-  //console.log("printNumSVGs", printNumSVGs);
-  let lastPage = $('div.grid').length % printNumSVGs;
-  if (lastPage == 0) {
-    lastPage = printNumSVGs;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-});
-
-
+}
 
 
 function getStageName(stage) {
@@ -783,31 +784,34 @@ function getStageName(stage) {
   return stageName;
 }
 
-//search new json methodNames file, returns array of arrays with methods
-function methodNames(stage, checkedClass, cb) {
-  $.getJSON('/methodnames/', function(body) {
-    if (checkedClass == "Plain") {
-      var plainClasses = ["Bob", "Place"];
-      let classMethods = [];
-      for (var i = 0; i < plainClasses.length; i++) {
-
-        let methods = body.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods;
-        for (var j = 0; j < methods.length; j++) {
-          classMethods.push(methods[j]);
-        }
-      }
-      //console.log("length of classMethods", classMethods.length);
-      cb(classMethods);
-    } else {
-      let classMethods = body.find(o => o.stage == stage).classes.find(o => o.class == checkedClass).methods;
-    //console.log("length of classMethods", classMethods.length);
-    cb(classMethods);
-    }
-  }).fail(function( jqxhr, textStatus, error ) {
-    var err = textStatus + ", " + error;
-    //console.log("Text: " + jqxhr.responseText);
-  console.log( "Request Failed: " + err );
+function getNames(obj, params) {
+  $.get("methodNames.json", function(body) {
+    methodNameList = body;
+    fillform(obj, params);
   });
+}
+
+//search new json methodNames file, returns array of arrays with methods
+function methodNames(stage, checkedClass) {
+  
+  if (checkedClass == "Plain") {
+    var plainClasses = ["Bob", "Place"];
+    let classMethods = [];
+    for (var i = 0; i < plainClasses.length; i++) {
+
+      let methods = methodNameList.find(o => o.stage == stage).classes.find(o => o.class == plainClasses[i]).methods;
+      for (var j = 0; j < methods.length; j++) {
+        classMethods.push(methods[j]);
+      }
+    }
+    //console.log("length of classMethods", classMethods.length);
+    return classMethods;
+  } else {
+    let classMethods = methodNameList.find(o => o.stage == stage).classes.find(o => o.class == checkedClass).methods;
+  //console.log("length of classMethods", classMethods.length);
+    return classMethods;
+  }
+  
 }
 
 
