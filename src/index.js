@@ -27,6 +27,9 @@ module.exports = [
       <h1>
         Change Ringing Method Tools
       </h1>
+      <h3>
+        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a>
+      </h3>
     </header>
     
     <main>
@@ -41,13 +44,15 @@ module.exports = [
             <div class="arrow"></div>
           </div>
           <ul class="dropdown">
-             <li>
+            <li>
                <a href="./surpriseminor">Surprise Minor name quiz</a>
             </li>
             <li>
                <a href="./stedman">Stedman tips and tricks</a>
             </li>
-
+            <li>
+              <a href="/home">Links to Alison's ringing tools</a>
+            </li>
           </ul>
         </div>
         <button type="button" id="switch">Click to enter a complib.org composition ID instead</button>
