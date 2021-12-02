@@ -24,7 +24,7 @@ module.exports = function methodInfo(methodInput, cb) {
     let knownMethod;
     let amp = /&(?!=amp)/gi;
     //.replace(amp, "&amp;")
-    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, '', (err, res) => {
+    findMethod({title: {$regex: "^" +methodInfo.name.toLowerCase(), $options: 'i'}}, true, (err, res) => {
       //console.log(res);
       if (!err) {
         knownMethod = buildMethod(res);

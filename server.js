@@ -61,7 +61,7 @@ const random = require('./src/random.js');
 
 
 //random(compinput); //{id: 40936}
-//findOne({title: "Cheeky Little Surprise Minor"}, '', (err, res) => {console.log(err || res)});
+//findOne({title: "Cheeky Little Surprise Minor"}, true, (err, res) => {console.log(err || res)});
 //findPost({query: {stage: 3}, fields: "title"}, null, (res) => {console.log(res[0])});
 
 const routes = {
@@ -92,6 +92,11 @@ const routes = {
   test: function(request, response, type, raw) {
     router(request.query, raw, (results) => {
       response.send(results);
+    });
+  },
+  method: function(request, response) {
+    findOne(request.query, true, (err, res) => {
+      response.send(err || res);
     });
   }
 }
@@ -127,6 +132,8 @@ app.get("/:param", function (request, response) {
     console.log("raw");
     let type = request.query.type;
     routes.app(request, response, type, true);
+  } else if (p === "method") {
+    routes.method(request, response);
   } else {
     response.sendStatus(404);
   }
