@@ -58,7 +58,7 @@ var instruct;
 var instructions = [];
 var running;
 const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
-var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#badbba","#a4e0b0","#71d184","#3fa654","#007317"];
+var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#c8e6ce","#a4e0b0","#71d184","#3fa654","#007317"];
 
 $(function() {
   let checked = 10;

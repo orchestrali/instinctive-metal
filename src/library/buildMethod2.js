@@ -30,6 +30,9 @@ module.exports = function buildMethod(method) {
      console.log(order);
     methodObj.courseorder = order;
   }
+  if (method.name === "Stedman" && method.class === "Principle") {
+    methodObj.courseorder = method.pbOrder[0].reverse();
+  }
   
   return methodObj;
 }
