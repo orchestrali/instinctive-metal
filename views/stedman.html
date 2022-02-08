@@ -630,24 +630,70 @@
           <li>2: The 2 is completing the "Thursday" section of the slow work, starting the last whole turn.</li>
           <li>3: The 3 is completing the "Tuesday" section of the slow work, making wrong thirds before doing the point leads of Wednesday.</li>
           <li>4: The 4 (and any higher even-numbered bells) has one more dodge down to do before going in. Since the 4 is in 4–5 down during a quick six, it will go in slow. The 6 would be in 6–7 down during the initial quick six, then 4–5 down for a slow six, then go in quick. The even bells continue to alternate in how they first go onto the front: 8 slow, 10 quick, 12 ___.</li>
-          <li>5: The 5 (and any higher odd-numbered bells) has one more dodge up, then will advance to the next dodging position. The odd bells that begin with dodging follow the same pattern as the even bells in alternating how they first go in (the 5 goes in quick, on any number of bells as long as it's a plain course!). </li>
+          <li>5: The 5 (and any higher odd-numbered bells) has one more dodge up, then will advance to the next dodging position. The odd bells that begin with dodging follow the same pattern as the even bells in alternating how they first go in (the 5 goes in quick, on any number of bells as long as it's a plain course). </li>
         </ul>
       </div>
       <h3>
-        Interacting with Other Bells
+        Stedman Plain Courses
+      </h3>
+      <div>
+        <div class="flexrow stages" id="pcstages">
+          <div id="s5" class="selected">Doubles</div>
+          <div id="s7">Triples</div>
+          <div id="s9">Caters</div>
+          <div id="s11">Cinques</div>
+        </div>
+        <div>
+          <span>Choose a bell to highlight: </span><select id="bluebell">
+          
+          </select>
+        </div>
+        <div id="plain-course-container">
+          
+        </div>
+      </div>
+      <h3>
+        Interacting with Other Bells (in a plain course)
       </h3>
       <div>
         <p>
           Within a six of Stedman, each bell only really interacts with one other bell (if they're dodging) or two other bells (if they're on the front). It's more useful to know who you'll dodge with and who you'll be on the front with than just the order you pass bells in, since you only really "pass" bells between sixes.
         </p>
+        <p>
+          The circle below gives the place-bell order (moving counterclockwise) and the order you encounter bells for double-dodging (moving clockwise). Clicking on a number will select it and give the rest of the bells different color borders to indicate when you dodge together. Moving clockwise from yourself are the bells you'll dodge with after the quick work and before the slow work. These bells will have blue borders (doubles) or blue or purple borders (triples and above). After the slow work, you'll dodge with the red-bordered bells (doubles) or repeat the purple borders and then go through the red borders (triples and above). 
+        </p>
+        <p>
+          The two bells immediately to your left and right around the circle are those that will be in the slow work with you, two sixes behind or ahead of you (see the note above just before the section on Stedman starts). These two bells are also the ones you dodge in 4–5 with on either side of the quick work.
+        </p>
+        <p>
+          The two bells across the circle from you are the bells that will come in quick while you're doing the slow work, and they'll be on the front when you go in quick. On Triples they are the two bells you'll spend two sixes dodging with, immediately before and after the slow work. On Caters and Cinques they are in the middle of the series of bells you spend two sixes dodging with. These interactions are faintly highlighted in the plain courses above.
+        </p>
         <div id="circleanim">
-          
+          <div class="flexrow stages" id="pbstages">
+            <div id="stage5">Doubles</div>
+            <div id="stage7">Triples</div>
+            <div id="stage9">Caters</div>
+            <div id="stage11" class="selected">Cinques</div>
+          </div>
+          <div class="container">
+            <div class="number" id="n1">1</div>
+            <div class="number" id="n2">2</div>
+            <div class="number" id="n3">3</div>
+            <div class="number" id="n4">4</div>
+            <div class="number" id="n5">5</div>
+            <div class="number" id="n6">6</div>
+            <div class="number" id="n7">7</div>
+            <div class="number" id="n8">8</div>
+            <div class="number" id="n9">9</div>
+            <div class="number" id="n10">10</div>
+            <div class="number" id="n11">11</div>
+          </div>
         </div>
       </div>
       <h3>
         Circle (or Ellipse) of Work
       </h3>
-      <div class="flexrow" id="stages">
+      <div class="flexrow stages" id="workstages">
         <div id="doubles" class="selected">
           Doubles
         </div>
