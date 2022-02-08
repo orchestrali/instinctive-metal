@@ -6,6 +6,8 @@ module.exports = [
     <input type="range" id="volume" min="0" max="2" value="1" step="0.01" class="block"/>
     <label for="duration">Stroke duration in seconds: </label>
     <input id="duration" type="number" value="1.3" step="0.1" />
+    <label for="handgap">Handstroke gap in bells: </label>
+    <input id="handgap" type="number" value="1" step="1" min="0" />
     <ul id="simulatoropts">
       <li>
         Pealspeed: 
@@ -28,6 +30,9 @@ module.exports = [
       </li>
       <li>
         <input type="checkbox" name="standbehind" id="standbehind" /><label for="standbehind">Give robot my bell</label>
+      </li>
+      <li>
+        <input type="checkbox" name="melouder" id="melouder" /><label for="melouder">Play my bell louder</label>
       </li>
     </ul>
     <label for="myrope">My rope:</label>

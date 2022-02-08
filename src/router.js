@@ -13,7 +13,7 @@ module.exports = function directTraffic(input, raw, cb) {
   }
   
   
-  if (validInputs === 0) {
+  if (validInputs === 0 || !input.stage) {
     cb(build([],{}, 0, type));
   } else {
     //buildpage

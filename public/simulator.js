@@ -1,10 +1,12 @@
 var audioCtx;
 var gainNode;
+var gainval = 0.75;
 var bells;
 var numbells;
 var mybells = [];
 var mbells = [];
 var duration = 1.3;
+var handgap = 1;
 var speed = 2.3;
 var delay;
 var centerrope;
@@ -54,6 +56,7 @@ var fadeabove;
 var displayplace;
 var placebells = false;
 var standbehind = false;
+var melouder = false;
 var instruct;
 var instructions = [];
 var running;
@@ -244,6 +247,7 @@ $(function() {
     //change volume
     $("#volume").on("change", function(e) {
       gainNode.gain.value = this.value;
+      gainval = this.value;
     });
     
     $('#simulatoropts input').on("change", function() {
@@ -373,6 +377,15 @@ $(function() {
           standbehind ? document.getElementById(l.id+b).removeEventListener(l.event, l.f) : document.getElementById(l.id+b).addEventListener(l.event, l.f);
         });
       });
+    });
+    
+    $("#melouder").on("click", function(e) {
+      melouder = $(this).prop("checked");
+    });
+    
+    $("#handgap").on("change", (e) => {
+      handgap = Number($("#handgap").val());
+      console.log(handgap);
     });
     
     $("#reset").click();
@@ -577,7 +590,9 @@ function ring(e) {
     let x = (bell.left - 270)/135;
     let z = (bell.z)/100;
     pan.push(x, 10, z);
-
+    if (melouder) {
+      gainNode.gain.value = mybells.includes(bellnum) ? gainval*1.35 : gainval*0.75;
+    }
     let buffer = bell.buffer;
     playSample(audioCtx, buffer, pan);
   }
@@ -757,7 +772,7 @@ function nextPlace() {
   if (place === numbells) {
     //console.log("rownum "+rownum);
 
-    if (stroke === -1) nextBellTime += delay + .23*duration; //add handstroke gap
+    if (stroke === -1) nextBellTime += delay*handgap + .23*duration; //add handstroke gap
     if (stroke === 1) nextBellTime -= .23*duration;
     place = 0;
     stroke *= -1;
