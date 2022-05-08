@@ -524,7 +524,7 @@ module.exports = [
               </fieldset>
               <p>
                 <label for="numrounds">Rows of rounds at start: </label>
-                <input type="number" id="numrounds" name="numrounds" value="2" step="1" min="0" />
+                <input type="number" id="numrounds" name="numrounds" value="2" step="2" min="0" />
               </p>
             </div>
             

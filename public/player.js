@@ -53,7 +53,7 @@ $(function() {
     let dy,dx;
     let startleft;
     let numbars;
-    let numrounds = Number($("#numrounds").val());
+    let numrounds = Math.abs(rowArray[0].rownum)+1;
     let gap = $("#handstroke-gap").is(":checked");
     let stafftimer;
     let lastplace = 0;

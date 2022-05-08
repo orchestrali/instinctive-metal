@@ -62,14 +62,16 @@ var instructions = [];
 var running;
 const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
 var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#c8e6ce","#a4e0b0","#71d184","#3fa654","#007317"];
+var type;
 
 $(function() {
   let checked = 10;
   let timeout;
+  type = $("#type input:checked").attr("id");
   check();
   
   $("#submit").on("click", () => {
-    let type = $("#type input:checked").attr("id");
+    type = $("#type input:checked").attr("id");
     //console.log(type);
     method = null, courseorder = null, cosallies = false, solidme = false, solidtreble = false;
     if (type === "simulator") {
@@ -80,7 +82,7 @@ $(function() {
   
   function check() {
     //console.log("checking");
-    if (window.bells && $(".results").length) {
+    if (window.bells && $(".results").length && type === "simulator") {
       clearTimeout(timeout);
       simulator();
       
@@ -924,7 +926,7 @@ function setupInstruct() {
   displayplace = false;
   $("#displayplace").prop("checked", false);
   $("#displayplace").prop("disabled", true);
-  describe(rowArr, mybells[0], Number(window.methodstage));
+  describe(rowArr.slice(robotopts.roundsrows-2), mybells[0], Number(window.methodstage));
   $("#chute"+mybells[0]).append(`<div id="instruct${mybells[0]}" class="instruct"></div>`);
 }
 

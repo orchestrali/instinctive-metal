@@ -50,7 +50,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
     results.script = obj.script;
   }
   if (displayInput.player) {
-    let r = buildplayer(methodInfo.stage+compInfo.tenors, displayInput, rowArray);
+    let r = buildplayer(methodInfo.stage+compInfo.tenors, displayInput, rowArray, compInfo.rowZeroObj.bells);
     results.script = r.script;
     results.player = r.player;
   }
