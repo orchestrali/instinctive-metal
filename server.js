@@ -80,7 +80,10 @@ const routes = {
     surpriseminor: "/views/surprise-minor.html",
     index: "/views/index.html",
     stedman: "/views/stedman.html",
-    home: "/views/home.html"
+    home: "/views/home.html",
+    timing: "/views/timing.html",
+    court: "/views/courtcambridge.html",
+    surprise: "/views/surprise.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {

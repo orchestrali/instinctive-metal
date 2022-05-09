@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133853596-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-133853596-1');
+    </script>
+    <title>Ringing Timing Visualizations</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stedman.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        Ringing Timing Visualizations
+      </h1>
+    </header>
+    <div class="visual">
+      <h3>
+        Handling
+      </h3>
+      <p>
+        Ringing a bell is sort of like dancing, with all the communication taking place through the rope. The bell is leading in the sense that your job as a ringer is to follow what it does by maintaining a small amount of tension in the rope.
+      </p>
+      <p>
+        Because the ideal amount of tension is small, and changes in tension are also small, I often find it easier to think of starting my pulls earlier or later rather than explicitly pulling harder or gentler. When the rope is moving downward your hands must move very slightly earlier than the rope in order to maintain tension. When the rope moves upward your hands must move very slightly later in order to maintain tension. In both of these parts of a stroke your hands should move at the same *speed* as the rope.
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewbox="0 70 300 300">
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0.5 130
+                   v -6
+                   h 77
+                   v 6
+                   m 2 0
+                   v -6
+                   h 77
+                   v 6" />
+          <path d="M 0 150
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   t 16.5 -22
+                   t 16.5 -22
+                   t 16.5 22
+                   t 16.5 22
+                   t 22.5 -30
+                   t 22.5 -30" />
+          <path d="M 64 192
+                   L 120 270
+                   M 134 185
+                   L 120 270" />
+        </g>
+        <g style="font-size:10pt;">
+          <text x="8" y="123" >Handstroke</text>
+          <text x="85" y="123">Backstroke</text>
+          <text x="100" y="280">Sound</text>
+        </g>
+        
+        
+        <circle cx="61.5" cy="188" fill="blue" r="3" />
+        <circle cx="133.5" cy="180" fill="blue" r="3" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="300" viewbox="0 70 400 300">
+        <text x="1" y="100" font-size="10pt">Hands early while rope moves down</text>
+        <text x="1" y="115" font-size="10pt">Hands late while rope moves up</text>
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 150
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   t 16.5 -22
+                   t 16.5 -22
+                   t 16.5 22
+                   t 16.5 22
+                   t 22.5 -30
+                   t 22.5 -30" />
+          <path d="M -3 150
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   h 6
+                   q 10 0 16.5 -22
+                   t 13.5 -22
+                   t 13.5 22
+                   t 16.5 22
+                   h 6
+                   q 10 0 22.5 -30
+                   t 22.5 -30" />
+          
+        </g>
+        
+        <circle cx="61.5" cy="188" fill="blue" r="3" />
+        <circle cx="133.5" cy="180" fill="blue" r="3" />
+      </svg>
+      <p>
+        These visualizations have the rope higher at hand than at back in order to create the handstroke gap.
+      </p>
+      <p>
+        In order to ring more slowly, the bell needs to swing higher, which will cause the rope to go higher as well. To keep your hands going to the same height you must let out rope and catch the sally slightly later (which will cause you to catch the sally slightly lower). To cause all of this, your hands should start earlier as the rope moves down, giving more tension, and only barely later than the rope as it moves up so that there is as little tension as possible for that part of the stroke. You want the rope to go up, so don't resist it!
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="200" viewbox="0 0 400 200">
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 70
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   t 19.5 -26
+                   t 19.5 -26
+                   t 19.5 26
+                   t 19.5 26
+                   t 25.5 -34
+                   t 25.5 -34" />
+          <path d="M -4 70
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   h 6
+                   q 10 0 19.5 -26
+                   t 16.5 -26
+                   t 16.5 26
+                   t 19.5 26
+                   h 6
+                   q 10 0 25.5 -34
+                   t 25.5 -34" />
+          
+        </g>
+        
+        <circle cx="64.5" cy="104" fill="blue" r="3" />
+        <circle cx="148.5" cy="96" fill="blue" r="3" />
+      </svg>
+      <p>
+        And to ring more quickly, you want the bell to swing a bit lower, which will cause the rope not to move up as far. To keep your hands going to the same height (which gives you the most control) you must take in rope and catch the sally very slightly earlier (causing you to catch the sally higher). The modification for this is the opposite of that for ringing slowly: move your hands only barely earlier than the rope as it moves down, maintaining as little tension as possible, and if needed resist the rope on its way up, i.e. wait to move your hands a bit later.
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="200" viewbox="0 0 400 200">
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 62
+                   q 10 0 25.5 34
+                   t 25.5 34
+                   t 22.5 -30
+                   t 22.5 -30
+                   t 22.5 30
+                   t 22.5 30
+                   t 19.5 -26
+                   t 19.5 -26" />
+          <path d="M -2 62
+                   q 10 0 25.5 34
+                   t 25.5 34
+                   h 6
+                   q 10 0 22.5 -30
+                   t 19.5 -30
+                   t 19.5 30
+                   t 22.5 30
+                   h 6
+                   q 10 0 19.5 -26
+                   t 19.5 -26" />
+          
+        </g>
+        
+        <circle cx="73.5" cy="100" fill="blue" r="3" />
+        <circle cx="160.5" cy="104" fill="blue" r="3" />
+      </svg>
+    </div>
+    <div class="visual">
+      <h3>
+        Thinking Ahead
+      </h3>
+      <p>
+        The timing of a bell's strike is determined by when the bell and its rope began coming down. But that in turn is determined by how the previous stroke was pulled. If it was underpulled, the bell will come down and strike too soon; if it was overpulled, it will come down and strike too late. If it was pulled just right, there is no need to make any adjustment to when it will come down and the ringer's focus can be entirely on preparing for the next stroke.
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="200" viewbox="0 0 400 200">
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 25
+                   q 10 0 25.5 34
+                   t 25.5 34
+                   t 22.5 -30
+                   t 22.5 -30
+                   t 22.5 30
+                   t 22.5 30
+                   t 25.5 -34
+                   t 25.5 -34" />
+          <path d="M 0 62
+                   q 10 0 25.5 34
+                   t 25.5 34
+                   t 22.5 -30
+                   q 9.5 -26 19.5 -26
+                   q 10 0 19.5 26
+                   t 19.5 26
+                   t 19.5 -26
+                   t 19.5 -26" />
+          <path d="M -2 62
+                   q 10 0 25.5 34
+                   t 25.5 34
+                   h 6
+                   q 10 0 22.5 -30
+                   q 9.5 -26 16.5 -26
+                   t 16.5 26
+                   t 19.5 26
+                   h 6
+                   q 10 0 19.5 -26
+                   t 19.5 -26" />
+          
+        </g>
+        
+        <circle cx="96" cy="33" fill="black" r="3" />
+        <circle cx="93" cy="74" fill="black" r="3" />
+        <circle cx="73.5" cy="63" fill="blue" r="3" />
+        <circle cx="166.5" cy="59" fill="blue" r="3" />
+        <circle cx="73.5" cy="100" fill="red" r="3" />
+        <circle cx="151.5" cy="100" fill="red" r="3" />
+        <text x="200" y="35">Goal</text>
+        <text x="200" y="102">Underpulling</text>
+      </svg>
+      <h4>
+        The Ideal Situation
+      </h4>
+      <p>
+        If you never make any mistakes, you can always be thinking a whole blow ahead! That is, say you are hunting up from 4ths place to 5ths place. When you begin to pull in 4ths place—not when you strike in 4ths place, when the bell begins coming down—you can <i>already be thinking about getting to 5ths place</i>. The fact that you are in 4ths place is only relevant in determining <i>how</i> you will approach 5ths place.
+      </p>
+      <p>
+        The illustration below represents hunting on 5 with a cover, starting from 1st place. The black dots represent the beginning of each stroke and the blue dots the sound. (I do not claim the distance from start to sound is accurately represented, but that's not terribly important for this illustration.) Immediately above each black dot is the place the bell is in. Above the places is one possibility for what I would be thinking to myself at each point in this process. The asterisks are at the points when the bell changes speed. Another possibility for the internal thought process would just be "rounds speed", "hunting up", or "hunting down". What I actually think is a sort of combination of the two: "hunt up to 2" instead of "1 to 2". The asterisked points are important because, assuming that you can ring easily at a steady pace, you can relax and do just that when there is a stretch with no speed changes. It is much harder to recover if you make a mistake at one of the asterisks!
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="200" viewbox="0 0 800 200">
+        <g text-anchor="middle">
+          <text x="96" y="20">***</text>
+          <text x="96" y="60">"1 to 2"</text>
+          <text x="160" y="40">"2 to 3"</text>
+          <text x="216" y="60">"3 to 4"</text>
+          <text x="280" y="40">"4 to 5"</text>
+          <text x="336" y="20">***</text>
+          <text x="336" y="60">"5 to 5"</text>
+          <text x="392" y="20">***</text>
+          <text x="392" y="40">"5 to 4"</text>
+          <text x="432" y="60">"4 to 3"</text>
+          <text x="480" y="40">"3 to 2"</text>
+          <text x="520" y="60">"2 to 1"</text>
+          <text x="568" y="20">***</text>
+          <text x="616" y="20">***</text>
+          <text x="568" y="40">"1 to 1"</text>
+          <text x="616" y="60">"1 to 2"</text>
+        </g>
+        <g fill="black" >
+          <circle cx="48" cy="100" r="3" />
+          <circle cx="96" cy="100" r="3" />
+          <circle cx="160" cy="100" r="3" />
+          <circle cx="216" cy="100" r="3" />
+          <circle cx="280" cy="100" r="3" />
+          <circle cx="336" cy="100" r="3" />
+          <circle cx="392" cy="100" r="3" />
+          <circle cx="432" cy="100" r="3" />
+          <circle cx="480" cy="100" r="3" />
+          <circle cx="520" cy="100" r="3" />
+          <circle cx="568" cy="100" r="3" />
+          <circle cx="616" cy="100" r="3" />
+        </g>
+        <g fill="blue">
+          <circle cx="72" cy="100" r="3" />
+          <circle cx="120" cy="100" r="3" />
+          <circle cx="184" cy="100" r="3" />
+          <circle cx="240" cy="100" r="3" />
+          <circle cx="304" cy="100" r="3" />
+          <circle cx="360" cy="100" r="3" />
+          <circle cx="416" cy="100" r="3" />
+          <circle cx="456" cy="100" r="3" />
+          <circle cx="504" cy="100" r="3" />
+          <circle cx="544" cy="100" r="3" />
+          <circle cx="592" cy="100" r="3" />
+          <circle cx="640" cy="100" r="3" />
+        </g>
+        <g text-anchor="middle">
+          <text x="48" y="90">1</text>
+          <text x="96" y="90">1</text>
+          <text x="160" y="90">2</text>
+          <text x="216" y="90">3</text>
+          <text x="280" y="90">4</text>
+          <text x="336" y="90">5</text>
+          <text x="392" y="90">5</text>
+          <text x="432" y="90">4</text>
+          <text x="480" y="90">3</text>
+          <text x="520" y="90">2</text>
+          <text x="568" y="90">1</text>
+          <text x="616" y="90">1</text>
+        </g>
+        
+      </svg>
+      <h4>
+        Correcting Mistakes - Overpulling
+      </h4>
+      <p>
+        On a lighter bell, it is possible to compensate almost immediately for overpulling—you can resist the bell on the way up and even start pulling it down early if necessary. However, attempting this on a heavy bell is likely to leave you even worse off, and even on a lighter bell it may not be advisable. It depends on the context.
+      </p>
+      <p>
+        For example, imagine that you are ringing in rounds and consistently overpulling. The danger in pulling a short stroke is that you will bring the bell down too much and then have to bring it back up, making it extremely easy to miss the ideal pull altogether. Correcting your position in rounds is also a bit less urgent than in a method, so it's best to correct overpulling by simply pulling more gently on the next stroke. Focus on what you want to do rather than on reacting to what you did previously.
+      </p>
+      <p>
+        Now imagine that the bell you've been ringing (and overpulling) in rounds is the treble, and the conductor calls "go plain hunt". Unless you've pulled so much that the stay is likely to bounce off the slider, correcting your overpulling would be counterproductive because you now need to slow your bell down anyway!
+      </p>
+      <p>
+        The context where correcting overpulling is most urgent is hunting down, especially if you have been overpulling in the sense of ringing at hunting up speed—you do actually want to bring the bell down a bit in this case. The thing to keep in mind is that the greater your correction, the more likely it is you will have to then compensate for your correction! Sometimes it might be better to make incremental changes and keep track of where you are in a method than to strike this one blow pretty well but then have to make another big adjustment and risk losing your place.
+      </p>
+      <h4>
+        Correcting Mistakes - Underpulling
+      </h4>
+      <p>
+        The *only* way to correct underpulling is by pulling more on subsequent strokes. This is most likely to be successful if you are thinking about it from the very beginning of a stroke, which means the sooner you realize you have underpulled, the better (this is also true because underpulled bells will start coming down sooner). Once again, it is important to match the amount of correction to the size of the bell you're ringing and the method context. Small bells are easy to overcorrect and easy to muscle down again. Larger bells are more likely to need more correction, but hard to adjust if you apply too much correction! 
+      </p>
+    </div>
+    <div class="visual">
+      <h3>
+        Rounds
+      </h3>
+      <p>
+        The diagram below represents six bells ringing in rounds. For simplicity's sake each rope/bell line is exactly the same, as if all the ropes were exactly the same length and the bell wheels the same size.
+      </p>
+      <p>
+        The controls allow you to select one bell and separately adjust when the bell pulls off and how quickly it rings. In practice it is difficult to control these parameters separately and this is what makes first learning to ring in rounds challenging. If you pull off late but then ring at the correct speed, you must speed up for only one stroke and then slow back down to the speed you were at in order to have good rounds. Ultimately ringing in rounds is *always* an exercise in adjusting your ringing speed to match the rest of the band—as you progress you just end up making smaller adjustments, not none. My focus tends to be on my hands and pulling as gently as possible to maintain the speed I need, so that my muscles don't get any more work than necessary.
+      </p>
+      <div>
+        <label for="mybell">Bell: </label>
+        <select id="mybell">
+          <option value selected></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <label for="pulloff">Pull off</label>
+        <input type="range" id="pulloff" min="-24" max="24" step="1" value="0" disabled />
+        <label for="speed">Speed</label>
+        <input type="range" id="speed" min="0.6" max="1.3" step="0.05" value="1" disabled />
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" height="300" viewbox="0 0 700 300" id="rounds">
+        <path d="M 0 70 h 400" stroke="#aaa" fill="none" stroke-width="1" />
+        <g style="stroke:black;stroke-width:1;fill:none" id="group">
+          <path d="M 0 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 24 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 48 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 72 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 96 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 120 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          
+        </g>
+        
+        
+        <circle cx="123" cy="146" fill="blue" r="3" />
+        <circle cx="147" cy="146" fill="blue" r="3" />
+        <circle cx="171" cy="146" fill="blue" r="3" />
+        <circle cx="195" cy="146" fill="blue" r="3" />
+        <circle cx="219" cy="146" fill="blue" r="3" />
+        <circle cx="243" cy="146" fill="blue" r="3" />
+        
+        <circle cx="267" cy="130" fill="blue" r="3" />
+        <circle cx="291" cy="130" fill="blue" r="3" />
+        <circle cx="315" cy="130" fill="blue" r="3" />
+        <circle cx="339" cy="130" fill="blue" r="3" />
+        <circle cx="363" cy="130" fill="blue" r="3" />
+        <circle cx="387" cy="130" fill="blue" r="3" />
+        
+        <circle cx="435" cy="146" fill="blue" r="3" />
+        
+      </svg>
+    </div>
+    <div class="visual">
+      <p>
+        Trying to show what it's really like where some bells have longer ropes...
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300" viewbox="0 0 500 300">
+        <path d="M 0 70 h 400" stroke="#aaa" fill="none" stroke-width="1" />
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 24 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 48 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 72 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 96 70
+                   q 20 0 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44
+                   t 33 44
+                   t 33 44
+                   t 45 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" />
+          <path d="M 108 70
+                   q 20 0 49 62
+                   t 49 62
+                   t 37 -45
+                   t 29 -40
+                   t 29 40
+                   t 37 45
+                   t 49 -60
+                   t 45 -60
+                   t 45 60
+                   t 45 60
+                   t 33 -44
+                   t 33 -44" stroke="red" />
+          
+        </g>
+        
+        
+        <circle cx="123" cy="146" fill="blue" r="3" />
+        <circle cx="147" cy="146" fill="blue" r="3" />
+        <circle cx="171" cy="146" fill="blue" r="3" />
+        <circle cx="195" cy="146" fill="blue" r="3" />
+        <circle cx="219" cy="146" fill="blue" r="3" />
+        <circle cx="243" cy="149" fill="blue" r="3" />
+        
+        <circle cx="267" cy="130" fill="blue" r="3" />
+        <circle cx="291" cy="130" fill="blue" r="3" />
+        <circle cx="315" cy="130" fill="blue" r="3" />
+        <circle cx="339" cy="130" fill="blue" r="3" />
+        <circle cx="363" cy="130" fill="blue" r="3" />
+        <circle cx="387" cy="133" fill="blue" r="3" />
+        
+        <circle cx="435" cy="146" fill="blue" r="3" />
+        
+      </svg>
+    </div>
+    <div class="visual">
+      <p>
+        Plain hunt attempt...
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="200" viewbox="0 0 400 200">
+        <g style="stroke:black;stroke-width:1;fill:none">
+          <path d="M 0 70
+                   q 10 0 22.5 30
+                   t 22.5 30
+                   t 16.5 -22
+                   t 16.5 -22
+                   t 16.5 22
+                   t 16.5 22
+                   t 22.5 -33
+                   t 22.5 -33
+                   h 5
+                   q 10 0 24.5 33
+                   t 24.5 33
+                   t 19.5 -26
+                   t 19.5 -26
+                   t 19.5 26
+                   t 19.5 26
+                   t 25.5 -34
+                   t 25.5 -34" />
+        </g>
+        
+        <circle cx="61.5" cy="108" fill="blue" r="3" />
+        <circle cx="133.5" cy="97" fill="blue" r="3" />
+        <circle cx="229.5" cy="104" fill="blue" r="3" />
+        <circle cx="313.5" cy="96" fill="blue" r="3" />
+        
+      </svg>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/timing.js"></script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 const bells = require("../library/bells.js");
 const rounds = require("../rounds.js");
 
-module.exports = function buildplayer(stage, input, rowArr) {
+module.exports = function buildplayer(stage, input, rowArr, rowzero) {
   //console.log("building player");
   //stage needs to actually be numbells
   console.log(rowArr[0]);
@@ -13,7 +13,7 @@ module.exports = function buildplayer(stage, input, rowArr) {
   for (let i = 0; i < Number(input.numrounds); i++) {
     let row = {
       rownum: 0-i,
-      bells: rounds(stage)
+      bells: rowzero
     }
     rowArr.unshift(row);
   }
