@@ -51,6 +51,12 @@ module.exports = [
                <a href="./stedman">Stedman tips and tricks</a>
             </li>
             <li>
+              <a href="/surprise">Annable's London Surprise Minor</a>
+            </li>
+            <li>
+              <a href="/court">Court places and Cambridge places</a>
+            </li>
+            <li>
               <a href="/home">Links to Alison's ringing tools</a>
             </li>
           </ul>
