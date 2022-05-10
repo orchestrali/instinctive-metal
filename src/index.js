@@ -27,9 +27,10 @@ module.exports = [
       <h1>
         Change Ringing Method Tools
       </h1>
-      <h3>
-        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a>
-      </h3>
+      <h4>
+        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Tip me on <a href="https://paypal.me/ans204" target="blank">paypal</a>
+      </h4>
+      
     </header>
     
     <main>
