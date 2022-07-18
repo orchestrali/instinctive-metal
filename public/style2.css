@@ -53,8 +53,9 @@
     margin-top: 50px;
     padding-top: 25px;
     border-top: 1px solid lightgrey;
+    color: #BBBBBB;
   }
-  footer > a {
+  footer a {
     color: #BBBBBB;
   }
   

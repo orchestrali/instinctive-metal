@@ -644,7 +644,9 @@
             "Teesport Treble Place Minimus",
             "Shipping Container Treble Place Minimus",
             "Freight Treble Place Minimus",
-            "Teesport Treble Place Minimus"
+            "Teesport Treble Place Minimus",
+            "Coot Treble Place Minimus",
+            "Piglet Treble Place Minimus"
           ]
         ]
       },
@@ -1843,7 +1845,11 @@
             "Sulby Bob Doubles",
             "Hempsted St Swithun Bob Doubles",
             "Tedding Bob Doubles",
-            "COP26 Bob Doubles"
+            "COP26 Bob Doubles",
+            "Llandegai Bob Doubles",
+            "Market Harborough Bob Doubles",
+            "Kowhai Bob Doubles",
+            "Huntingfield Little Bob Doubles"
           ]
         ]
       },
@@ -2095,7 +2101,8 @@
             "Double Portington Place Doubles",
             "Norfolk Place Doubles",
             "Reverse Norwell Place Doubles",
-            "Reverse Ockham Place Doubles"
+            "Reverse Ockham Place Doubles",
+            "Platinum Place Doubles"
           ]
         ]
       },
@@ -2177,7 +2184,9 @@
             "North Cave Treble Place Doubles",
             "St Aelred of Rievaulx Little Treble Place Doubles",
             "Pohutukawa Treble Place Doubles",
-            "Pukerangiora Treble Place Doubles"
+            "Pukerangiora Treble Place Doubles",
+            "Melton Ross Treble Place Doubles",
+            "Majesty Treble Place Doubles"
           ]
         ]
       },
@@ -2226,7 +2235,8 @@
             "Sedgehill Alliance Doubles",
             "Alderton Alliance Doubles",
             "Chalvey Alliance Doubles",
-            "Bledlow Alliance Doubles"
+            "Bledlow Alliance Doubles",
+            "Platinum Jubilee Alliance Doubles"
           ]
         ]
       },
@@ -2434,7 +2444,12 @@
             "Parity Doubles",
             "Fairlands Valley Doubles",
             "Haultwick Doubles",
-            "Gosmore Doubles"
+            "Gosmore Doubles",
+            "Carpathia Doubles",
+            "Proton Doubles",
+            "Neutron Doubles",
+            "Electron Doubles",
+            "Hibernian Doubles"
           ]
         ]
       }
@@ -3970,7 +3985,14 @@
             "Great Comberton Bob Minor",
             "Cranberry Sauce Bob Minor",
             "Turkey Bob Minor",
-            "Brimpsfield Bob Minor"
+            "Brimpsfield Bob Minor",
+            "Upper Maes-coed Bob Minor",
+            "Magnifico Bob Minor",
+            "Figaro Bob Minor",
+            "Middle Maes-coed Bob Minor",
+            "Jade Anniversary Bob Minor",
+            "Stratton Strawless Platinum Jubilee Little Bob Minor",
+            "Stanley Pontlarge Bob Minor"
           ]
         ]
       },
@@ -6347,7 +6369,11 @@
             "Noo-noo Delight Minor",
             "Tubby Custard Delight Minor",
             "St Kenan Delight Minor",
-            "Marmalade Delight Minor"
+            "Marmalade Delight Minor",
+            "Platinum Accession Delight Minor",
+            "Waltham Cross Delight Minor",
+            "Geegelup Delight Minor",
+            "US and A Delight Minor"
           ]
         ]
       },
@@ -8098,7 +8124,12 @@
             "Dambusters Surprise Minor",
             "Cecilia Surprise Minor",
             "Fair Isle (North) Lighthouse Surprise Minor",
-            "Fair Isle (South) Lighthouse Surprise Minor"
+            "Fair Isle (South) Lighthouse Surprise Minor",
+            "Farne Island Lighthouse Surprise Minor",
+            "Bridgetown Differential Surprise Minor",
+            "Vaccination Heroes Surprise Minor",
+            "Fidra Lighthouse Surprise Minor",
+            "Platinum Jubilee Surprise Minor"
           ]
         ]
       },
@@ -9195,7 +9226,13 @@
             "Union Flag Day Bob Triples",
             "Madeira Island Bob Triples",
             "St Michael and All Angels Bob Triples",
-            "Charlotte Bob Triples"
+            "Charlotte Bob Triples",
+            "Treetops Bob Triples",
+            "Bastow Little Bob Triples",
+            "Yorkshire Wolds Bob Triples",
+            "Clun Bob Triples",
+            "Octopod Little Bob Triples",
+            "Golden Year Bob Triples"
           ]
         ]
       },
@@ -9222,7 +9259,9 @@
             "Magnis Campanis Place Triples",
             "Temple Ewell Place Triples",
             "Guisborough Place Triples",
-            "Drellingore Place Triples"
+            "Drellingore Place Triples",
+            "Déjà Vu Place Triples",
+            "Windsor Platinum Place Triples"
           ]
         ]
       },
@@ -9277,7 +9316,8 @@
             "Original Triples",
             "Orpheus Triples",
             "Martin's Triples",
-            "Carter Triples"
+            "Carter Triples",
+            "Stedmonster Triples"
           ]
         ]
       }
@@ -10701,7 +10741,9 @@
             "Walpurgis Eve Bob Major",
             "Walpurgis Eve Bob Major",
             "Marie Curie Day of Reflection Bob Major",
-            "Hawkesbury Bob Major"
+            "Hawkesbury Bob Major",
+            "Broadwell Bob Major",
+            "Tuppen Bob Major"
           ]
         ]
       },
@@ -10879,7 +10921,10 @@
             "Yucky Treble Bob Major",
             "Bishop's Cleeve Treble Bob Major",
             "Carolina Reaper Treble Bob Major",
-            "Carolina Reaper Treble Bob Major"
+            "Carolina Reaper Treble Bob Major",
+            "Dee Treble Bob Major",
+            "Esher Treble Bob Major",
+            "Farnborough Treble Bob Major"
           ]
         ]
       },
@@ -12727,7 +12772,30 @@
             "Estune Delight Major",
             "Devon Square Delight Major",
             "Bovey Tracey Christmas Delight Major",
-            "Lathkill Delight Major"
+            "Lathkill Delight Major",
+            "Norfolk Delight Major",
+            "Gilletts Delight Major",
+            "Sunday Delight Major",
+            "Cramlington Delight Major",
+            "Lords and Ladies Delight Major",
+            "Byermoor Delight Major",
+            "Dilston Delight Major",
+            "Flawford Delight Major",
+            "Gilsland Delight Major",
+            "Zwingenberg Castle Delight Major",
+            "Portland Place Delight Major",
+            "Leintwardine Delight Major",
+            "Scilly Delight Major",
+            "Don't Leave Me This Way Delight Major",
+            "Rosemary Delight Major",
+            "Riding Mill Delight Major",
+            "Bulwell Delight Major",
+            "Nudiustertian Delight Major",
+            "Friday the Thirteenth Delight Major",
+            "Appleby Castle Delight Major",
+            "Postlebury Delight Major",
+            "Suffolk Day Delight Major",
+            "Forest Delight Major"
           ]
         ]
       },
@@ -18798,7 +18866,55 @@
             "Swan on The Stray Surprise Major",
             "Lamzy Divey Surprise Major",
             "Liopleurodon Surprise Major",
-            "Hazlehurst Surprise Major"
+            "Hazlehurst Surprise Major",
+            "Coldstream Little Surprise Major",
+            "Cunecastre Little Surprise Major",
+            "New Bacup Surprise Major",
+            "Bamburgh Castle Surprise Major",
+            "New Chester Surprise Major",
+            "New Hexham Surprise Major",
+            "Kelsoish Surprise Major",
+            "Lightfoot Surprise Major",
+            "Munden House Surprise Major",
+            "Netherseal Surprise Major",
+            "Newcastle upon Tyne Surprise Major",
+            "Bowmore Surprise Major",
+            "Kilchoman Surprise Major",
+            "Dalwhinnie Surprise Major",
+            "Wolfburn Surprise Major",
+            "Ardbeg Surprise Major",
+            "Lagavulin Surprise Major",
+            "Glen Elgin Surprise Major",
+            "Edradour Surprise Major",
+            "Talisker Surprise Major",
+            "Clynelish Surprise Major",
+            "Dufftown Surprise Major",
+            "Fettercairn Surprise Major",
+            "Glenmorangie Surprise Major",
+            "Macduff Surprise Major",
+            "Deanston Surprise Major",
+            "Xyrself Surprise Major",
+            "What Could Possibly Go Wrong?! Surprise Major",
+            "Hugs and Cakes Surprise Major",
+            "Starling Surprise Major",
+            "Yielden Castle Surprise Major",
+            "Wem Surprise Major",
+            "Aha Surprise Major",
+            "Eden Project Surprise Major",
+            "Edenva Surprise Major",
+            "Djer Surprise Major",
+            "Presteigne Surprise Major",
+            "Roy's Glove Surprise Major",
+            "Alliance Delight Surprise Major",
+            "Wollondilly Surprise Major",
+            "Velociraptor Surprise Major",
+            "California Roll Surprise Major",
+            "I'll Ring the Treble Surprise Major",
+            "Curlew Surprise Major",
+            "Chiffchaff Surprise Major",
+            "Platinum Queen Surprise Major",
+            "Mistle Thrush Surprise Major",
+            "Kelham Island Surprise Major"
           ]
         ]
       },
@@ -19472,7 +19588,28 @@
             "Lancashire Alliance Major",
             "Snishums Alliance Major",
             "Newbiggin Alliance Major",
-            "Nythe Alliance Major"
+            "Nythe Alliance Major",
+            "Wylam Alliance Major",
+            "Bywell Alliance Major",
+            "Winlaton Mill Alliance Major",
+            "Lord Edgefield of Shepton Beauchamp Alliance Major",
+            "Flickets Alliance Major",
+            "Jubilee Alliance Major",
+            "Zeppelin Alliance Major",
+            "Zebrafinch Alliance Major",
+            "Lintzford Alliance Major",
+            "Milestone Alliance Major",
+            "Grockles Alliance Major",
+            "Crawcrook Alliance Major",
+            "Ulking Alliance Major",
+            "Lent Rosums Alliance Major",
+            "Guide Post Alliance Major",
+            "Windy Gyle Alliance Major",
+            "Quidditch Alliance Major",
+            "Heworth Alliance Major",
+            "Aldercar Alliance Major",
+            "North Shields Alliance Major",
+            "Upton upon Severn Alliance Major"
           ]
         ]
       },
@@ -19531,7 +19668,8 @@
             "Isis Major",
             "Rapid Wrap Major",
             "Wolf Wrap Major",
-            "Solstice Major"
+            "Solstice Major",
+            "Erin Major"
           ]
         ]
       }
@@ -19690,7 +19828,8 @@
             "Stratton Bob Caters",
             "Crayford College Bob Caters",
             "Candlesby Bob Caters",
-            "Sound of Wells 2021 College Bob Caters"
+            "Sound of Wells 2021 College Bob Caters",
+            "Jura Bob Caters"
           ]
         ]
       },
@@ -19935,7 +20074,8 @@
             "Heywood Cyclic Bob Royal",
             "Double Sandbach Bob Royal",
             "Arist Little Bob Royal",
-            "Grandsire Royal"
+            "Grandsire Royal",
+            "Moriarty Little Bob Royal"
           ]
         ]
       },
@@ -19943,7 +20083,8 @@
         "class": "Place",
         "methods": [
           [
-            "Little Little Penultimus Little Place Royal"
+            "Little Little Penultimus Little Place Royal",
+            "Meiringen Little Place Royal"
           ]
         ]
       },
@@ -19976,7 +20117,8 @@
             "Colby Treble Place Royal",
             "Percy's Tea Strainer Treble Place Royal",
             "Marengo Treble Place Royal",
-            "Saltby Treble Place Royal"
+            "Saltby Treble Place Royal",
+            "Twosday Treble Place Royal"
           ]
         ]
       },
@@ -20373,7 +20515,13 @@
             "Munrung Delight Royal",
             "Waldegrave Delight Royal",
             "Aisthorpe Delight Royal",
-            "Castlethorpe Delight Royal"
+            "Castlethorpe Delight Royal",
+            "Hyattswood Delight Royal",
+            "Branston Pickle Delight Royal",
+            "Platinum Jubilee Delight Royal",
+            "Woodthorpe Delight Royal",
+            "Gawthorpe Delight Royal",
+            "Rothborough Delight Royal"
           ]
         ]
       },
@@ -22041,7 +22189,10 @@
             "Longis Bay Surprise Royal",
             "Hurlock Surprise Royal",
             "Jovium Surprise Royal",
-            "Asterby Surprise Royal"
+            "Asterby Surprise Royal",
+            "Sgùrr a' Ghreadaidh Surprise Royal",
+            "St John of Beverley Surprise Royal",
+            "Tresham Surprise Royal"
           ]
         ]
       },
@@ -22234,7 +22385,10 @@
             "Kable Alliance Royal",
             "Belinda Alliance Royal",
             "Swindon Alliance Royal",
-            "Silver Alliance Royal"
+            "Silver Alliance Royal",
+            "Platinum Alliance Royal",
+            "Kentmere Pike Alliance Royal",
+            "Pearl Alliance Royal"
           ]
         ]
       },
@@ -22615,7 +22769,8 @@
             "Firebird Little Place Maximus",
             "Klink Little Place Maximus",
             "Mercury Differential Little Place Maximus",
-            "Magenta Little Place Maximus"
+            "Magenta Little Place Maximus",
+            "Meiringen Differential Little Place Maximus"
           ]
         ]
       },
@@ -23364,7 +23519,13 @@
             "Nuro Fen Surprise Maximus",
             "Nuro Fen Surprise Maximus",
             "Lizzicles Little Surprise Maximus",
-            "Bolonium Surprise Maximus"
+            "Bolonium Surprise Maximus",
+            "Farmer's Glory Surprise Maximus",
+            "Bishop of Portsmouth Surprise Maximus",
+            "Perseverance Surprise Maximus",
+            "Whirlpool Surprise Maximus",
+            "Horsleydown Hall Surprise Maximus",
+            "Vesper Surprise Maximus"
           ]
         ]
       },
@@ -23527,7 +23688,10 @@
             "Halloween Alliance Maximus",
             "Wenlock and Mandeville Differential Little Alliance Maximus",
             "Marchpole Alliance Maximus",
-            "Chain-link Alliance Maximus"
+            "Chain-link Alliance Maximus",
+            "Christmas Alliance Maximus",
+            "Strawberry Fields Alliance Maximus",
+            "Solitaire Alliance Maximus"
           ]
         ]
       },
@@ -23633,7 +23797,17 @@
             "St Cross Little Bob Fourteen",
             "Burford Little Bob Fourteen",
             "Bampton Little Bob Fourteen",
-            "St Birinus Little Bob Fourteen"
+            "St Birinus Little Bob Fourteen",
+            "Moriarty Little Bob Fourteen",
+            "Churchill Little Bob Fourteen"
+          ]
+        ]
+      },
+      {
+        "class": "Place",
+        "methods": [
+          [
+            "Meiringen Little Place Fourteen"
           ]
         ]
       },

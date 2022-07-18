@@ -614,6 +614,9 @@ module.exports = [
       <a href="https://glitch.com/edit/#!/changeringing?path=README.md:1:0">
         About this project
       </a>
+      <p>
+      This project is made possible with support from Sophie MacDonald on <a href="https://www.patreon.com/alisons">Patreon</a>
+      </p>
     </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
@@ -629,4 +632,4 @@ module.exports = [
   </body>
 </html>
 `
-]
+];
