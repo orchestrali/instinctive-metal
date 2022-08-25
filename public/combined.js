@@ -186,7 +186,7 @@ $(function() {
         $(".errors").html(results.errors);
       } else {
         if (results.script) {
-          //console.log(results.script);
+          console.log("new script");
           $("head").append(results.script);
         }
         $("main").append(results.html);

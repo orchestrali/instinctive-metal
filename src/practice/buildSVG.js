@@ -55,6 +55,11 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   let height = numRows*20+370;
   let placelines = '';
   let placenums = '';
+  let hblines = '';
+  
+  for (let i = 0; i < numRows; i+=2) {
+    hblines += `<path d="M ${textx} ${i*20+45} h ${rowZero.length*16-7}" />`;
+  }
   
   if (!displayInput.numbers) {
     //numbers = '';
@@ -85,6 +90,10 @@ module.exports = function buildSVG(rowZeroObj, numRows, displayInput) {
   <svg id="container" viewBox="0 0 320 400" width="320">
     
     ${placelines}
+    
+    <g id="hblines" style="stroke:rgb(155,155,155);stroke-width:1;fill:none;">
+      ${hblines}
+    </g>
   
     ${numbers}
   

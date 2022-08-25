@@ -3,7 +3,7 @@ module.exports = [
   `
   <div id="options" class="results">
     <label for="volume">Volume</label>
-    <input type="range" id="volume" min="0" max="2" value="1" step="0.01" class="block"/>
+    <input type="range" id="volume" min="0" max="2" value="0.75" step="0.01" class="block"/>
     <label for="duration">Stroke duration in seconds: </label>
     <input id="duration" type="number" value="1.3" step="0.1" />
     <label for="handgap">Handstroke gap in bells: </label>
@@ -20,7 +20,7 @@ module.exports = [
       </li>
       <li>
         <label for="roundsrows">Rows of rounds to start: </label>
-        <input type="number" min="2" step="1" name="roundsrows" id="roundsrows" value="2" />
+        <input type="number" min="2" step="2" name="roundsrows" id="roundsrows" value="2" />
       </li>
       <li>
         <input type="checkbox" name="stopatrounds" id="stopatrounds" checked /><label for="nthrounds">Stop at the <input type="number" name="nthrounds" id="nthrounds" min="1" step="1" value="1" />th occurence of rounds</label>
