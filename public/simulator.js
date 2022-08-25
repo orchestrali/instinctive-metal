@@ -13,9 +13,6 @@ var centerrope;
 var zoom = 0;
 var keysdown = [];
 
-let highlightself = false;
-let highlighttreble = false;
-
 let robotopts = {
   hours: 3,
   minutes: 0,
@@ -65,15 +62,17 @@ var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#c8e6
 var type;
 
 $(function() {
-  let checked = 10;
+  let checked = 7;
   let timeout;
   type = $("#type input:checked").attr("id");
+  console.log(type);
   check();
   
   $("#submit").on("click", () => {
+    $("#reset").click();
     type = $("#type input:checked").attr("id");
-    //console.log(type);
-    method = null, courseorder = null, cosallies = false, solidme = false, solidtreble = false;
+    console.log("submit clicked");
+    //method = null, courseorder = null, cosallies = false, solidme = false, solidtreble = false;
     if (type === "simulator") {
       checked = 0;
       timeout = setTimeout(check, 100);
@@ -86,8 +85,10 @@ $(function() {
       clearTimeout(timeout);
       simulator();
       
+      
     } else {
       checked++;
+      type = $("#type input:checked").attr("id");
       if (checked < 10) {
         timeout = setTimeout(check, 100);
       } else {
@@ -97,14 +98,24 @@ $(function() {
   }
   
   
+  
   function simulator() {
     //console.log($(".results").length);
-    
+    //gainval, mybells, mbells, duration, handgap, speed, centerrope, zoom, robotopts, solidme, solidtreble, cosallies, highlightunder, fadeabove, displayplace, placebells, standbehind, melouder, instruct
+    let options = [[gainval, 0.75, "#volume"],[duration, 1.3,"#duration"],[handgap,1,"#handgap"], [robotopts.roundsrows, 2,"#roundsrows"], [robotopts.stopatrounds,true,"#stopatrounds"], [robotopts.nthrounds,1,"#nthrounds"], [robotopts.waitforgaps,true,"#waitforgaps"]];
+    [[solidme, "#solidme"], [solidtreble, "#solidtreble"], [cosallies, "#cosallies"], [highlightunder, "#highlightunder"], [fadeabove, "#fadeabove"], [displayplace, "#displayplace"], [placebells, "#placebells"], [standbehind, "#standbehind"], [melouder, "#melouder"], [instruct, "#instructions"]].forEach(a => {
+      a.splice(1, 0, false);
+      options.push(a);
+    });
+    mybells = [], mbells = [];
     numbells = window.numbells;
     bells = window.bells;
     rowArr = window.rowArray;
     firstcall = rowArr[0].call;
     huntbells = window.hunts;
+    
+    
+    zoom = 0;
     if (window.courseorder) {
       let arr = window.courseorder;
       courseorder = [];
@@ -121,13 +132,9 @@ $(function() {
         }
       });
     }
-    //console.log(rowArr[2]);
-    if (!running) {
-      start();
-    }
-    setupSample(0);
     calcspeed();
     centerrope = [1];
+    console.log("positioning ropes");
     for (let i = 0; i < numbells; i++) {
       position(i,i+1);
       let handstroke = document.getElementById("hand8b"+(i+1));
@@ -136,6 +143,13 @@ $(function() {
       backstroke.addEventListener("beginEvent", ring);
     }
     assign(1);
+    if (!running) {
+      running = true;
+      start();
+    }
+    
+    setupSample(0);
+    
     
     $("body").on("click", function() {
       if (audioCtx.state === 'suspended') {
@@ -189,17 +203,18 @@ $(function() {
         });
       }
       
-      if (instruct) $(".instruct").text("");
+      $(".instruct").text("");
       //}
     });
     
     //change stroke duration
     $("#duration").change(function() {
+      console.log("changing duration");
       duration = Number($("#duration").val());
-      for (let n = 0; n < numbells; n++) {
+      for (let n = 1; n <= numbells; n++) {
         for (let i = 0; i < 15; i++) {
           ["hand","back"].forEach(s => {
-            let j = s === "hand" ? i+1 : i;
+            let j = s === "hand" ? (i+1) : i;
             document.getElementById(s+j+"b"+n).setAttributeNS(null, "dur", setdur(s,i)+"s");
           });
         }
@@ -388,6 +403,21 @@ $(function() {
     $("#handgap").on("change", (e) => {
       handgap = Number($("#handgap").val());
       console.log(handgap);
+    });
+    
+    options.forEach(a => {
+      if (a[0] != null && a[0] != a[1]) {
+        if ([true, false].includes(a[1])) {
+          $(a[2]).click();
+        } else {
+          $(a[2]).val(a[0]);
+          if (a[2] === "#roundsrows") {
+            robotopts.roundsrows = 2;
+          }
+          $(a[2]).change();
+        }
+        
+      }
     });
     
     $("#reset").click();
