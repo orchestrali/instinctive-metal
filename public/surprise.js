@@ -1,13 +1,11 @@
-
+var methods;
+var current;
+var filtered;
 
 
 $(function() {
   let started = 0;
-  let methods;
-  let current;
-  
   let used = [];
-  let filtered;
   let usedMax;
   let times = [];
   let prevClick;
@@ -31,10 +29,17 @@ $(function() {
   
   $("#nav-options").click(function() {
     $("#nav-options ul").slideToggle(600, "swing");
-    $(".arrow").toggleClass("rotate");
+    $("#nav-options .arrow").toggleClass("rotate");
     
   });
   
+  $("#game-options").click(function() {
+    $("#game-options ul").slideToggle(600, "swing");
+    $("#game-options .arrow").toggleClass("rotate");
+    
+  });
+  
+  $("#game-options input").click(adjustmethods);
   
   //when there's a click on the start button
   $("#methodname").click(function() {
@@ -58,14 +63,14 @@ $(function() {
     //console.log(current[cat]);
     
     
-    if (current) {
+    if (current && !$(this).hasClass("disabled")) {
       if (choice == current[cat]) {
         $(this).addClass("correct");
         count++;
         
         if (count == 3) {
           $("div.option").removeClass("correct wrong");
-          let now = Date.now()
+          let now = Date.now();
           let lastTime = now-prevClick;
           times.push(lastTime);
           let medTime = medTimes();
@@ -95,6 +100,49 @@ $(function() {
       
     }
   });
+  
+  function adjustmethods(e) {
+    e.stopPropagation();
+    let id = this.id;
+    if (id === "all") {
+      if ($(this).prop("checked")) {
+        $("#game-options input").prop("checked", true);
+        $(".option").removeClass("disabled");
+        filtered = methods;
+      } else {
+        $("#game-options input").prop("checked", false);
+        $(".option").removeClass("disabled").addClass("disabled");
+        filtered = [];
+      }
+    } else {
+      filtered = [];
+      $(".option").removeClass("disabled");
+      methods.forEach(m => {
+        if ($("#over"+m.overwork).prop("checked")) {
+          filtered.push(m);
+        }
+      });
+      $("#overwork .option").each((i,elem) => {
+        if (!$("#over"+elem.id).prop("checked")) {
+          $(elem).addClass("disabled");
+        }
+      });
+      $("#underwork .option,#leadend .option").each((i,elem) => {
+        if (!filtered.find(o => o.underwork === elem.id || o.leadend === elem.id)) {
+          $(elem).addClass("disabled");
+        }
+      });
+    }
+    
+    usedMax = Math.max(Math.floor(filtered.length/2), Math.min(9,filtered.length));
+    if (current && filtered.length) {
+      used = [];
+      getMethod();
+      count = 0;
+      Wcount = 0;
+      prevClick = Date.now();
+    }
+  }
   
   
   function names(array) {

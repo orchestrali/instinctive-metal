@@ -42,7 +42,13 @@ footer {
   margin-bottom: 20px;
 }
 
-#nav-options p {
+#game-options {
+  background-color: aliceblue;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+#nav-options p, #game-options p {
   width: 80%;
   margin: 8px 8px;
   display: inline-block;
@@ -51,7 +57,7 @@ footer {
   color: darkslateblue;
 }
 
-#nav-options ul {
+ul.dropdown {
   margin-top: 0;
   padding-bottom: 8px;
   padding-left: 20px;
@@ -124,9 +130,19 @@ footer {
   box-shadow: inset -3px -3px 5px lightgray, inset 1px 1px 5px lightgray;
 }
 
+.option.disabled {
+  color: #666666;
+  background-color: #eeeeee;
+}
+
 .option:hover {
   cursor: pointer;
   box-shadow: inset -3px -3px 5px lightsteelblue, inset 1px 1px 5px lightsteelblue;
+}
+
+.option.disabled:hover {
+  cursor: auto;
+  box-shadow: inset -3px -3px 5px lightgray, inset 1px 1px 5px lightgray;
 }
 
 .option p {
