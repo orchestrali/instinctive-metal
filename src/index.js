@@ -46,6 +46,12 @@ module.exports = [
           </div>
           <ul class="dropdown">
             <li>
+              <a href="https://towers.changeringing.net">Tower guide</a>
+            </li>
+            <li>
+              <a href="https://ringle.glitch.me">Ringle: a Wordle-inspired change ringing game</a>
+            </li>
+            <li>
                <a href="./surpriseminor">Surprise Minor name quiz</a>
             </li>
             <li>
