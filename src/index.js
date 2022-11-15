@@ -28,7 +28,7 @@ module.exports = [
         Change Ringing Method Tools
       </h1>
       <h4>
-        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a>
+        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a> • Check out my embroidered method bookmarks on <a href="https://www.etsy.com/shop/RingingEmbroidery" target="blank">Etsy</a>
       </h4>
       
     </header>

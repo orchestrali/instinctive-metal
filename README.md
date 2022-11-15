@@ -23,7 +23,7 @@ updated June 22, 2019
 Who am I?
 ---------
 
-I'm Alison Stevens; I learned to ring at Smith College in Massachusetts ([NAGCR link](http://www.nagcr.org/groups/smith.html)), spent three years in Vancouver, BC, and currently ring in Boston and Orleans MA.
+I'm Alison Stevens; I learned to ring at Smith College in Massachusetts ([NAGCR link](http://www.nagcr.org/groups/smith.html)), spent three years in Vancouver, BC, and currently live and ring in Edinburgh, Scotland.
 
 -------------------
 
