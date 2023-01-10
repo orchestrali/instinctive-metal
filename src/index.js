@@ -1,3 +1,4 @@
+//fixed bits for the home page
 module.exports = [
   `<!DOCTYPE html>
 <html>
@@ -598,6 +599,12 @@ module.exports = [
                 <label for="tenors">Tenor(s) behind: </label>
                 <input type="number" id="mtenors" name="tenors" value="0" />
               </p>
+              <fieldset>
+                <ul>
+                  <li><input type="radio" id="simtower" name="simtype" value="tower" />tower</li>
+                  <li><input type="radio" id="simhand" name="simtype" value="hand" />handbells</li>
+                </ul>
+              </fieldset>
             </div>
             
             

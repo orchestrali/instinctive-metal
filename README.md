@@ -11,13 +11,15 @@ I am very grateful for Nick Reilingh's help on this and other projects.
 
 Things I hope to someday add or fix 
 ------------
-updated June 22, 2019
+updated December 29, 2022
 
 - instructions for entering compositions
 - option to let the app predict what the calls are rather than having to specify for any touch
 - a dropdown menu of common touches
 - spliced compositions
 - a method search function—find methods that meet various criteria
+- feedback in the tower simulator
+- handbell simulator mode
 
 
 Who am I?

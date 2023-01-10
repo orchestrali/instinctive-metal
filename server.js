@@ -83,7 +83,8 @@ const routes = {
     home: "/views/home.html",
     timing: "/views/timing.html",
     court: "/views/courtcambridge.html",
-    surprise: "/views/surprise.html"
+    surprise: "/views/surprise.html",
+    callchange: "/views/callchange.html"
   },
   updatenames: function (request, response) {
     if (request.query.secret === process.env.SECRET) {

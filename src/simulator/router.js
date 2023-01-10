@@ -3,8 +3,8 @@ const bells = require("../library/bells.js");
 const rounds = require("../rounds.js");
 const words = ["call","type","name"];
 
-module.exports = function router(numbells, rowArr, rowzero, method) {
-  let current = bells.filter(b => b.type === "tower");
+module.exports = function router(numbells, rowArr, rowzero, method, simtype) {
+  let current = bells.filter(b => b.type === simtype);
   let bellarr = [];
   for (let i = numbells; i > 0; i--) {
     let bell = {
