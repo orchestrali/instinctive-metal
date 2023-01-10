@@ -45,7 +45,7 @@ module.exports = function handleInput(methodInfo, compInfo, rowArray, displayInp
   } else if (type == 'staff') {
     results.SVGs = staffNot(compInfo.rowZeroObj, rowArray, methodInfo.stage, displayInput);
   } else if (type === "simulator") {
-    let obj = simulator(methodInfo.stage+compInfo.tenors, rowArray, compInfo.rowZeroObj.bells, methodInfo);
+    let obj = simulator(methodInfo.stage+compInfo.tenors, rowArray, compInfo.rowZeroObj.bells, methodInfo, displayInput.simtype);
     results.SVGs = obj.html;
     results.script = obj.script;
   }

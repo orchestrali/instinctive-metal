@@ -1,8 +1,8 @@
 const categories = {
   methodInfo: ['stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc'],
   composition: ['leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'tenors', 'complibid'],
-  display: ['numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player', 'sounds', 'numrounds']
-}
+  display: ['numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player', 'sounds', 'numrounds', 'simtype']
+};
 
 
 const catIndexed = (function(cats) {
