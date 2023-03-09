@@ -63,6 +63,13 @@ module.exports = [
 
   </div>
   <div id="room" class="results">
+    <div id="visuals">
+      <ul>
+        <li>
+        <div id="sound-line"></div>
+        </li>
+      </ul>
+    </div>
     <div id="display">
 
     </div>

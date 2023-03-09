@@ -11,8 +11,11 @@
     <h1>
       Call Change Game
     </h1>
+    <button id="learn">
+      Learn call changes
+    </button>
     <button id="start">
-      Start
+      Play a game
     </button>
     <div id="game" style="display:none;">
       <div id="instructions">
@@ -46,10 +49,13 @@
       <button id="levelup" style="display:none">
         Next level
       </button>
+      <button id="menu" style="display:none">
+        Back to menu
+      </button>
       <div id="fieldsets">
         <fieldset>
           <label for="myplace">My place: </label>
-          <ul>
+          <ul id="myplace">
             <li><input type="radio" name="myplace" value="1"/>lead</li>
             <li><input type="radio" name="myplace" value="2"/>2</li>
             <li><input type="radio" name="myplace" value="3" checked/>3</li>
@@ -64,11 +70,11 @@
         </fieldset>
         <fieldset>
           <label for="following">I'm following bell: </label>
-          <ul>
+          <ul class="follow">
             <li><input type="radio" name="following" value="0"/>I'm leading</li>
             <li><input type="radio" name="following" value="1"/>1</li>
             <li><input type="radio" name="following" value="2" checked/>2</li>
-            <!--<li><input type="radio" name="following" value="3"/>3</li>-->
+            <li><input type="radio" name="following" value="3"/>3</li>
             <li><input type="radio" name="following" value="4"/>4</li>
             <li><input type="radio" name="following" value="5"/>5</li>
             <li><input type="radio" name="following" value="6"/>6</li>
@@ -80,11 +86,11 @@
         </fieldset>
         <fieldset style="display:none">
           <label for="followw">The bell I'm following is following bell:</label>
-          <ul>
+          <ul class="follow">
             <li><input type="radio" name="followw" value="0" checked />It's leading</li>
             <li><input type="radio" name="followw" value="1"/>1</li>
             <li><input type="radio" name="followw" value="2"/>2</li>
-            <!--<li><input type="radio" name="following" value="3"/>3</li>-->
+            <li><input type="radio" name="followw" value="3"/>3</li>
             <li><input type="radio" name="followw" value="4"/>4</li>
             <li><input type="radio" name="followw" value="5"/>5</li>
             <li><input type="radio" name="followw" value="6"/>6</li>

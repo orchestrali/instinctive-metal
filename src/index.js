@@ -53,6 +53,9 @@ module.exports = [
               <a href="https://ringle.glitch.me">Ringle: a Wordle-inspired change ringing game</a>
             </li>
             <li>
+              <a href="/callchange">Call change game</a>
+            </li>
+            <li>
                <a href="./surpriseminor">Surprise Minor name quiz</a>
             </li>
             <li>
@@ -66,6 +69,9 @@ module.exports = [
             </li>
             <li>
               <a href="/home">Links to Alison's ringing tools</a>
+            </li>
+            <li>
+              <a href="https://www.sallyandbobminor.com" target="blank">Alison's ringing blog</a>
             </li>
           </ul>
         </div>
@@ -599,12 +605,12 @@ module.exports = [
                 <label for="tenors">Tenor(s) behind: </label>
                 <input type="number" id="mtenors" name="tenors" value="0" />
               </p>
-              <fieldset>
+              <!--<fieldset>
                 <ul>
                   <li><input type="radio" id="simtower" name="simtype" value="tower" />tower</li>
                   <li><input type="radio" id="simhand" name="simtype" value="hand" />handbells</li>
                 </ul>
-              </fieldset>
+              </fieldset>-->
             </div>
             
             
