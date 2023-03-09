@@ -60,6 +60,14 @@ var running;
 const placeNames = [{num: 1, name: "lead"}, {num: 2, name: "2nds"}, {num: 3, name: "3rds"}];
 var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#c8e6ce","#a4e0b0","#71d184","#3fa654","#007317"];
 var type;
+var soundqueue = [];
+var soundplace;
+var ringtiming;
+var feedback = false;
+var diffs = [];
+var mynexttime;
+var myqueue = [];
+var myrow = 0;
 
 $(function() {
   let checked = 7;
@@ -113,7 +121,18 @@ $(function() {
     rowArr = window.rowArray;
     firstcall = rowArr[0].call;
     huntbells = window.hunts;
-    
+    var listeners = [
+      {id: "hand15b", event: "endEvent", f: endpull},
+      {id: "back14b", event: "endEvent", f: endpull},
+      {id: "sally", event: "mouseover", f: pointer},
+      {id: "sally", event: "click", f: emitring},
+      {id: "tail", event: "mouseover", f: pointer},
+      {id: "tail", event: "click", f: emitring},
+      {id: "hand", event: "touchstart", f: emitring},
+      {id: "back", event: "touchstart", f: emitring},
+      {id: "hand", event: "touchend", f: prevent},
+      {id: "back", event: "touchend", f: prevent}
+    ];
     
     zoom = 0;
     if (window.courseorder) {
@@ -149,6 +168,10 @@ $(function() {
     }
     
     setupSample(0);
+    if (feedback) {
+      placemarkers();
+      $("#sound-line").css("transition", "width "+(speed*2-delay)+"s linear");
+    }
     
     
     $("body").on("click", function() {
@@ -421,6 +444,429 @@ $(function() {
     });
     
     $("#reset").click();
+    
+    function assign(n) {
+      listeners.forEach(l => {
+        mybells.forEach(b => {
+          document.getElementById(l.id+b).removeEventListener(l.event, l.f);
+        });
+        if (n && !standbehind) {
+          document.getElementById(l.id+n).addEventListener(l.event, l.f);
+        }
+      });
+      if (n) {
+        mybells = [n];
+        let keys = n < 10 ? n.toString() : n === 10 ? "0" : n === 11 ? "-" : "=";
+        keys += "j";
+        mbells = [{num: n, keys: keys}];
+        $("#mykeys").val(keys);
+
+        let diff1 = centerrope[0] - n;
+        let diff2 = n-centerrope[0];
+        if (diff1 < 0) diff1 += numbells;
+        if (diff2 < 0) diff2 += numbells;
+        let dir = diff1 <= diff2 ? 1 : -1;
+        let diff = dir === 1 ? diff1 : diff2;
+        if (diff > 0) {
+          $("#myrope").prop("disabled", true);
+          rotate(dir);
+          diff--;
+          let timer = setInterval(function() {
+            if (diff > 0) {
+              rotate(dir);
+              diff--;
+            } else {
+              $("#myrope").prop("disabled", false);
+              centerrope = [n];
+              clearTimeout(timer);
+            }
+          }, 700);
+        }
+        if (instruct) setupInstruct();
+        if (cosallies) {
+          //console.log(courseorder);
+          colorsally(courseorder.includes(n) ? n : Number(window.methodstage));
+
+        }
+      }
+
+    }
+    
+    //emit ring from a click
+    function emitring(e) {
+      let num = this.id.startsWith("sally") ? Number(this.id.slice(5)) : Number(this.id.slice(4));
+      let bell = bells.find(b => b.num === num);
+      let o = {bell: bell.num};
+      if ((this.id.startsWith("sally") || this.id.startsWith("hand")) && bell.stroke === 1) {
+        o.stroke = 1;
+
+      } else if ((this.id.startsWith("tail") || this.id.startsWith("back")) && bell.stroke === -1) {
+        o.stroke = -1;
+      }
+
+      pull(o);
+    }
+
+    function pull(obj, t) {
+      if (bells) {
+        //console.log(obj);
+        let now = audioCtx.currentTime;
+        let id = (obj.stroke === 1 ? "hand1b" : "back0b") + obj.bell;
+        let bell = bells.find(b => b.num === obj.bell);
+
+        if (bell && bell.stroke === obj.stroke) { //if strokes are consistent
+          //if (mybells.includes(obj.bell)) console.log(audioCtx.currentTime);
+          let mbell = mbells.find(b => b.num === obj.bell);
+          if (mbell) {
+            mbell.ringing = true;
+            if (playing && rowArr[rownum+1]) {
+              let p = rowArr[rownum].row.findIndex(a => a[0] === obj.bell);
+
+              let row = rowArr[rownum].row[p][1] ? rowArr[rownum+2] : rowArr[rownum+1];
+              let i = row ? row.row.findIndex(a => a[0] === obj.bell) : -1;
+              if (highlightunder) {
+                let n = i > 0 ? row.row[i-1][0] : i === 0 ? obj.bell : null;
+                if (n) highlight(n);
+              } else if (fadeabove) {
+                let fade = i > -1 ? row.row.slice(i+1).map(a => a[0]) : [];
+                if (fade) fadeout(fade);
+              }
+              if (displayplace) {
+                let b = i+1;
+                $("#instruct"+obj.bell).text(b === 0 ? "???" : b === 1 ? "Lead" : b === 2 ? "2nd" : b === 3 ? "3rd" : b+"th");
+              }
+              if (instruct) {
+                let j = rownum-robotopts.roundsrows+2;
+                if (rowArr[rownum].row[p][1]) j++;
+                if (instructions[j]) {
+                  let text = instructions[j].instruction;
+                  if (instructions[j].with) text += " with the "+instructions[j].with;
+                  $("#instruct"+obj.bell).text(text);
+                }
+              }
+
+
+            }
+          }
+
+          //actually pull the rope
+          t ? document.getElementById(id).beginElementAt(t-now) : document.getElementById(id).beginElement();
+
+          bell.stroke = obj.stroke * -1;
+
+          let row = rowArr[rownum];
+
+          if (playing && row && mybells.includes(obj.bell)) {
+            if (feedback) {
+              if (obj.bell === 1 && waiting && rownum === 0) {
+                myqueue = [{stroke: -1, time: now+speed-.23*duration, place: 0}];
+                //make the sound line start!
+              } else if (myqueue.length) {
+                let diff = myqueue[0].time - now;
+                diffs.push(diff);
+                soundqueue.push({time: now+(bell.stroke === -1 ? 8 : 13)*duration/21, place: myqueue[0].place, mybell: true, rownum: myqueue[0].rownum, diff: diff});
+                let p1 = myqueue[0].place;
+                let p2 = rowArr[rownum+1] ? findplace(rownum+1) : null;
+                let d = p2 - p1;
+                let time = myqueue[0].time + speed + d*delay + bell.stroke*.23*duration;
+                if (bell.stroke === 1) time += delay;
+                myqueue.push({stroke: bell.stroke, time: time, place: p2, rownum: rownum+1});
+                if (Math.abs(diff) < .1) {
+                  ringtiming = "Good!";
+                  myqueue.shift();
+                } else if (diff > 0) {
+                  ringtiming = "Early";
+                  myqueue[0].early = true;
+                } else {
+                  ringtiming = "Late";
+                  myqueue.shift();
+                }
+              }
+              console.log(ringtiming);
+            }
+
+            let i = row.row.findIndex(a => a[0] === obj.bell);
+            if (!row.row[i][1] && ((rownum%2 === 0 && obj.stroke === 1) || (rownum%2 === 1 && obj.stroke === -1))) {
+              row.row[i][1] = true;
+            } else if (row.row[i][1] && rowArr[rownum+1] && ((rownum%2 === 0 && obj.stroke === -1) || (rownum%2 === 1 && obj.stroke === 1))) {
+              let j = rowArr[rownum+1].row.findIndex(a => a[0] === obj.bell);
+              if (j > -1 && !rowArr[rownum+1].row[j][1]) rowArr[rownum+1].row[j][1] = true;
+            }
+            myrow++;
+          }
+
+        }
+
+        if (waiting) {
+          waiting = false;
+          nextBellTime = Math.max(audioCtx.currentTime, nextBellTime);
+          scheduler();
+        }
+
+      }
+    }
+    
+    function startplay() {
+      console.log("numbells "+numbells);
+      playing = true;
+      $("#start").text("Stop");
+      $("#reset").addClass("disabled");
+      $("#options input").prop("disabled", true);
+
+      if (feedback) resetsoundline();
+      nextBellTime = audioCtx.currentTime;
+      if (rownum === 0 && (!mybells.includes(1) || standbehind)) {
+        place = -2;
+      }
+      if (rownum === 0 && mybells.includes(1) && !standbehind) {
+        waiting = true;
+        requestAnimationFrame(animater);
+      } else {
+        console.log("starting");
+        waiting = false;
+        if (feedback) {
+          mynexttime = nextBellTime + (mybells[0]-1)*delay;
+          if (rownum === 0) {
+            mynexttime += 2*delay;
+            myqueue = [{stroke: 1, time: mynexttime, place: mybells[0]-1, rownum: 0}]; 
+            //,{stroke: -1, time: mynexttime+speed-.23*duration, place: mybells[0]-1, rownum: 1}
+          }
+        }
+        scheduler();
+        requestAnimationFrame(animater);
+      }
+    }
+    
+    function nextPlace() {
+      nextBellTime += delay;
+      //console.log("adding delay "+place);
+      place++;
+      if (place === 1) {
+        if (currentcall) {
+          callqueue.push({call: currentcall, time: nextBellTime, rownum: rownum});
+        }
+        if (placebells && rowArr[rownum].name === "leadhead") {
+          for (let i = 1; i <= numbells; i++) {
+            let p = rowArr[rownum].row.findIndex(a => a[0] === i);
+
+            $("#chute"+i+" .placebell").text(placeName(p+1)+" place bell");
+          }
+        }
+        let ct = $('input[name="callType"]:checked').val()
+        if (cosallies && ["b","s"].includes(rowArr[rownum].type) && ["a","b"].includes(ct)) {
+          let b = ct === "a" ? rowArr[rownum].row[3][0] : rowArr[rownum].row[Number(window.methodstage)-3][0];
+          let i = courseorder.indexOf(b);
+          let j;
+          switch (ct) {
+            case "b":
+              j = i-2;
+              if (j < 0) j+=courseorder.length-1;
+              break;
+            case "a":
+              j = i+2;
+              if (j >= courseorder.length) j-=courseorder.length-1;
+              break;
+          }
+
+          if (rowArr[rownum].type === "s") {
+            courseorder[i] = courseorder[j];
+            courseorder[j] = b;
+          } else {
+            courseorder.splice(i,1);
+            courseorder.splice(j,0,b);
+          }
+          console.log(courseorder);
+          colorsally((mybells[0] && courseorder.includes(mybells[0])) ? mybells[0] : Number(window.methodstage));
+        }
+      }
+      if (place === numbells) {
+        //console.log("rownum "+rownum);
+
+        if (stroke === -1) {
+          if (feedback) soundqueue.push({place: numbells, rownum: rownum, time: nextBellTime + .23*duration + 8*duration/21});
+          nextBellTime += delay*handgap + .23*duration; //add handstroke gap
+        }
+        if (stroke === 1) nextBellTime -= .23*duration;
+        place = 0;
+        stroke *= -1;
+        rownum++;
+        currentcall = rowArr[rownum] && rowArr[rownum].call ? rowArr[rownum].call : " ";
+
+        if (feedback && rowArr[rownum+1]) {
+          let p1 = findplace(rownum);
+          let p2 = findplace(rownum+1);
+          let diff = p2 - p1;
+          //let time = myqueue[myqueue.length-1].time + speed + diff*delay - stroke*.23*duration;
+          //if (stroke === -1) time += delay;
+          //myqueue.push({stroke: stroke*-1, time: time, place: p2, rownum: stroke === 1 ? 1 : 0});
+        }
+
+        if (rownum === rowArr.length-2) {
+          roundscount++;
+          if ((roundscount === robotopts.nthrounds && robotopts.stopatrounds) || comp) {
+            thatsall = true;
+            if (currentcall === " ") currentcall = "That's all!";
+          }
+        }
+
+        if (rownum === rowArr.length && !thatsall) {
+          //repeating
+          //console.log("no next row");
+          rownum = robotopts.roundsrows;
+        } else if (rownum === rowArr.length && thatsall) {
+          thatisall();
+        }
+
+      }
+
+    }
+    
+    function scheduleRing(p, t) {
+      if (p > -1) {
+        let num = rowArr[rownum].row[p];
+        //console.log(num);
+        let bell = num && num.length;
+        let mine = bell ? mybells.includes(num[0]) : null;
+
+        if (bell && (!mine || standbehind)) {
+          //console.log("scheduling "+num[0] + " time "+t);
+          //soundqueue.push({bell: num[0], stroke: stroke, time: t, place: p});
+          //console.log("soundqueue "+soundqueue.length);
+          pull({bell: num[0], stroke: stroke}, t);
+        }
+        if (feedback && (bell || (p === 0 && rownum%2 === 0))) {
+          if (!mine || standbehind) {
+            soundqueue.push({place: p, rownum: rownum, time: t+(stroke === 1 ? 8 : 13)*duration/21, mybell: mine && standbehind});
+          } else {
+            //myqueue.push({stroke: stroke, time: t+(stroke === 1 ? 8 : 13)*duration/21, place: p, rownum: rownum});
+          }
+          
+        }
+        if (rownum === 0 && p === 0) {
+          callqueue.push({call: "", time: t, rownum: rownum});
+          //socket.emit("call", "");
+        }
+        if (rownum === robotopts.roundsrows-2 && p === 1 && firstcall) {
+          callqueue.push({call: firstcall, time: t, rownum: rownum});
+        }
+
+        if ((mine && !standbehind) && waitgaps && (!num || !num[1])) {
+          //console.log("pull expected at "+t);
+
+          waiting = t;
+        } else {
+          nextPlace();
+        }
+
+
+
+      } else {
+        let call = p === -2 ? "Look to" : "Treble's going";
+        callqueue.push({call: call, time: t, rownum: rownum});
+        //socket.emit("call", call);
+        nextPlace();
+      }
+
+
+    }
+
+    function scheduler() {
+
+      while (nextBellTime < audioCtx.currentTime + schedule && rowArr[rownum] && !waiting) {
+        scheduleRing(place, nextBellTime);
+      }
+      !waiting && rowArr[rownum] ? timeout = setTimeout(scheduler, lookahead): clearTimeout(timeout);
+
+    }
+    
+    function animater() {
+      let call = lastcall;
+      let callrow = lastcallrow;
+      let currentTime = audioCtx.currentTime;
+
+      while (callqueue.length && callqueue[0].time < currentTime) {
+        call = callqueue[0].call;
+        callrow = callqueue[0].rownum;
+        callqueue.shift();
+      }
+      if (call != lastcall || callrow != lastcallrow) {
+        $("#callcontainer").text(call);
+        lastcall = call;
+        lastcallrow = callrow;
+      }
+
+      if (myqueue[0] && myqueue[0].early && myqueue[0].time < currentTime) {
+        myqueue.shift();
+      }
+
+      if (feedback) {
+        let soundmark = soundplace;
+        while (soundqueue[0] && soundqueue[0].time < currentTime) {
+          soundmark = soundqueue[0].place + (soundqueue[0].rownum%2 === 1 ? numbells+1 : 1);
+          if (soundqueue[0].mybell) {
+            $(".sound.marker:nth-child("+soundmark+")").addClass("mymarker");
+            let left = ($(".sound.marker:nth-child("+soundmark+")").css("left"));
+            left = Number(left.slice(0,-2));
+            let d = (660/(numbells*2-1))*soundqueue[0].diff/delay;
+            //console.log(left-d);
+            $(".sound.marker:nth-child("+soundmark+")").css("left", (left-d)+"px");
+          }
+          soundqueue.shift();
+          
+          
+        }
+        //console.log(soundmark);
+        if (soundmark != soundplace) {
+          
+          if (soundmark > (numbells*2) ) {
+            resetsoundline();
+          } 
+          if (soundmark <= numbells*2) {
+            $(".sound.marker:nth-child("+soundmark+")").css("display", "block");
+          }
+          soundplace = soundmark;
+        }
+        if (soundmark === 1) {
+          
+          $("#sound-line").css("width", "660px");
+        }
+      }
+
+
+
+      requestAnimationFrame(animater);
+    }
+
+    function thatisall() {
+      playing = false;
+      waiting = false;
+      clearTimeout(timeout);
+      $("#start").text("Start");
+      $("#reset").removeClass("disabled");
+      $("#options input").prop("disabled", false);
+      if (instruct) $("#displayplace").prop("disabled", true);
+      if (displayplace) $("#instructions").prop("disabled", true);
+      if (feedback) {
+        resetsoundline();
+        soundqueue = [];
+      }
+    }
+    
+    function remove(e) {
+      if (e) {
+        e.removeEventListener("click", emitring);
+        e.removeEventListener("mouseenter", pointer);
+      }
+    }
+    
+    function resetsoundline() {
+      $(".sound.marker").css("display", "none");
+      $(".sound.marker").removeClass("mymarker");
+      positionmarkers();
+      let line = $("#sound-line").detach();
+      line.css("width", "0");
+      $("#visuals li:first-child").append(line);
+    }
   }
   
 });
@@ -514,12 +960,7 @@ function rotate(dir) {
   */
 }
 
-function remove(e) {
-  if (e) {
-    e.removeEventListener("click", emitring);
-    e.removeEventListener("mouseenter", pointer);
-  }
-}
+
 
 function pointer(e) {
   let num = this.id.startsWith("sally") ? Number(this.id.slice(5)) : Number(this.id.slice(4));
@@ -531,69 +972,13 @@ function pointer(e) {
   }
 }
 
-var listeners = [
-  {id: "hand15b", event: "endEvent", f: endpull},
-  {id: "back14b", event: "endEvent", f: endpull},
-  {id: "sally", event: "mouseover", f: pointer},
-  {id: "sally", event: "click", f: emitring},
-  {id: "tail", event: "mouseover", f: pointer},
-  {id: "tail", event: "click", f: emitring},
-  {id: "hand", event: "touchstart", f: emitring},
-  {id: "back", event: "touchstart", f: emitring},
-  {id: "hand", event: "touchend", f: prevent},
-  {id: "back", event: "touchend", f: prevent}
-];
+
 
 function prevent(e) {
   e.preventDefault();
 }
 
-function assign(n) {
-  listeners.forEach(l => {
-    mybells.forEach(b => {
-      document.getElementById(l.id+b).removeEventListener(l.event, l.f);
-    });
-    if (n && !standbehind) {
-      document.getElementById(l.id+n).addEventListener(l.event, l.f);
-    }
-  });
-  if (n) {
-    mybells = [n];
-    let keys = n < 10 ? n.toString() : n === 10 ? "0" : n === 11 ? "-" : "=";
-    keys += "j";
-    mbells = [{num: n, keys: keys}];
-    $("#mykeys").val(keys);
-    
-    let diff1 = centerrope[0] - n;
-    let diff2 = n-centerrope[0];
-    if (diff1 < 0) diff1 += numbells;
-    if (diff2 < 0) diff2 += numbells;
-    let dir = diff1 <= diff2 ? 1 : -1;
-    let diff = dir === 1 ? diff1 : diff2;
-    if (diff > 0) {
-      $("#myrope").prop("disabled", true);
-      rotate(dir);
-      diff--;
-      let timer = setInterval(function() {
-        if (diff > 0) {
-          rotate(dir);
-          diff--;
-        } else {
-          $("#myrope").prop("disabled", false);
-          centerrope = [n];
-          clearTimeout(timer);
-        }
-      }, 700);
-    }
-    if (instruct) setupInstruct();
-    if (cosallies) {
-      //console.log(courseorder);
-      colorsally(courseorder.includes(n) ? n : Number(window.methodstage));
-      
-    }
-  }
-  
-}
+
 
 function colorsally(n) {
   $("#sally"+n).attr("fill", colors[0]);
@@ -645,90 +1030,7 @@ function playSample(audioContext, audioBuffer, pan) {
   return sampleSource;
 }
 
-//emit ring from a click
-function emitring(e) {
-  let num = this.id.startsWith("sally") ? Number(this.id.slice(5)) : Number(this.id.slice(4));
-  let bell = bells.find(b => b.num === num);
-  let o = {bell: bell.num};
-  if ((this.id.startsWith("sally") || this.id.startsWith("hand")) && bell.stroke === 1) {
-    o.stroke = 1;
 
-  } else if ((this.id.startsWith("tail") || this.id.startsWith("back")) && bell.stroke === -1) {
-    o.stroke = -1;
-  }
-  
-  pull(o);
-}
-
-function pull(obj, t) {
-  if (bells) {
-    //console.log(obj);
-    let id = (obj.stroke === 1 ? "hand1b" : "back0b") + obj.bell;
-    let bell = bells.find(b => b.num === obj.bell);
-    
-    if (bell && bell.stroke === obj.stroke) {
-      //if (mybells.includes(obj.bell)) console.log(audioCtx.currentTime);
-      let mbell = mbells.find(b => b.num === obj.bell);
-      if (mbell) {
-        mbell.ringing = true;
-        if (playing && rowArr[rownum+1]) {
-          let p = rowArr[rownum].row.findIndex(a => a[0] === obj.bell);
-          
-          let row = rowArr[rownum].row[p][1] ? rowArr[rownum+2] : rowArr[rownum+1];
-          let i = row ? row.row.findIndex(a => a[0] === obj.bell) : -1;
-          if (highlightunder) {
-            let n = i > 0 ? row.row[i-1][0] : i === 0 ? obj.bell : null;
-            if (n) highlight(n);
-          } else if (fadeabove) {
-            let fade = i > -1 ? row.row.slice(i+1).map(a => a[0]) : [];
-            if (fade) fadeout(fade);
-          }
-          if (displayplace) {
-            let b = i+1;
-            $("#instruct"+obj.bell).text(b === 0 ? "???" : b === 1 ? "Lead" : b === 2 ? "2nd" : b === 3 ? "3rd" : b+"th");
-          }
-          if (instruct) {
-            let j = rownum-robotopts.roundsrows+2;
-            if (rowArr[rownum].row[p][1]) j++;
-            if (instructions[j]) {
-              let text = instructions[j].instruction;
-              if (instructions[j].with) text += " with the "+instructions[j].with;
-              $("#instruct"+obj.bell).text(text);
-            }
-          }
-          
-
-        }
-      }
-
-      //actually pull the rope
-      t ? document.getElementById(id).beginElementAt(t-audioCtx.currentTime) : document.getElementById(id).beginElement();
-
-      bell.stroke = obj.stroke * -1;
-
-      let row = rowArr[rownum];
-      
-      if (playing && row && mybells.includes(obj.bell)) { //&& row[place][0] === bell.num
-        let i = row.row.findIndex(a => a[0] === obj.bell);
-        if (!row.row[i][1] && ((rownum%2 === 0 && obj.stroke === 1) || (rownum%2 === 1 && obj.stroke === -1))) {
-          row.row[i][1] = true;
-        } else if (row.row[i][1] && rowArr[rownum+1] && ((rownum%2 === 0 && obj.stroke === -1) || (rownum%2 === 1 && obj.stroke === 1))) {
-          let j = rowArr[rownum+1].row.findIndex(a => a[0] === obj.bell);
-          if (j > -1 && !rowArr[rownum+1].row[j][1]) rowArr[rownum+1].row[j][1] = true;
-        }
-
-      }
-      
-    }
-
-    if (waiting) {
-      waiting = false;
-      nextBellTime = Math.max(audioCtx.currentTime, nextBellTime);
-      scheduler();
-    }
-
-  }
-}
 
 function endpull(e) {
   let bellnum = Number(this.id.slice(7));
@@ -738,176 +1040,11 @@ function endpull(e) {
   }
 }
 
-function startplay() {
-  playing = true;
-  $("#start").text("Stop");
-  $("#reset").addClass("disabled");
-  $("#options input").prop("disabled", true);
-  
-  nextBellTime = audioCtx.currentTime;
-  if (rownum === 0 && (!mybells.includes(1) || standbehind)) {
-    place = -2;
-  }
-  if (rownum === 0 && mybells.includes(1) && !standbehind) {
-    waiting = true;
-    requestAnimationFrame(animater);
-  } else {
-    console.log("starting");
-    waiting = false;
-    scheduler();
-    requestAnimationFrame(animater);
-  }
-}
-
-function nextPlace() {
-  nextBellTime += delay;
-  //console.log("adding delay "+place);
-  place++;
-  if (place === 1) {
-    if (currentcall) {
-      callqueue.push({call: currentcall, time: nextBellTime, rownum: rownum});
-    }
-    if (placebells && rowArr[rownum].name === "leadhead") {
-      for (let i = 1; i <= numbells; i++) {
-        let p = rowArr[rownum].row.findIndex(a => a[0] === i);
-        
-        $("#chute"+i+" .placebell").text(placeName(p+1)+" place bell");
-      }
-    }
-    let ct = $('input[name="callType"]:checked').val()
-    if (cosallies && ["b","s"].includes(rowArr[rownum].type) && ["a","b"].includes(ct)) {
-      let b = ct === "a" ? rowArr[rownum].row[3][0] : rowArr[rownum].row[Number(window.methodstage)-3][0];
-      let i = courseorder.indexOf(b);
-      let j;
-      switch (ct) {
-        case "b":
-          j = i-2;
-          if (j < 0) j+=courseorder.length-1;
-          break;
-        case "a":
-          j = i+2;
-          if (j >= courseorder.length) j-=courseorder.length-1;
-          break;
-      }
-      
-      if (rowArr[rownum].type === "s") {
-        courseorder[i] = courseorder[j];
-        courseorder[j] = b;
-      } else {
-        courseorder.splice(i,1);
-        courseorder.splice(j,0,b);
-      }
-      console.log(courseorder);
-      colorsally((mybells[0] && courseorder.includes(mybells[0])) ? mybells[0] : Number(window.methodstage));
-    }
-  }
-  if (place === numbells) {
-    //console.log("rownum "+rownum);
-
-    if (stroke === -1) nextBellTime += delay*handgap + .23*duration; //add handstroke gap
-    if (stroke === 1) nextBellTime -= .23*duration;
-    place = 0;
-    stroke *= -1;
-    rownum++;
-    currentcall = rowArr[rownum] && rowArr[rownum].call ? rowArr[rownum].call : " ";
-
-    if (rownum === rowArr.length-2) {
-      roundscount++;
-      if ((roundscount === robotopts.nthrounds && robotopts.stopatrounds) || comp) {
-        thatsall = true;
-        if (currentcall === " ") currentcall = "That's all!";
-      }
-    }
-
-    if (rownum === rowArr.length && !thatsall) {
-      //repeating
-      //console.log("no next row");
-      rownum = robotopts.roundsrows;
-    } else if (rownum === rowArr.length && thatsall) {
-      thatisall();
-    }
-
-  }
-
-}
-
-function scheduleRing(p, t) {
-  if (p > -1) {
-    let num = rowArr[rownum].row[p];
-    //console.log(num);
-    let bell = num && num.length ? !mybells.includes(num[0]) || standbehind : null;
-
-    if (bell) {
-      //console.log("scheduling "+num[0] + " time "+t);
-      //soundqueue.push({bell: num[0], stroke: stroke, time: t, place: p});
-      //console.log("soundqueue "+soundqueue.length);
-      pull({bell: num[0], stroke: stroke}, t);
-    }
-    if (rownum === 0 && p === 0) {
-      callqueue.push({call: "", time: t, rownum: rownum});
-      //socket.emit("call", "");
-    }
-    if (rownum === robotopts.roundsrows-2 && p === 1 && firstcall) {
-      callqueue.push({call: firstcall, time: t, rownum: rownum});
-    }
-
-    if (!bell && waitgaps && (!num || !num[1])) {
-      //console.log("pull expected at "+t);
-
-      waiting = t;
-    } else {
-      nextPlace();
-    }
 
 
 
-  } else {
-    let call = p === -2 ? "Look to" : "Treble's going";
-    callqueue.push({call: call, time: t, rownum: rownum});
-    //socket.emit("call", call);
-    nextPlace();
-  }
 
 
-}
-
-function scheduler() {
-    
-  while (nextBellTime < audioCtx.currentTime + schedule && rowArr[rownum] && !waiting) {
-    scheduleRing(place, nextBellTime);
-  }
-  !waiting && rowArr[rownum] ? timeout = setTimeout(scheduler, lookahead): clearTimeout(timeout);
-
-}
-
-function animater() {
-  let call = lastcall;
-  let callrow = lastcallrow;
-  let currentTime = audioCtx.currentTime;
-  
-  while (callqueue.length && callqueue[0].time < currentTime) {
-    call = callqueue[0].call;
-    callrow = callqueue[0].rownum;
-    callqueue.shift();
-  }
-  if (call != lastcall || callrow != lastcallrow) {
-    $("#callcontainer").text(call);
-    lastcall = call;
-    lastcallrow = callrow;
-  }
-  requestAnimationFrame(animater);
-}
-
-function thatisall() {
-  playing = false;
-  waiting = false;
-  clearTimeout(timeout);
-  $("#start").text("Start");
-  $("#reset").removeClass("disabled");
-  $("#options input").prop("disabled", false);
-  if (instruct) $("#displayplace").prop("disabled", true);
-  if (displayplace) $("#instructions").prop("disabled", true);
-}
 
 function updaterobot(obj) {
   robotopts = obj;
@@ -960,7 +1097,33 @@ function setupInstruct() {
   $("#chute"+mybells[0]).append(`<div id="instruct${mybells[0]}" class="instruct"></div>`);
 }
 
+function placemarkers() {
+  let left = -8;
+  for (let i = 1; i <= numbells*2; i++) {
+    $("#sound-line").append('<div class="sound marker" style="left:'+left+'px;"></div>')
+    left += 360/numbells;
+  }
+  $(".sound.marker:nth-child("+numbells+"n-"+(numbells-1)+")").css("background-color", "skyblue");
+}
 
+function positionmarkers() {
+  let left = -8;
+  for (let i = 1; i <= numbells; i++) {
+    $(".sound.marker:nth-child("+i+")").css("left", left+"px");
+    $(".sound.marker:nth-child("+(i+numbells)+")").css("left", (left+360)+"px");
+    left += 360/numbells;
+  }
+}
+
+
+
+function findplace(rn) {
+  let p;
+  if (rowArr[rn]) {
+    p = rowArr[rn].row.findIndex(a => a[0] === mybells[0]);
+  }
+  return p;
+}
 
 function describe(rowArray, bell, stage) {
   instructions = [];

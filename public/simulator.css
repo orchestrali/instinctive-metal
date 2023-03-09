@@ -71,3 +71,25 @@ div.instruct {
   font-size: 16pt;
   background-color: rgba(255,255,255,0.7);
 }
+
+#sound-line {
+  position: relative;
+  width: 0;
+  height: 4px;
+  transition: width 4.22s linear;
+  background-color: navy;
+}
+
+.marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: none;
+  top: -6px;
+  background-color: navy;
+}
+
+.marker.mymarker {
+  background-color: red;
+}
