@@ -1103,7 +1103,7 @@ function placemarkers() {
     $("#sound-line").append('<div class="sound marker" style="left:'+left+'px;"></div>')
     left += 360/numbells;
   }
-  $(".sound.marker:nth-child("+numbells+"n-"+(numbells-1)+")").css("background-color", "skyblue");
+  $(".sound.marker:nth-child("+numbells+"n-"+(numbells-1)+")").addClass("first");
 }
 
 function positionmarkers() {

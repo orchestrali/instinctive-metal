@@ -90,6 +90,10 @@ div.instruct {
   background-color: navy;
 }
 
+.marker.first {
+  background-color: skyblue;
+}
+
 .marker.mymarker {
   background-color: red;
 }
