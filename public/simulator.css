@@ -52,7 +52,16 @@ div.chute {
 	margin: 10px;
 	width: 60px;
 	height: 300px;
-	-webkit-transition: 0.6s linear;
+	-webkit-transition: transform 0.6s linear, left 0.6s linear;
+}
+
+
+.highlight {
+  opacity: 1;
+}
+
+.fade {
+  opacity: 0.4;
 }
 
 .bellnum {
