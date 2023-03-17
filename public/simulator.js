@@ -62,6 +62,7 @@ var colors = ["#000080","#1a1ad6","#5c5ced","#758de6","#9198bf","#babfdb","#c8e6
 var type;
 var soundqueue = [];
 var soundplace;
+var soundrow;
 var ringtiming;
 var feedback = false;
 var diffs = [];
@@ -367,13 +368,16 @@ $(function() {
     $("#highlightunder,#fadeabove").on("click", function() {
       highlightunder = $("#highlightunder").prop("checked");
       fadeabove = $("#fadeabove").prop("checked");
+      $(".chute").removeClass("fade highlight");
       if (!highlightunder && !fadeabove) {
         $("#fadeabove,#highlightunder").prop("disabled", false);
+        
         for (let i = 1; i <= numbells; i++) {
           $("#chute"+i).css("opacity", 1);
         }
       } else if (highlightunder) {
         $("#fadeabove").prop("disabled", true);
+        $(".chute").addClass("fade");
         if (rownum === 0) {
           highlight(mybells[0]-1);
         }
@@ -614,6 +618,7 @@ $(function() {
       $("#options input").prop("disabled", true);
 
       if (feedback) resetsoundline();
+      soundrow = -1;
       nextBellTime = audioCtx.currentTime;
       if (rownum === 0 && (!mybells.includes(1) || standbehind)) {
         place = -2;
@@ -783,6 +788,8 @@ $(function() {
       let call = lastcall;
       let callrow = lastcallrow;
       let currentTime = audioCtx.currentTime;
+      $(".fade").css("opacity", "0.4");
+      $(".highlight").css("opacity", "1");
 
       while (callqueue.length && callqueue[0].time < currentTime) {
         call = callqueue[0].call;
@@ -802,14 +809,27 @@ $(function() {
       if (feedback) {
         let soundmark = soundplace;
         while (soundqueue[0] && soundqueue[0].time < currentTime) {
-          soundmark = soundqueue[0].place + (soundqueue[0].rownum%2 === 1 ? numbells+1 : 1);
+          soundmark = soundqueue[0].place;
           if (soundqueue[0].mybell) {
+            if (soundqueue[0].rownum != soundrow) {
+              
+              if (soundmark === 0 && soundqueue[0].rownum === soundrow+1) {
+                soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
+              } else {
+                console.log(soundrow, soundqueue[0].rownum);
+              }
+            } else {
+              soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
+            }
+            
             $(".sound.marker:nth-child("+soundmark+")").addClass("mymarker");
             let left = ($(".sound.marker:nth-child("+soundmark+")").css("left"));
             left = Number(left.slice(0,-2));
             let d = (660/(numbells*2-1))*soundqueue[0].diff/delay;
             //console.log(left-d);
             $(".sound.marker:nth-child("+soundmark+")").css("left", (left-d)+"px");
+          } else {
+            soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
           }
           soundqueue.shift();
           
@@ -817,6 +837,9 @@ $(function() {
         }
         //console.log(soundmark);
         if (soundmark != soundplace) {
+          if ([1,numbells+1].includes(soundmark)) {
+            soundrow++;
+          }
           
           if (soundmark > (numbells*2) ) {
             resetsoundline();
@@ -847,8 +870,8 @@ $(function() {
       if (instruct) $("#displayplace").prop("disabled", true);
       if (displayplace) $("#instructions").prop("disabled", true);
       if (feedback) {
-        resetsoundline();
-        soundqueue = [];
+        //resetsoundline();
+        //soundqueue = [];
       }
     }
     
@@ -907,6 +930,9 @@ function calcspeed() {
   delay = wholepull * 60 / (numbells*2+1);
   speed = delay*numbells;
   console.log("delay "+delay);
+  if (feedback) {
+    $("#sound-line").css("transition", "width "+(speed*2-delay)+"s linear");
+  }
 }
 
 function position(i, num) {
@@ -1062,14 +1088,18 @@ function updaterobot(obj) {
 }
 
 function highlight(n) {
+  //console.log("highlighting "+n);
+  $(".highlight").removeClass("highlight").addClass("fade");
+  $("#chute"+n).removeClass("fade").addClass("highlight");
   for (let i = 1; i <= numbells; i++) {
-    $("#chute"+i).css("opacity", i === n ? 1 : 0.4);
+    //$("#chute"+i).css("opacity", i === n ? 1 : 0.4);
   }
 }
 
 function fadeout(arr) {
+  $(".chute").removeClass("fade highlight");
   for (let i = 1; i <= numbells; i++) {
-    $("#chute"+i).css("opacity", arr.includes(i) ? 0.4 : 1);
+    $("#chute"+i).addClass(arr.includes(i) ? "fade" : "highlight");
   }
 }
 
@@ -1101,7 +1131,7 @@ function placemarkers() {
   let left = -8;
   for (let i = 1; i <= numbells*2; i++) {
     $("#sound-line").append('<div class="sound marker" style="left:'+left+'px;"></div>')
-    left += 360/numbells;
+    left += 660/(2*numbells-1);
   }
   $(".sound.marker:nth-child("+numbells+"n-"+(numbells-1)+")").addClass("first");
 }
@@ -1111,7 +1141,7 @@ function positionmarkers() {
   for (let i = 1; i <= numbells; i++) {
     $(".sound.marker:nth-child("+i+")").css("left", left+"px");
     $(".sound.marker:nth-child("+(i+numbells)+")").css("left", (left+360)+"px");
-    left += 360/numbells;
+    left += 660/(2*numbells-1);
   }
 }
 
