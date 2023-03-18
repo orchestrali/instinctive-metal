@@ -212,6 +212,8 @@ $(function() {
         stroke = 1;
         thatsall = false;
         currentcall = null;
+      myrow = 0;
+      soundrow = -1;
       if (method && method.co && cosallies) {
         //console.log("resetting course order");
         courseorder = [];
@@ -523,10 +525,11 @@ $(function() {
           let mbell = mbells.find(b => b.num === obj.bell);
           if (mbell) {
             mbell.ringing = true;
-            if (playing && rowArr[rownum+1]) {
-              let p = rowArr[rownum].row.findIndex(a => a[0] === obj.bell);
+            console.log(myrow, rownum);
+            if (playing && rowArr[myrow+1]) {
+              let p = rowArr[myrow].row.findIndex(a => a[0] === obj.bell);
 
-              let row = rowArr[rownum].row[p][1] ? rowArr[rownum+2] : rowArr[rownum+1];
+              let row = rowArr[myrow].row[p][1] ? rowArr[myrow+2] : rowArr[myrow+1];
               let i = row ? row.row.findIndex(a => a[0] === obj.bell) : -1;
               if (highlightunder) {
                 let n = i > 0 ? row.row[i-1][0] : i === 0 ? obj.bell : null;
@@ -540,8 +543,8 @@ $(function() {
                 $("#instruct"+obj.bell).text(b === 0 ? "???" : b === 1 ? "Lead" : b === 2 ? "2nd" : b === 3 ? "3rd" : b+"th");
               }
               if (instruct) {
-                let j = rownum-robotopts.roundsrows+2;
-                if (rowArr[rownum].row[p][1]) j++;
+                let j = myrow-robotopts.roundsrows+2;
+                if (rowArr[myrow].row[p][1]) j++;
                 if (instructions[j]) {
                   let text = instructions[j].instruction;
                   if (instructions[j].with) text += " with the "+instructions[j].with;
@@ -558,7 +561,7 @@ $(function() {
 
           bell.stroke = obj.stroke * -1;
 
-          let row = rowArr[rownum];
+          let row = rowArr[myrow];
 
           if (playing && row && mybells.includes(obj.bell)) {
             if (feedback) {
@@ -570,11 +573,11 @@ $(function() {
                 diffs.push(diff);
                 soundqueue.push({time: now+(bell.stroke === -1 ? 8 : 13)*duration/21, place: myqueue[0].place, mybell: true, rownum: myqueue[0].rownum, diff: diff});
                 let p1 = myqueue[0].place;
-                let p2 = rowArr[rownum+1] ? findplace(rownum+1) : null;
+                let p2 = rowArr[myrow+1] ? findplace(myrow+1) : null;
                 let d = p2 - p1;
                 let time = myqueue[0].time + speed + d*delay + bell.stroke*.23*duration;
                 if (bell.stroke === 1) time += delay;
-                myqueue.push({stroke: bell.stroke, time: time, place: p2, rownum: rownum+1});
+                myqueue.push({stroke: bell.stroke, time: time, place: p2, rownum: myrow+1});
                 if (Math.abs(diff) < .1) {
                   ringtiming = "Good!";
                   myqueue.shift();
@@ -586,15 +589,15 @@ $(function() {
                   myqueue.shift();
                 }
               }
-              console.log(ringtiming);
+              //console.log(ringtiming);
             }
 
             let i = row.row.findIndex(a => a[0] === obj.bell);
-            if (!row.row[i][1] && ((rownum%2 === 0 && obj.stroke === 1) || (rownum%2 === 1 && obj.stroke === -1))) {
+            if (!row.row[i][1] && ((myrow%2 === 0 && obj.stroke === 1) || (myrow%2 === 1 && obj.stroke === -1))) {
               row.row[i][1] = true;
-            } else if (row.row[i][1] && rowArr[rownum+1] && ((rownum%2 === 0 && obj.stroke === -1) || (rownum%2 === 1 && obj.stroke === 1))) {
-              let j = rowArr[rownum+1].row.findIndex(a => a[0] === obj.bell);
-              if (j > -1 && !rowArr[rownum+1].row[j][1]) rowArr[rownum+1].row[j][1] = true;
+            } else if (row.row[i][1] && rowArr[myrow+1] && ((myrow%2 === 0 && obj.stroke === -1) || (myrow%2 === 1 && obj.stroke === 1))) {
+              let j = rowArr[myrow+1].row.findIndex(a => a[0] === obj.bell);
+              if (j > -1 && !rowArr[myrow+1].row[j][1]) rowArr[myrow+1].row[j][1] = true;
             }
             myrow++;
           }
@@ -812,16 +815,16 @@ $(function() {
           soundmark = soundqueue[0].place;
           if (soundqueue[0].mybell) {
             if (soundqueue[0].rownum != soundrow) {
-              
+              console.log(soundrow, soundqueue[0].rownum);
               if (soundmark === 0 && soundqueue[0].rownum === soundrow+1) {
-                soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
+                //soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
               } else {
-                console.log(soundrow, soundqueue[0].rownum);
+                
               }
             } else {
-              soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
+              
             }
-            
+            soundmark += soundqueue[0].rownum%2 === 1 ? numbells+1 : 1
             $(".sound.marker:nth-child("+soundmark+")").addClass("mymarker");
             let left = ($(".sound.marker:nth-child("+soundmark+")").css("left"));
             left = Number(left.slice(0,-2));
