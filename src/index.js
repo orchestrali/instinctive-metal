@@ -31,6 +31,12 @@ module.exports = [
       <h4>
         Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a> • Check out my embroidered method bookmarks on <a href="https://www.etsy.com/shop/RingingEmbroidery" target="blank">Etsy</a>
       </h4>
+      <p>
+        <span class="bold">What is change ringing?</span>Read about it <a href="https://cccbr.org.uk/bellringing/what-is-bell-ringing/" target="blank">here</a>, try a <a href="https://belldance.glitch.me">change-ringing lapping game</a>, or try a <a href="https://bellmaster.glitch.me">tower bell game</a>. Or play my Wordle-inspired change-ringing game, <a href="https://ringle.glitch.me">Ringle</a>.
+      </p>
+      <p>
+        <span class="bold">Learning to ring?</span>Try out my <a href="/callchange">call-change game</a>, look up nearby <a href="https://towers.changeringing.net">towers</a> and record your visits, or use the form below to view methods.
+      </p>
       
     </header>
     
@@ -81,7 +87,9 @@ module.exports = [
 `,
   `
         </div>
-        
+        <h3>
+          Look up a method to view or practice
+        </h3>
         <form action="/" method="get" autocomplete="off" id="formform">
           <div id="complib" class="category hidden">
             <div class="input">

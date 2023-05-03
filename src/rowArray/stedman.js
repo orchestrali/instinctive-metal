@@ -3,10 +3,10 @@ const buildLead = require('./buildLead2.js');
 const doubles = {
   quicks: [[1],[3],[1,4,5],[3],[1],[5]],
   slows: [[3],[1],[3,4,5],[1],[3],[5]]
-}
+};
 
 module.exports = function stedman(methodInfo, compInfo, sixes) {
-  console.log("stedman");
+  //console.log("stedman");
   let stage = methodInfo.stage;
   let bob = [stage-2], single = [stage-2,stage-1,stage]
   let pn;
@@ -17,10 +17,10 @@ module.exports = function stedman(methodInfo, compInfo, sixes) {
   let comp = sixes ? sixes : compInfo.touch;
   
   if (stage == 5) {
-    console.log("stedman doubles");
+    //console.log("stedman doubles");
     pn = buildPN("first", "p", 5);
     rowArray = buildLead(rowZero, pn, rowNum);
-    console.log(rowArray);
+    //console.log(rowArray);
     rowZero = rowArray[rowArray.length-1].bells;
     rowNum = rowArray.length+1;
     let six;

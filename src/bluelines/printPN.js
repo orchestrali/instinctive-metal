@@ -8,6 +8,6 @@ module.exports = function printPN(pn) {
     text += `<text x="5" y="${24+i*20}">${t}</text>`;
   }
   text += `
-</g>`
+</g>`;
   return text;
 }
