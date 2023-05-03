@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="400" viewBox="0 -100 300 400" id="bellwheel">
+  <rect x="264" y="242" width="5" height="100" />
+              <path d="M60,25
+                 h180
+                 q -45 45, -45 135
+                 q -45 22.5, -90 0
+                 q 0 -90, -45 -135" stroke-width="2" fill="rgb(75, 63, 51)"/>
+              <g stroke="rgb(115, 65, 31)" stroke-width="10" fill="none" >
+                <circle cx="150" cy="150" r="144" />
+
+                <path d="M 5 140
+                         h 290
+                         l -130 30
+                         m -30 0
+                         l -130 -30
+                         m 40 110
+                         l 100 -70
+                         m -10 0
+                         v 115
+                         m 30 0
+                         v -115
+                         m -10 0
+                         l 100 70
+                         M 125 140
+                         l -50 -112
+                         M 175 140
+                         l 50 -112"
+                      />
+              </g>
+              <rect x="130" y="140" width="40" height="70" fill="rgb(115, 65, 31)" />
+              <g stroke-width="1" fill="#eed" stroke="#ccb" rx="2" >
+                <rect x="127" y="220" width="46" height="5" />
+                <rect x="127" y="225" width="46" height="5" />
+                <rect x="127" y="230" width="46" height="5" />
+                <rect x="127" y="235" width="46" height="5" />
+                <rect x="127" y="240" width="46" height="5" />
+                <rect x="127" y="245" width="46" height="5" />
+                <rect x="127" y="250" width="46" height="5" />
+                <rect x="148" y="218" width="5" height="40" />
+                <path fill="none" d="M169,225 l90,10" stroke-width="7" />
+                
+              </g>
+              <rect x="5" y="280" fill="darkred" width="300" height="20" />
+            </svg>

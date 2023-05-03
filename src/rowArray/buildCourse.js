@@ -21,5 +21,5 @@ module.exports = function buildCourse(rowZero, pn, rowNum) {
     
   } while (lastrow != roundsStr && lastrow != rowZeroStr)
   
-    return rowArray;
+  return rowArray;
 }

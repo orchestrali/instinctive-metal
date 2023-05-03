@@ -22,6 +22,6 @@ module.exports = function numbers(compInfo) {
       }
     }
   }
-  console.log(comp)
+  //console.log(comp)
   return comp;
 }

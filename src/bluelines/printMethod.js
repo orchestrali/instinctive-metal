@@ -12,6 +12,7 @@ module.exports = function printSVG(rowArray, pathArray, info) {
    //width of svg including rows + margin
   let gridWidth = rowArray[0].bells.length*16 + 38;
   let x = 40;
+  //if the PN should be displayed and this rowArr contains the first lead
   let pn = info.displayPN && rowArray[0].rowNum <= info.leadLength ? printpn(info.placeNot.plain) : "";
   if (pn.length) {
     let max = Math.max(...info.placeNot.plain.filter(e => e != "x").map(e => e.length));

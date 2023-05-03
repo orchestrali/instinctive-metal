@@ -1,6 +1,6 @@
 const parseLH = require('./leadhead.js');
 const parseTouch = require('./composition.js');
-const addTenor = require('../rowArray/addTenor.js');
+//const addTenor = require('../rowArray/addTenor.js');
 
 //take compInput and generate compInfo object with rowZero (array), rowZeroObj, quantity, touch, touchType
 module.exports = function compInfo(compInput, stage) {

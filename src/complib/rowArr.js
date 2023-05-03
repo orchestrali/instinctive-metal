@@ -8,7 +8,7 @@ module.exports = function organize(info, obj) {
     rowArray: []
   };
   let stage = obj.stage;
-  console.log(stage);
+  //console.log(stage);
   let method;
   let pn = [];
   let comp = "";
