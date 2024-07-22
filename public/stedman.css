@@ -23,6 +23,10 @@ li {
   margin-bottom: 5px;
 }
 
+.strong {
+  font-weight: bold;
+}
+
 #nav-options {
   background-color: aliceblue;
   color: steelblue;

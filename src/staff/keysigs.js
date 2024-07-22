@@ -1,6 +1,6 @@
 const sharps = ['G', 'D', 'A', 'E', 'B', 'F♯'];
 const flats = ['F', 'B♭', 'E♭', 'A♭', 'D♭', 'G♭'];
-const sharpy = [19, 34, 14, 29, 44, 24]
+const sharpy = [19, 34, 14, 29, 44, 24];
 
 
 module.exports = function keysigs(tenor) {

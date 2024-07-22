@@ -81,15 +81,16 @@ module.exports = [
             </li>
           </ul>
         </div>
+        <h3>
+          Look up a method to view or practice
+        </h3>
         <button type="button" id="switch">Click to enter a complib.org composition ID instead</button>
        
         <div class="errors">
 `,
   `
         </div>
-        <h3>
-          Look up a method to view or practice
-        </h3>
+        
         <form action="/" method="get" autocomplete="off" id="formform">
           <div id="complib" class="category hidden">
             <div class="input">

@@ -8,10 +8,10 @@ module.exports = function barlines(barEnds, last) {
       barlines += `<path d="M ${barEnds[i]+1} 29.5
              v 41" stroke-width="3" />
               <path d="M ${barEnds[i]-3} 30
-             v 40" />`
+             v 40" />`;
     } else {
       barlines += `<path d="M ${barEnds[i]} 30
-             v 40" />`
+             v 40" />`;
     }
     
   }

@@ -49,6 +49,11 @@ var library = [
     start: [1,2,3,4,5,6,7,8,9,10],
     stage: 10,
     calls: [[2,3],[4,5],[6,7],[8,9],[2,5],[4,7],[6,9],[2,7],[4,9],[2,9],[9,2],[7,2],[5,2],[3,2],[9,4],[7,4],[5,4],[9,6],[7,6],[9,8]]
+  },
+  { //rollercoaster
+    start: [1,2,3,4,5,6,7,8,9,10],
+    stage: 10,
+    calls: [[8,9],[7,9],[7,8],[5,6],[4,6],[4,5],[2,3],[1,3],[1,2],[8,7],[9,7],[6,5],[6,4],[5,4],[9,8],[2,1],[3,1],[3,2]]
   }
 ];
 
@@ -236,7 +241,7 @@ function levelup() {
   level++;
   $("#levelup").hide();
   if (level === 2) {
-    row = [1,2,3,4,5,6,7,8,9,0];
+    row = [1,2,3,4,5,6,7,8,9,10];
     rowstring(row);
     $("input").prop("checked", false);
     $('input[name="myplace"][value="3"]').prop("checked", true);
@@ -247,7 +252,7 @@ function levelup() {
     $("#instructions p:nth-last-child(2)").text("On this level you may be called to move up one place, the two bells beneath you may be called to swap places, or bells above you may be called to swap.")
     $("#instructions p:last-child").text("Click 'next call' to start");
   } else if (level === 3) {
-    row = [1,3,5,7,9,2,4,6,8,0];
+    row = [1,3,5,7,9,2,4,6,8,10];
     rowstring(row);
     $("input").prop("checked", false);
     $('input[name="myplace"][value="2"]').prop("checked", true);

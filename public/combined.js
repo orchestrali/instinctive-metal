@@ -301,8 +301,13 @@ $(function() {
     stage = Number($('select#stage option:checked').val());
     checkedClass = $('select#methodClass option:checked').val();
     
+    // /[^\w\s]/.test(name)
+    
+    
     //value = whatever's been typed
     let value = $(this).val().toLowerCase();
+    let altval = checkname(value);
+    //console.log(altval);
     //warn people to pick stage and class if they haven't
     if (stage == "" || checkedClass == "") {
       if ($('li#warning').length == 0) {
@@ -336,7 +341,7 @@ $(function() {
           //chop off the stage name
           let text = methodList[0][j].substring(0,methodList[0][j].length-1-stageName.length);
           methods.push(text);
-          if (text.toLowerCase().indexOf(value) > -1) {
+          if (text.toLowerCase().indexOf(value) > -1 || checkname(text.toLowerCase()).indexOf(altval) > -1) {
             numMatch++;
           }
         }
@@ -345,13 +350,15 @@ $(function() {
         for (var j = 0; j < numArrays; ++j) {
           for (var k = 0; k < methodList[j].length; ++k) {
             let method = methodList[j][k].substring(0,methodList[j][k].length-1-stageName.length);
-            if (method.toLowerCase().indexOf(value) > -1) {
+            if (method.toLowerCase().indexOf(value) > -1 || checkname(method.toLowerCase()).indexOf(altval) > -1) {
               methods.push(method);
               numMatch++;
             }
           }
         }
       }
+      
+      
       
       
       //if no methods match, say so
@@ -392,7 +399,8 @@ $(function() {
           //check how many current items match the new search
           let currentMatch = [];
           for (var i = 1; i <= $("#methodList li").length; i++) {
-            if ($("#methodList li:nth-child("+ i + ")").text().toLowerCase().indexOf(value) > -1) {
+            let text = $("#methodList li:nth-child("+ i + ")").text().toLowerCase();
+            if (text.indexOf(value) > -1 || checkname(text).indexOf(altval) > -1) {
               currentMatch.push($("#methodList li:nth-child("+ i + ")").text());
             }
           }
@@ -820,7 +828,33 @@ function searchWarning() {
   $('<li id="warning"></li>').text("Select a stage and class to search methods").css("display", "list-item").appendTo($("#methodList"));
 }
 
-
+function checkname(name) {
+  //'.()!-?&,£="/₃₁²™
+  //éèëøůáčöåòùûàóìäúñṟāêæâîü
+  let lstr = "áàäâāåčçéèëêēe̊íìïîīñóòöôōo̊øṟřšśúùüûūů";
+  let letters = {
+    a: "áàäâāå",
+    //ae: "æ",
+    c: "čç",
+    e: "éèëêēe̊",
+    i: "íìïîī",
+    n: "ñ",
+    o: "óòöôōo̊ø",
+    r: "ṟř",
+    s: "šś",
+    u: "úùüûūů"
+  };
+  let alt = "";
+  for (let i = 0; i < name.length; i++) {
+    if (lstr.indexOf(name[i]) > -1) {
+      let l = Object.keys(letters).find(c => letters[c].indexOf(name[i]) > -1);
+      alt += l;
+    } else {
+      alt += name[i];
+    }
+  }
+  return alt;
+}
 
 //build filtered methodSet
 function getMethods(methods, howMany) {
@@ -843,15 +877,22 @@ function buildList(methods, display) {
 }
 
 function filterList(value) {
+  //console.log("filtering items");
   $("#methodList li").filter(function() {
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    let text = $(this).text().toLowerCase();
+    let alt = checkname(text);
+    let altval = checkname(value);
+    $(this).toggle(text.indexOf(value) > -1 || alt.indexOf(altval) > -1);
   });
 }
 
 function removeItems(value) {
   //console.log('removing items');
   $("#methodList li").filter(function() {
-    return $(this).text().toLowerCase().indexOf(value) == -1
+    let text = $(this).text().toLowerCase();
+    let alt = checkname(text);
+    let altval = checkname(value);
+    return (text.indexOf(value) == -1 && alt.indexOf(altval) === -1);
   }).remove();
   $("#methodList li").css("display", "list-item");
 }

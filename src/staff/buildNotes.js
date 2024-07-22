@@ -68,7 +68,7 @@ function stem(x, y) {
         stemdir = 'v -35';
       }
   if (y == 10 || y >= 90) {
-        stemdir = 'V 50'
+        stemdir = 'V 50';
       }
   return `<path d="M ${stemx} ${y}
              ${stemdir}" />
