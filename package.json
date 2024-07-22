@@ -11,16 +11,15 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "request": "^2.88.0",
-    "mongoose": "^5.12.1",
+    "mongoose": "^6.12.4",
     "morgan": "^1.10.0",
     "lodash": "^4.17.21",
-    "axios": "^0.21.1",
+    "axios": "^1.6.5",
     "mquery": "^3.2.4",
-    "mpath": "^0.8.4"
+    "mpath": "^0.9.0"
   },
   "engines": {
-    "node": "8.x"
+    "node": "16.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/welcome-project"

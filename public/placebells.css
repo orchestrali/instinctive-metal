@@ -1,0 +1,31 @@
+button:hover {
+  cursor: pointer;
+}
+
+circle:hover, text:hover {
+  cursor: pointer;
+}
+
+path.highlight {
+  stroke: blue;
+}
+line.highlight {
+  stroke: skyblue;
+}
+
+path.hunt, line.hunt {
+  stroke: red;
+}
+
+#placenot text {
+  /*fill: #555555;*/
+}
+
+.selected {
+  font-weight: 600;
+  fill: black;
+}
+
+.le2 {
+  display: none;
+}
