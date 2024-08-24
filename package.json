@@ -10,11 +10,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "mongoose": "^6.12.4",
     "morgan": "^1.10.0",
     "lodash": "^4.17.21",
-    "axios": "^1.6.5",
+    "axios": "^1.7.5",
     "mquery": "^3.2.4",
     "mpath": "^0.9.0"
   },
