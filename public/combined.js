@@ -1,8 +1,8 @@
-const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes'];
+const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName', 'callType', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'leadhead', 'otherLeadhead', 'quantity', 'comp', 'touchType', 'type', 'numbers', 'pn', 'huntBellw', 'huntColor', 'blueBell', 'blueBellw', 'blueBellc', 'pagination', 'blueGroup1', 'blueGroup1w', 'blueGroup1c', 'blueGroup2w', 'blueGroup2c', 'blueGroup2', 'huntbells', 'windowWidth', 'gap', 'includeTime', 'timesig', 'keysig', 'actTenor', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'stenors', 'gtenors', 'player', 'sounds', 'numrounds', 'hours', 'minutes', 'describe'];
 const selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
 const texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'mtenors', 'hours', 'minutes', 'complibid'];
 const radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
-const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player'];
+const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player', 'describe'];
 for (let i = 1; i < 17; i++) {
   keys.push('bell'+i+'w', 'bell'+i+'c');
   texts.push('bell'+i+'c');
