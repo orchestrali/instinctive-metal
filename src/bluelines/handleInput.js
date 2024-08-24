@@ -2,6 +2,7 @@ const handlePaths = require('./handlePaths.js');
 const ungroupPaths = require('./pathsToBuild.js');
 const printMethod = require('./printMethod.js');
 const pagedSVGs = require('./pagedPrint.js');
+const addinstruct = require('../tutorial/test.js');
 
 module.exports = function handleInput(displayInput, info, rowArray) {
   let rowZeroObj = info.rowZeroObj;
@@ -14,6 +15,9 @@ module.exports = function handleInput(displayInput, info, rowArray) {
   }
    */
   rowArray.unshift(rowZeroObj);
+  if (displayInput.describe) {
+    addinstruct(rowArray, Number(displayInput.blueBell), info.numBells, info.hunts);
+  }
   //console.log(rowArray[0]);
   let pathArray = ungroupPaths(handlePaths(displayInput, info), rowArray);
   //console.log(pathArray);

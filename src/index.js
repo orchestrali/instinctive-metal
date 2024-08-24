@@ -373,6 +373,10 @@ module.exports = [
                     <input type="text" id="blueBellc" name="blueBellc" value="blue"/>
                   </span>
                 </div>
+                <div class="input">
+                  <input type="checkbox" id="describe" name="describe" value="show" />
+                  <label for="describe">Show description of the blue line</label>
+                </div>
                 <p>
                 Advanced options: 
                   <button id="line-groups" type="button">
