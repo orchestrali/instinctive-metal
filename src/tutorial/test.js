@@ -132,11 +132,11 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
       }
       
       let last = i > 0 ? work[work.length-1] : "";
-      let x = last.indexOf("Point") == -1 || last.indexOf("Fish") == -1 ? i : i+1;
+      let x = (last.indexOf("Point") == -1 || last.indexOf("Fish") == -1) ? i : i+1;
       let v = rowArray[i+3] ? getPlace(i+3) : null;
       if (v != u) {
         work.push(makePlace(t, rowArray[i+1].rowNum));
-        if (rowArray[x].instruction) {
+        if (rowArray[x].instruction || rowArray[x+1].name === "leadhead") {
           rowArray[x+1].instruction = makePlace(t, rowArray[i+1].rowNum);
         } else {
           rowArray[x].instruction = makePlace(t, rowArray[i+1].rowNum);
@@ -148,7 +148,11 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
           count++;
         }
         work.push(count + " blows in " + placeName(t));
-        rowArray[x].instruction = count + " blows in " + placeName(t);
+        if (rowArray[x].instruction || rowArray[x+1].name === "leadhead") {
+          rowArray[x+1].instruction = count + " blows in " + placeName(t);
+        } else {
+          rowArray[x].instruction = count + " blows in " + placeName(t);
+        }
         i += count;
       }
     } else {
@@ -287,19 +291,17 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
     
   }
   
-  function checklegs(j) {
-    
-  }
   
   if (hunts[0] === 1) {
-    rowArray.forEach(r => {
+    rowArray.forEach((r, i) => {
       if (r.name === "leadhead" && r.rowNum > 0) {
         let p = getPlace(r.rowNum);
         let text = "Become "+placeName(p)+" place bell";
-        if (r.instruction) {
-          r.instruction2 = text;
+        if (rowArray[i-1].instruction) {
+          rowArray[i-1].instruction += ",";
+          rowArray[i-1].instruction2 = text;
         } else {
-          r.instruction = text;
+          rowArray[i-1].instruction = text;
         }
       }
     });
