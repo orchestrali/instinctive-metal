@@ -29,7 +29,7 @@ module.exports = [
         Change Ringing Method Tools
       </h1>
       <h4>
-        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a> • Check out my embroidered method bookmarks on <a href="https://www.etsy.com/shop/RingingEmbroidery" target="blank">Etsy</a>
+        Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a> • Check out my embroidered method bookmarks on <a href="https://www.etsy.com/shop/RingingEmbroidery" target="blank">Etsy</a> • Support my work or get bell method puzzle sets on <a href="https://ko-fi.com/alisonstevens/shop" target="blank">Ko-fi</a> • Read my <a href="https://www.sallyandbobminor.com" target="blank">bellringing blog</a>
       </h4>
       <p>
         <span class="bold">What is change ringing?</span>Read about it <a href="https://cccbr.org.uk/bellringing/what-is-bell-ringing/" target="blank">here</a>, try a <a href="https://belldance.glitch.me">change-ringing lapping game</a>, or try a <a href="https://bellmaster.glitch.me">tower bell game</a>. Or play my Wordle-inspired change-ringing game, <a href="https://ringle.glitch.me">Ringle</a>.

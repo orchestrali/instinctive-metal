@@ -2,7 +2,7 @@ const places = require('../places');
 
 //the rowArray needs to include rowZero
 //I was going to produce an array of objects with instructions and rowNums but maybe I should just add the instructions to the rowArray??
-module.exports = function describe(rowArray, bell, stage, hunts) {
+module.exports = function describe(rowArray, bell, stage, hunts, early) {
   console.log("starting description");
   console.log("rowArray length " + rowArray.length);
   rowArray[0].description = true;
@@ -12,6 +12,21 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
   let placearr = rowArray.map(r => r.bells.indexOf(bell)+1);
   //console.log(placearr);
   let wtreble = false;
+  
+  //place bells
+  if (hunts.length && !hunts.includes(bell)) {
+    rowArray.forEach((r, i) => {
+      if (r.name === "leadhead" && r.rowNum > 0) {
+        let p = getPlace(r.rowNum);
+        let text = "Become "+placeName(p)+" place bell";
+        if (early) {
+          rowArray[i-1].instruction = text;
+        } else {
+          r.instruction = text;
+        }
+      }
+    });
+  }
   
   while (i < rowArray.length-2) {
     //console.log("i equals " + i);
@@ -29,9 +44,9 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
         if (treble) {
           if (rowArray[i-1].instruction) {
             rowArray[i-1].instruction += ",";
-            rowArray[i-1].instruction2 = "pass treble in "+(s-dir)+"–"+s;
+            rowArray[i-1].instruction2 = "pass treble in "+(s-dir)+"-"+s;
           } else {
-            rowArray[i-1].instruction = "Pass treble in "+(s-dir)+"–"+s;
+            rowArray[i-1].instruction = "Pass treble in "+(s-dir)+"-"+s;
           }
         }
       }
@@ -40,7 +55,14 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
         count++;
       }
       work.push(count + " blows in " + placeName(s));
-      rowArray[i].instruction = count + " blows in " + placeName(s);
+      let text = count + " blows in " + placeName(s);
+      if (rowArray[i].instruction) {
+        rowArray[i].instruction += ", ";
+        rowArray[i].instruction2 = text;
+      } else {
+        rowArray[i].instruction = text;
+      }
+      
       i += count-1;
     } else if (t == s) {
       //console.log("Make place");
@@ -53,20 +75,31 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
           console.log("make place");
           if (rowArray[i-1].instruction) {
             rowArray[i-1].instruction += ",";
-            rowArray[i-1].instruction2 = "pass treble in "+(s-dir)+"–"+s;
+            rowArray[i-1].instruction2 = "pass treble in "+(s-dir)+"-"+s;
           } else {
-            rowArray[i-1].instruction = "Pass treble in "+(s-dir)+"–"+s;
+            rowArray[i-1].instruction = "Pass treble in "+(s-dir)+"-"+s;
           }
         }
       }
-      work.push(makePlace(s, rowArray[i].rowNum));
-      rowArray[i].instruction = makePlace(s, rowArray[i].rowNum);
+      let text = makePlace(s, rowArray[i].rowNum);
+      work.push(text);
+      if (rowArray[i].instruction) {
+        rowArray[i].instruction += ", ";
+        rowArray[i].instruction2 = text;
+      } else {
+        rowArray[i].instruction = text;
+      }
       i++;
     } else if (t-s == u-t) {
       //console.log("Hunt");
       let dir = t-s;
       let dirName = dirname(dir);
-      rowArray[i].instruction = "Hunt " + dirName;
+      let text = "Hunt " + dirName;
+      if (rowArray[i].instruction) {
+        rowArray[i].instruction += ", "+text;
+      } else {
+        rowArray[i].instruction = text;
+      }
       let treble, place;
       if (hunts.length && hunts[0] === 1) {
         place = s;
@@ -76,14 +109,14 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
           if (treble) {
             if (j === 0) {
               rowArray[i].instruction += ",";
-              rowArray[i].instruction2 = "pass treble in "+s+"–"+t;
+              rowArray[i].instruction2 = "pass treble in "+s+"-"+t;
               if (s === 1 && t === 2) {
                 rowArray[i].instruction2 += " (treble takes you off lead)";
               } else if (s === stage && t === stage-1) {
                 rowArray[i].instruction2 += " (treble takes you off the back)";
               }
             } else {
-              rowArray[i+j].instruction = "Pass treble in "+place+"–"+(place+dir);
+              rowArray[i+j].instruction = "Pass treble in "+place+"-"+(place+dir);
             }
           }
           place += dir;
@@ -97,7 +130,7 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
         if (hunts.length && hunts[0] === 1) {
           treble = getBell(i+1, place) === 1;
           if (treble) {
-            rowArray[i+2].instruction = "Pass treble in "+placearr[i+1]+"–"+placearr[i+2];
+            rowArray[i+2].instruction = "Pass treble in "+placearr[i+1]+"-"+placearr[i+2];
           }
         }
       }
@@ -110,21 +143,23 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
       //console.log("also make place");
       if (hunts.length && hunts[0] === 1) {
          
-        let dir = t-s;
+        
         let treble = rowArray[i].bells[t-1] === 1;
         if (wtreble) {
           wtreble = false;
         } else if (treble) {
+          let j = early ? i : i+1;
+          let key = rowArray[j].instruction ? "instruction2" : "instruction";
           //console.log("also make place");
-          rowArray[i].instruction = "Pass treble in "+s+"-"+t;
+          rowArray[j][key] = "Pass treble in "+s+"-"+t;
           if (s === 2 && t === 1) {
-            rowArray[i].instruction += " (take treble off lead)";
+            rowArray[j][key] += " (take treble off lead)";
           } else if (s === 1 && t === 2) {
-            rowArray[i].instruction += " (treble takes you off lead)";
+            rowArray[j][key] += " (treble takes you off lead)";
           } else if (s === stage-1 && t === stage) {
-            rowArray[i].instruction += " (take treble off the back)";
+            rowArray[j][key] += " (take treble off the back)";
           } else if (s === stage && t === stage-1) {
-            rowArray[i].instruction += " (treble takes you off the back)";
+            rowArray[j][key] += " (treble takes you off the back)";
           }
         }
         
@@ -132,14 +167,15 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
       }
       
       let last = i > 0 ? work[work.length-1] : "";
-      let x = (last.indexOf("Point") == -1 || last.indexOf("Fish") == -1) ? i : i+1;
+      let x = (last.indexOf("Point") == -1 && last.indexOf("Fish") == -1 && early) ? i : i+1;
       let v = rowArray[i+3] ? getPlace(i+3) : null;
       if (v != u) {
-        work.push(makePlace(t, rowArray[i+1].rowNum));
-        if (rowArray[x].instruction || rowArray[x+1].name === "leadhead") {
-          rowArray[x+1].instruction = makePlace(t, rowArray[i+1].rowNum);
+        let text = makePlace(t, rowArray[x].rowNum);
+        work.push(text);
+        if (rowArray[x].instruction) {
+          rowArray[x].instruction2 = text;
         } else {
-          rowArray[x].instruction = makePlace(t, rowArray[i+1].rowNum);
+          rowArray[x].instruction = text;
         }
         i+=2;
       } else {
@@ -147,11 +183,12 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
         while (checkPlace(i+count+1, t)) {
           count++;
         }
-        work.push(count + " blows in " + placeName(t));
-        if (rowArray[x].instruction || rowArray[x+1].name === "leadhead") {
-          rowArray[x+1].instruction = count + " blows in " + placeName(t);
+        let text = count + " blows in " + placeName(t);
+        work.push(text);
+        if (rowArray[x].instruction) {
+          rowArray[x].instruction2 = text;
         } else {
-          rowArray[x].instruction = count + " blows in " + placeName(t);
+          rowArray[x].instruction = text;
         }
         i += count;
       }
@@ -162,13 +199,22 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
       
       if (v == u || v-u != dir1) {
         let stroke = rowArray[i+1].rowNum % 2 == 1 ? " at hand" : " at back";
-        work.push("Point " + placeName(t));
-        rowArray[i].instruction = "Point " + placeName(t);
-        rowArray[i].with = getBell(i+1,s);
+        let text = "Point " + placeName(t) + stroke;
+        work.push(text);
+        let j = early ? i : i+1;
+        if (rowArray[j].instruction) {
+          //if the point happens in the leadhead row, it needs to come before the new place bell
+          rowArray[j].instruction2 = rowArray[j].instruction;
+          rowArray[j].instruction = text;
+        } else {
+          rowArray[j].instruction = text;
+        }
+        rowArray[j].with = getBell(i+1,s);
         i+=2;
       } else {
-      let count = 1;
+        let count = 1;
         let starti = i;
+        let j = early ? i : i+1;
         i+=3;
         while (getPlace(i) == t && getPlace(i+1) == s) {
           count++;
@@ -177,17 +223,32 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
         if (getPlace(i) == s || getPlace(i) == s+dir1*-1) {
           let points = count > 2 ? ", " + count + " points " + placeName(t) : "";
           let places = s > t ? t + "-" + s : s + "-" + t;
-          work.push("Fishtail " + places + points);
-          rowArray[starti].instruction = "Fishtail " + places + points;
-          rowArray[starti].with = getBell(starti+1,s);
-          //if (getPlace(i) == s) 
+          let text = "Fishtail " + places + points;
+          work.push(text);
+          if (rowArray[j].instruction) {
+            rowArray[j].instruction2 = text;
+          } else {
+            rowArray[j].instruction = text;
+          }
+          rowArray[j].with = getBell(starti+1,s);
           i--
         } else if (getPlace(i+1) == t || getPlace(i+1) == t+dir1 || getPlace(i+1) == null) {
           let places = s > t ? t + "-" + s : s + "-" + t;
-          work.push(dodgeNum(count) + places + " " + dirname(dir1));
-          rowArray[starti].instruction = dodgeNum(count) + places + " " + dirname(dir1);
-          rowArray[starti].with = getBell(starti+1,s);
-          if (rowArray[starti].with === 1) {
+          let text = dodgeNum(count) + places + " " + dirname(dir1);
+          work.push(text);
+          if (!early) j += 1;
+          if (rowArray[j].instruction) {
+            if (rowArray[starti+2].name === "leadhead") {
+              rowArray[j].instruction2 = rowArray[j].instruction;
+              rowArray[j].instruction = text;
+            } else {
+              rowArray[j].instruction2 = text;
+            }
+          } else {
+            rowArray[j].instruction = text;
+          }
+          rowArray[j].with = getBell(starti+1,s);
+          if (rowArray[j].with === 1) {
             wtreble = true;
           }
         }
@@ -198,12 +259,13 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
     
   }
   
+  
   let penult = getPlace(rowArray.length-2);
   let ult = getPlace(rowArray.length-1);
   
   if (i == rowArray.length-2) {
     let dir = ult-penult;
-    if (dir != 0) {
+    if (dir != 0 && !work[work.length-1].startsWith("Hunt")) {
       work.push("Hunt " + dirname(dir));
       rowArray[rowArray.length-2].instruction = "Hunt " + dirname(dir);
     } else if (ult == penult) {
@@ -212,6 +274,7 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
     }
   } 
   
+  //Stedman whole turns
   i = 0;
   while (i < rowArray.length-6) {
     let set = placearr.slice(i, i+7);
@@ -292,20 +355,6 @@ module.exports = function describe(rowArray, bell, stage, hunts) {
   }
   
   
-  if (hunts[0] === 1) {
-    rowArray.forEach((r, i) => {
-      if (r.name === "leadhead" && r.rowNum > 0) {
-        let p = getPlace(r.rowNum);
-        let text = "Become "+placeName(p)+" place bell";
-        if (rowArray[i-1].instruction) {
-          rowArray[i-1].instruction += ",";
-          rowArray[i-1].instruction2 = text;
-        } else {
-          rowArray[i-1].instruction = text;
-        }
-      }
-    });
-  }
   
     
   

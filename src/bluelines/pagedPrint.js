@@ -25,6 +25,7 @@ module.exports = function composition(rowArray, pathArray, info) {
   //build SVGs with chunks of the rowArray containing numLeads*leadLength rows
   for (var j = 1; j < numSVGs; ++j) {
     let shortArray = rowArray.slice(j*numRows,(j+1)*numRows+1);
+    if (rowArray[0].description) shortArray[0].description = true;
     svgs.push(printMethod(shortArray, pathArray, info));
   }
   

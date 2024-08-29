@@ -13,7 +13,7 @@ module.exports = function handle(rowArray, info, displayInput) {
   let bluebell = Number(displayInput.blueBell);
   
   if (displayInput.tutorial) {
-    rowArray = tutorial(rowArray, bluebell, info.stage);
+    rowArray = tutorial(rowArray, bluebell, info.stage, info.hunts, true);
   }
   let rowZero = rowArray[0];
   if (rowArray[1].method) rowZero.method = rowArray[1].method;
