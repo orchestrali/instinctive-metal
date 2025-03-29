@@ -2,82 +2,82 @@ module.exports = [
   {
     bell: "c5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell60.wav?v=1598131481664"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell60.wav"
   },
   {
     bell: "d5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell62.wav?v=1598131495023"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell62.wav"
   },
   {
     bell: "e5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell64.wav?v=1598131497895"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell64.wav?v=1598131497895"
   },
   {
     bell: "f5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell65.wav?v=1598131501860"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell65.wav?v=1598131501860"
   },
   {
     bell: "g5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell67.wav?v=1598131504743"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell67.wav?v=1598131504743"
   },
   {
     bell: "a5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell69.wav?v=1598131513355"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell69.wav?v=1598131513355"
   },
   {
     bell: "b5",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell71.wav?v=1598131517820"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell71.wav?v=1598131517820"
   },
   {
     bell: "c6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell72.wav?v=1598131529717"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell72.wav?v=1598131529717"
   },
   {
     bell: "d6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell74.wav?v=1598131533096"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell74.wav?v=1598131533096"
   },
   {
     bell: "e6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell76.wav?v=1598131538083"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell76.wav?v=1598131538083"
   },
   {
     bell: "f6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell77.wav?v=1598131543168"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell77.wav?v=1598131543168"
   },
   {
     bell: "g6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fhbell79.wav?v=1598131547736"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/hbell79.wav?v=1598131547736"
   },
   {
     bell: "a6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell81.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/bell81.wav"
   },
   {
     bell: "b6",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell83.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/bell83.wav"
   },
   {
     bell: "c7",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell84.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/bell84.wav"
   },
   {
     bell: "d7",
     type: "hand",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fbell86.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/bell86.wav"
   },
   
   

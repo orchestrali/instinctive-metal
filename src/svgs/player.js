@@ -30,17 +30,19 @@ module.exports = function buildplayer(stage, input, rowArr, rowzero) {
   let script = `<script class="results">window.rowArray = ${JSON.stringify(rowArr)};
                         window.numrounds = ${input.numrounds};
                         window.bells = ${JSON.stringify(bellarr)};
-                        window.numbells = ${stage}
+                        window.numbells = ${stage};
+                        window.hours = ${hours};
+                        window.minutes = ${minutes};
                 </script>`;
   let info = {
     rowArray: rowArr,
     numrounds: input.numrounds,
     bells: bellarr,
     numbells: stage
-  }
+  };
   let player = `
-      <div id="player" class="results">
-        <img id="wait" alt="Loading..." src="https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2Fwait.gif?v=1602790171222" />
+      <div id="player" >
+        <img id="wait" alt="Loading..." src="https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/wait.gif" />
         <div id="playbutton" class="button"><div id="playarrow"></div><label>Play</label></div>
         <div id="pausebutton" class="button"><div id="pausesymbol"></div><label>Pause</label></div>
         <div id="playreset" class="button"><div id="rewindrect"></div><div id="rewindarrow"></div><label>Return to beginning</label></div>

@@ -636,6 +636,16 @@ module.exports = [
        
       
       </div>
+      `,
+  `
+      <div id="player" style="display:none;">
+        <img id="wait" alt="Loading..." src="https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/wait.gif" />
+        <div id="playbutton" class="button"><div id="playarrow"></div><label>Play</label></div>
+        <div id="pausebutton" class="button"><div id="pausesymbol"></div><label>Pause</label></div>
+        <div id="playreset" class="button"><div id="rewindrect"></div><div id="rewindarrow"></div><label>Return to beginning</label></div>
+        <div id="pealspeed">Pealspeed: <input type="number" min="1" step="1" name="hours" id="hours" value="3"/><label for="hours">hours</label><input type="number" min="0" max="59" step="1" name="minutes" id="minutes" value="20"/><label for="minutes">minutes</label></div>
+        <div><input type="checkbox" id="indicate" checked name="indicate" /><label for="indicate">Indicate current row</label></div>
+      </div>
 `,
   `
 

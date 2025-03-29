@@ -1,7 +1,7 @@
-
+var playeractive;
 
 $(function() {
-  
+  console.log("hello from player file");
   let type = $("#type input:checked").attr("id");
   let checked = 10;
   let timeout;
@@ -9,7 +9,8 @@ $(function() {
   
   $("#submit").on("click", () => {
     type = $("#type input:checked").attr("id");
-    if (!["practice", "simulator"].includes(type) && $("#player-"+type).is("checked")) {
+    if (!["practice", "simulator"].includes(type) && $("#player-"+type).is(":checked") && !playeractive) {
+      console.log("player included");
       checked = 0;
       timeout = setTimeout(check, 50);
     }
@@ -18,6 +19,7 @@ $(function() {
   function check() {
     if (window.bells && !["practice", "simulator"].includes(type)) {
       clearTimeout(timeout);
+      //console.log(checked);
       player();
     } else {
       checked++;
@@ -31,49 +33,100 @@ $(function() {
   
   
   function player() {
+    console.log("player starting");
+    playeractive = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let numbells = window.numbells;
-    let rowArray = window.rowArray;
-    let bells = window.bells;
+    let numbells;
+    let rowArray;
+    let bells;
     let rowspeed = 3;
     
-    let stroke = 1;
-    let place = 0;
-    let nextBellTime = 0.0;
-    let rownum = 0;
+    let stroke = 1; //
+    let place = 0; //
+    let nextBellTime = 0.0; //
+    let rownum = 0; //
     let timeout;
     let playing = false;
     let lookahead = 25.0;
     let schedule = 0.1;
-    let queue = [];
-    let pealspeed = Number($('input[name="hours"]').val())*60 + Number($('input[name="minutes"]').val());
-    let delay = calcdelay(pealspeed);
-    let type = $("#type input:checked").attr("id");
+    let queue = []; //
+    let pealspeed;
+    let delay;
+    let type;
     let left = 0, top = 0;
     let dy,dx;
     let startleft;
     let numbars;
-    let numrounds = Math.abs(rowArray[0].rownum)+1;
-    let gap = $("#handstroke-gap").is(":checked");
+    let numrounds;
+    let gap;
     let stafftimer;
     let lastplace = 0;
     
-    $("#pausebutton,#playbutton").hide();
+    function startrestart() {
+      numbells = window.numbells;
+      rowArray = window.rowArray;
+      bells = window.bells;
+      $('input[name="hours"]').val(window.hours);
+      $('input[name="minutes"]').val(window.minutes);
+      pealspeed = window.hours*60 + window.minutes;
+      delay = calcdelay(pealspeed);
+      type = $("#type input:checked").attr("id");
+      numrounds = Math.abs(rowArray[0].rownum)+1;
+      gap = $("#handstroke-gap").is(":checked");
+      
+      $("#pausebutton,#playbutton").hide();
+      $("#player").show();
+      $("#wait").show();
+      sethighlightsize(type, numbells);
+      
+      setupSample(0);
+      
+      if (type === "grid") {
+        left = Number($("text:first-child").attr("x"))-2;
+        $("#highlight").css({"left": (left || "38")+"px", border: "2px solid teal"});
+        dy = 20;
+      } else if (type === "staff") {
+        startleft = Number($("svg:first-child .noteheads ellipse:first-child").attr("cx"))-12;
+        left = Number($("svg:nth-child(2) .noteheads ellipse:first-child").attr("cx"))-12;
+        $("#highlight").css({"left": startleft + "px", border: "3px solid teal"});
+        dx = 30;
+        dy = 140;
+        numbars = $("svg:nth-child(2) .barlines path").length;
+      }
+    }
     
-    setupSample(0);
+    startrestart();
+    
+    
     //console.log("container width", $(".grid-container").css("width"));
     
-    if (type === "grid") {
-      left = Number($("text:first-child").attr("x"))-2;
-      $("#highlight").css("left", (left || "38")+"px");
-      dy = 20;
-    } else if (type === "staff") {
-      startleft = Number($("svg:first-child .noteheads ellipse:first-child").attr("cx"))-12;
-      left = Number($("svg:nth-child(2) .noteheads ellipse:first-child").attr("cx"))-12;
-      $("#highlight").css("left", startleft + "px");
-      dx = 30;
-      dy = 140;
-      numbars = $("svg:nth-child(2) .barlines path").length;
+    $("#submit").on("click", function() {
+      if (!$("#submit").hasClass("disabled")) {
+        type = $("#type input:checked").attr("id");
+        if (!["practice", "simulator"].includes(type) && $("#player-"+type).is(":checked")) {
+          
+          console.log("attempting to restart player");
+          checked = 0;
+          timeout = setTimeout(checknew, 50);
+        } else {
+          $("#player").hide();
+        }
+      }
+    });
+    
+    function checknew() {
+      if (window.bells) {
+        clearTimeout(timeout);
+        startrestart();
+        $("#playreset").click();
+      } else {
+        checked++;
+        if (checked < 10) {
+          timeout = setTimeout(checknew, 50);
+        } else {
+          clearTimeout(timeout);
+        }
+      }
     }
     
     
@@ -82,8 +135,8 @@ $(function() {
       if (audioCtx.state === 'suspended') {
         //console.log("resuming audio");
         audioCtx.resume();
-        if (type === "grid" && $("#indicate").is(":checked")) $("#highlight").css({"border": "2px solid teal"});
-        if (type === "staff" && $("#indicate").is(":checked") && $("#rowzero").is(":checked")) $("#highlight").css({"border": "3px solid teal"});
+        //if (["grid","staff"].includes(type) && $("#indicate").is(":checked")) $("#highlight").css({"border": (type === "grid" ? "2" : "3") + "px solid teal"});
+        
       }
       
       
@@ -97,6 +150,7 @@ $(function() {
         $("#pausebutton").show();
         $("#playbutton").hide();
         $("#player input").prop("disabled", true);
+        $("#submit").addClass("disabled");
       } 
       
     });
@@ -108,6 +162,7 @@ $(function() {
       clearTimeout(timeout);
       //clearTimeout(stafftimer);
       $("#player input").prop("disabled", false);
+      $("#submit").removeClass("disabled");
     });
     
     $("#playreset").on("click", function() {
@@ -272,18 +327,22 @@ $(function() {
     }
     
     async function setupSample(i) {
-      let arrayBuffer = await getFile(audioCtx, bells[i].url);
-      audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
-        bells[i].buffer = buffer;
-        if (i < bells.length-1) {
-          i++;
-          setupSample(i);
-        } else {
-          console.log("finished setting up");
-          $("#wait").hide();
-          $("#playbutton").show();
-        }
-      }, (e) => { console.log(e) });
+      let arrayBuffer = await getFile2(i, bells[i].url);
+      if (arrayBuffer) {
+        audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
+          bells[i].buffer = buffer;
+          if (i < bells.length-1) {
+            i++;
+            setupSample(i);
+          } else {
+            console.log("finished setting up");
+            $("#wait").hide();
+            $("#playbutton").show();
+          }
+        }, (e) => { console.log(e) });
+      } else {
+        $("#wait").hide();
+      }
     }
     
     async function getFile(audioContext, filepath) {
@@ -292,7 +351,28 @@ $(function() {
       return arrayBuffer;
     }
     
+    async function getFile2(i, filepath) {
+      try {
+        const response = await fetch(filepath);
+        if (!response.ok) {
+          console.log("response issue");
+          throw new Error(`Response status: ${response.status}`);
+        }
+        const arrayBuffer = await response.arrayBuffer();
+        return arrayBuffer;
+      } catch (error) {
+        console.log(error.message);
+        alert("Sorry, there has been a problem accessing the sound files.");
+        return null;
+      }
+    }
     
   }
   
 });
+
+function sethighlightsize(type, numbells) {
+  $("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : "106px");
+  $("#highlight").css("width", type === "grid" ? numbells*16+"px" : type === "graph" ? "270px" : "24px");
+  
+}
