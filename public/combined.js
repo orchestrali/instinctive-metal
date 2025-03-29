@@ -2,7 +2,7 @@ const keys = ['complibid', 'stage', 'placeNotation', 'methodClass', 'methodName'
 const selects = ['stage', 'methodClass', 'huntBellw', 'blueBell', 'blueBellw', 'blueGroup1', 'blueGroup1w', 'blueGroup2w', 'blueGroup2', 'keysig', 'actTenor'];
 const texts = ['placeNotation', 'methodName', 'bobPlaceNot', 'singlePlaceNot', 'callLoc', 'otherLeadhead', 'comp', 'huntColor', 'blueBellc', 'blueGroup1c', 'blueGroup2c', 'stenors', 'gtenors', 'numrounds', 'btenors', 'mtenors', 'hours', 'minutes', 'complibid'];
 const radios = ['callType', 'leadhead', 'quantity', 'touchType', 'type', 'timesig', 'sounds'];
-const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player', 'describe'];
+const checked = ['numbers', 'pn', 'pagination', 'huntbells', 'gap', 'includeTime', 'rowzero', 'mobile', 'keepscore', 'drawLH', 'tutorial', 'player', 'describe', 'highlight', 'onlyblue'];
 for (let i = 1; i < 17; i++) {
   keys.push('bell'+i+'w', 'bell'+i+'c');
   texts.push('bell'+i+'c');

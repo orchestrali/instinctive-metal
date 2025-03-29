@@ -85,82 +85,82 @@ module.exports = [
   {
     bell: "f4",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FF4.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/F4.wav?v=1743184866805"
   },
   {
     bell: "g4",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FG4.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/G4.wav?v=1743185567223"
   },
   {
     bell: "a4",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FA4.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/A4.wav"
   },
   {
     bell: "b4",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FBf4.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/Bf4.wav"
   },
   {
     bell: "c5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FC5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/C5.wav"
   },
   {
     bell: "d5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FD5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/D5.wav"
   },
   {
     bell: "e5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FE5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/E5.wav"
   },
   {
     bell: "f5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FF5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/F5.wav"
   },
   {
     bell: "g5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FG5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/G5.wav"
   },
   {
     bell: "a5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FA5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/A5.wav"
   },
   {
     bell: "b5",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FBf5.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/Bf5.wav"
   },
   {
     bell: "c6",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FC6.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/C6.wav"
   },
   {
     bell: "d6",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FD6.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/D6.wav"
   },
   {
     bell: "e6",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FE6.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/E6.wav"
   },
   {
     bell: "f6",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FF6.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/F6.wav"
   },
   {
     bell: "g6",
     type: "tower",
-    url: "https://cdn.glitch.com/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf%2FG6.wav"
+    url: "https://cdn.glitch.global/0db7d9ca-f427-4a0a-8bb6-165118dc0eaf/G6.wav"
   }
 ];
 
