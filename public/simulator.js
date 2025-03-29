@@ -82,6 +82,7 @@ $(function() {
     type = $("#type input:checked").attr("id");
     console.log("submit clicked");
     //method = null, courseorder = null, cosallies = false, solidme = false, solidtreble = false;
+    //this one is different from the player—tons of controls are being added and functions are attached to them, so the simulator function really does need to be started again
     if (type === "simulator") {
       checked = 0;
       timeout = setTimeout(check, 100);
@@ -109,6 +110,7 @@ $(function() {
   
   
   function simulator() {
+    
     //console.log($(".results").length);
     //gainval, mybells, mbells, duration, handgap, speed, centerrope, zoom, robotopts, solidme, solidtreble, cosallies, highlightunder, fadeabove, displayplace, placebells, standbehind, melouder, instruct
     let options = [[gainval, 0.75, "#volume"],[duration, 1.3,"#duration"],[handgap,1,"#handgap"], [robotopts.roundsrows, 2,"#roundsrows"], [robotopts.stopatrounds,true,"#stopatrounds"], [robotopts.nthrounds,1,"#nthrounds"], [robotopts.waitforgaps,true,"#waitforgaps"]];
@@ -163,9 +165,15 @@ $(function() {
       backstroke.addEventListener("beginEvent", ring);
     }
     assign(1);
+    
+    
     if (!running) {
       running = true;
       start();
+    }
+      
+    function startrestart() {
+      
     }
     
     setupSample(0);
@@ -901,7 +909,7 @@ function start() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   gainNode = audioCtx.createGain();
   gainNode.gain.value = 0.75;
-  running = true;
+  
 }
 
 async function getFile(audioContext, filepath) {
@@ -910,19 +918,37 @@ async function getFile(audioContext, filepath) {
   return arrayBuffer;
 }
 
+async function getFile2(audioContext, filepath) {
+  try {
+    const response = await fetch(filepath);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    return arrayBuffer;
+  } catch (error) {
+    console.log(error.message);
+    alert("Sorry, there has been a problem accessing the sound files.");
+    return null;
+  }
+}
+
 //create sound buffers for all the bells
 async function setupSample(i) {
-  let arrayBuffer = await getFile(audioCtx, bells[i].url);
-  audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
-    bells[i].buffer = buffer;
-    if (i < bells.length-1) {
-      i++;
-      setupSample(i);
-    } else {
-      console.log("finished setting up");
+  let arrayBuffer = await getFile2(audioCtx, bells[i].url);
+  if (arrayBuffer) {
+    
+    audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
+      bells[i].buffer = buffer;
+      if (i < bells.length-1) {
+        i++;
+        setupSample(i);
+      } else {
+        console.log("finished setting up");
 
-    }
-  }, (e) => { console.log(e) });
+      }
+    }, (e) => { console.log(e) });
+  }
 }
 
 function calcspeed() {

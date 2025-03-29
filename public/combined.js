@@ -132,7 +132,7 @@ $(function() {
     adjustTime(numBells);
     tenOpts(keysig, numBells);
     if (type === "grid") {
-      $("#highlight").css("width", numBells*16);
+      $("#highlight").css("width", numBells*16+"px");
     }
     
   });
@@ -165,38 +165,41 @@ $(function() {
   
   
   $("#submit").on("click", function() {
-    $(".results").remove();
-    let form = document.getElementById("formform");
-    let data = new FormData(form);
-    let query = [];
-    
-    for (let key of data.entries()) {
-      query.push(encodeURIComponent(key[0]) +"="+ encodeURIComponent(key[1]).replace(/%20/g, "+"));
-      
-    }
-    
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/raw?'+query.join("&"), true);
-    xhr.send();
-    
-    xhr.onload = function () {
-      let results = JSON.parse(xhr.responseText);
-      
-      if (results.errors) {
-        $(".errors").html(results.errors);
-      } else {
-        if (results.script) {
-          console.log("new script");
-          $("head").append(results.script);
-        }
-        $("main").append(results.html);
-        window.location.hash = 'svgs';
-        if (history) {
-          history.pushState('', '', "/?"+query.join("&")+window.location.hash);
+    if (!$("#submit").hasClass("disabled")) {
+      $(".results").remove();
+      window.bells = null;
+      let form = document.getElementById("formform");
+      let data = new FormData(form);
+      let query = [];
+
+      for (let key of data.entries()) {
+        query.push(encodeURIComponent(key[0]) +"="+ encodeURIComponent(key[1]).replace(/%20/g, "+"));
+
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/raw?'+query.join("&"), true);
+      xhr.send();
+
+      xhr.onload = function () {
+        let results = JSON.parse(xhr.responseText);
+
+        if (results.errors) {
+          $(".errors").html(results.errors);
+        } else {
+          if (results.script) {
+            console.log("new script");
+            $("head").append(results.script);
+          }
+          $("#form").after(results.title);
+          $("main").append(results.html);
+          window.location.hash = 'svgs';
+          if (history) {
+            history.pushState('', '', "/?"+query.join("&")+window.location.hash);
+          }
         }
       }
     }
-    
   });
   
   
@@ -536,12 +539,8 @@ $(function() {
     
     $(".type").addClass("hidden");
     $("div#"+type+"opts").removeClass("hidden");
-    $("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : "106px");
-    if (type === "graph") {
-      $("#highlight").css("width", "270px");
-    } else if (type === "staff") {
-      $("#highlight").css("width", "24px");
-    }
+    //$("#highlight").css("height", type === "grid" ? "19px" : type === "graph" ? "174px" : "106px");
+    
     
     $("#stage option:nth-child(n+11)").prop("disabled", ["graph", "simulator"].includes(type));
     if (["practice", "simulator"].includes(type)) {
