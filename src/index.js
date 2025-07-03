@@ -28,6 +28,13 @@ module.exports = [
       <h1>
         Change Ringing Method Tools
       </h1>
+      <h3>
+        Due to circumstances beyond my control, this site may have greatly reduced functionality for a period beginning 7 July 2025. I will endeavor to get it working again as soon as I can, but probably not until August. I appreciate your patience. - Alison Stevens 
+      </h3>
+      <h4>
+      Support my work or get bell method puzzle sets on <a href="https://ko-fi.com/alisonstevens/shop" target="blank">Ko-fi</a>
+      </h4>
+      <!--
       <h4>
         Built by <a href="https://www.alisonnicole.com" target="blank">Alison Stevens</a> • Support this project on <a href="https://www.patreon.com/alisons" target="blank">Patreon</a> • Check out my embroidered method bookmarks on <a href="https://www.etsy.com/shop/RingingEmbroidery" target="blank">Etsy</a> • Support my work or get bell method puzzle sets on <a href="https://ko-fi.com/alisonstevens/shop" target="blank">Ko-fi</a> • Read my <a href="https://www.sallyandbobminor.com" target="blank">bellringing blog</a>
       </h4>
@@ -37,6 +44,7 @@ module.exports = [
       <p>
         <span class="bold">Learning to ring?</span>Try out my <a href="/callchange">call-change game</a>, look up nearby <a href="https://towers.changeringing.net">towers</a> and record your visits, or use the form below to view methods.
       </p>
+      -->
       
     </header>
     
@@ -657,7 +665,7 @@ module.exports = [
         About this project
       </a>
       <p>
-      This project is made possible with support from Sophie MacDonald on <a href="https://www.patreon.com/alisons">Patreon</a>
+      <!--This project is made possible with support from  on <a href="https://www.patreon.com/alisons">Patreon</a>-->
       </p>
     </footer>
 
